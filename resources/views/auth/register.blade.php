@@ -1,60 +1,201 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Registration</title>
+    <link rel="stylesheet" href="css/register.css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="login-link">
+        <div class="logo">
+          <img src="img/logo similki.jpg" alt="logo similki" />
+        </div>
+        <p class="side-big-heading">Sudah memiliki Akun?</p>
+        <a href="/login2.html" class="loginbtn">Login</a>
+      </div>
+      
+      <div class="signup-form-container">
+        <p class="big-heading">Buat Akun</p>
+        <div class="progress-bar">
+            <div class="stage">
+              <p class="tool-tip">Informasi Pribadi</p>
+              <p class="stageno stageno-1">1</p>
+            </div>
+            <div class="stage">
+              <p class="tool-tip">Alamat Lengkap</p>
+              <p class="stageno stageno-2">2</p>
+            </div>
+            <div class="stage">
+              <p class="tool-tip">Buat Akun</p>
+              <p class="stageno stageno-3">3</p>
+          </div>
+        </div>
+        
+        <div id="validation-errors" class="mb-4">
+          
+        </div>
+        <br>
 
-        <x-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('register') }}">
+        <div class="signup-form-content">
+          <form id="stage1" action="{{ route('register1') }}"  method="POST">
+              @csrf
+              <div class="stage1-content">
+                  <div class="button-container">
+                      <div class="text-fields name">
+                          <label for="namae_lengkap">Nama Lengkap</label>
+                          <input type="text" name="nama_lengkap" id="nama_lengkap" placeholder="Nama lengkap Anda" required />
+                      </div>
+                      <div class="gender-selection">
+                          <p class="field-heading">Jenis Kelamin :</p>
+                          <label for="jenis_kelamin_laki-laki"> <input type="radio" name="jenis_kelamin" value="1" {{ old('jenis_kelamin') == '1' ? 'checked' : '' }} id="jenis_kelamin_laki-laki" required/> Laki-Laki </label>
+                          <label for="jenis_kelamin_perempuan"> <input type="radio" name="jenis_kelamin" value="0" {{ old('jenis_kelamin') == '0' ? 'checked' : '' }} id="jenis_kelamin_perempuan" required/>Perempuan</label>
+                      </div>
+                  </div>
+                  <div class="button-container">
+                      <div class="text-fields nip">
+                          <label for="nip">NIP</label>
+                          <input type="text" name="nip" id="nip" pattern="[0-9]{18}" placeholder="Isi dengan Angka" required title="Tolong isi dengan Angka saja dan minimal 18 digit" />
+                      </div>
+                      <div class="text-fields nomor_telepon">
+                          <label for="nomor_telepon">Nomor Telepon</label>
+                          <input type="text" name="nomor_telepon" id="nomor_telepon" placeholder="628123456789" pattern="[6]{1}[2]{1}[0-9]{3}[0-9]{4}[0-9]{4}" required title="Awali dengan 62 dan minimal 11 digit"/>
+                      </div>
+                      <div class="text-fields bidang">
+                          <label for="id_role">Bidang</label>
+                          <select id="id_role" class="option-input" name="id_role" required autofocus>
+                              <option value="" hidden>Pilih Bidang</option>
+                              @foreach($roles as $role)
+                                  <option id="{{ $role->tag }}" value="{{ $role->id }}" required>{{ $role->name }}</option>
+                              @endforeach
+                          </select>
+                      </div>
+                  </div>
+                  <div class="text-fields bentuk_upt" >
+                    <label for="bentuk_upt">Pilih Jenis UPT</label>
+                          <select id="bentuk_upt" class="option-input" name="bentuk_upt"  autofocus>
+                              <option value="" hidden>BBKSDA/BKSDA</option>
+                              @foreach($upt_bentuk as $upt)
+                                  <option id="{{ $upt->bentuk }}" value="{{ $upt->bentuk }}" >{{ $upt->bentuk }}</option>
+                              @endforeach
+                          </select>
+                  </div>
+                  <div class="text-fields wilayah_upt" >
+                  <label for="wilayah_upt" >Pilih Wilayah UPT </label>
+                          <select id="wilayah_upt" class="option-input upt-wilayah" name="wilayah_upt"  autofocus>
+                              <option value="" hidden>Pilih Wilayah</option>
+                              @foreach($upt_wilayah as $upt)
+                                  <option id="{{ $upt->wilayah }}" value="{{ $upt->wilayah }}" >{{ $upt->wilayah }}</option>
+                              @endforeach
+                          </select>
+                  </div>
+                      <div class="text-fields id_lk" >
+                          <label for="id_lk" >Unit Lembaga Konservasi</label>
+                          <select id="id_lk" class="option-input id_lk" name="id_lk"  autofocus>
+                              <option value="" hidden>Pilih Unit</option>
+                              @foreach($list_lk as $lk)
+                                  <option id="{{ $lk->slug }}" value="{{ $lk->id }}" >{{ $lk->name }}</option>
+                              @endforeach
+                          </select>
+                      </div>
+                      <div class="text-fields id_spesies" >
+                          <label for="id_spesies" >Species</label>
+                          <select id="id_spesies" class="option-input id_spesies" name="id_spesies"  autofocus>
+                              <option value="" hidden>Pilih Species</option>
+                              @foreach($list_species as $species)
+                                  <option id="{{ $species->spesies }}" value="{{ $species->id }}" >{{ $species->spesies }}</option>
+                              @endforeach
+                          </select>
+                      </div>
+                  <div class="pagination-btns">
+                  <input id="submitStage1" type="submit" value="Next" class="nextPage stagebtn1b"  />
+                  </div>
+              </div>
+          </form>
+          <form id="stage2" action="{{ route('register2') }}" method="POST">
             @csrf
-
-            <div>
-                <x-label for="name" value="{{ __('Name') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-label for="terms">
-                        <div class="flex items-center">
-                            <x-checkbox name="terms" id="terms" required />
-
-                            <div class="ms-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
-                                ]) !!}
-                            </div>
-                        </div>
-                    </x-label>
+              <div class="stage2-content">
+              <div class="button-container">
+                <div class="text-fields kodepos">
+                  <label for="kodepos">Kode pos</label>
+                  <input type="text" name="kodepos" id="kodepos" placeholder="Isi Kode Pos Anda" required />
                 </div>
-            @endif
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ms-4">
-                    {{ __('Register') }}
-                </x-button>
+                <div class="text-fields provinsi">
+                  <label for="provinsi">Provinsi</label>
+                  <input type="text" name="provinsi" id="provinsi" placeholder="Isi Kode Pos"readonly />
+                </div>
+              </div>
+              <div class="button-container">
+                <div class="text-fields kota/kab">
+                  <label for="kota/kab">Kota/Kabupaten</label>
+                  <input type="text" name="kota/kab" id="kota/kab" placeholder="Isi Kode Pos" readonly />
+                </div>
+                <div class="text-fields kecamatan">
+                  <label for="kecamatan">Kecamatan</label>
+                  <input type="text" name="kecamatan" id="kecamatan" placeholder="Isi Kode Pos"readonly />
+                </div>
+              </div>
+              <div class="button-container">
+                <div class="text-fields kelurahan">
+                  <label for="kelurahan">Kelurahan</label>
+                  <input type="text" name="kelurahan" id="kelurahan" placeholder="Isi Kode Pos" readonly />
+                </div>
+                <div class="text-fields alamat_lengkap">
+                  <label for="alamat_lengkap">Alamat Lengkap</label>
+                  <input type="text" name="alamat_lengkap" id="alamat_lengkap" placeholder="Alamat Lengkap" required/>
+                </div>
+              </div>
+              <div class="pagination-btns">
+              <input type="button" value="Previous" class="previousPage stagebtn3a" onclick="stage2to1()" />
+                <input id="submitStage2" type="submit" value="Next" class="nextPage stagebtn2b"  />
+              </div>
             </div>
+          </form>
+          <form id="stage3" action="{{ route('register3') }}" method="POST">
+          @csrf
+          <div class="stage3-content">
+            <div class="button-container">
+                <div class="text-fields username">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" placeholder="Buat Username Anda" required/>
+                </div>
+              </div>
+              <div class="button-container">
+                <div class="text-fields email">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder=" abcd@gmail.com" required />
+                </div>
+              </div>
+              <div class="button-container">
+                <div class="text-fields password">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Buat kata sandi Anda"required />
+                </div>
+              <div class="text-fields password_confirmation">
+                  <label for="password_confirmation">Confirmation password</label>
+                  <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Ketika ulang kata sandi Anda" required/>
+                </div>
+              </div>
+              <div class="pagination-btns">
+                <input type="button" value="Previous"  class="previousPage stagebtn3a" onclick="stage3to2()" />
+              <input type="submit" value="Submit" class="nextPage stagebtn3b" />
+              </div>
+          </div>
         </form>
-    </x-authentication-card>
-</x-guest-layout>
+      </div>
+      
+        
+          
+
+    </div>
+    </div>
+
+  </body>
+  <script src="js/register.js"></script>
+  <!-- <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script> -->
+</html>

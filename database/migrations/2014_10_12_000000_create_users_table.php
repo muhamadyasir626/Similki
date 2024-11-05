@@ -13,13 +13,23 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable();
-            $table->string('profile_photo_path', 2048)->nullable();
+            $table->string('nama_lengkap', 255);
+            $table->string('nip', 20);
+            $table->string('username', 255)->unique();
+            $table->string('kodepos',5);
+            $table->string('provinsi', 50);
+            $table->string('kecamatan', 50);
+            $table->string('kelurahan', 50);
+            $table->text('alamat_lengkap');
+            $table->boolean('jenis_kelamin');  
+            $table->string('nomor_telepon', 20)->unique();
+            $table->string('email', 255)->unique();
+            $table->foreignId('id_role')->constrained('roles')->onDelete('cascade');
+            $table->foreignId('id_list_lk')->nullable()->constrained('list_lks')->onDelete('cascade');
+            $table->foreignId('id_spesies')->nullable()->constrained('list_species')->onDelete('cascade');
+            $table->foreignId('id_list_upt')->nullable()->constrained('list_upts')->onDelete('cascade');
+            $table->string('password', 255);
+            $table->boolean('status_permission')->default(false);
             $table->timestamps();
         });
     }
