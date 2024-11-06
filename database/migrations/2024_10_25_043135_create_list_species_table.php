@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('spesies',255);
             $table->string('subspesies',255);
             $table->string('nama_lokal',255);
-            $table->string('nama_inter',255);
+            // $table->string('nama_inter',255);
             $table->string('nama_ilmiah',255);
             $table->timestamps();
         });

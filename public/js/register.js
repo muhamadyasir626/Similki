@@ -132,7 +132,7 @@ forms.forEach(function(form) {
   })
       .then(data => {
         if (data.success) {
-          transitionStage(formId)
+        transitionStage(formId)
         }
       })
       .catch(error => {

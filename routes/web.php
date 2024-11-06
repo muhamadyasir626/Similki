@@ -1,8 +1,6 @@
 <?php
 
 use App\Models\Role;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Models\ListLk;
@@ -45,16 +43,19 @@ Route::post('register2',[AuthController::class, 'register2'])->name('register2')
 Route::post('register3',[AuthController::class, 'register3'])->name('register3');
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
+Route::get('/dashboard', function () {
     // dd(Auth::User());
         return view('dashboard');
     })->name('dashboard');
-});
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified',
+// ])->group(function () {
+//     Route::get('/dashboard', function () {
+//     // dd(Auth::User());
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
 
 

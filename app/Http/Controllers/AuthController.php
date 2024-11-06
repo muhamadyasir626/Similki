@@ -25,6 +25,12 @@ class  AuthController extends Controller
             'bentuk_upt' => ['nullable', 'string'],
             'wilayah_upt' => ['nullable', 'string'],
             'id_spesies' => ['nullable', 'string'],
+        ],[
+            'required' => ':attribute harus diisi.',
+            'string' => ':attribute harus berupa string.',
+            'max' => ':attribute tidak boleh lebih dari :max karakter.',
+            'min' => ':attribute harus minimal :min karakter.',
+            'unique' => ':attribute sudah terdaftar.',
         ]);
     
         if ($validator->fails()) {
@@ -55,7 +61,7 @@ class  AuthController extends Controller
     
         return response()->json([
             'success' => true,
-            'message' => 'Registrasi berhasil step 1.'
+            'message' => 'Registrasi berhasil step 2'
         ]);
     }
 
@@ -67,6 +73,11 @@ class  AuthController extends Controller
             'kecamatan' => ['required', 'string'],
             'kelurahan' => ['required', 'string'],
             'alamat_lengkap' => ['required', 'string'],
+        ], [
+            'required' => ':attribute harus diisi.',
+            'string' => ':attribute harus berupa string.',
+            'max' => ':attribute tidak boleh lebih dari :max karakter.',
+            'min' => ':attribute harus minimal :min karakter.'
         ]);
     
         if ($validator->fails()) {
@@ -87,7 +98,7 @@ class  AuthController extends Controller
     
         return response()->json([
             'success' => true,
-            'message' => 'Registrasi berhasil step 1.',
+            'message' => 'Registrasi berhasil step 2',
         ]);
     }
 
@@ -98,6 +109,14 @@ class  AuthController extends Controller
             'password' => ['required', 'string', 'min:8'],
             'password_confirmation' => ['required', 'min:8','same:password'],
 
+        ], [
+            'required' => ':attribute harus diisi.',
+            'string' => ':attribute harus berupa string.',
+            'email' => ':attribute harus berupa alamat email yang valid.',
+            'max' => ':attribute tidak boleh lebih dari :max karakter.',
+            'min' => ':attribute harus minimal :min karakter.',
+            'unique' => ':attribute sudah terdaftar.',
+            'same' => ':attribute harus sama dengan password.'
         ]);
     
         if ($validator->fails()) {
@@ -136,59 +155,6 @@ class  AuthController extends Controller
         ]);
     }
     
-    // public function register(Request $request){
-    //     $validator = Validator::make($request->all(), [
-    //         'username' => ['required', 'string', 'max:255','unique:users'],
-    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-    //         'kode_pos' => ['required', 'string', 'max:5', 'min:5'],
-    //         'provinsi' => ['required', 'string'],
-    //         'kabupaten' => ['required', 'string'],
-    //         'kecamatan' => ['required', 'string'],
-    //         'kelurahan' => ['required', 'string'],
-    //         'alamat_lengkap' => ['required', 'string'],
-           
-    //         'password' => ['required', 'min:8'],
-    //         'confirm_password' => ['required', 'min:8','same:password'],
-    //     ]);
-
-    //     $validated = $validator->validated();
-
-    //     $role = Role::find($validated['id_role']); 
-
-    //     $status_permission = 0; 
-
-    //     if ($role && $role->tag === 'KKHSG') {
-    //         $status_permission = 1; 
-    //     }
-
-    //     if ($validator->fails()) {
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Ada kesalahan',
-    //             'data' => $validator->errors()
-    //         ]);
-    //     }
-
-    //     $input = $request->all();
-    //     $input['password'] = bcrypt($input['password']);
-    //     $input['status_permission'] = $status_permission;
-    //     $user = User::create($input);
-        
-        
-    //     // $success['token'] = $user->createToken('auth_token')->plainTextToken;
-    //     // $success['name'] = $user->name;
-
-    //     // return response()->json([
-    //     //     'success' => true,
-    //     //     'message' => 'Sukses register',
-    //     //     'data' => $success,
-    //     //     'redirect' => '/dashboard'
-    //     // ]);
-        
-
-    //     return redirect('/');
-    // }
-
     public function getWilayahUPT(Request $request){
         try {
             $bentukUpt = $request->input('bentuk');
@@ -202,48 +168,51 @@ class  AuthController extends Controller
     }
 
 
-    // public function login(Request $request){
-    //     $request->validate([
-    //         'login' => 'required|string',
-    //         'password' => 'required|string|min:8'
-    //     ]);
-    
-    //     $field = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-    
-    //     $credentials = [
-    //         $field => $request->input('login'),
-    //         'password' => $request->input('password')
-    //     ];
-    
-    //     if (Auth::attempt($credentials)) {
-    //         try {
-    //             $auth = Auth::user();
-    //             $token = $auth->createToken('auth_token')->plainTextToken;
-    //             $cookie = cookie('auth_token', $token, null, null, null, true, true); 
+    public function login(Request $request){
+    $request->validate([
+        'login' => 'required|string',
+        'password' => 'required|string|min:8'
+    ]);
 
-    //             $response = [
-    //                 'success' => true,
-    //                 'message' => 'Login successful',
-    //                 'data' => [
-    //                     'user' => $auth,
-    //                     'token' => $token
-    //                 ],
-    //                 'redirect' => '/dashboard'
-    //             ];
-    
-    //             // Return JSON response and set cookie
-    //             // return response()->json($response)->withCookie($cookie);
-    
-    //             return redirect('/dashboard')->withCookie($cookie);
-    //         } catch (\Exception $e) {
-    //             return back()->withErrors(['login' => 'Gagal saat menggenerate token: ' . $e->getMessage()]);
-    //         }
-    //     } else {
-    //         return redirect('/login')->withErrors([
-    //             'login' => 'Email/Username atau password salah, silakan coba lagi'
-    //         ])->withInput($request->except('password'));
-    //     }
-    // }
+    // Cek login menggunakan via email/username     
+    $field = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+    $credentials = [
+        $field => $request->input('login'),
+        'password' => $request->input('password')
+    ];
+
+    if (Auth::attempt($credentials)) {
+        try {
+            $auth = Auth::user();
+            $token = $auth->createToken('auth_token')->plainTextToken;
+            $cookie = cookie('auth_token', $token, null, null, null, true, true);
+            $response = [
+                'success' => true,
+                'message' => 'Login berhasil',
+                'data' => [
+                    // 'user' => $auth,
+                    'token' => $token
+                ],
+                'redirect' => '/dashboard'];
+
+            // Mengembalikan response JSON dan mengatur cookie tanpa redirect
+            // return response()->json($response)->withCookie($cookie);
+            return view('dashboard');
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal saat menggenerate token: ' . $e->getMessage()
+            ], 500);
+        }
+    } else {
+        return response()->json([
+            'success' => false,
+            'message' => 'Email/Username atau password salah, silakan coba lagi'
+        ], 401);
+    }
+}
+
 
     public function logout(Request $request){
         $user = Auth::user();
