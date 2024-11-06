@@ -139,8 +139,6 @@ function stage3to2() {
     saveCurrentStage("stage2");
 }
 
-
-// Call `updateStageIndicators()` on load to restore indicators if stages were saved
 window.addEventListener("load", () => {
     const savedStage = localStorage.getItem("currentStage");
 
@@ -237,10 +235,10 @@ function transitionStage(formId) {
     switch (formId) {
         case "stage1":
             stage1to2();
-            break; // Mencegah eksekusi lanjut ke case berikutnya
+            break; 
         case "stage2":
             stage2to3();
-            break; // Mencegah eksekusi lanjut ke case berikutnya
+            break; 
         case "stage3":
             window.location.href = "/";
             break;
