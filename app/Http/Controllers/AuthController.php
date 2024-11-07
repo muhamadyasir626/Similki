@@ -136,58 +136,7 @@ class  AuthController extends Controller
         ]);
     }
     
-    // public function register(Request $request){
-    //     $validator = Validator::make($request->all(), [
-    //         'username' => ['required', 'string', 'max:255','unique:users'],
-    //         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-    //         'kode_pos' => ['required', 'string', 'max:5', 'min:5'],
-    //         'provinsi' => ['required', 'string'],
-    //         'kabupaten' => ['required', 'string'],
-    //         'kecamatan' => ['required', 'string'],
-    //         'kelurahan' => ['required', 'string'],
-    //         'alamat_lengkap' => ['required', 'string'],
-           
-    //         'password' => ['required', 'min:8'],
-    //         'confirm_password' => ['required', 'min:8','same:password'],
-    //     ]);
-
-    //     $validated = $validator->validated();
-
-    //     $role = Role::find($validated['id_role']); 
-
-    //     $status_permission = 0; 
-
-    //     if ($role && $role->tag === 'KKHSG') {
-    //         $status_permission = 1; 
-    //     }
-
-    //     if ($validator->fails()) {
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Ada kesalahan',
-    //             'data' => $validator->errors()
-    //         ]);
-    //     }
-
-    //     $input = $request->all();
-    //     $input['password'] = bcrypt($input['password']);
-    //     $input['status_permission'] = $status_permission;
-    //     $user = User::create($input);
-        
-        
-    //     // $success['token'] = $user->createToken('auth_token')->plainTextToken;
-    //     // $success['name'] = $user->name;
-
-    //     // return response()->json([
-    //     //     'success' => true,
-    //     //     'message' => 'Sukses register',
-    //     //     'data' => $success,
-    //     //     'redirect' => '/dashboard'
-    //     // ]);
-        
-
-    //     return redirect('/');
-    // }
+    // 
 
     public function getWilayahUPT(Request $request){
         try {
@@ -202,48 +151,48 @@ class  AuthController extends Controller
     }
 
 
-    // public function login(Request $request){
-    //     $request->validate([
-    //         'login' => 'required|string',
-    //         'password' => 'required|string|min:8'
-    //     ]);
+    public function login(Request $request){
+        $request->validate([
+            'login' => 'required|string',
+            'password' => 'required|string|min:8'
+        ]);
     
-    //     $field = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $field = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
     
-    //     $credentials = [
-    //         $field => $request->input('login'),
-    //         'password' => $request->input('password')
-    //     ];
+        $credentials = [
+            $field => $request->input('login'),
+            'password' => $request->input('password')
+        ];
     
-    //     if (Auth::attempt($credentials)) {
-    //         try {
-    //             $auth = Auth::user();
-    //             $token = $auth->createToken('auth_token')->plainTextToken;
-    //             $cookie = cookie('auth_token', $token, null, null, null, true, true); 
+        if (Auth::attempt($credentials)) {
+            try {
+                $auth = Auth::user();
+                $token = $auth->createToken('auth_token')->plainTextToken;
+                $cookie = cookie('auth_token', $token, null, null, null, true, true); 
 
-    //             $response = [
-    //                 'success' => true,
-    //                 'message' => 'Login successful',
-    //                 'data' => [
-    //                     'user' => $auth,
-    //                     'token' => $token
-    //                 ],
-    //                 'redirect' => '/dashboard'
-    //             ];
+                $response = [
+                    'success' => true,
+                    'message' => 'Login successful',
+                    'data' => [
+                        'user' => $auth,
+                        'token' => $token
+                    ],
+                    'redirect' => '/dashboard'
+                ];
     
-    //             // Return JSON response and set cookie
-    //             // return response()->json($response)->withCookie($cookie);
+                // Return JSON response and set cookie
+                // return response()->json($response)->withCookie($cookie);
     
-    //             return redirect('/dashboard')->withCookie($cookie);
-    //         } catch (\Exception $e) {
-    //             return back()->withErrors(['login' => 'Gagal saat menggenerate token: ' . $e->getMessage()]);
-    //         }
-    //     } else {
-    //         return redirect('/login')->withErrors([
-    //             'login' => 'Email/Username atau password salah, silakan coba lagi'
-    //         ])->withInput($request->except('password'));
-    //     }
-    // }
+                return redirect('/dashboard')->withCookie($cookie);
+            } catch (\Exception $e) {
+                return back()->withErrors(['login' => 'Gagal saat menggenerate token: ' . $e->getMessage()]);
+            }
+        } else {
+            return redirect('/login')->withErrors([
+                'login' => 'Email/Username atau password salah, silakan coba lagi'
+            ])->withInput($request->except('password'));
+        }
+    }
 
     public function logout(Request $request){
         $user = Auth::user();
