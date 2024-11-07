@@ -1,0 +1,219 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: SIMILKI RESTful API
+  description: API for RESTful API 
+
+servers:
+  - url: http://127.0.0.1:8000/
+    description: Production Develop
+
+paths:
+  /register1:
+    post:
+      summary: Step 1 - Personal Information
+      description: Collects personal information of the user and stores it in the session.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nama_lengkap:
+                  type: string
+                  example: John Doe
+                jenis_kelamin:
+                  type: string
+                  enum: ["0", "1"]
+                  example: "1"
+                nomor_telepon:
+                  type: string
+                  minLength: 12
+                  example: "081234567890"
+                nip:
+                  type: string
+                  minLength: 18
+                  maxLength: 18
+                  example: "123456789012345678"
+                id_role:
+                  type: integer
+                  example: 2
+                id_lk:
+                  type: integer
+                  nullable: true
+                  example: 1
+                bentuk_upt:
+                  type: string
+                  nullable: true
+                  example: "UPT Form"
+                wilayah_upt:
+                  type: string
+                  nullable: true
+                  example: "Region A"
+                id_spesies:
+                  type: string
+                  nullable: true
+                  example: "Spesies1"
+      responses:
+        '201':
+          description: Registration successful for step 1
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Registrasi berhasil step 1."
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  errors:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+
+  /register2:
+    post:
+      summary: Step 2 - Address Information
+      description: Collects address information and stores it in the session.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                kodepos:
+                  type: string
+                  minLength: 5
+                  maxLength: 5
+                  example: "12345"
+                provinsi:
+                  type: string
+                  example: "Province X"
+                kota/kab:
+                  type: string
+                  example: "City Y"
+                kecamatan:
+                  type: string
+                  example: "District Z"
+                kelurahan:
+                  type: string
+                  example: "Sub-district W"
+                alamat_lengkap:
+                  type: string
+                  example: "1234 Some Street"
+      responses:
+        '201':
+          description: Registration successful for step 2
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Registrasi berhasil step 2."
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  errors:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+
+  /register3:
+    post:
+      summary: Step 3 - Account Information
+      description: Collects account information, merges all previous data, and creates a new user account.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: johndoe
+                email:
+                  type: string
+                  format: email
+                  example: johndoe@example.com
+                password:
+                  type: string
+                  minLength: 8
+                  example: password123
+                password_confirmation:
+                  type: string
+                  minLength: 8
+                  example: password123
+      responses:
+        '201':
+          description: Registration successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Registrasi berhasil."
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  errors:
+                    type: object
+                    additionalProperties:
+                      type: array
+                      items:
+                        type: string
+        '400':
+          description: Session data missing for previous steps
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: false
+                  message:
+                    type: string
+                    example: "Silakan ulangi proses registrasi."
