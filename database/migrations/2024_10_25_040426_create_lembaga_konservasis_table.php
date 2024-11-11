@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('lembaga_konservasis', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('id_Lk')->constrained('list_lks')->onDelete('cascade');
-            $table->string('name');
-            $table->string('alamat');
-            $table->string('slug')->unique();
+            $table->id('');
+            $table->string('nama',255);
+            $table->string('slug',255)->unique();
+            $table->foreignId('id_upt')->constrained('list_upts')->onDelete('cascade');
+            $table->text('alamat');
+            $table->string('kode_pos',5);
             $table->string('provinsi');
-            $table->string('kota_kabupaten');
+            $table->string('kota_kab');
             $table->string('kecamatan');
             $table->string('kelurahan_desa');
-            $table->string('kode_pos');
             $table->string('tahun_izin');
             $table->string('np_izin_peroleh');
             $table->string('link_sk');

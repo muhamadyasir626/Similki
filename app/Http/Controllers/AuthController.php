@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class  AuthController extends Controller
 {
@@ -53,15 +54,19 @@ class  AuthController extends Controller
                         ->first();
     
             if ($upt) {
-                $sessionData['id_list_lk'] = $upt->id;
+                $sessionData['id_upt'] = $upt->id;
             } 
         } 
+
+        if($validatedData['id_role'] == '1'){
+            $sessionData['status_permission'] = '1';
+        }
     
         $request->session()->put('register1', $sessionData);
     
         return response()->json([
             'success' => true,
-            'message' => 'Registrasi berhasil step 2'
+            'message' => 'Registrasi berhasil step 1'
         ]);
     }
 
@@ -69,7 +74,7 @@ class  AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'kodepos' => ['required', 'string','min:5', 'max:5'],
             'provinsi' => ['required', 'string'],
-            'kota/kab' => ['required', 'string'],
+            'kota_kab' => ['required', 'string'],
             'kecamatan' => ['required', 'string'],
             'kelurahan' => ['required', 'string'],
             'alamat_lengkap' => ['required', 'string'],
@@ -89,7 +94,7 @@ class  AuthController extends Controller
     
     
         $sessionData = $request->only([
-            'kodepos', 'provinsi', 'kabupaten', 'kecamatan', 
+            'kodepos', 'provinsi', 'kota_kab', 'kecamatan', 
             'kelurahan', 'alamat_lengkap'
         ]);
 
@@ -129,7 +134,7 @@ class  AuthController extends Controller
         $register1 = $request->session()->get('register1');
         $register2 = $request->session()->get('register2');
     
-        if (!$register1 || !$register2) {
+        if (!$register1 && !$register2) {
             return response()->json([
                 'success' => false,
                 'message' => 'Silakan ulangi proses registrasi.'
@@ -168,50 +173,54 @@ class  AuthController extends Controller
     }
 
 
-    public function login(Request $request){
-    $request->validate([
-        'login' => 'required|string',
-        'password' => 'required|string|min:8'
-    ]);
-
-    // Cek login menggunakan via email/username     
-    $field = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-
-    $credentials = [
-        $field => $request->input('login'),
-        'password' => $request->input('password')
-    ];
-
-    if (Auth::attempt($credentials)) {
-        try {
-            $auth = Auth::user();
-            $token = $auth->createToken('auth_token')->plainTextToken;
-            $cookie = cookie('auth_token', $token, null, null, null, true, true);
-            $response = [
-                'success' => true,
-                'message' => 'Login berhasil',
-                'data' => [
-                    // 'user' => $auth,
-                    'token' => $token
-                ],
-                'redirect' => '/dashboard'];
-
-            // Mengembalikan response JSON dan mengatur cookie tanpa redirect
-            // return response()->json($response)->withCookie($cookie);
-            return view('dashboard');
-        } catch (\Exception $e) {
+    public function login(Request $request) {
+        $request->validate([
+            'login' => 'required',
+            'password' => 'required|string|min:8'
+        ]);
+    
+        $field = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+    
+        $credentials = [
+            $field => $request->input('login'),
+            'password' => $request->input('password')
+        ];
+        $remember = $request->has('remember_me');
+    
+        if (Auth::attempt($credentials, $remember)) {
+            try {
+                $auth = Auth::user();
+                
+                $expiryMinutes = 60 * 24 * 7; 
+    
+                $token = $auth->createToken('auth_token', [], now()->addMinutes($expiryMinutes))->plainTextToken;
+    
+                $cookie = cookie('auth_token', $token, $expiryMinutes, null, null, true, true);
+    
+                $response = [
+                    'success' => true,
+                    'message' => 'Login berhasil',
+                    'data' => [
+                        'token' => $token
+                    ],
+                    'redirect' => '/permissions'
+                ];
+    
+                return response()->json($response)->withCookie($cookie);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Gagal saat menggenerate token: ' . $e->getMessage()
+                ], 500);
+            }
+        } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Gagal saat menggenerate token: ' . $e->getMessage()
-            ], 500);
+                'message' => 'Email/Username atau password salah, silakan coba lagi'
+            ], 401);
         }
-    } else {
-        return response()->json([
-            'success' => false,
-            'message' => 'Email/Username atau password salah, silakan coba lagi'
-        ], 401);
     }
-}
+    
 
 
     public function logout(Request $request){

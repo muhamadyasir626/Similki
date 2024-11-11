@@ -248,4 +248,9 @@ function toggleinput() {
       break;
   }
 }
-
+function togglePasswordVisibility(fieldId) {
+    const field = document.getElementById(fieldId);
+    const type =
+        field.getAttribute("type") === "password" ? "text" : "password";
+    field.setAttribute("type", type);
+}

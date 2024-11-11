@@ -14,10 +14,6 @@ body {
     padding: 20px 0;
 }
 
-.stage1-content {
-    /* width: 100%; */
-}
-
 .container {
     display: flex;
     width: 80%;
@@ -36,30 +32,6 @@ body {
     border-bottom-left-radius: 20px;
 }
 
-.signup-form-container {
-    width: 70%;
-    padding: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-}
-
-.gender-selection {
-    margin-bottom: 10px;
-}
-
-.gender-selection label {
-    margin-right: 10px;
-    /* display: flex;   
-    flex-direction: column; */
-}
-
-.gender-selection .field-heading {
-    margin-bottom: 10px;
-}
-
 .logo {
     display: flex;
     align-items: center;
@@ -69,9 +41,16 @@ body {
 
 .logo img {
     width: 100%;
-
     border-radius: 50%;
     object-fit: cover;
+}
+
+.login-form-container {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .side-big-heading {
@@ -83,7 +62,7 @@ body {
     font-weight: 600;
 }
 
-a.loginbtn {
+.registerbtn {
     /* background-color: white; */
     color: white;
     border: 2px solid white;
@@ -98,7 +77,7 @@ a.loginbtn {
     text-decoration: none;
 }
 
-a.loginbtn:hover {
+.registerbtn:hover {
     background-color: #f0f0f0;
     color: #386641;
 }
@@ -110,51 +89,9 @@ a.loginbtn:hover {
     font-weight: 600;
 }
 
-.progress-bar {
-    display: flex;
-    padding: 10px;
-    border-radius: 10px;
-    justify-content: space-evenly;
-    width: 100%;
-    margin-bottom: 30px;
-    color: black;
-}
-
-.stage {
-    text-align: center;
-}
-
-.stage .tool-tip {
-    font-size: 0.9rem;
-    color: #84848d;
-    margin-left: -20px;
-    margin-bottom: 10px;
-}
-
-.stageno {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #f2e8cf;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #386641;
-    font-weight: 600;
-    font-size: 1rem;
-}
-
 .input-wrapper {
     position: relative;
     width: 100%;
-}
-
-.input-wrapper i {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #84848d;
 }
 
 .text-fields label {
@@ -172,64 +109,26 @@ a.loginbtn:hover {
     margin-bottom: 15px;
 }
 
-.bentuk_upt,
-.wilayah_upt,
-.id_lk,
-.id_spesies {
-    display: none;
-}
-
-.text-fields .option-input {
-    width: 100%;
-    padding: 10px 10px 10px;
-    border: 1px solid #d3d3d3;
-    border-radius: 10px;
-    outline: none;
-    background: #f9f9f9;
-    transition: border-color 0.3s;
-    margin-bottom: 15px;
-}
-
-.text-fields input:focus {
-    border-color: #386641;
-}
-
-.gender-selection input {
-    margin-bottom: 10px;
-}
-.field-heading {
-    margin-bottom: 5px;
-}
-
 .pagination-btns {
     display: flex;
+    justify-content: end;
     gap: 15px;
 }
 
-.pagination-btns input {
+.pagination-btns button {
     padding: 12px 20px;
     font-weight: 500;
     border: none;
     border-radius: 25px;
     color: white;
+    background-color: #6a994e;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.nextPage {
-    background-color: #6a994e;
-}
-
-.previousPage {
-    background-color: #84848d;
-}
-
-.nextPage:hover {
+.pagination-btns button:hover{
     background-color: #386641;
-}
-
-.previousPage:hover {
-    background-color: #5a5a5a;
+    color: white;
 }
 
 .toggle-password {
@@ -240,4 +139,13 @@ a.loginbtn:hover {
     transform: translateY(-50%);
     cursor: pointer;
     z-index: 1;
+}
+
+.forgot-password{
+    text-decoration: none;
+    color: red;
+    display: flex;
+    justify-content: end;
+    padding-top: 10px;
+    font-style: italic;
 }
