@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('taggings', function (Blueprint $table) {
-            $table->id();
-            $table->string('jenis_tagging',50);
+            $table->id('id_tagging');
+            $table->string('jenis_tagging',50)->nullable();
+            $table->string('kode_tagging',20)->nullable();
+            $table->string('alasan_belum_tagging',255)->nullable();
+            $table->date('ba_tagging')->nullable();
             $table->timestamps();
         });
     }

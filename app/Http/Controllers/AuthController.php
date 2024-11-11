@@ -53,9 +53,13 @@ class  AuthController extends Controller
                         ->first();
     
             if ($upt) {
-                $sessionData['id_list_lk'] = $upt->id;
+                $sessionData['id_upt'] = $upt->id;
             } 
         } 
+
+        if($validatedData['id_role'] == '1'){
+            $sessionData['status_permission'] = '1';
+        }
     
         $request->session()->put('register1', $sessionData);
     
@@ -69,7 +73,7 @@ class  AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'kodepos' => ['required', 'string','min:5', 'max:5'],
             'provinsi' => ['required', 'string'],
-            'kota/kab' => ['required', 'string'],
+            'kota_kab' => ['required', 'string'],
             'kecamatan' => ['required', 'string'],
             'kelurahan' => ['required', 'string'],
             'alamat_lengkap' => ['required', 'string'],
@@ -89,7 +93,7 @@ class  AuthController extends Controller
     
     
         $sessionData = $request->only([
-            'kodepos', 'provinsi', 'kabupaten', 'kecamatan', 
+            'kodepos', 'provinsi', 'kota_kab', 'kecamatan', 
             'kelurahan', 'alamat_lengkap'
         ]);
 
@@ -129,7 +133,7 @@ class  AuthController extends Controller
         $register1 = $request->session()->get('register1');
         $register2 = $request->session()->get('register2');
     
-        if (!$register1 || !$register2) {
+        if (!$register1 && !$register2) {
             return response()->json([
                 'success' => false,
                 'message' => 'Silakan ulangi proses registrasi.'
@@ -169,12 +173,11 @@ class  AuthController extends Controller
 
 
     public function login(Request $request){
-    $request->validate([
+        $request->validate([
         'login' => 'required|string',
         'password' => 'required|string|min:8'
-    ]);
+        ]);
 
-    // Cek login menggunakan via email/username     
     $field = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
     $credentials = [
@@ -196,9 +199,11 @@ class  AuthController extends Controller
                 ],
                 'redirect' => '/dashboard'];
 
-            // Mengembalikan response JSON dan mengatur cookie tanpa redirect
             // return response()->json($response)->withCookie($cookie);
-            return view('dashboard');
+            // return view('dashboard');
+            // return view('dashboard', compact('response'));
+            return redirect('/permission')->withCookie($cookie);
+            // return redirect('/dashboard')->withCookie($cookie);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
