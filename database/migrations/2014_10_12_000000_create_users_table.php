@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('id_user');
+            $table->id();
             $table->string('nama_lengkap', 100);
             $table->string('nip', 20);
             $table->string('username', 50)->unique();
@@ -31,6 +31,7 @@ return new class extends Migration
             $table->foreignId('id_list_upt')->nullable()->constrained('list_upts','id_upt')->onDelete('cascade');
             $table->string('password', 255);
             $table->boolean('status_permission')->default(false);
+            $table->rememberToken();
             $table->timestamps();
         });
     }

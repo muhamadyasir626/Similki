@@ -13,14 +13,15 @@
     <div class="container">
       <div class="login-link">
         <div class="logo">
-          <img src="img/logo similki.jpg" alt="logo similki" />
+          <img src="img/klhk.png" alt="klhk" />
         </div>
         <p class="side-big-heading">Sudah memiliki Akun?</p>
-        <a href="/login2.html" class="loginbtn">Login</a>
+        <a href="{{ route('login') }}" class="loginbtn">Login</a>
+
       </div>
       
       <div class="signup-form-container">
-        <p class="big-heading">Buat Akun</p>
+        <p class="big-heading">Daftar Akun</p>
         <div class="progress-bar">
             <div class="stage">
               <p class="tool-tip">Informasi Pribadi</p>
@@ -47,20 +48,23 @@
               @csrf
               <div class="stage1-content">
                   <div class="button-container">
-                      <div class="text-fields name">
-                          <label for="namae_lengkap">Nama Lengkap</label>
-                          <input type="text" name="nama_lengkap" id="nama_lengkap" placeholder="Nama lengkap Anda" required />
-                      </div>
+                    <div class="text-fields name">
+                      <label for="nama_lengkap">Nama Lengkap</label>
+                      <input type="text" name="nama_lengkap" id="nama_lengkap" 
+                             placeholder="Nama lengkap Anda" required 
+                             pattern="[A-Za-z\s]+" 
+                             title="Nama hanya boleh mengandung huruf alfabet dan spasi" />
+                  </div>
                       <div class="gender-selection">
                           <p class="field-heading">Jenis Kelamin :</p>
                           <label for="jenis_kelamin_laki-laki"> <input type="radio" name="jenis_kelamin" value="1" {{ old('jenis_kelamin') == '1' ? 'checked' : '' }} id="jenis_kelamin_laki-laki" required/> Laki-Laki </label>
-                          <label for="jenis_kelamin_perempuan"> <input type="radio" name="jenis_kelamin" value="0" {{ old('jenis_kelamin') == '0' ? 'checked' : '' }} id="jenis_kelamin_perempuan" required/>Perempuan</label>
+                          <label for="jenis_kelamin_perempuan"> <input type="radio" name="jenis_kelamin" value="0" {{ old('jenis_kelamin') == '0' ? 'checked' : '' }} id="jenis_kelamin_perempuan" required/> Perempuan</label>
                       </div>
                   </div>
                   <div class="button-container">
                       <div class="text-fields nip">
                           <label for="nip">NIP</label>
-                          <input type="text" name="nip" id="nip" pattern="[0-9]{18}" placeholder="Isi dengan Angka" required title="Tolong isi dengan Angka saja dan minimal 18 digit" />
+                          <input type="text" name="nip" id="nip" pattern="[0-9]{18}" placeholder="Isi dengan Angka" required title="Hanya boleh angka saja dan berjumlah 18 digit" />
                       </div>
                       <div class="text-fields nomor_telepon">
                           <label for="nomor_telepon">Nomor Telepon</label>
@@ -71,7 +75,7 @@
                           <select id="id_role" class="option-input" name="id_role" required autofocus>
                               <option value="" hidden>Pilih Bidang</option>
                               @foreach($roles as $role)
-                                  <option id="{{ $role->tag }}" value="{{ $role->id }}" required>{{ $role->name }}</option>
+                                  <option id="{{ $role->tag }}"  value="{{ $role->id }}" required>{{ $role->name }}</option>
                               @endforeach
                           </select>
                       </div>
@@ -123,7 +127,7 @@
               <div class="button-container">
                 <div class="text-fields kodepos">
                   <label for="kodepos">Kode pos</label>
-                  <input type="text" name="kodepos" id="kodepos" placeholder="Isi Kode Pos Anda" required />
+                  <input type="text" name="kodepos" id="kodepos" placeholder="Isi Kode Pos Anda (5 digit)" required />
                 </div>
                 <div class="text-fields provinsi">
                   <label for="provinsi">Provinsi</label>
@@ -168,24 +172,32 @@
               <div class="button-container">
                 <div class="text-fields email">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder=" abcd@gmail.com" required />
+                    <input type="email" name="email" id="email" placeholder="abcd@gmail.com" required />
                 </div>
               </div>
               <div class="button-container">
                 <div class="text-fields password">
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password" placeholder="Buat kata sandi Anda"required />
+                    <div class="input-wrapper">
+                        <input type="password" name="password" id="password" placeholder="Buat kata sandi Anda" required />
+                        <span onclick="togglePasswordVisibility('password')" class="toggle-password">👁️</span>
+                    </div>
                 </div>
-              <div class="text-fields password_confirmation">
-                  <label for="password_confirmation">Confirmation password</label>
-                  <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Ketika ulang kata sandi Anda" required/>
+                
+                <div class="text-fields password_confirmation">
+                    <label for="password_confirmation">Confirmation password</label>
+                    <div class="input-wrapper">
+                        <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Ketika ulang kata sandi Anda" required />
+                        <span onclick="togglePasswordVisibility('password_confirmation')" class="toggle-password">👁️</span>
+                    </div>
                 </div>
-              </div>
+            </div>
               <div class="pagination-btns">
                 <input type="button" value="Previous"  class="previousPage stagebtn3a" onclick="stage3to2()" />
               <input type="submit" value="Submit" class="nextPage stagebtn3b" />
-              </div>
+              </div>              
           </div>
+          
         </form>
       </div>
       

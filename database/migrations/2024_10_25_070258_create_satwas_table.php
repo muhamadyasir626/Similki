@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('satwas', function (Blueprint $table) {
-            $table->id('id_satwa'); 
-            $table->foreignId('id_lk')->constrained('lembaga_konservasis','id_lk')->onDelete('cascade');
+            $table->id(); 
+            $table->foreignId('id_lk')->constrained('lembaga_konservasis')->onDelete('cascade');
             $table->string('jenis_koleksi', 50);//satwa hidup/awetan
             $table->string('asal_satwa', 50);
             $table->string('no_sats_ln')->nullable();
-            $table->foreignId('id_spesies')->constrained('list_species', 'id_spesies')->onDelete('cascade');
+            $table->foreignId('id_spesies')->constrained('list_species')->onDelete('cascade');
             $table->boolean('status_perlindungan')->nullable(); // dilindugi (1) || tidak dilindugi (0)
             $table->boolean('pengambilan_satwa')->nullable(); //alam(1) || bukan alam (0)
             $table->string('sk_kepala')->nullable();
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->decimal('jumlah_unsex', 10, 2);
             $table->decimal('jumlah_keseluruhan_gender', 10, 2);
             $table->string('no_izin_peroleh',50);
-            $table->foreignId('id_tagging')->constrained('taggings','id_tagging')->onDelete('cascade'); // Correct foreign key
+            $table->foreignId('id_tagging')->constrained('taggings')->onDelete('cascade'); // Correct foreign key
             $table->string('no_ba_titipan')->nullable();
             $table->string('no_ba_kelahiran')->nullable();
             $table->string('no_ba_kematian')->nullable();

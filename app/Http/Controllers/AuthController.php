@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class  AuthController extends Controller
 {
@@ -65,7 +66,7 @@ class  AuthController extends Controller
     
         return response()->json([
             'success' => true,
-            'message' => 'Registrasi berhasil step 2'
+            'message' => 'Registrasi berhasil step 1'
         ]);
     }
 
@@ -172,51 +173,54 @@ class  AuthController extends Controller
     }
 
 
-    public function login(Request $request){
+    public function login(Request $request) {
         $request->validate([
-        'login' => 'required|string',
-        'password' => 'required|string|min:8'
+            'login' => 'required',
+            'password' => 'required|string|min:8'
         ]);
-
-    $field = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-
-    $credentials = [
-        $field => $request->input('login'),
-        'password' => $request->input('password')
-    ];
-
-    if (Auth::attempt($credentials)) {
-        try {
-            $auth = Auth::user();
-            $token = $auth->createToken('auth_token')->plainTextToken;
-            $cookie = cookie('auth_token', $token, null, null, null, true, true);
-            $response = [
-                'success' => true,
-                'message' => 'Login berhasil',
-                'data' => [
-                    // 'user' => $auth,
-                    'token' => $token
-                ],
-                'redirect' => '/dashboard'];
-
-            // return response()->json($response)->withCookie($cookie);
-            // return view('dashboard');
-            // return view('dashboard', compact('response'));
-            return redirect('/permission')->withCookie($cookie);
-            // return redirect('/dashboard')->withCookie($cookie);
-        } catch (\Exception $e) {
+    
+        $field = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+    
+        $credentials = [
+            $field => $request->input('login'),
+            'password' => $request->input('password')
+        ];
+        $remember = $request->has('remember_me');
+    
+        if (Auth::attempt($credentials, $remember)) {
+            try {
+                $auth = Auth::user();
+                
+                $expiryMinutes = 60 * 24 * 7; 
+    
+                $token = $auth->createToken('auth_token', [], now()->addMinutes($expiryMinutes))->plainTextToken;
+    
+                $cookie = cookie('auth_token', $token, $expiryMinutes, null, null, true, true);
+    
+                $response = [
+                    'success' => true,
+                    'message' => 'Login berhasil',
+                    'data' => [
+                        'token' => $token
+                    ],
+                    'redirect' => '/permissions'
+                ];
+    
+                return response()->json($response)->withCookie($cookie);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Gagal saat menggenerate token: ' . $e->getMessage()
+                ], 500);
+            }
+        } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Gagal saat menggenerate token: ' . $e->getMessage()
-            ], 500);
+                'message' => 'Email/Username atau password salah, silakan coba lagi'
+            ], 401);
         }
-    } else {
-        return response()->json([
-            'success' => false,
-            'message' => 'Email/Username atau password salah, silakan coba lagi'
-        ], 401);
     }
-}
+    
 
 
     public function logout(Request $request){

@@ -9,11 +9,9 @@ class Tagging extends Model
 {
     use HasFactory;
 
-    public function SatwaKoleksi(){
-        return $this->belongsTo(SatwaKoleksi::class);
+    public function Satwa(){
+        return $this->belongsTo(Satwa::class);
     }
 
-    public function PendataanSatwa(){
-        return $this->belongsTo(PendataanSatwa::class);
-    }
+    
 }

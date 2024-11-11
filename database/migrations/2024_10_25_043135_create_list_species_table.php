@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('list_species', function (Blueprint $table) {
-            $table->id('id_spesies');
+            $table->id();
             $table->string('class',255);
             $table->string('genus',255);
             $table->string('spesies',255);
