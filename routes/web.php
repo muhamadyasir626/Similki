@@ -58,4 +58,16 @@ Route::get('/dashboard', function () {
 //     })->name('dashboard');
 // });
 
+Route::group(['prefix' => 'forms'], function(){
+    Route::get('basic-elements', function () { return view('pages.forms.basic-elements'); });
+    Route::get('data_lk', function () { return view('pages.forms.data_lk'); });
+    Route::get('wizard', function () { return view('pages.forms.wizard'); });
+    Route::get('input-investasi', function () { return view('pages.forms.input-investasi'); });
+    Route::get('monitoring-investasi', function () { return view('pages.forms.monitoring-investasi'); });
+    Route::get('input-lk', function () { return view('pages.forms.input-lk'); });
 
+});
+
+Route::group(['prefix' => 'tables'], function(){
+    Route::get('data-table', function () { return view('pages.tables.data-table'); });
+});
