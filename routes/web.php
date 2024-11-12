@@ -47,8 +47,8 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
     Route::get('/permission', function(){
         return view('permission');
     })->name('permission');
+    Route::resource('lembaga-konservasi', LembagaKonservasi::class);
+    Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
 });
 
 Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);
-
-
