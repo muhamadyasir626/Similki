@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('lembaga_konservasis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_Lk')->constrained('list_lks')->onDelete('cascade');
-            $table->string('name');
-            $table->string('alamat');
-            $table->string('slug')->unique();
+            $table->string('nama',255);
+            $table->string('slug',255)->unique();
+            $table->foreignId('id_upt')->constrained('list_upts')->onDelete('cascade');
+            $table->text('alamat');
+            $table->string('kode_pos',5);
             $table->string('provinsi');
             $table->string('kota_kabupaten');
             $table->string('kecamatan');

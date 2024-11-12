@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('taggings', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_tagging',50);
+            $table->foreignId('id_satwa')->constrained('satwas')->onDelete('cascade');
+            $table->string('jenis_tagging',50)->nullable();
+            $table->string('kode_tagging',20)->nullable();
+            $table->string('alasan_belum_tagging',255)->nullable();
+            $table->date('ba_tagging')->nullable();
             $table->timestamps();
         });
     }
