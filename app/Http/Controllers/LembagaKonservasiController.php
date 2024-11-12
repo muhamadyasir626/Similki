@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\LembagaKonservasi;
 use App\Http\Requests\StoreLembagaKonservasiRequest;
 use App\Http\Requests\UpdateLembagaKonservasiRequest;
+use App\Imports\LembagaKonservasiImport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LembagaKonservasiController extends Controller
 {
@@ -90,13 +93,30 @@ class LembagaKonservasiController extends Controller
         return redirect()->route('lk.index')->with('success', 'Lembaga Konservasi updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy(LembagaKonservasi $lembagaKonservasi)
     {
         $lembagaKonservasi->delete();
 
         return redirect()->route('lk.index')->with('success', 'Lembaga Konservasi deleted successfully.');
+    }
+
+    public function import(Request $request){
+        $validatedFile = Validator::make($request->all(),[
+            'file' =>'required|mimes:csv',
+        ]);
+
+        if($validatedFile->fails()){
+            return redirect()->route('lk.create')
+                    ->withErrors($validatedFile)
+                    ->withInput();
+        }
+        try{
+            Excel::import(new LembagaKonservasiImport, $request->file('file'));
+            
+            return redirect()->route('lk.index')->with('Success', 'File/Data import berhasil');
+        }catch(\Exception$e){
+            return redirect()->with('Failed', "File/Data import gagal!");
+        }
     }
 }
