@@ -1,11 +1,12 @@
 <?php
 
 use App\Models\Role;
+use App\Models\ListUpt;
+use App\Models\ListSpecies;
+use App\Models\LembagaKonservasi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Models\LembagaKonservasi;
-use App\Models\ListSpecies;
-use App\Models\ListUpt;
+use App\Http\Controllers\checkpermission;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,13 +36,13 @@ Route::get('/register', function () {
 Route::post('register1',[AuthController::class, 'register1'])->name('register1');
 Route::post('register2',[AuthController::class, 'register2'])->name('register2');
 Route::post('register3',[AuthController::class, 'register3'])->name('register3');
-Route::post('login', [AuthController::class, 'login']);
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('login', [AuthController::class, 'login'])->name('authenticate');
 
-Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_session'),'verified'])
 ->group(function () {
+    Route::get('/check-permission',[checkpermission::class,'check']);
+
     Route::get('/dashboard', function () {
-    // dd(Auth::User());
         return view('dashboard');
     })->name('dashboard');
     Route::get('/permission', function(){
@@ -51,4 +52,5 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
     Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
 });
 
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);
