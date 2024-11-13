@@ -25,10 +25,10 @@ return new class extends Migration
             $table->boolean('jenis_kelamin');  
             $table->string('nomor_telepon', 20)->unique();
             $table->string('email', 255)->unique();
-            $table->foreignId('id_role')->constrained('roles','id_role')->onDelete('cascade');
-            $table->foreignId('id_lk')->nullable()->constrained('lembaga_konservasis','id_lk')->onDelete('cascade');
-            $table->foreignId('id_spesies')->nullable()->constrained('list_species','id_spesies')->onDelete('cascade');
-            $table->foreignId('id_list_upt')->nullable()->constrained('list_upts','id_upt')->onDelete('cascade');
+            $table->foreignId('id_role')->constrained('roles')->onDelete('cascade');
+            $table->foreignId('id_lk')->nullable()->constrained('lembaga_konservasis')->onDelete('cascade');
+            $table->foreignId('id_spesies')->nullable()->constrained('list_species')->onDelete('cascade');
+            $table->foreignId('id_list_upt')->nullable()->constrained('list_upts')->onDelete('cascade');
             $table->string('password', 255);
             $table->boolean('status_permission')->default(false);
             $table->rememberToken();

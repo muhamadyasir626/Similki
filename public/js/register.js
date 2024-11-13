@@ -12,7 +12,7 @@ function searchPostalCode() {
           var locationData = data.data[0];
           
           document.getElementById("provinsi").value = locationData.province || "";
-          document.getElementById("kota/kab").value = locationData.regency || "";
+          document.getElementById("kota_kab").value = locationData.regency || "";
           document.getElementById("kecamatan").value = locationData.district || "";
           document.getElementById("kelurahan").value = locationData.village || "";
         } else {

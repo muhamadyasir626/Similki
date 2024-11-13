@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('lembaga_konservasis', function (Blueprint $table) {
-            $table->id('');
+            $table->id();
             $table->string('nama',255);
             $table->string('slug',255)->unique();
             $table->foreignId('id_upt')->constrained('list_upts')->onDelete('cascade');
