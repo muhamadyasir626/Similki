@@ -54,7 +54,7 @@ License: For each use you must have a valid license purchased only from above li
       <div class="page-content">
         @yield('content')
       </div>
-      @include('layouts.footer')
+      {{-- @include('layouts.footer') --}}
     </div>
   </div>
 
@@ -62,6 +62,7 @@ License: For each use you must have a valid license purchased only from above li
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('assets/plugins/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('assets/js/logout.js') }}"></script>
     <!-- end base js -->
 
     <!-- plugin js -->

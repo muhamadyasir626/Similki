@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\ListUpt;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
-use Carbon\Carbon;
 
 class  AuthController extends Controller
 {
@@ -186,27 +187,28 @@ class  AuthController extends Controller
             'password' => $request->input('password')
         ];
         $remember = $request->has('remember_me');
-    
+        
         if (Auth::attempt($credentials, $remember)) {
             try {
                 $auth = Auth::user();
                 
                 $expiryMinutes = 60 * 24 * 7; 
-    
+                
                 $token = $auth->createToken('auth_token', [], now()->addMinutes($expiryMinutes))->plainTextToken;
-    
                 $cookie = cookie('auth_token', $token, $expiryMinutes, null, null, true, true);
-    
+                $auth->remember_token = Str::random(60); // Generate random token
+                $auth->save();
                 $response = [
                     'success' => true,
                     'message' => 'Login berhasil',
                     'data' => [
                         'token' => $token
                     ],
-                    'redirect' => '/permissions'
-                ];
-    
-                return response()->json($response)->withCookie($cookie);
+                    'url' => '/permission'
+                ];    
+                // return response()->json($response)->withCookie($cookie);
+                // return redirect('/permission')->header('Authorization', 'Bearer'. $token);
+                return redirect('/permission')->withCookie($cookie);                
             } catch (\Exception $e) {
                 return response()->json([
                     'success' => false,
@@ -230,6 +232,7 @@ class  AuthController extends Controller
             $user->tokens->each(function ($token, $key) {
                 $token->delete();
             });
+            $user->forceFill(['remember_token' => null])->save();
         }
 
         $request->session()->invalidate();
