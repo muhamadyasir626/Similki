@@ -124,6 +124,8 @@ body {
     background-color: #6a994e;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: 100%;
+    margin-top: 12px;
 }
 
 .pagination-btns button:hover{
@@ -144,8 +146,9 @@ body {
 .forgot-password{
     text-decoration: none;
     color: red;
+    opacity: 70%;
+    font-size: 12px;
     display: flex;
-    justify-content: end;
+    justify-content: center;
     padding-top: 10px;
-    font-style: italic;
 }
