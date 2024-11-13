@@ -68,6 +68,7 @@ class LembagaKonservasiController extends Controller
     /**
      * Display the specified resource.
      */
+    
     public function show(LembagaKonservasi $lembagaKonservasi)
     {
         return view('lk.show', compact('lembagaKonservasi'));

@@ -19,7 +19,7 @@
 
         <div class="login-form-container">
             <p class="big-heading">Login Akun</p>
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('authenticate') }}">
                 @csrf
 
                 <div class="text-fields">
