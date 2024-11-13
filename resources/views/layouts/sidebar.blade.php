@@ -165,7 +165,7 @@
         <div class="collapse {{ show_class(['forms/*']) }}" id="forms">
           <ul class="nav sub-menu">            
             <li class="nav-item">
-              <a href="{{ url('/forms/wizard') }}" class="nav-link {{ active_class(['forms/wizard']) }}">Data Satwa</a>
+              <a href="{{ route('lembaga-konservasi.index') }}" class="nav-link {{ active_class(['forms/wizard']) }}">Data Satwa</a>
             </li>
             <li class="nav-item">
               <a href="{{ url('/forms/data_lk') }}" class="nav-link {{ active_class(['forms/data_lk']) }}">Data LK</a>
@@ -181,6 +181,9 @@
             </li>
             <li class="nav-item">
               <a href="{{ url('/forms/input-lk') }}" class="nav-link {{ active_class(['forms/input-lk']) }}">Input Data LK</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('/forms/list-lk') }}" class="nav-link {{ active_class(['forms/list-lk']) }}">List Data LK</a>
             </li>
           </ul>
         </div>
@@ -292,7 +295,7 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item {{ active_class(['error/*']) }}">
+      {{-- <li class="nav-item {{ active_class(['error/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#error" role="button" aria-expanded="{{ is_active_route(['error/*']) }}" aria-controls="error">
           <i class="link-icon" data-feather="cloud-off"></i>
           <span class="link-title">Error</span>
@@ -308,7 +311,7 @@
             </li>
           </ul>
         </div>
-      </li>
+      </li> --}}
       {{-- <li class="nav-item nav-category">Docs</li>
       <li class="nav-item">
         <a href="https://www.nobleui.com/laravel/documentation/docs.html" target="_blank" class="nav-link">

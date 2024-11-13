@@ -46,8 +46,7 @@ Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
     Route::get('/permission', function(){
         return view('permission');
     })->name('permission');
-    Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
-       
+    Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');       
 });
 
 Route::get('/dashboard', function () {
@@ -70,6 +69,6 @@ Route::group(['prefix' => 'tables'], function(){
     Route::get('data-table', function () { return view('pages.tables.data-table'); });
 });
 
-Route::get('/404', function () {
+Route::get('404', function () {
     return view('404');
 })->name('404');

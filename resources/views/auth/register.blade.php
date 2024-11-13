@@ -75,7 +75,7 @@
                           <select id="id_role" class="option-input" name="id_role" required autofocus>
                               <option value="" hidden>Pilih Bidang</option>
                               @foreach($roles as $role)
-                                  <option id="{{ $role->tag }}" value="{{ $role->id }}" required>{{ $role->name }}</option>
+                                  <option id="{{ $role->tag }}"  value="{{ $role->id }}" required>{{ $role->name }}</option>
                               @endforeach
                           </select>
                       </div>
@@ -135,9 +135,9 @@
                 </div>
               </div>
               <div class="button-container">
-                <div class="text-fields kota/kab">
-                  <label for="kota/kab">Kota/Kabupaten</label>
-                  <input type="text" name="kota/kab" id="kota/kab" placeholder="Isi Kode Pos" readonly />
+                <div class="text-fields kota_kab">
+                  <label for="kota_kab">Kota/Kabupaten</label>
+                  <input type="text" name="kota_kab" id="kota_kab" placeholder="Isi Kode Pos" readonly />
                 </div>
                 <div class="text-fields kecamatan">
                   <label for="kecamatan">Kecamatan</label>
