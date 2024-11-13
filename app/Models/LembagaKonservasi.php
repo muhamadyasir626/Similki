@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Satwa;
 
 class LembagaKonservasi extends Model
 {
@@ -11,7 +12,16 @@ class LembagaKonservasi extends Model
 
     protected $guard =['id'];
 
-    public function list_lk(){
-        return $this->belongsTo(ListLk::class);
+    public function list_upt(){
+        return $this->belongsTo(ListUpt::class);
+    }
+    public function User(){
+        return $this->belongsTo(User::class);
+    }
+    public function Satwa(){
+        return $this->belongsTo(Satwa::class);
+    }
+    public function MonitoringInvestasi(){
+        return $this->belongsTo(MonitoringInvestasi::class);
     }
 }
