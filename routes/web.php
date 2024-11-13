@@ -7,6 +7,7 @@ use App\Models\LembagaKonservasi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\checkpermission;
+use Illuminate\Contracts\View\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +51,12 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     })->name('permission');
     Route::resource('lembaga-konservasi', LembagaKonservasi::class);
     Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);
+
+//undefined route 
+// Route::any('/{page}', function () {
+//     return View::make()
+// });
