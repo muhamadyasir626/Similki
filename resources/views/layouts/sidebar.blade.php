@@ -1,7 +1,8 @@
 <nav class="sidebar">
   <div class="sidebar-header">
     <a href="#" class="sidebar-brand">
-      Noble<span>UI</span>
+      {{-- Noble<span>UI</span> --}}
+      SIMILKI
     </a>
     <div class="sidebar-toggler not-active">
       <span></span>
@@ -18,7 +19,7 @@
           <span class="link-title">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item nav-category">web apps</li>
+      {{-- <li class="nav-item nav-category">web apps</li>
       <li class="nav-item {{ active_class(['email/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#email" role="button" aria-expanded="{{ is_active_route(['email/*']) }}" aria-controls="email">
           <i class="link-icon" data-feather="mail"></i>
@@ -50,9 +51,9 @@
           <i class="link-icon" data-feather="calendar"></i>
           <span class="link-title">Calendar</span>
         </a>
-      </li>
-      <li class="nav-item nav-category">Components</li>
-      <li class="nav-item {{ active_class(['ui-components/*']) }}">
+      </li> --}}
+      <li class="nav-item nav-category">LEMBAGA KONSERVASI</li>
+      {{-- <li class="nav-item {{ active_class(['ui-components/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button" aria-expanded="{{ is_active_route(['ui-components/*']) }}" aria-controls="uiComponents">
           <i class="link-icon" data-feather="feather"></i>
           <span class="link-title">UI Kit</span>
@@ -131,8 +132,8 @@
             </li>
           </ul>
         </div>
-      </li>
-      <li class="nav-item {{ active_class(['advanced-ui/*']) }}">
+      </li> --}}
+      {{-- <li class="nav-item {{ active_class(['advanced-ui/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#advanced-ui" role="button" aria-expanded="{{ is_active_route(['advanced-ui/*']) }}" aria-controls="advanced-ui">
           <i class="link-icon" data-feather="anchor"></i>
           <span class="link-title">Advanced UI</span>
@@ -154,7 +155,7 @@
             </li>
           </ul>
         </div>
-      </li>
+      </li> --}}
       <li class="nav-item {{ active_class(['forms/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#forms" role="button" aria-expanded="{{ is_active_route(['forms/*']) }}" aria-controls="forms">
           <i class="link-icon" data-feather="inbox"></i>
@@ -162,18 +163,24 @@
           <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
         <div class="collapse {{ show_class(['forms/*']) }}" id="forms">
-          <ul class="nav sub-menu">
+          <ul class="nav sub-menu">            
             <li class="nav-item">
-              <a href="{{ url('/forms/basic-elements') }}" class="nav-link {{ active_class(['forms/basic-elements']) }}">Basic Elements</a>
+              <a href="{{ url('/forms/wizard') }}" class="nav-link {{ active_class(['forms/wizard']) }}">Data Satwa</a>
             </li>
             <li class="nav-item">
-              <a href="{{ url('/forms/advanced-elements') }}" class="nav-link {{ active_class(['forms/advanced-elements']) }}">Advanced Elements</a>
+              <a href="{{ url('/forms/data_lk') }}" class="nav-link {{ active_class(['forms/data_lk']) }}">Data LK</a>
             </li>
             <li class="nav-item">
-              <a href="{{ url('/forms/editors') }}" class="nav-link {{ active_class(['forms/editors']) }}">Editors</a>
+              <a href="{{ url('/forms/data_lk') }}" class="nav-link {{ active_class(['forms/data_lk']) }}">Profile LK</a>
             </li>
             <li class="nav-item">
-              <a href="{{ url('/forms/wizard') }}" class="nav-link {{ active_class(['forms/wizard']) }}">Wizard</a>
+              <a href="{{ url('/forms/input-investasi') }}" class="nav-link {{ active_class(['forms/input-investasi']) }}">Input Investasi</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('/forms/monitoring-investasi') }}" class="nav-link {{ active_class(['forms/monitoring-investasi']) }}">Monitoring Investasi</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('/forms/input-lk') }}" class="nav-link {{ active_class(['forms/input-lk']) }}">Input Data LK</a>
             </li>
           </ul>
         </div>
@@ -302,17 +309,17 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item nav-category">Docs</li>
+      {{-- <li class="nav-item nav-category">Docs</li>
       <li class="nav-item">
         <a href="https://www.nobleui.com/laravel/documentation/docs.html" target="_blank" class="nav-link">
           <i class="link-icon" data-feather="hash"></i>
           <span class="link-title">Documentation</span>
         </a>
-      </li>
+      </li> --}}
     </ul>
   </div>
 </nav>
-<nav class="settings-sidebar">
+{{-- <nav class="settings-sidebar">
   <div class="sidebar-body">
     <a href="#" class="settings-sidebar-toggler">
       <i data-feather="settings"></i>
@@ -343,4 +350,4 @@
       </a>
     </div>
   </div>
-</nav>
+</nav> --}}
