@@ -165,7 +165,7 @@
         <div class="collapse {{ show_class(['forms/*']) }}" id="forms">
           <ul class="nav sub-menu">            
             <li class="nav-item">
-              <a href="{{ url('/forms/wizard') }}" class="nav-link {{ active_class(['forms/wizard']) }}">Data Satwa</a>
+              <a href="{{ route('lembaga-konservasi.index') }}" class="nav-link {{ active_class(['forms/wizard']) }}">Data Satwa</a>
             </li>
             <li class="nav-item">
               <a href="{{ url('/forms/data_lk') }}" class="nav-link {{ active_class(['forms/data_lk']) }}">Data LK</a>

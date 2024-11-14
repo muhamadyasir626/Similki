@@ -26,7 +26,7 @@ return new class extends Migration
             $table->boolean('perilaku_satwa'); // individu (1) || berkelompok (0)
             $table->boolean('jenis_kelamin_individu')->nullable(); // jantan (1) || betina (0)
             $table->string('status_satwa', 50); // satwa {titipan, koleksi}, breeding loan, rehabilitasi
-            $table->decimal('jumlah_jantang', 10, 2);
+            $table->decimal('jumlah_jantan', 10, 2);
             $table->decimal('jumlah_betina', 10, 2);
             $table->decimal('jumlah_unsex', 10, 2);
             $table->decimal('jumlah_keseluruhan_gender', 10, 2);

@@ -7,6 +7,7 @@ use App\Models\LembagaKonservasi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\checkpermission;
+use App\Http\Controllers\LembagaKonservasiController;
 use Illuminate\Contracts\View\View;
 
 /*
@@ -49,7 +50,7 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::get('/permission', function(){
         return view('permission');
     })->name('permission');
-    Route::resource('lembaga-konservasi', LembagaKonservasi::class);
+    Route::resource('lembaga-konservasi', LembagaKonservasiController::class);
     Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
