@@ -1,12 +1,15 @@
 <?php
 
 use App\Models\Role;
+use App\Models\ListUpt;
+use App\Models\ListSpecies;
+use App\Models\LembagaKonservasi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Models\ListSpecies;
-use App\Models\ListUpt;
+use App\Http\Controllers\checkpermission;
 use App\Http\Controllers\LembagaKonservasiController;
-use App\Models\LembagaKonservasi;
+use App\Http\Controllers\SatwaController;
+use Illuminate\Contracts\View\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +30,7 @@ Route::get('/register', function () {
     $upt_bentuk = ListUpt::distinct()->select('bentuk')->get();
     $upt_wilayah = ListUpt::distinct()->select('wilayah')->get();
     $list_lk = LembagaKonservasi::orderBy('nama','asc')->get();
+    // dd($list_lk);
     $list_species =ListSpecies::all();
 
     // dd($upt_bentuk);
@@ -36,39 +40,60 @@ Route::get('/register', function () {
 Route::post('register1',[AuthController::class, 'register1'])->name('register1');
 Route::post('register2',[AuthController::class, 'register2'])->name('register2');
 Route::post('register3',[AuthController::class, 'register3'])->name('register3');
-Route::post('login', [AuthController::class, 'login']);
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-Route::resource('lembaga-konservasi', LembagaKonservasiController::class);  
+Route::post('login', [AuthController::class, 'login'])->name('authenticate');
 
-Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])
+Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_session'),'verified'])
 ->group(function () {
     
-    Route::get('/permission', function(){
-        return view('permission');
-    })->name('permission');
-    Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');       
-});
+//     Route::get('/permission', function(){
+//         return view('permission');
+//     })->name('permission');
+//     Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');       
+// });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
 
-Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);
-Route::group(['prefix' => 'forms'], function(){
-    Route::get('basic-elements', function () { return view('pages.forms.basic-elements'); });
-    Route::get('data_lk', function () { return view('pages.forms.data_lk'); });
-    Route::get('wizard', function () { return view('pages.forms.wizard'); });
-    Route::get('input-investasi', function () { return view('pages.forms.input-investasi'); });
-    Route::get('monitoring-investasi', function () { return view('pages.forms.monitoring-investasi'); });
-    Route::get('input-lk', function () { return view('pages.forms.input-lk'); });
-    Route::get('list-lk', function () { return view('pages.forms.list-lk'); });
+// Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);
+// Route::group(['prefix' => 'forms'], function(){
+//     Route::get('basic-elements', function () { return view('pages.forms.basic-elements'); });
+//     Route::get('data_lk', function () { return view('pages.forms.data_lk'); });
+//     Route::get('wizard', function () { return view('pages.forms.wizard'); });
+//     Route::get('input-investasi', function () { return view('pages.forms.input-investasi'); });
+//     Route::get('monitoring-investasi', function () { return view('pages.forms.monitoring-investasi'); });
+//     Route::get('input-lk', function () { return view('pages.forms.input-lk'); });
+//     Route::get('list-lk', function () { return view('pages.forms.list-lk'); });
 
-});
+// });
 
-Route::group(['prefix' => 'tables'], function(){
-    Route::get('data-table', function () { return view('pages.tables.data-table'); });
-});
+// Route::group(['prefix' => 'tables'], function(){
+//     Route::get('data-table', function () { return view('pages.tables.data-table'); });
+// });
 
 Route::get('404', function () {
     return view('404');
 })->name('404');
+    Route::get('/check-permission',[checkpermission::class,'check']);
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::get('/permission', function(){
+        return view('permission');
+    })->name('permission');
+    
+    Route::resource('lembaga-konservasi', LembagaKonservasiController::class);
+    Route::resource('satwa', SatwaController::class);
+    Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);
+
+//undefined route 
+// Route::any('/{page}', function () {
+//     return View::make()
+// });

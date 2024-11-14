@@ -18,7 +18,7 @@ class Satwa extends Model
         return $this->belongsTo(ListSpecies::class);
     }
 
-    public function ListLK(){
-        return $this->belongsTo(ListLk::class);
+    public function lk(){
+        return $this->belongsTo(LembagaKonservasi::class, 'id_lk');
     }
 }

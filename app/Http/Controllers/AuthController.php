@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\ListUpt;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Validator;
-use Carbon\Carbon;
 
 class  AuthController extends Controller
 {
@@ -159,124 +160,86 @@ class  AuthController extends Controller
             'message' => 'Registrasi berhasil.',
         ]);
     }
-
-    // public function login(Request $request) {
-    //     \Log::info('Login request received', $request->all());
     
-    //     $request->validate([
-    //         'login' => 'required',
-    //         'password' => 'required|string|min:8'
-    //     ]);
-    
-    //     $field = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        
-    //     $credentials = [
-    //         $field => $request->input('login'),
-    //         'password' => $request->input('password')
-    //     ];
-        
-    //     $remember = $request->has('remember_me');
-    
-    //     if (Auth::attempt($credentials, $remember)) {
-    //         try {
-    //             $auth = Auth::user();
-    //             \Log::info('User logged in', ['user' => $auth]);
-    //             // Redirect ke dashboard setelah login berhasil
-    //             return redirect()->intended('/dashboard');
-    //         } catch (\Exception $e) {
-    //             \Log::error('Error generating token: ' . $e->getMessage());
-    //             return response()->json([
-    //                 'success' => false,
-    //                 'message' => 'Gagal saat menggenerate token: ' . $e->getMessage()
-    //             ], 500);
-    //         }
-    //     } else {
-    //         \Log::warning('Login failed for user', ['login' => $request->input('login')]);
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Email/Username atau password salah, silakan coba lagi'
-    //         ], 401);
-    //     }
-    // }
-    
-    // public function logout(Request $request){
-    //     $user = Auth::user();
-
-    //     if ($user) {
-    //         $user->tokens->each(function ($token, $key) {
-    //             $token->delete();
-    //         });
-    //     }
-
-    //     $request->session()->invalidate();
-    //     $request->session()->regenerateToken();
-    //     $cookie = Cookie::forget('auth_token');
-
-    //     return redirect('/login')->withCookie($cookie)->with('message', 'Successfully logged out.');
-    // }
-
-    public function login(Request $request)
-{
-    Log::info('Login request received', $request->all());
-
-    $request->validate([
-        'login' => 'required',
-        'password' => 'required|string|min:8'
-    ]);
-
-    $field = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-
-    $credentials = [
-        $field => $request->input('login'),
-        'password' => $request->input('password')
-    ];
-
-    $rememberMe = $request->has('remember_me');
-
-    if (Auth::attempt($credentials, $rememberMe)) {
+    public function getWilayahUPT(Request $request){
         try {
-            $auth = Auth::user();
-            Log::info('User logged in', ['user' => $auth]);
-
-            // Simpan token pengguna sebagai cookie
-            $token = str_random(60); 
-            Cookie::queue('auth_token', $token);
-
-            return redirect()->intended('/dashboard');
+            $bentukUpt = $request->input('bentuk');
+            $wilayah = ListUpt::where('bentuk', $bentukUpt)
+                            ->select('wilayah','slug')
+                            ->get();
+            return response()->json(['data' => $wilayah]);
         } catch (\Exception $e) {
-            Log::error('Error generating token: ' . $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+
+    public function login(Request $request) {
+        $request->validate([
+            'login' => 'required',
+            'password' => 'required|string|min:8'
+        ]);
+    
+        $field = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+    
+        $credentials = [
+            $field => $request->input('login'),
+            'password' => $request->input('password')
+        ];
+        $remember = $request->has('remember_me');
+        
+        if (Auth::attempt($credentials, $remember)) {
+            try {
+                $auth = Auth::user();
+                
+                $expiryMinutes = 60 * 24 * 7; 
+                
+                $token = $auth->createToken('auth_token', [], now()->addMinutes($expiryMinutes))->plainTextToken;
+                $cookie = cookie('auth_token', $token, $expiryMinutes, null, null, true, true);
+                $auth->remember_token = Str::random(60); // Generate random token
+                $auth->save();
+                $response = [
+                    'success' => true,
+                    'message' => 'Login berhasil',
+                    'data' => [
+                        'token' => $token
+                    ],
+                    'url' => '/permission'
+                ];    
+                // return response()->json($response)->withCookie($cookie);
+                // return redirect('/permission')->header('Authorization', 'Bearer'. $token);
+                return redirect('/permission')->withCookie($cookie);                
+            } catch (\Exception $e) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Gagal saat menggenerate token: ' . $e->getMessage()
+                ], 500);
+            }
+        } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Gagal saat menggenerate token: ' . $e->getMessage(),
-            ], 500);
+                'message' => 'Email/Username atau password salah, silakan coba lagi'
+            ], 401);
         }
-    } else {
-        Log::warning('Login failed for user', ['login' => $request->input('login')]);
-        return response()->json([
-            'success' => false,
-            'message' => 'Email/Username atau password salah, silakan coba lagi',
-        ], 401);
     }
-}
+    
 
-public function logout(Request $request)
-{
-    $user = Auth::user();
 
-    if ($user) {
-        $user->tokens->each(function ($token, $key) {
-            $token->delete();
-        });
+    public function logout(Request $request){
+        $user = Auth::user();
+
+        if ($user) {
+            $user->tokens->each(function ($token, $key) {
+                $token->delete();
+            });
+            $user->forceFill(['remember_token' => null])->save();
+        }
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        $cookie = Cookie::forget('auth_token');
+
+        return redirect('/login')->withCookie($cookie)->with('message', 'Successfully logged out.');
     }
-
-    // Hapus semua session dan regenerasi token baru
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-
-    // Membersihkan cookie auth_token jika ada
-    $cookie = Cookie::forget('auth_token');
-
-    return redirect('/login')->withCookie($cookie)->with('message', 'Successfully logged out.');
-}
     
 }

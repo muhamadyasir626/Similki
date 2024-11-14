@@ -17,9 +17,8 @@ class LembagaKonservasiController extends Controller
      */
     public function index()
     {
-        // Eager loading 'id_upt' relation
-        $ListLK = LembagaKonservasi::with('id_upt')->get();
-        return view('pages.forms.wizard', compact('ListLK'));
+        $ListLK = LembagaKonservasi::with('ListUpt')->get();
+        return view('pages.lk.list-lk', compact('ListLK'));
     }
 
     /**
@@ -68,6 +67,7 @@ class LembagaKonservasiController extends Controller
     /**
      * Display the specified resource.
      */
+    
     public function show(LembagaKonservasi $lembagaKonservasi)
     {
         return view('lk.show', compact('lembagaKonservasi'));
