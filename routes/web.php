@@ -7,6 +7,8 @@ use App\Models\LembagaKonservasi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\checkpermission;
+use App\Http\Controllers\LembagaKonservasiController;
+use App\Http\Controllers\SatwaController;
 use Illuminate\Contracts\View\View;
 
 /*
@@ -28,6 +30,7 @@ Route::get('/register', function () {
     $upt_bentuk = ListUpt::distinct()->select('bentuk')->get();
     $upt_wilayah = ListUpt::distinct()->select('wilayah')->get();
     $list_lk = LembagaKonservasi::orderBy('nama','asc')->get();
+    // dd($list_lk);
     $list_species =ListSpecies::all();
 
     // dd($upt_bentuk);
@@ -46,11 +49,15 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
     Route::get('/permission', function(){
         return view('permission');
     })->name('permission');
-    Route::resource('lembaga-konservasi', LembagaKonservasi::class);
+    
+    Route::resource('lembaga-konservasi', LembagaKonservasiController::class);
+    Route::resource('satwa', SatwaController::class);
     Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
+
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 

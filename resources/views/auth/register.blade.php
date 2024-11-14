@@ -103,7 +103,7 @@
                           <select id="id_lk" class="option-input id_lk" name="id_lk"  autofocus>
                               <option value="" hidden>Pilih Unit</option>
                               @foreach($list_lk as $lk)
-                                  <option id="{{ $lk->slug }}" value="{{ $lk->id }}" >{{ $lk->name }}</option>
+                                  <option id="{{ $lk->slug }}" value="{{ $lk->id }}" >{{ $lk->nama }}</option>
                               @endforeach
                           </select>
                       </div>

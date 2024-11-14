@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreSatwaRequest;
 use App\Http\Requests\UpdateSatwaRequest;
+use App\Models\LembagaKonservasi;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class SatwaController extends Controller
 {
@@ -165,6 +168,15 @@ class SatwaController extends Controller
             'success' => true,
             'message' => 'Pendataan satwa berhasil'
         ]);
+    }
+
+    public function index(){
+        $user = User::with('lk','role', 'upt', 'spesies')->find(Auth::id());
+        $satwa = Satwa::with('lk')->get();
+        $lk = LembagaKonservasi::with('ListUpt')->get();
+
+
+        return view('pages.LK.pendataan-satwa', compact('satwa','lk','user',));
     }
     /**
      * Store a newly created resource in storage.

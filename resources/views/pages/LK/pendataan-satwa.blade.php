@@ -7,7 +7,7 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Forms</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
     <li class="breadcrumb-item active" aria-current="page">Pendataan Satwa</li>
   </ol>
 </nav>
@@ -22,13 +22,25 @@
           <h2>Informasi Status Satwa</h2>
           <section>
             {{-- NAMA LK --}}
+           @if ($user->role && $user->role->tag == 'LK')           
             <div id="nama_lk" style="margin:10px 0px; padding-bottom:10px;">
               <h5 style="margin-bottom:7px;">Lembaga Konservasi</h5>
-              {{-- <input class="" type="text" name="nama_lk" id="nama_lk" placeholder="Lembaga Konservasi" style="width: 400px; padding:10px;" readonly> --}}
-              <div id="nama_lk" style="width: 400px; padding:10px; outline:1px solid rgb(120, 119, 119); color:rgb(120, 119, 119);">
+              <input class="" type="text" name="nama_lk" id="nama_lk" placeholder="Lembaga Konservasi" style="width: 400px; padding:10px;" value="{{ $user->lk->id }}" >
+              {{-- <div id="nama_lk" style="width: 400px; padding:10px; outline:1px solid rgb(120, 119, 119); color:rgb(120, 119, 119);">
                 Lembaga Konservasi
-              </div>
+              </div> --}}
             </div>
+            @else
+            <div id="nama_lk" style="margin:10px 0px; padding-bottom:10px;">
+              <h5 style="margin-bottom:7px;">Lembaga Konservasi</h5>
+              <input class="" type="text" name="{{ $user->lk->slug ?? '-' }}" id="{{ $user->lk->id ?? '-' }}" placeholder="Lembaga Konservasi" style="width: 400px; padding:10px;" value="{{ $user->lk->name ?? '-' }}">
+              {{-- <div id="nama_lk" style="width: 400px; padding:10px; outline:1px solid rgb(120, 119, 119); color:rgb(120, 119, 119);">
+                Lembaga Konservasi
+              </div> --}}
+            </div>
+
+            @endif 
+            
 
             {{-- JENIS KOLEKSI SATWA --}}
               <div id="form-satwa_koleksi" style="margin-bottom: 10px">
