@@ -27,13 +27,24 @@
                     <input id="login" type="text" name="login" required autofocus placeholder="Username atau Email" :value="old('login')">
                 </div>
 
-                <div class="text-fields">
+                {{-- <div class="text-fields">
                     <label for="password">Password</label>
                     <div class="input-wrapper">
                         <input type="password" id="password" name="password" required placeholder="Password">
                         <span onclick="togglePasswordVisibility('password')" class="toggle-password">👁️</span>
                     </div>
+                </div> --}}
+
+                <div class="text-fields"> 
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" name="password" required placeholder="Password">
+                        <span onclick="togglePasswordVisibility('password', this)" class="toggle-password">
+                            <img src="{{ asset('public/assets/images/others/eye-hide-password.png') }}" alt="hide password" style="width: 50%;" />
+                        </span>
+                    </div>
                 </div>
+                
 
                 <div class="checkbox-container">
                     <label for="remember_me" class="checkbox-label">

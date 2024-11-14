@@ -175,7 +175,7 @@
                     <input type="email" name="email" id="email" placeholder="abcd@gmail.com" required />
                 </div>
               </div>
-              <div class="button-container">
+              {{-- <div class="button-container">
                 <div class="text-fields password">
                     <label for="password">Password</label>
                     <div class="input-wrapper">
@@ -191,7 +191,32 @@
                         <span onclick="togglePasswordVisibility('password_confirmation')" class="toggle-password">👁️</span>
                     </div>
                 </div>
-            </div>
+            </div> --}}
+
+            <div class="button-container">
+              <div class="text-fields password">
+                  <label for="password">Password</label>
+                  <div class="input-wrapper">
+                      <input type="password" name="password" id="password" placeholder="Buat kata sandi Anda" required />
+                      <span onclick="togglePasswordVisibility('password', this, '{{ asset('public/assets/images/others/eye-show-password.png') }}', '{{ asset('public/assets/images/others/eye-hide-password.png') }}')" class="toggle-password">
+                          <img src="{{ asset('public/assets/images/others/eye-hide-password.png') }}" alt="hide password" style="width: 50%;" />
+                      </span>
+                  </div>
+              </div>
+          
+              <div class="text-fields password_confirmation">
+                  <label for="password_confirmation">Confirmation password</label>
+                  <div class="input-wrapper">
+                      <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Ketik ulang kata sandi Anda" required />
+                      <span onclick="togglePasswordVisibility('password_confirmation', this, '{{ asset('public/assets/images/others/eye-show-password.png') }}', '{{ asset('public/assets/images/others/eye-hide-password.png') }}')" class="toggle-password">
+                          <img src="{{ asset('public/assets/images/others/eye-hide-password.png') }}" alt="hide password" style="width: 50%;" />
+                      </span>
+                  </div>
+              </div>
+          </div>
+        
+          
+
               <div class="pagination-btns">
                 <input type="button" value="Previous"  class="previousPage stagebtn3a" onclick="stage3to2()" />
               <input type="submit" value="Submit" class="nextPage stagebtn3b" />
