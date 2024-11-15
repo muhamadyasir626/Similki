@@ -53,6 +53,18 @@
         </a>
       </li> --}}
       <li class="nav-item nav-category">LEMBAGA KONSERVASI</li>
+      <li class="nav-item {{ active_class(['/']) }}">
+        <a href="{{ route('lembaga-konservasi.index') }}" class="nav-link">
+          <i class="link-icon" data-feather="list"></i>
+          <span class="link-title">Daftar Lembaga Konservasi</span>
+        </a>
+      </li>
+      <li class="nav-item {{ active_class(['/']) }}">
+        <a href="{{ route('satwa.index') }}" class="nav-link">
+          <i class="link-icon" data-feather="plus-circle"></i>
+          <span class="link-title">Pendataan Satwa</span>
+        </a>
+      </li>
       {{-- <li class="nav-item {{ active_class(['ui-components/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button" aria-expanded="{{ is_active_route(['ui-components/*']) }}" aria-controls="uiComponents">
           <i class="link-icon" data-feather="feather"></i>
@@ -165,7 +177,7 @@
         <div class="collapse {{ show_class(['forms/*']) }}" id="forms">
           <ul class="nav sub-menu">            
             <li class="nav-item">
-              <a href="{{ route('lembaga-konservasi.index') }}" class="nav-link {{ active_class(['forms/wizard']) }}">Data Satwa</a>
+              <a href="{{ route('lembaga-konservasi.index') }}" class="nav-link {{ active_class(['forms/wizard']) }}">Daftar Lembaga Konservasi</a>
             </li>
             <li class="nav-item">
               <a href="{{ url('/forms/data_lk') }}" class="nav-link {{ active_class(['forms/data_lk']) }}">Data LK</a>

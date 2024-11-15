@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('bentuk');
             $table->string('wilayah');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

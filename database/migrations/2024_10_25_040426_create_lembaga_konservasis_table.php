@@ -23,16 +23,16 @@ return new class extends Migration
             $table->string('kecamatan');
             $table->string('kelurahan_desa');
             $table->string('tahun_izin');
-            $table->string('link_sk');
-            $table->string('legalitas_perizinan');
+            $table->text('link_sk');
+            $table->text('legalitas_perizinan');
             $table->string('nomor_tanggal_surat');
             $table->string('bentuk_lk');
             $table->string('pengelola');
             $table->string('nama_pimpinan');
-            $table->string('izin_perolehan_tsl');
+            $table->text('izin_perolehan_tsl');
             $table->string('tahun_akred');
             $table->string('nilai_akred');
-            $table->string('pks_dengan_lk_lainnya')->nullable();
+            $table->text('pks_dengan_lk_lainnya')->nullable();
             $table->timestamps();
         });
     }

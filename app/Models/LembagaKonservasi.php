@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Satwa;
+use App\Models\ListUpt;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class LembagaKonservasi extends Model
 {
@@ -12,8 +14,8 @@ class LembagaKonservasi extends Model
 
     protected $guard =['id'];
 
-    public function list_upt(){
-        return $this->belongsTo(ListUpt::class);
+    public function ListUpt(){
+        return $this->belongsTo(ListUpt::class, 'id_upt');
     }
     public function User(){
         return $this->belongsTo(User::class);
