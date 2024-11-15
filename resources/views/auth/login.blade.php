@@ -22,9 +22,13 @@
             <form method="POST" action="{{ route('authenticate') }}">
                 @csrf
 
-                <div class="text-fields">
-                    <label for="login">Username/Email</label>
-                    <input id="login" type="text" name="login" required autofocus placeholder="Username atau Email" :value="old('login')">
+                <div class="text-fields email">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" 
+                           placeholder="abcd@gmail.com" 
+                           required 
+                           pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z]+(\.[a-zA-Z]{2,})+" 
+                           title="Format email tidak valid. Harus memiliki huruf setelah '@' dan diikuti oleh '.'" />
                 </div>
 
                 {{-- <div class="text-fields">
@@ -39,12 +43,11 @@
                     <label for="password">Password</label>
                     <div class="input-wrapper">
                         <input type="password" id="password" name="password" required placeholder="Password">
-                        <span onclick="togglePasswordVisibility('password', this)" class="toggle-password">
-                            <img src="{{ asset('public/assets/images/others/eye-hide-password.png') }}" alt="hide password" style="width: 50%;" />
+                        <span onclick="togglePasswordVisibility('password', this)" class="toggle-password" data-show="{{ asset('assets/images/others/eye-show-password.png') }}" data-hide="{{ asset('assets/images/others/eye-hide-password.png') }}">
+                            <img src="{{ asset('assets/images/others/eye-hide-password.png') }}" alt="hide password" />
                         </span>
                     </div>
                 </div>
-                
 
                 <div class="checkbox-container">
                     <label for="remember_me" class="checkbox-label">

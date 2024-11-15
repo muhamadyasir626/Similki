@@ -175,7 +175,6 @@ class SatwaController extends Controller
         $satwa = Satwa::with('lk')->get();
         $lk = LembagaKonservasi::with('ListUpt')->get();
 
-
         return view('pages.LK.pendataan-satwa', compact('satwa','lk','user',));
     }
     /**

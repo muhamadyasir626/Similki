@@ -5,7 +5,33 @@ $(function () {
         headerTag: "h2",
         bodyTag: "section",
         transitionEffect: "slideLeft",
+        // Trigger untuk fetch data saat pindah ke step 2
+        onStepChanging: function (event, currentIndex, newIndex) {
+            if (newIndex === 1) {
+                fetchData();
+            }
+            return true;
+        },
     });
+
+
+    function fetchData() {    
+        const apiUrl = "/api/satwa";    
+        fetch(apiUrl)
+            .then((response) => response.json())
+            .then((data) => {
+            
+                console.log(data);
+                if (data.someCondition) {                
+                    $("#form-satwa_koleksi").append(
+                        "<div>Data baru: " + data.someValue + "</div>"
+                    );
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching data:", error);
+            });
+    }
 
     // hide all
     $(

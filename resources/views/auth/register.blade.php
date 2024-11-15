@@ -63,13 +63,24 @@
                   </div>
                   <div class="button-container">
                       <div class="text-fields nip">
-                          <label for="nip">NIP</label>
-                          <input type="text" name="nip" id="nip" pattern="[0-9]{18}" placeholder="Isi dengan Angka" required title="Hanya boleh angka saja dan berjumlah 18 digit" />
+                        <label for="nip">NIP</label>
+                        <input type="text" name="nip" id="nip" 
+                              pattern="^[0-9]{18}$" 
+                              placeholder="Isi dengan Angka" 
+                              required 
+                              title="Hanya boleh angka saja dan berjumlah 18 digit" 
+                              maxlength="18"
+                              oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
                       </div>
                       <div class="text-fields nomor_telepon">
-                          <label for="nomor_telepon">Nomor Telepon</label>
-                          <input type="text" name="nomor_telepon" id="nomor_telepon" placeholder="628123456789" pattern="[6]{1}[2]{1}[0-9]{3}[0-9]{4}[0-9]{4}" required title="Awali dengan 62 dan minimal 11 digit"/>
-                      </div>
+                        <label for="nomor_telepon">Nomor Telepon</label>
+                        <input type="text" name="nomor_telepon" id="nomor_telepon"
+                               oninput='this.value=this.value.replace(/[^0-9]/g,"")' 
+                               placeholder="628123456789"
+                               pattern="^62[0-9]{9,11}$" 
+                               required title="Harus diawali dengan 62 dan terdiri dari 11 hingga 13 digit!" 
+                               maxlength="13"/>
+                    </div>
                       <div class="text-fields bidang">
                           <label for="id_role">Bidang</label>
                           <select id="id_role" class="option-input" name="id_role" required autofocus>
@@ -126,8 +137,14 @@
               <div class="stage2-content">
               <div class="button-container">
                 <div class="text-fields kodepos">
-                  <label for="kodepos">Kode pos</label>
-                  <input type="text" name="kodepos" id="kodepos" placeholder="Isi Kode Pos Anda (5 digit)" required />
+                  <label for="kodepos">Kode Pos</label>
+                  <input type="text" name="kodepos" id="kodepos" 
+                         placeholder="Isi Kode Pos Anda (5 digit)" 
+                         required 
+                         pattern="^[0-9]{5}$" 
+                         title="Hanya boleh angka dan berjumlah 5 digit" 
+                         maxlength="5"
+                         oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
                 </div>
                 <div class="text-fields provinsi">
                   <label for="provinsi">Provinsi</label>
@@ -171,8 +188,12 @@
               </div>
               <div class="button-container">
                 <div class="text-fields email">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="abcd@gmail.com" required />
+                  <label for="email">Email</label>
+                  <input type="email" name="email" id="email" 
+                         placeholder="abcd@gmail.com" 
+                         required 
+                         pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z]+(\.[a-zA-Z]{2,})+" 
+                         title="Format email tidak valid. Harus memiliki huruf setelah '@' dan diikuti oleh '.'" />
                 </div>
               </div>
               {{-- <div class="button-container">
@@ -197,25 +218,28 @@
               <div class="text-fields password">
                   <label for="password">Password</label>
                   <div class="input-wrapper">
-                      <input type="password" name="password" id="password" placeholder="Buat kata sandi Anda" required />
-                      <span onclick="togglePasswordVisibility('password', this, '{{ asset('public/assets/images/others/eye-show-password.png') }}', '{{ asset('public/assets/images/others/eye-hide-password.png') }}')" class="toggle-password">
-                          <img src="{{ asset('public/assets/images/others/eye-hide-password.png') }}" alt="hide password" style="width: 50%;" />
+                      <input type="password" id="password" name="password" required placeholder="Password">
+                      <span onclick="togglePasswordVisibility('password', this)" class="toggle-password"
+                            data-show="{{ asset('assets/images/others/eye-show-password.png') }}"
+                            data-hide="{{ asset('assets/images/others/eye-hide-password.png') }}">
+                          <img src="{{ asset('assets/images/others/eye-hide-password.png') }}" alt="hide password" />
                       </span>
                   </div>
               </div>
           
               <div class="text-fields password_confirmation">
-                  <label for="password_confirmation">Confirmation password</label>
+                  <label for="password_confirmation">Konfirmasi Password</label>
                   <div class="input-wrapper">
-                      <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Ketik ulang kata sandi Anda" required />
-                      <span onclick="togglePasswordVisibility('password_confirmation', this, '{{ asset('public/assets/images/others/eye-show-password.png') }}', '{{ asset('public/assets/images/others/eye-hide-password.png') }}')" class="toggle-password">
-                          <img src="{{ asset('public/assets/images/others/eye-hide-password.png') }}" alt="hide password" style="width: 50%;" />
+                      <input type="password" id="password_confirmation" name="password_confirmation" required placeholder="Konfirmasi Password">
+                      <span onclick="togglePasswordVisibility('password_confirmation', this)" class="toggle-password"
+                            data-show="{{ asset('assets/images/others/eye-show-password.png') }}"
+                            data-hide="{{ asset('assets/images/others/eye-hide-password.png') }}">
+                          <img src="{{ asset('assets/images/others/eye-hide-password.png') }}" alt="hide password" />
                       </span>
                   </div>
               </div>
-          </div>
-        
-          
+          {{-- </div> --}}
+          </div>         
 
               <div class="pagination-btns">
                 <input type="button" value="Previous"  class="previousPage stagebtn3a" onclick="stage3to2()" />

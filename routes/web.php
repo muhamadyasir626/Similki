@@ -44,40 +44,11 @@ Route::post('login', [AuthController::class, 'login'])->name('authenticate');
 
 Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_session'),'verified'])
 ->group(function () {
-    
-//     Route::get('/permission', function(){
-//         return view('permission');
-//     })->name('permission');
-//     Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');       
-// });
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
-
-// Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);
-// Route::group(['prefix' => 'forms'], function(){
-//     Route::get('basic-elements', function () { return view('pages.forms.basic-elements'); });
-//     Route::get('data_lk', function () { return view('pages.forms.data_lk'); });
-//     Route::get('wizard', function () { return view('pages.forms.wizard'); });
-//     Route::get('input-investasi', function () { return view('pages.forms.input-investasi'); });
-//     Route::get('monitoring-investasi', function () { return view('pages.forms.monitoring-investasi'); });
-//     Route::get('input-lk', function () { return view('pages.forms.input-lk'); });
-//     Route::get('list-lk', function () { return view('pages.forms.list-lk'); });
-
-// });
-
-// Route::group(['prefix' => 'tables'], function(){
-//     Route::get('data-table', function () { return view('pages.tables.data-table'); });
-// });
-
-Route::get('404', function () {
-    return view('404');
-})->name('404');
     Route::get('/check-permission',[checkpermission::class,'check']);
 
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $user=Auth::user();
+        return view('dashboard', compact('user'));
     })->name('dashboard');
 
     Route::get('/permission', function(){
@@ -89,6 +60,10 @@ Route::get('404', function () {
     Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/satwa/pendataan1',[SatwaController::class, 'pendataan1'])->name('pendataan-satwa1');
+    Route::post('/satwa/pendataan2',[SatwaController::class, 'pendataan2'])->name('pendataan-satwa2');
+    Route::post('/satwa/pendataan3',[SatwaController::class, 'pendataan3'])->name('pendataan-satwa3');
+    Route::post('/satwa/pendataan4',[SatwaController::class, 'pendataan4'])->name('pendataan-satwa4');
 });
 
 Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);

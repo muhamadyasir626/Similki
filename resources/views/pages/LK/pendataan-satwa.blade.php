@@ -245,9 +245,9 @@
 
           <h2>Data-data Satwa</h2>
           <section>
-          {{-- <h2>Second Step</h2> --}}
-
-          {{-- PERILAKU SATWA --}}
+            {{-- <h2>Second Step</h2> --}}
+          
+            {{-- PERILAKU SATWA --}}
             <div id="form-perilaku_satwa" style="margin-bottom: 10px">
               <h5 style="margin-bottom:10px;">Apakah Satwa Memiliki Perilaku Berkelompok?</h5>
               <div class="form-check">
@@ -263,7 +263,7 @@
                 </label>
               </div>
             </div>
-
+          
             {{-- JUMLAH SATWA --}}
             <div id="form-jumlah" style="margin-bottom:10px; padding-bottom:10px;">
               <h5 style="margin-bottom: 8px">Jumlah Hewan</h5>
@@ -273,40 +273,38 @@
                 <input type="number" name="jumlah_unsex" id="jumlah_unsex" placeholder="Jumlah Unisex" style="width: 180px; padding:10px;" min="0">
               </div>
             </div>
-
-            {{-- JUMLAH KESELURUHAN HEWAN --}}
-            <div id="form-jumlah_keseluruhan_gender" style="margin-bottom:10px; padding-bottom:10px;">
-              <h5 style="margin-bottom: 8px">Jumlah Keseluruhan Hewan</h5>
-              <div style="display: flex; gap: 10px;">
-                <input type="number" name="jumlah_keseluruhan_gender" id="jumlah_keseluruhan_gender" placeholder="Jumlah seluruh hewan" style="width: 180px; padding:10px;" min="0">
-                </div>
-            </div>
-
+          
             {{-- JENIS KELAMIN SATWA --}}
-            <div id="form-satwa_koleksi" style="margin-bottom: 10px">
+            <div id="form-jenis_kelamin" style="margin-bottom: 10px">
               <h5 style="margin-bottom:10px;">Jenis kelamin satwa?</h5>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="satwa_koleksi" id="satwa_koleksi" value="Ya">
+                <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Ya">
                 <label class="form-check-label">
                   Jantan
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="satwa_koleksi" id="satwa_koleksi" value="Ya">
+                <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Ya">
                 <label class="form-check-label">
                   Betina
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="satwa_koleksi" id="satwa_koleksi" value="Tidak">
+                <input class="form-check-input" type="radio" name="jenis_kelamin" id="jenis_kelamin" value="Tidak">
                 <label class="form-check-label">
                   Belum diketahui
                 </label>
               </div>
             </div>
 
-            
-
+            {{-- JUMLAH KESELURUHAN HEWAN --}}
+            <div id="form-jumlah_keseluruhan_gender" style="margin-bottom:10px; padding-bottom:10px;">
+              <h5 style="margin-bottom: 8px">Jumlah Keseluruhan Gender</h5>
+              <div style="display: flex; gap: 10px;">
+                <input type="number" name="jumlah_keseluruhan_gender" id="jumlah_keseluruhan_gender" placeholder="Jumlah seluruh hewan" style="width: 180px; padding:10px;" min="0">
+              </div>
+            </div>
+          
             {{-- SATWA DI TAGGING --}}
             <div id="form-confirm_tagging" style="margin-bottom: 10px">
               <h5 style="margin-bottom:10px;">Apakah Satwa Telah Ditagging?</h5>
@@ -323,14 +321,13 @@
                 </label>
               </div>
             </div>
-
+          
             {{-- ALASAN BELUM TAGGING --}}
-            <div class="form-alasan_belum_tagging" style="margin-bottom: 10px">
+            <div id="form-alasan_belum_tagging" class="form-alasan_belum_tagging" style="margin-bottom: 10px">
               <label for="additional_notes"><h5>Alasan satwa belum dilakukan tagging</h5></label>
               <textarea class="form-control" id="alasan_belum_tagging" name="alasan_belum_tagging" rows="4" placeholder="Alasan..."></textarea>
-          </div>
+            </div>
           
-            
             {{-- JENIS TAGGING --}}
             <div id="form-jenis_tagging" style="margin-bottom:10px; padding-bottom:10px;">
               <h5 style="margin-bottom: 8px">Jenis Tagging dan Jumlah</h5>
@@ -349,208 +346,134 @@
                 <input type="text" name="kode_tagging" id="kode_tagging" placeholder="Kode Tagging" style="width: 180px; padding:10px;" min="0">
               </div>
             </div>
-            
+          
             {{-- BERITA ACARA TAGGING --}}
             <div id="form-ba_tagging" style="margin-bottom:10px; padding-bottom:10px;">
               <h5 style="margin-bottom: 8px">Berita Acara Tagging</h5>
               <input class="" type="text" name="ba_tagging" id="ba_tagging" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;">
-            </div> 
-
+            </div>
+          
             {{-- TANGGAL TAGGING --}}
             <div id="form-tanggal_tagging" style="margin-bottom:10px; padding-bottom:10px;">
               <h5 style="margin-bottom: 8px">Tanggal Tagging</h5>
               <input class="" type="date" name="tanggal_tagging" id="tanggal_tagging" placeholder="Masukkan nomor keputusan" style="width: 400px; padding:10px;">
-            </div> 
-
+            </div>
+          
             {{-- NO BA TITIPAN --}}
-          <div id="form-no_ba_titipan" style="margin-bottom:10px; padding-bottom:10px;">
-            <h5 style="margin-bottom: 8px">NO BA TITIPAN</h5>
-            <input class="" type="text" name="no_ba_titipan" id="no_ba_titipan" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;">
-          </div> 
-
-          {{-- NO BA KELAHIRAN --}}
-          <div id="form-no_ba_kelahiran" style="margin-bottom:10px; padding-bottom:10px;">
-            <h5 style="margin-bottom: 8px">NO BA KELAHIRAN</h5>
-            <input class="" type="text" name="no_ba_kelahiran" id="no_ba_kelahiran" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;">
-          </div> 
-
-          {{-- NO BA KEMATIAN --}}
-          <div id="form-no_ba_kematian" style="margin-bottom:10px; padding-bottom:10px;">
-            <h5 style="margin-bottom: 8px">NO BA KEMATIAN</h5>
-            <input class="" type="text" name="no_ba_kematian" id="no_ba_kematian" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;">
-          </div> 
-
-          {{-- NAMA PANGGILAN --}}
-          <div id="form-nama_panggilan" style="margin-bottom:10px; padding-bottom:10px;">
-            <h5 style="margin-bottom: 8px">NAMA PANGGILAN</h5>
-            <input class="" type="text" name="nama_panggilan" id="nama_panggilan" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;">
-          </div> 
-
-          {{-- VALIDASI TANGGAL --}}
-          <div id="form-validasi_tanggal" style="margin-bottom:10px; padding-bottom:10px;">
-            <h5 style="margin-bottom: 8px">Validasi Tanggal</h5>
-            <input class="" type="date" name="validasi_tanggal" id="validasi_tanggal" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;">
-          </div> 
-
-          {{-- Tahun Titipan --}}
-          <div id="form-tahun_titipan" style="margin-bottom:10px; padding-bottom:10px;">
-            <h5 style="margin-bottom: 8px">Tahun Titipan</h5>
-            <input class="" type="date" name="tahun_titipan" id="tahun_titipan" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;">
-          </div> 
-
-          {{-- Keterangan --}}
-          <div class="form-keterangan" style="margin-bottom: 10px">
-            <label for="additional_notes"><h5>Keterangan</h5></label>
-            <textarea class="form-control" id="keterangan" name="keterangan" rows="4" placeholder="Keterangan..."></textarea>
-          </div>
-
-          {{-- NAMA SATWA INDONESIA --}}
-          <div id="form-nama_panggilan" style="margin-bottom:10px; padding-bottom:10px;">
-            <h5 style="margin-bottom: 8px">NAMA PANGGILAN</h5>
-            <input class="" type="text" name="nama_panggilan" id="nama_panggilan" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;">
-          </div> 
-
-          {{-- S A T W A  I N D I V I D U --}}
-          {{-- NAMA SATWA DALAM INDONESIA  --}}
-          <div id="form-nama_panggilan" style="margin-bottom:10px; padding-bottom:10px;">
-            <h5 style="margin-bottom: 8px">NAMA SATWA DALAM INDONESIA</h5>
-            <input class="" type="text" name="nama_panggilan" id="nama_panggilan" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;">
-          </div> 
-
-          {{-- NAMA PANGGILAN SATWA  --}}
-          <div id="form-nama_panggilan" style="margin-bottom:10px; padding-bottom:10px;">
-            <h5 style="margin-bottom: 8px">NAMA PANGGILAN SATWA</h5>
-            <input class="" type="text" name="nama_panggilan" id="nama_panggilan" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;">
-          </div> 
-
-          {{-- TAKSON SATWA --}}
-          <div class="takson-hewan" style="padding-bottom: 20px;">
-            <h5 style="margin-bottom: 8px;">TAKSON HEWAN</h5>        
-            <div style="display: flex; gap: 10px;">          
-              <div class="dropdown">
+            <div id="form-no_ba_titipan" style="margin-bottom:10px; padding-bottom:10px;">
+              <h5 style="margin-bottom: 8px">NO BA TITIPAN</h5>
+              <input class="" type="text" name="no_ba_titipan" id="no_ba_titipan" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;">
+            </div>
+          
+            {{-- NO BA KELAHIRAN --}}
+            <div id="form-no_ba_kelahiran" style="margin-bottom:10px; padding-bottom:10px;">
+              <h5 style="margin-bottom: 8px">NO BA KELAHIRAN</h5>
+              <input class="" type="text" name="no_ba_kelahiran" id="no_ba_kelahiran" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;">
+            </div>
+          
+            {{-- NO BA KEMATIAN --}}
+            <div id="form-no_ba_kematian" style="margin-bottom:10px; padding-bottom:10px;">
+              <h5 style="margin-bottom: 8px">NO BA KEMATIAN</h5>
+              <input class="" type="text" name="no_ba_kematian" id="no_ba_kematian" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;">
+            </div>
+                   
+            {{-- VALIDASI TANGGAL --}}
+            <div id="form-validasi_tanggal" style="margin-bottom:10px; padding-bottom:10px;">
+              <h5 style="margin-bottom: 8px">Validasi Tanggal</h5>
+              <input class="" type="date" name="validasi_tanggal" id="validasi_tanggal" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;">
+            </div>
+          
+            {{-- Tahun Titipan --}}
+            <div id="form-tahun_titipan" style="margin-bottom:10px; padding-bottom:10px;">
+              <h5 style="margin-bottom: 8px">Tahun Titipan</h5>
+              <input class="" type="date" name="tahun_titipan" id="tahun_titipan" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;">
+            </div>
+          
+            {{-- Keterangan --}}
+            <div id="form-keterangan" class="form-keterangan" style="margin-bottom: 10px">
+              <label for="additional_notes"><h5>Keterangan</h5></label>
+              <textarea class="form-control" id="keterangan" name="keterangan" rows="4" placeholder="Keterangan..."></textarea>
+            </div>
+          
+            {{-- SATWA INDIVIDU --}}
+            {{-- NAMA SATWA DALAM INDONESIA --}}
+            <div id="form-nama_satwa_ina" style="margin-bottom:10px; padding-bottom:10px;">
+              <h5 style="margin-bottom: 8px">NAMA SATWA DALAM INDONESIA</h5>
+              <input class="" type="text" name="nama_satwa_ina" id="nama_satwa_ina" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;">
+            </div>
+          
+            {{-- NAMA PANGGILAN SATWA --}}
+            <div id="form-nama_panggilan" style="margin-bottom:10px; padding-bottom:10px;">
+              <h5 style="margin-bottom: 8px">NAMA PANGGILAN SATWA</h5>
+              <input class="" type="text" name="nama_panggilan" id="nama_panggilan" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;">
+            </div>
+          
+            {{-- TAKSON SATWA --}}
+            <div id="takson_hewan" class="takson-hewan" style="padding-bottom: 20px;">
+              <h5 style="margin-bottom: 8px;">TAKSON HEWAN</h5>
+              <div style="display: flex; gap: 10px;">
+                <div class="dropdown">
                   <button class="btn dropdown-toggle custom-dropdown" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Class
+                    Class
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <a class="dropdown-item" href="#">Action 1</a>
-                      <a class="dropdown-item" href="#">Another action 1</a>
-                      <a class="dropdown-item" href="#">Something else here 1</a>
+                    <a class="dropdown-item" href="#">Action 1</a>
+                    <a class="dropdown-item" href="#">Another action 1</a>
+                    <a class="dropdown-item" href="#">Something else here 1</a>
                   </div>
-              </div>
-              
-              <div class="dropdown">
+                </div>
+                
+                <div class="dropdown">
                   <button class="btn dropdown-toggle custom-dropdown" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Genus
+                    Genus
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                      <a class="dropdown-item" href="#">Action 2</a>
-                      <a class="dropdown-item" href="#">Another action 2</a>
-                      <a class="dropdown-item" href="#">Something else here 2</a>
+                    <a class="dropdown-item" href="#">Action 2</a>
+                    <a class="dropdown-item" href="#">Another action 2</a>
+                    <a class="dropdown-item" href="#">Something else here 2</a>
                   </div>
-              </div>
-              
-              <div class="dropdown">
+                </div>
+                
+                <div class="dropdown">
                   <button class="btn dropdown-toggle custom-dropdown" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Species
+                    Species
                   </button>
+                  
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                      <a class="dropdown-item" href="#">Action 3</a>
-                      <a class="dropdown-item" href="#">Another action 3</a>
-                      <a class="dropdown-item" href="#">Something else here 3</a>
+                    <select name="jenis_tagging" id="jenis_tagging" style="width: 180px; padding:10px;">
+                      <option value="" disabled selected>Pilih Jenis Tagging</option>
+                      <option value="ring">Ring</option>
+                      <option value="chip">Chip</option>
+                      <option value="eartag">Eartag</option>
+                      <option value="label">Label</option>
+                      <option value="tattoo">Tattoo</option>
+                    </select>
+                    {{-- <a class="dropdown-item" href="#">Action 3</a>
+                    <a class="dropdown-item" href="#">Another action 3</a>
+                    <a class="dropdown-item" href="#">Something else here 3</a> --}}
                   </div>
-              </div>
-              
-              <div class="dropdown">
+                </div>
+                
+                <div class="dropdown">
                   <button class="btn dropdown-toggle custom-dropdown" type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Sub Species
+                    Sub Species
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
-                      <a class="dropdown-item" href="#">Action 4</a>
-                      <a class="dropdown-item" href="#">Another action 4</a>
-                      <a class="dropdown-item" href="#">Something else here 4</a>
+                    <a class="dropdown-item" href="#">Action 4</a>
+                    <a class="dropdown-item" href="#">Another action 4</a>
+                    <a class="dropdown-item" href="#">Something else here 4</a>
                   </div>
+                </div>
               </div>
             </div>
-          </div>  
-
-          {{-- S A T W A  B E R K E L O M P O K --}}
-          {{-- TOTAL SATWA KELOMPOK --}}
-          <div id="form-nama_panggilan" style="margin-bottom:10px; padding-bottom:10px;">
-            <h5 style="margin-bottom: 8px">Total Satwa</h5>
-            <input class="" type="number" name="total_satwa" id="total_satwa" placeholder="Total Satwa" style="width: 400px; padding:10px;" min="0">
-          </div> 
-          </section>
-
           
-
-          {{-- <h2>Biodata Satwa Individu</h2>
-          <section>
-            <h4>Third Step</h4>
-            <p>Morbi ornare tellus at elit ultrices id dignissim lorem elementum. Sed eget nisl at justo condimentum dapibus. Fusce eros justo, 
-                pellentesque non euismod ac, rutrum sed quam. Ut non mi tortor. Vestibulum eleifend varius ullamcorper. Aliquam erat volutpat. 
-                Donec diam massa, porta vel dictum sit amet, iaculis ac massa. Sed elementum dui commodo lectus sollicitudin in auctor mauris 
-                venenatis.</p>
-          </section>
-
-          <h2>Biodata Satwa Kelompok</h2>
-          <section>
-            <h4>Fourth Step</h4>
-            <p>Quisque at sem turpis, id sagittis diam. Suspendisse malesuada eros posuere mauris vehicula vulputate. Aliquam sed sem tortor. 
-                Quisque sed felis ut mauris feugiat iaculis nec ac lectus. Sed consequat vestibulum purus, imperdiet varius est pellentesque vitae. 
-                Suspendisse consequat cursus eros, vitae tempus enim euismod non. Nullam ut commodo tortor.</p>
-          </section> --}}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-{{-- <div class="row">
-  <div class="col-md-12 stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Vertical Wizard</h4>
-        <div id="wizardVertical">
-          <h2>First Step</h2>
-          <section>
-            <h4>First Step</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut nulla nunc. Maecenas arcu sem, hendrerit a tempor quis, 
-                sagittis accumsan tellus. In hac habitasse platea dictumst. Donec a semper dui. Nunc eget quam libero. Nam at felis metus. 
-                Nam tellus dolor, tristique ac tempus nec, iaculis quis nisi.</p>
-          </section>
-
-          <h2>Second Step</h2>
-          <section>
-            <h4>Second Step</h4>
-            <p>Donec mi sapien, hendrerit nec egestas a, rutrum vitae dolor. Nullam venenatis diam ac ligula elementum pellentesque. 
-                In lobortis sollicitudin felis non eleifend. Morbi tristique tellus est, sed tempor elit. Morbi varius, nulla quis condimentum 
-                dictum, nisi elit condimentum magna, nec venenatis urna quam in nisi. Integer hendrerit sapien a diam adipiscing consectetur. 
-                In euismod augue ullamcorper leo dignissim quis elementum arcu porta. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Vestibulum leo velit, blandit ac tempor nec, ultrices id diam. Donec metus lacus, rhoncus sagittis iaculis nec, malesuada a diam. 
-                Donec non pulvinar urna. Aliquam id velit lacus.</p>
-          </section>
-
-          <h2>Third Step</h2>
-          <section>
-            <h4>Third Step</h4>
-            <p>Morbi ornare tellus at elit ultrices id dignissim lorem elementum. Sed eget nisl at justo condimentum dapibus. Fusce eros justo, 
-                pellentesque non euismod ac, rutrum sed quam. Ut non mi tortor. Vestibulum eleifend varius ullamcorper. Aliquam erat volutpat. 
-                Donec diam massa, porta vel dictum sit amet, iaculis ac massa. Sed elementum dui commodo lectus sollicitudin in auctor mauris 
-                venenatis.</p>
-          </section>
-
-          <h2>Fourth Step</h2>
-          <section>
-            <h4>Fourth Step</h4>
-            <p>Quisque at sem turpis, id sagittis diam. Suspendisse malesuada eros posuere mauris vehicula vulputate. Aliquam sed sem tortor. 
-                Quisque sed felis ut mauris feugiat iaculis nec ac lectus. Sed consequat vestibulum purus, imperdiet varius est pellentesque vitae. 
-                Suspendisse consequat cursus eros, vitae tempus enim euismod non. Nullam ut commodo tortor.</p>
-          </section>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> --}}
+            {{-- SATWA BERKELOMPOK --}}
+            {{-- TOTAL SATWA KELOMPOK --}}
+            <div id="form-total_satwa" style="margin-bottom:10px; padding-bottom:10px;">
+              <h5 style="margin-bottom: 8px">Total Satwa</h5>
+              <input class="" type="number" name="total_satwa" id="total_satwa" placeholder="Total Satwa" style="width: 400px; padding:10px;" min="0">
+            </div>
+          </section>          
 @endsection
 
 @push('plugin-scripts')
@@ -559,4 +482,5 @@
 
 @push('custom-scripts')
   <script src="{{ asset('assets/js/wizard.js') }}"></script>  
+  <script src="{{ asset('assets/js/wizard-2.js') }}"></script>  
 @endpush

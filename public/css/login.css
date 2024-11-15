@@ -128,27 +128,36 @@ body {
     margin-top: 12px;
 }
 
-.pagination-btns button:hover{
+.pagination-btns button:hover {
     background-color: #386641;
     color: white;
 }
 
-.toggle-password {
-    display: flex;
-    position: absolute;
-    top: 33%;
-    right: 11px;
-    transform: translateY(-50%);
-    cursor: pointer;
-    z-index: 1;
-}
-
-.forgot-password{
+.forgot-password {
     text-decoration: none;
-    color: red;
     opacity: 70%;
     font-size: 12px;
     display: flex;
     justify-content: center;
     padding-top: 10px;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 35%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 1;
+    display: flex;
+    justify-content: end;
+}
+
+.toggle-password img {
+    width: 7%;
+    height: auto;
 }

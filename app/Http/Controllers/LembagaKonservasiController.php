@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\LembagaKonservasi;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreLembagaKonservasiRequest;
 use App\Http\Requests\UpdateLembagaKonservasiRequest;
 use App\Imports\LembagaKonservasiImport;
@@ -17,8 +19,9 @@ class LembagaKonservasiController extends Controller
      */
     public function index()
     {
-        $ListLK = LembagaKonservasi::with('ListUpt')->get();
-        return view('pages.lk.list-lk', compact('ListLK'));
+    $user = User::with('lk','role', 'upt', 'spesies')->find(Auth::id());
+    $ListLK = LembagaKonservasi::with('ListUpt')->get();
+        return view('pages.lk.list-lk', compact('ListLK','user'));
     }
 
     /**

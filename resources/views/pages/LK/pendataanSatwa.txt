@@ -1,0 +1,277 @@
+@extends('layouts.master')
+
+@push('plugin-styles')
+  <link href="{{ asset('assets/plugins/jquery-steps/jquery.steps.css') }}" rel="stylesheet" />
+@endpush
+
+@section('content')
+<nav class="page-breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Pendataan Satwa</li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Pendataan Satwa</h4>
+        <div id="wizard">
+          <h2>Informasi Status Satwa</h2>
+          <section id="step-1">
+            {{-- NAMA lks --}}
+           @if ($user->role && $user->role->tag == 'LK')           
+            <div id="nama_lk" style="margin:10px 0px; padding-bottom:10px; display:none;">
+              <h5 style="margin-bottom:7px;">Lembaga Konservasi</h5>
+              <input class="" type="text" name="{{ $user->lk->slug }}" id="{{ $user->lk->id }}" placeholder="Lembaga Konservasi" style="width: 400px; padding:10px;" value="{{ $user->lk->nama }}" >
+            </div>
+            @else
+            <div id="nama_lk" style="margin:10px 0px; padding-bottom:10px;">
+              <h5 style="margin-bottom:7px;">Lembaga Konservasi</h5>
+              <select class="" name="{{ $user->lk->slug ?? '-' }}" id="{{ $user->lk->id ?? '-' }}" style="width: 400px; padding:10px;">
+                  <option value="" hidden>Pilih Lembaga Konservasi</option>
+                  @foreach ($lk as $lks)
+                    <option id="{{ $lks->id }}" value="{{ $lks->slug }}" >{{ $lks->nama }}</option>
+
+                  @endforeach
+                  @endif
+              </select>
+            </div>        
+
+            {{-- JENIS KOLEKSI SATWA --}}
+              <div id="form-satwa_koleksi" style="margin-bottom: 10px">
+                <h5 style="margin:10px;">Jenis satwa yang akan dikoleksi?</h5>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="satwa_koleksi" id="satwa_koleksi" value="Ya">
+                  <label class="form-check-label">
+                    Satwa Hidup
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="satwa_koleksi" id="satwa_koleksi" value="Tidak">
+                  <label class="form-check-label">
+                    Satwa Awetan
+                  </label>
+                </div>
+              </div>
+
+            {{-- JENIS SATWA YANG AKAN DI DATA --}}
+            <div id="form-jenis_koleksi">
+              <h5 style="margin-bottom:10px;">Jenis satwa hidup yang akan di data :</h5>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="jenis_koleksi" id="jenis_koleksi">
+                <label class="form-check-label">
+                  Satwa Koleksi
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="jenis_koleksi" id="jenis_koleksi">
+                <label class="form-check-label">
+                  Satwa Titipan
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="jenis_koleksi" id="jenis_koleksi">
+                <label class="form-check-label">
+                  Breeding Loan
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="jenis_koleksi" id="jenis_koleksi">
+                <label class="form-check-label">
+                  Rehabilitasi
+                </label>
+              </div>
+            </div>
+
+            {{-- ASAL SATWA --}}
+            <div id="form-asal_satwa">
+              <h5 style="margin:10px 0px;">Apakah satwa yang akan di data satwa asli dari Indonesia?</h5>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="asal_satwa" id="asal_satwa" value="Ya">
+                <label class="form-check-label">
+                  Endemik (Asli Indonesia)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="asal_satwa" id="asal_satwa" value="Tidak">
+                <label class="form-check-label">
+                  Eksotik (Bukan asli Indonesia)
+                </label>
+              </div>
+            </div>
+
+            {{-- STATUS PERLINDUNGAN --}}
+            <div id="form-status_perlindungan" style="display: none">
+              <h5 style="margin:10px 0px;">Apakah satwa statusnya dilindungi?</h5>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="status_perlindungan" id="status_perlindungan" value="Ya">
+                <label class="form-check-label">
+                  Ya, statusnya dilindungi
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="status_perlindungan" id="status_perlindungan" value="Tidak">
+                <label class="form-check-label">
+                  Tidak
+                </label>
+              </div>
+            </div>          
+
+          </section>
+
+          {{-- S E C T I O N 2 --}}
+
+          <h2>Data-data Satwa</h2>
+          <section id="step-2">
+
+            {{-- PERILAKU SATWA --}}
+              <div id="form-perilaku_satwa" style="margin-bottom: 10px">
+                <h5 style="margin-bottom:10px;">Apakah Satwa Memiliki Perilaku Berkelompok?</h5>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="perilaku_satwa" id="perilaku_satwa" value="Ya">
+                  <label class="form-check-label">
+                    Ya
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="perilaku_satwa" id="perilaku_satwa" value="Tidak">
+                  <label class="form-check-label">
+                    Tidak
+                  </label>
+                </div>
+              </div>
+
+              {{-- JUMLAH SATWA --}}
+              <div id="form-jumlah" style="margin-bottom:10px; padding-bottom:10px;">
+                <h5 style="margin-bottom: 8px">Jumlah Hewan</h5>
+                <div style="display: flex; gap: 10px;">
+                  <input type="number" name="jumlah_male" id="jumlah_male" placeholder="Jumlah Jantan" style="width: 180px; padding:10px;" min="0">
+                  <input type="number" name="jumlah_female" id="jumlah_female" placeholder="Jumlah Betina" style="width: 180px; padding:10px;" min="0">
+                  <input type="number" name="jumlah_unsex" id="jumlah_unsex" placeholder="Jumlah Unisex" style="width: 180px; padding:10px;" min="0">
+                </div>
+              </div>
+
+              {{-- JUMLAH KESELURUHAN HEWAN --}}
+              <div id="form-jumlah_keseluruhan_gender" style="margin-bottom:10px; padding-bottom:10px;">
+                <h5 style="margin-bottom: 8px">Jumlah Keseluruhan Hewan</h5>
+                <div style="display: flex; gap: 10px;">
+                  <input type="number" name="jumlah_keseluruhan_gender" id="jumlah_keseluruhan_gender" placeholder="Jumlah seluruh hewan" style="width: 180px; padding:10px;" min="0">
+                  </div>
+              </div>
+
+              {{-- JENIS KELAMIN SATWA --}}
+              <div id="form-gender_satwa" style="margin-bottom: 10px">
+                <h5 style="margin-bottom:10px;">Jenis kelamin satwa?</h5>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gender_satwa" id="gender_satwa" value="Ya">
+                  <label class="form-check-label">
+                    Jantan
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gender_satwa" id="gender_satwa" value="Ya">
+                  <label class="form-check-label">
+                    Betina
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gender_satwa" id="gender_satwa" value="Tidak">
+                  <label class="form-check-label">
+                    Belum diketahui
+                  </label>
+                </div>
+              </div>            
+
+              {{-- SATWA DI TAGGING --}}
+              <div id="form-confirm_tagging" style="margin-bottom: 10px">
+                <h5 style="margin-bottom:10px;">Apakah Satwa Telah Ditagging?</h5>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="confirm_tagging" id="confirm_tagging" value="Ya">
+                  <label class="form-check-label">
+                    Sudah
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="confirm_tagging" id="confirm_tagging" value="Tidak">
+                  <label class="form-check-label">
+                    Belum
+                  </label>
+                </div>
+              </div>
+
+              {{-- JENIS TAGGING --}}
+              <div id="form-jenis_tagging" style="margin-bottom:10px; padding-bottom:10px;">
+                <h5 style="margin-bottom: 8px">Jenis Tagging</h5>
+                <div style="display: flex; gap: 10px;">
+                  <input type="number" name="jenis_tagging" id="jenis_tagging" placeholder="Jumlah seluruh hewan" style="width: 180px; padding:10px;" min="0">
+                  </div>
+              </div>
+
+              {{-- KODE TAGGING --}}
+              <div id="form-kode_tagging" style="margin-bottom:10px; padding-bottom:10px;">
+                <h5 style="margin-bottom: 8px">Kode Tagging</h5>
+                <div style="display: flex; gap: 10px;">
+                  <input type="number" name="kode_tagging" id="kode_tagging" placeholder="Jumlah seluruh hewan" style="width: 180px; padding:10px;" min="0">
+                  </div>
+              </div>
+
+            {{-- S A T W A  B E R K E L O M P O K --}}
+            {{-- TOTAL SATWA KELOMPOK --}}
+            <div id="form-total_satwa" style="margin-bottom:10px; padding-bottom:10px;">
+              <h5 style="margin-bottom: 8px">Total Satwa</h5>
+              <input class="" type="number" name="total_satwa" id="total_satwa" placeholder="Total Satwa" style="width: 400px; padding:10px;" min="0">
+            </div> 
+
+            {{-- S A T W A  I N D I V I D U --}}
+            {{-- NAMA SATWA DALAM INA --}}
+            <div id="form-total_satwa" style="margin-bottom:10px; padding-bottom:10px;">
+              <h5 style="margin-bottom: 8px">Total Satwa</h5>
+              <input class="" type="number" name="total_satwa" id="total_satwa" placeholder="Total Satwa" style="width: 400px; padding:10px;" min="0">
+            </div>
+
+            {{-- NAMA PANGGILAN SATWA SATWA --}}
+            <div id="form-nama_ina" style="margin-bottom:10px; padding-bottom:10px;">
+              <h5 style="margin-bottom: 8px">Nama Satwa dalam INA</h5>
+              <input class="" type="number" name="nama_ina" id="nama_ina" placeholder="Nama Satwa" style="width: 400px; padding:10px;" min="0">
+            </div>
+
+            {{-- TAKSON --}}
+            <div id="form-takson-satwa" class="row d-flex flex-wrap mb-3">
+              <h3 class="mb-2">Takson</h3>
+              <div class="col-md-3">
+                <label for="class_satwa" class="form-label">Class</label>
+                <input type="text" class="form-control" id="class_satwa" autocomplete="off" placeholder="Class">
+              </div>
+              <div class="col-md-3">
+                <label for="genus_satwa" class="form-label">Genus</label>
+                <input type="text" class="form-control" id="genus_satwa" autocomplete="off" placeholder="Genus">
+              </div>
+              <div class="col-md-3">
+                <label for="species_satwa" class="form-label">Species</label>
+                <input type="text" class="form-control" id="species_satwa" autocomplete="off" placeholder="Species">
+              </div>
+              <div class="col-md-3">
+                <label for="sub_species_satwa" class="form-label">Sub Species</label>
+                <input type="text" class="form-control" id="sub_species_satwa" autocomplete="off" placeholder="Sub Species">
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@endsection
+
+@push('plugin-scripts')
+  <script src="{{ asset('assets/plugins/jquery-steps/jquery.steps.min.js') }}"></script>
+@endpush
+
+@push('custom-scripts')
+  <script src="{{ asset('assets/js/wizard.js') }}"></script>  
+  <script src="{{ asset('assets/js/wizard-2.js') }}"></script>  
+  <script src="{{ asset('assets/js/form-satwa.js') }}"></script>  
+@endpush

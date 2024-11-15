@@ -36,8 +36,8 @@
                         <td>{{ $lk->ListUpt->wilayah}}</td> <!-- Nama UPT melalui relasi, gunakan null check -->
                         <td>{{ $lk->bentuk_lk }}</td>
                         <td>{{ $lk->nilai_akred ?? '-' }}</td>
-                        <td>{{ $lk->tahun_izin }}</td>
-                        <td><button>Detail</button></td>
+                        <td>{{ $lk->id }}</td>
+                        <td><button id="{{ $lk->id }}">Detail</button></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -57,4 +57,5 @@
 
 @push('custom-scripts')
   <script src="{{ asset('assets/js/data-table.js') }}"></script>
+  <script src="{{ asset('assets/js/popup.js') }}"></script>
 @endpush
