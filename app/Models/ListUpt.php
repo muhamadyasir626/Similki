@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ListUpt extends Model
 {
@@ -15,6 +16,16 @@ class ListUpt extends Model
         'wilayah',
         'slug',
     ];
+
+    public function lk(){
+        return $this->belongsTo(LembagaKonservasi::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+  
 
 
 }

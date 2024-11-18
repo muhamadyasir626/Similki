@@ -61,16 +61,16 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function Role(){
-        return $this->belongsTo(Role::class);
+    public function role(){
+        return $this->belongsTo(Role::class,'id_role');
     }
-    public function listUpt(){
-        return $this->belongsTo(ListUpt::class);
+    public function upt(){
+        return $this->belongsTo(ListUpt::class,'id_upt');
     }
-    public function ListSpecies(){
-        return $this->belongsTo(ListSpecies::class);
+    public function spesies(){
+        return $this->belongsTo(ListSpecies::class,'id_spesies');
     }
-    public function ListLk(){
-        return $this->belongsTo(ListLk::class);
+    public function lk(){
+        return $this->belongsTo(LembagaKonservasi::class,'id_lk');
     }
 }

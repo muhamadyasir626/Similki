@@ -10,7 +10,8 @@ class MonitoringInvestasi extends Model
     use HasFactory;
 
 
-    public function ListLk(){
-        return $this->belongsTo(ListLk::class);
+    public function lk(){
+        return $this->belongsTo(LembagaKonservasi::class,'id_lk');
     }
+
 }

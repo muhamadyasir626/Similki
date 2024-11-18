@@ -7,7 +7,9 @@ use App\Models\LembagaKonservasi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\checkpermission;
-use Illuminate\Contracts\View\View;
+use App\Http\Controllers\LembagaKonservasiController;
+use App\Http\Controllers\SatwaController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,7 @@ Route::get('/register', function () {
     $upt_bentuk = ListUpt::distinct()->select('bentuk')->get();
     $upt_wilayah = ListUpt::distinct()->select('wilayah')->get();
     $list_lk = LembagaKonservasi::orderBy('nama','asc')->get();
+    // dd($list_lk);
     $list_species =ListSpecies::all();
 
     // dd($upt_bentuk);
@@ -44,19 +47,28 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::get('/check-permission',[checkpermission::class,'check']);
 
     Route::get('/dashboard', function () {
-        return view('dashboard');
+            return view('dashboard');
     })->name('dashboard');
+
+    Route::resource('lembaga-konservasi', LembagaKonservasiController::class);
+    Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
+    Route::get('/monitoring',[LembagaKonservasiController::class,'monitoring'])->name('moniotring-lk');
+
+    
+    Route::resource('satwa', SatwaController::class);
+    Route::get('/pendataan-satwa', [SatwaController::class,'form'])->name('form-satwa');
+    Route::post('/satwa/pendataan1',[SatwaController::class, 'pendataan1'])->name('pendataan-satwa1');
+    Route::post('/satwa/pendataan2',[SatwaController::class, 'pendataan2'])->name('pendataan-satwa2');
+    Route::get('/search',[SatwaController::class,'search'])->name('satwa-search');
+    
+
     Route::get('/permission', function(){
         return view('permission');
     })->name('permission');
-    Route::resource('lembaga-konservasi', LembagaKonservasi::class);
-    Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
+    Route::get('/verifikasi-akun',[AuthController::class,'index'])->name('verifikasi-akun');
+    Route::post('/updated-permission/id={id}',[AuthController::class,'updatePermission'])->name('updated-permission');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);
 
-//undefined route 
-// Route::any('/{page}', function () {
-//     return View::make()
-// });

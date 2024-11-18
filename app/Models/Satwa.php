@@ -11,14 +11,14 @@ class Satwa extends Model
 
     protected $guard = ['id'];
 
-    public function Tagging(){
-        return $this->belongsTo(Tagging::class);
-    }
-    public function ListSpecies(){
-        return $this->belongsTo(ListSpecies::class);
+    // public function tagging(){
+    //     return $this->belongsTo(Tagging::class);
+    // }
+    public function species(){
+        return $this->belongsTo(ListSpecies::class,'id_spesies');
     }
 
-    public function ListLK(){
-        return $this->belongsTo(ListLk::class);
+    public function lk(){
+        return $this->belongsTo(LembagaKonservasi::class, 'id_lk');
     }
 }
