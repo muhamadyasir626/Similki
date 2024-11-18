@@ -35,8 +35,8 @@ $(function() {
     url: '/get-lembaga-konservasi',
     type: 'GET',
     success: function(data) {
+      console.log('Data berhasil diambil:', data);
       
-        console.log('Data berhasil diambil:', data);
   
         // Menghitung jumlah lembaga per provinsi
         const bentukCounts = data.reduce((counts, item) => {
