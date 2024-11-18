@@ -9,10 +9,10 @@ class ListSpecies extends Model
 {
     use HasFactory;
 
-    public function user(){
+    public function User(){
         return $this->belongsTo(User::class);
     }
-    public function satwa(){
+    public function Satwa(){
         return $this->belongsTo (Satwa::class);
     }
 }

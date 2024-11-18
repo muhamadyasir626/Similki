@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreLembagaKonservasiRequest;
 use App\Http\Requests\UpdateLembagaKonservasiRequest;
 use App\Imports\LembagaKonservasiImport;
-use App\Models\MonitoringInvestasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
@@ -20,12 +19,9 @@ class LembagaKonservasiController extends Controller
      */
     public function index()
     {
-        // $user = User::with('lk','role', 'upt', 'spesies')->find(Auth::id());
-        // $ListLK = LembagaKonservasi::with('ListUpt')->get();
-        //     return view('pages.lk.list-lk', compact('ListLK','user'));
-        // }
-        $ListLK = LembagaKonservasi::with('upt')->get();
-        return view('pages.lk.daftar-lk', compact('ListLK'));
+    $user = User::with('lk','role', 'upt', 'spesies')->find(Auth::id());
+    $ListLK = LembagaKonservasi::with('ListUpt')->get();
+        return view('pages.lk.list-lk', compact('ListLK','user'));
     }
 
     /**
@@ -69,6 +65,7 @@ class LembagaKonservasiController extends Controller
     
         return redirect()->route('lk.index')->with('success', 'Lembaga Konservasi created successfully.');
     }
+    
 
     /**
      * Display the specified resource.
@@ -124,11 +121,5 @@ class LembagaKonservasiController extends Controller
         }catch(\Exception$e){
             return redirect()->with('Failed', "File/Data import gagal!");
         }
-    }
-
-    public function monitoring(){
-        $investasi = MonitoringInvestasi::with('lk')->get(); 
-
-        return view('pages.lk.monitoring', compact('investasi'));
     }
 }

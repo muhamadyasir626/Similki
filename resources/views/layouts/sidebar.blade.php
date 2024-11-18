@@ -18,49 +18,17 @@
           <span class="link-title">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item nav-category">LEMBAGA KONSERVASI</li>
+            <li class="nav-item nav-category">LEMBAGA KONSERVASI</li>
       <li class="nav-item {{ active_class(['/']) }}">
         <a href="{{ route('lembaga-konservasi.index') }}" class="nav-link">
           <i class="link-icon" data-feather="list"></i>
-          <span class="link-title">Daftar Isi LK</span>
+          <span class="link-title">Daftar Lembaga Konservasi</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['/']) }}">
-        <a href="{{ route('moniotring-lk') }}" class="nav-link">
-          <i class="link-icon" data-feather="monitor"></i>
-          <span class="link-title">Monitoring LK</span>
-        </a>
-      </li>
-      <li class="nav-item {{ active_class(['/']) }}">
-        <a href="" class="nav-link">
-          <i class="link-icon" data-feather="plus-circle"></i>
-          <span class="link-title">Pendataan LK </span>
-        </a>
-      </li>
-      <li class="nav-item {{ active_class(['/']) }}">
-        <a href="" class="nav-link">
-          <i class="link-icon" data-feather="upload"></i>
-          <span class="link-title">Import File</span>
-        </a>
-      </li>
-      <li class="nav-item {{ active_class(['/']) }}">
-        <a href="" class="nav-link">
-          <i class="link-icon" data-feather="download"></i>
-          <span class="link-title">Export File </span>
-        </a>
-      </li>
-
-      <li class="nav-item nav-category">SATWA</li>
       <li class="nav-item {{ active_class(['/']) }}">
         <a href="{{ route('satwa.index') }}" class="nav-link">
-          <i class="link-icon" data-feather="list"></i>
-          <span class="link-title">Daftar Isi Satwa </span>
-        </a>
-      </li>
-      <li class="nav-item {{ active_class(['/']) }}">
-        <a href="{{ route('form-satwa') }}" class="nav-link">
           <i class="link-icon" data-feather="plus-circle"></i>
-          <span class="link-title">Pendataan Satwa </span>
+          <span class="link-title">Pendataan Satwa</span>
         </a>
       </li>
       <li class="nav-item {{ active_class(['/']) }}">
@@ -263,14 +231,53 @@
             </li>
           </ul>
         </div>
-      </li> --}}
-
-      <li class="nav-item nav-category">Verifikasi Akun</li>
-      <li class="nav-item {{ active_class(['/']) }}">
-        <a href="{{ route('verifikasi-akun') }}" class="nav-link">
-          <i class="link-icon" data-feather="unlock"></i>
-          <span class="link-title">Perizinan Akses</span>
+      </li>
+      <li class="nav-item nav-category">Pages</li>
+      <li class="nav-item {{ active_class(['general/*']) }}">
+        <a class="nav-link" data-bs-toggle="collapse" href="#general" role="button" aria-expanded="{{ is_active_route(['general/*']) }}" aria-controls="general">
+          <i class="link-icon" data-feather="book"></i>
+          <span class="link-title">Special Pages</span>
+          <i class="link-arrow" data-feather="chevron-down"></i>
         </a>
+        <div class="collapse {{ show_class(['general/*']) }}" id="general">
+          <ul class="nav sub-menu">
+            <li class="nav-item">
+              <a href="{{ url('/general/blank-page') }}" class="nav-link {{ active_class(['general/blank-page']) }}">Blank page</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('/general/faq') }}" class="nav-link {{ active_class(['general/faq']) }}">Faq</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('/general/invoice') }}" class="nav-link {{ active_class(['general/invoice']) }}">Invoice</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('/general/profile') }}" class="nav-link {{ active_class(['general/profile']) }}">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('/general/pricing') }}" class="nav-link {{ active_class(['general/pricing']) }}">Pricing</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('/general/timeline') }}" class="nav-link {{ active_class(['general/timeline']) }}">Timeline</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item {{ active_class(['auth/*']) }}">
+        <a class="nav-link" data-bs-toggle="collapse" href="#auth" role="button" aria-expanded="{{ is_active_route(['auth/*']) }}" aria-controls="auth">
+          <i class="link-icon" data-feather="unlock"></i>
+          <span class="link-title">Authentication</span>
+          <i class="link-arrow" data-feather="chevron-down"></i>
+        </a>
+        <div class="collapse {{ show_class(['auth/*']) }}" id="auth">
+          <ul class="nav sub-menu">
+            <li class="nav-item">
+              <a href="{{ url('/auth/login') }}" class="nav-link {{ active_class(['auth/login']) }}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('/auth/register') }}" class="nav-link {{ active_class(['auth/register']) }}">Register</a>
+            </li>
+          </ul>
+        </div>
       </li>
       {{-- <li class="nav-item {{ active_class(['error/*']) }}">
         <a class="nav-link" data-bs-toggle="collapse" href="#error" role="button" aria-expanded="{{ is_active_route(['error/*']) }}" aria-controls="error">

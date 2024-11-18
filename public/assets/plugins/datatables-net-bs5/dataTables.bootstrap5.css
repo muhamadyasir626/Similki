@@ -295,14 +295,10 @@ div.dataTables_wrapper div.dataTables_length label {
   font-weight: normal;
   text-align: left;
   white-space: nowrap;
-  display: none;
-
 }
 div.dataTables_wrapper div.dataTables_length select {
   width: auto;
-  /* display: inline-block; */
-  display: none;
-  
+  display: inline-block;
 }
 div.dataTables_wrapper div.dataTables_filter {
   text-align: right;
@@ -318,11 +314,9 @@ div.dataTables_wrapper div.dataTables_filter input {
   width: auto;
 }
 div.dataTables_wrapper div.dataTables_info {
-  /* padding-top: 0.85em; */
-  display: none;
+  padding-top: 0.85em;
 }
 div.dataTables_wrapper div.dataTables_paginate {
-  display: none;
   margin: 0;
   white-space: nowrap;
   text-align: right;

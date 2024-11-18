@@ -15,11 +15,6 @@ use Illuminate\Support\Facades\Validator;
 
 class  AuthController extends Controller
 {
-    public function index(){
-        $user = User::all();
-        // dd($user)
-        return view('pages.account.verifikasi-akun',compact('user'));
-    }
 
     public function register1(Request $request){
         $validator = Validator::make($request->all(), [
@@ -213,7 +208,7 @@ class  AuthController extends Controller
                 ];    
                 // return response()->json($response)->withCookie($cookie);
                 // return redirect('/permission')->header('Authorization', 'Bearer'. $token);
-                return redirect('/permission')->withCookie($cookie);                     
+                return redirect('/permission')->withCookie($cookie);                
             } catch (\Exception $e) {
                 return response()->json([
                     'success' => false,
@@ -221,7 +216,10 @@ class  AuthController extends Controller
                 ], 500);
             }
         } else {
-            return redirect('/')->with('error', 'Email/Username atau password salah, silakan coba lagi');
+            return response()->json([
+                'success' => false,
+                'message' => 'Email/Username atau password salah, silakan coba lagi'
+            ], 401);
         }
     }
     
@@ -242,16 +240,6 @@ class  AuthController extends Controller
         $cookie = Cookie::forget('auth_token');
 
         return redirect('/login')->withCookie($cookie)->with('message', 'Successfully logged out.');
-    }
-
-
-    public function updatePermission(Request $request, $id){
-        $user = User::findOrFail($id);
-        $user->status_permission = $request->status; 
-        // dd($user);
-        $user->save();
-
-        return response()->json(['message' => 'Status permission updated successfully!']);
     }
     
 }
