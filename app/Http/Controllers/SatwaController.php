@@ -13,6 +13,34 @@ use Illuminate\Support\Facades\Auth;
 
 class SatwaController extends Controller
 {
+
+public function getall()
+{
+    try {
+        // Ambil data dan cek apakah relasi berhasil di-load
+        // $satwa = Satwa::with(['lk', 'species'])
+        //               ->select('id', 'status_satwa', 'jenis_kelamin_individu')
+        //               ->whereIn('status_satwa', ['Satwa Koleksi', 'Satwa Titipan'])
+        //               ->get();
+        $satwa = Satwa::select('status_satwa')->count();
+
+        // Debugging: Tampilkan hasil query
+        // dd($satwa);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $satwa
+        ]);
+    } catch (\Exception $e) {
+        // Tangkap error dan tampilkan pesan
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage()
+        ], 500);
+    }
+}
+
+
     //pendataan satwa
     public function pendataan1(Request $request){
         $validator  = Validator::make($request->all(),[

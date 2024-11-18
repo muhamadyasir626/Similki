@@ -16,7 +16,7 @@ License: For each use you must have a valid license purchased only from above li
   <meta name="description" content="Responsive Laravel Admin Dashboard Template based on Bootstrap 5">
 	<meta name="author" content="NobleUI">
 	<meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, laravel, theme, front-end, ui kit, web">
-
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>NobleUI - Laravel Admin Dashboard Template</title>
 
   <!-- Fonts -->

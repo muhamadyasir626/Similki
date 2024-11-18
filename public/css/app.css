@@ -1170,6 +1170,10 @@ progress {
     flex: 0 0 auto;
     width: 100%;
   }
+  .col-md-13 {
+    flex: 0 0 auto;
+    width: 100%;
+  }
   .offset-md-0 {
     margin-left: 0;
   }
@@ -21000,7 +21004,7 @@ div.fc .btn-group-lg > .btn-icon-text.fc-button-primary .btn-icon-append {
 }
 .card .card-title {
   text-transform: uppercase;
-  font-size: 0.875rem;
+  font-size: 0.850rem;
   font-weight: 500;
 }
 
@@ -22402,3 +22406,47 @@ div.tox .tox-dialog__body {
 }
 
 /*# sourceMappingURL=app.css.map*/
+
+.container {
+  padding: 0; /* Menghilangkan padding internal */
+}
+
+.custom-card-size {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px; 
+  border: 1px solid var(--bs-card-border-color);
+  box-shadow: var(--bs-card-box-shadow);
+  border-radius: var(--bs-card-border-radius);
+  background-color: var(--bs-card-bg);
+  text-align: center;
+}
+
+.card-body-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.card-body-2 {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Mengatur lebar margin bawah setiap kartu */
+.mb-2 {
+  margin-bottom: 10px;
+}
+
+#wilayahLKChart {
+  transition: transform 0.2s ease-in-out; /* Smooth transition for scale transformation */
+}
+
+#wilayahLKChart:hover {
+  transform: scale(1.1); /* Zoom in by scaling to 110% when hovered */
+}
+

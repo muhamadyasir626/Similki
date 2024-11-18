@@ -4,6 +4,8 @@ use App\Models\Role;
 use App\Models\ListUpt;
 use App\Models\ListSpecies;
 use App\Models\LembagaKonservasi;
+use App\Models\Satwa;
+use App\Models\Tagging;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\checkpermission;
@@ -46,10 +48,18 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
 ->group(function () {
     Route::get('/check-permission',[checkpermission::class,'check']);
 
+    
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $lk_count = LembagaKonservasi::count();
+        $species_count = ListSpecies::count();
+        $skoleksi_count = Satwa::where('status_satwa','satwa koleksi')->count();
+        $stitipan_count = Satwa::where('status_satwa','satwa titipan')->count();
+        $sbelumtag_count = Tagging::where('jenis_tagging','belum ditagging')->count();
+        $shidup_count = Satwa::where('jenis_koleksi','satwa hidup')->count();
+        return view('dashboard', compact('lk_count', 'species_count', 'skoleksi_count', 'stitipan_count', 'sbelumtag_count', 'shidup_count'));
     })->name('dashboard');
-
+    
+    
     Route::get('/permission', function(){
         return view('permission');
     })->name('permission');
@@ -57,8 +67,10 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::resource('lembaga-konservasi', LembagaKonservasiController::class);
     Route::resource('satwa', SatwaController::class);
     Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
-
+    
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/get-satwa',[SatwaController::class,'getall']);
+    Route::get('/get-lembaga-konservasi',[LembagaKonservasiController::class,'getall']);
 });
 
 Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);

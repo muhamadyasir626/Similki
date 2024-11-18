@@ -14,8 +14,8 @@ class Satwa extends Model
     public function Tagging(){
         return $this->belongsTo(Tagging::class);
     }
-    public function ListSpecies(){
-        return $this->belongsTo(ListSpecies::class);
+    public function spesies(){
+        return $this->belongsTo(ListSpecies::class,'id_spesies');
     }
 
     public function lk(){

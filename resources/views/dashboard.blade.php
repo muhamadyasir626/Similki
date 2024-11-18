@@ -7,7 +7,7 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
   <div>
-    <h4 class="mb-3 mb-md-0">Welcome to Dashboard</h4>
+    <h4 class="mb-3 mb-md-0">Selamat Datang di Dashboard</h4>
   </div>
   <div class="d-flex align-items-center flex-wrap text-nowrap">
     <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
@@ -25,157 +25,128 @@
   </div>
 </div>
 
+<div class="container-fluid px-0">
+    <!-- Baris pertama untuk Kartu 1-6 -->
+    <div class="row mb-3">
+        <!-- Loop untuk membuat semua kartu dalam satu baris -->
+        <div class="col-lg-2 col-md-4 col-sm-6"> <!-- Lebar kolom disesuaikan agar semua kartu muat dalam satu baris -->
+            <!-- Kartu 1 -->
+            <div class="card mb-2 custom-card-size">
+                <div class="card-body-1">
+                    <h5 class="card-title">Jumlah LK</h5>
+                    <h3>{{ $lk_count }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <!-- Kartu 2 -->
+            <div class="card mb-2 custom-card-size">
+                <div class="card-body-1">
+                    <h5 class="card-title">Total Jenis Satwa</h5>
+                    <h3>{{ $species_count }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <!-- Kartu 3 -->
+            <div class="card mb-2 custom-card-size">
+                <div class="card-body-1">
+                    <h5 class="card-title">Satwa Koleksi</h5>
+                    <h3>{{ $skoleksi_count }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <!-- Kartu 4 -->
+            <div class="card mb-2 custom-card-size">
+                <div class="card-body-1">
+                    <h5 class="card-title">Satwa Titipan</h5>
+                    <h3>{{ $stitipan_count }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <!-- Kartu 5 -->
+            <div class="card mb-2 custom-card-size">
+                <div class="card-body-1">
+                    <h5 class="card-title">Satwa Belum Tagging</h5>
+                    <h3>{{ $sbelumtag_count }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4 col-sm-6">
+            <!-- Kartu 6 -->
+            <div class="card mb-2 custom-card-size">
+                <div class="card-body-1">
+                    <h5 class="card-title">Satwa Hidup</h5>
+                    <h3> {{ $shidup_count }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Baris kedua untuk Jenis LK dan Wilayah LK -->
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card h-100 custom-card-size">
+                <div class="card-body-2">
+                    <h5 class="card-title">Jenis Lembaga Konservasi</h5>
+                    <div id="jenisLKChart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card h-100 custom-card-size">
+                <div class="card-body-2">
+                    <h5 class="card-title">Wilayah Lembaga Konservasi</h5>
+                    <div id="wilayahLKChart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row">
-  <div class="col-12 col-xl-12 stretch-card">
-    <div class="row flex-grow-1">
-      <div class="col-md-4 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-baseline">
-              <h6 class="card-title mb-0">New Customers</h6>
-              <div class="dropdown mb-2">
-                <button class="btn btn-link p-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="eye" class="icon-sm me-2"></i> <span class="">View</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="edit-2" class="icon-sm me-2"></i> <span class="">Edit</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="trash" class="icon-sm me-2"></i> <span class="">Delete</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="printer" class="icon-sm me-2"></i> <span class="">Print</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="download" class="icon-sm me-2"></i> <span class="">Download</span></a>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6 col-md-12 col-xl-5">
-                <h3 class="mb-2">3,897</h3>
-                <div class="d-flex align-items-baseline">
-                  <p class="text-success">
-                    <span>+3.3%</span>
-                    <i data-feather="arrow-up" class="icon-sm mb-1"></i>
-                  </p>
-                </div>
-              </div>
-              <div class="col-6 col-md-12 col-xl-7">
-                <div id="customersChart" class="mt-md-3 mt-xl-0"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-baseline">
-              <h6 class="card-title mb-0">New Orders</h6>
-              <div class="dropdown mb-2">
-                <button class="btn btn-link p-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="eye" class="icon-sm me-2"></i> <span class="">View</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="edit-2" class="icon-sm me-2"></i> <span class="">Edit</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="trash" class="icon-sm me-2"></i> <span class="">Delete</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="printer" class="icon-sm me-2"></i> <span class="">Print</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="download" class="icon-sm me-2"></i> <span class="">Download</span></a>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6 col-md-12 col-xl-5">
-                <h3 class="mb-2">35,084</h3>
-                <div class="d-flex align-items-baseline">
-                  <p class="text-danger">
-                    <span>-2.8%</span>
-                    <i data-feather="arrow-down" class="icon-sm mb-1"></i>
-                  </p>
-                </div>
-              </div>
-              <div class="col-6 col-md-12 col-xl-7">
-                <div id="ordersChart" class="mt-md-3 mt-xl-0"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-baseline">
-              <h6 class="card-title mb-0">Growth</h6>
-              <div class="dropdown mb-2">
-                <button class="btn btn-link p-0" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                  <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="eye" class="icon-sm me-2"></i> <span class="">View</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="edit-2" class="icon-sm me-2"></i> <span class="">Edit</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="trash" class="icon-sm me-2"></i> <span class="">Delete</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="printer" class="icon-sm me-2"></i> <span class="">Print</span></a>
-                  <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="download" class="icon-sm me-2"></i> <span class="">Download</span></a>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6 col-md-12 col-xl-5">
-                <h3 class="mb-2">89.87%</h3>
-                <div class="d-flex align-items-baseline">
-                  <p class="text-success">
-                    <span>+2.8%</span>
-                    <i data-feather="arrow-up" class="icon-sm mb-1"></i>
-                  </p>
-                </div>
-              </div>
-              <div class="col-6 col-md-12 col-xl-7">
-                <div id="growthChart" class="mt-md-3 mt-xl-0"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="col-lg-4">
+    <div class="card h-100 custom-card-size">
+      <div class="card-body-2">
+        <h5 class="card-title">Taksa</h5>
+        <div id="chartContainer1"></div>
       </div>
     </div>
   </div>
-</div> <!-- row -->
-
-<div class="row">
-  <div class="col-12 col-xl-12 grid-margin stretch-card">
-    <div class="card overflow-hidden">
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
-          <h6 class="card-title mb-0">Revenue</h6>
-          <div class="dropdown">
-            <button class="btn btn-link p-0" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-              <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="eye" class="icon-sm me-2"></i> <span class="">View</span></a>
-              <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="edit-2" class="icon-sm me-2"></i> <span class="">Edit</span></a>
-              <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="trash" class="icon-sm me-2"></i> <span class="">Delete</span></a>
-              <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="printer" class="icon-sm me-2"></i> <span class="">Print</span></a>
-              <a class="dropdown-item d-flex align-items-center" href="javascript:;"><i data-feather="download" class="icon-sm me-2"></i> <span class="">Download</span></a>
-            </div>
-          </div>
-        </div>
-        <div class="row align-items-start mb-2">
-          <div class="col-md-7">
-            <p class="text-muted tx-13 mb-3 mb-md-0">Revenue is the income that a business has from its normal business activities, usually from the sale of goods and services to customers.</p>
-          </div>
-          <div class="col-md-5 d-flex justify-content-md-end">
-            <div class="btn-group mb-3 mb-md-0" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-outline-primary">Today</button>
-              <button type="button" class="btn btn-outline-primary d-none d-md-block">Week</button>
-              <button type="button" class="btn btn-primary">Month</button>
-              <button type="button" class="btn btn-outline-primary">Year</button>
-            </div>
-          </div>
-        </div>
-        <div id="revenueChart"></div>
+  <div class="col-lg-4">
+    <div class="card h-100 custom-card-size">
+      <div class="card-body-2">
+        <h5 class="card-title">Jenis Tagging</h5>
+        <div id="chartContainer2"></div>
       </div>
     </div>
   </div>
-</div> <!-- row -->
+  <div class="col-lg-4">
+    <div class="card h-100 custom-card-size">
+      <div class="card-body-2">
+        <h5 class="card-title">Jenis Koleksi</h5>
+        <div id="chartContainer3"></div>
+      </div>
+    </div>
+  </div>
+</div> 
 
 <div class="row">
+    <div class="col-lg-12">
+        <div class="card h-100 custom-card-size">
+            <div class="card-body">
+                <h5 class="card-title">Jumlah Spesies Individu</h5>
+                <div id="spesiesIndChart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+      
+
+<!-- <div class="row">
   <div class="col-lg-7 col-xl-8 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
@@ -238,7 +209,7 @@
       </div>
     </div>
   </div>
-</div> <!-- row -->
+</div> 
 
 <div class="row">
   <div class="col-lg-5 col-xl-4 grid-margin grid-margin-xl-0 stretch-card">
@@ -418,10 +389,11 @@
       </div> 
     </div>
   </div>
-</div> <!-- row -->
+</div> -->
 @endsection
 
 @push('plugin-scripts')
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
   <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
 @endpush

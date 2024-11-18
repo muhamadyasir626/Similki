@@ -12,6 +12,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class LembagaKonservasiController extends Controller
 {
+    public function getall(){
+        $lk = LembagaKonservasi::with('ListUpt')->get();
+
+        return response()->json($lk);
+    }
     /**
      * Display a listing of the resource.
      */

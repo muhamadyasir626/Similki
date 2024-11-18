@@ -19,173 +19,8 @@ $(function() {
   }
 
   var fontFamily = "'Roboto', Helvetica, sans-serif"
-
-  var revenueChartData = [
-    49.33,
-    48.79,
-    50.61,
-    53.31,
-    54.78,
-    53.84,
-    54.68,
-    56.74,
-    56.99,
-    56.14,
-    56.56,
-    60.35,
-    58.74,
-    61.44,
-    61.11,
-    58.57,
-    54.72,
-    52.07,
-    51.09,
-    47.48,
-    48.57,
-    48.99,
-    53.58,
-    50.28,
-    46.24,
-    48.61,
-    51.75,
-    51.34,
-    50.21,
-    54.65,
-    52.44,
-    53.06,
-    57.07,
-    52.97,
-    48.72,
-    52.69,
-    53.59,
-    58.52,
-    55.10,
-    58.05,
-    61.35,
-    57.74,
-    60.27,
-    61.00,
-    57.78,
-    56.80,
-    58.90,
-    62.45,
-    58.75,
-    58.40,
-    56.74,
-    52.76,
-    52.30,
-    50.56,
-    55.40,
-    50.49,
-    52.49,
-    48.79,
-    47.46,
-    43.31,
-    38.96,
-    34.73,
-    31.03,
-    32.63,
-    36.89,
-    35.89,
-    32.74,
-    33.20,
-    30.82,
-    28.64,
-    28.44,
-    27.73,
-    27.75,
-    25.96,
-    24.38,
-    21.95,
-    22.08,
-    23.54,
-    27.30,
-    30.27,
-    27.25,
-    29.92,
-    25.14,
-    23.09,
-    23.79,
-    23.46,
-    27.99,
-    23.21,
-    23.91,
-    19.21,
-    15.13,
-    15.08,
-    11.00,
-    9.20,
-    7.47,
-    11.64,
-    15.76,
-    13.99,
-    12.59,
-    13.53,
-    15.01,
-    13.95,
-    13.23,
-    18.10,
-    20.63,
-    21.06,
-    25.37,
-    25.32,
-    20.94,
-    18.75,
-    15.38,
-    14.56,
-    17.94,
-    15.96,
-    16.35,
-    14.16,
-    12.10,
-    14.84,
-    17.24,
-    17.79,
-    14.03,
-    18.65,
-    18.46,
-    22.68,
-    25.08,
-    28.18,
-    28.03,
-    24.11,
-    24.28,
-    28.23,
-    26.24,
-    29.33,
-    26.07,
-    23.92,
-    28.82,
-    25.14,
-    21.79,
-    23.05,
-    20.71,
-    29.72,
-    30.21,
-    32.56,
-    31.46,
-    33.69,
-    30.05,
-    34.20,
-    36.93,
-    35.50,
-    34.78,
-    36.97
-  ];
-
-  var revenueChartCategories = [
-    "Jan 01 2023", "Jan 02 2023", "jan 03 2023", "Jan 04 2023", "Jan 05 2023", "Jan 06 2023", "Jan 07 2023", "Jan 08 2023", "Jan 09 2023", "Jan 10 2023", "Jan 11 2023", "Jan 12 2023", "Jan 13 2023", "Jan 14 2023", "Jan 15 2023", "Jan 16 2023", "Jan 17 2023", "Jan 18 2023", "Jan 19 2023", "Jan 20 2023","Jan 21 2023", "Jan 22 2023", "Jan 23 2023", "Jan 24 2023", "Jan 25 2023", "Jan 26 2023", "Jan 27 2023", "Jan 28 2023", "Jan 29 2023", "Jan 30 2023", "Jan 31 2023",
-    "Feb 01 2023", "Feb 02 2023", "Feb 03 2023", "Feb 04 2023", "Feb 05 2023", "Feb 06 2023", "Feb 07 2023", "Feb 08 2023", "Feb 09 2023", "Feb 10 2023", "Feb 11 2023", "Feb 12 2023", "Feb 13 2023", "Feb 14 2023", "Feb 15 2023", "Feb 16 2023", "Feb 17 2023", "Feb 18 2023", "Feb 19 2023", "Feb 20 2023","Feb 21 2023", "Feb 22 2023", "Feb 23 2023", "Feb 24 2023", "Feb 25 2023", "Feb 26 2023", "Feb 27 2023", "Feb 28 2023",
-    "Mar 01 2023", "Mar 02 2023", "Mar 03 2023", "Mar 04 2023", "Mar 05 2023", "Mar 06 2023", "Mar 07 2023", "Mar 08 2023", "Mar 09 2023", "Mar 10 2023", "Mar 11 2023", "Mar 12 2023", "Mar 13 2023", "Mar 14 2023", "Mar 15 2023", "Mar 16 2023", "Mar 17 2023", "Mar 18 2023", "Mar 19 2023", "Mar 20 2023","Mar 21 2023", "Mar 22 2023", "Mar 23 2023", "Mar 24 2023", "Mar 25 2023", "Mar 26 2023", "Mar 27 2023", "Mar 28 2023", "Mar 29 2023", "Mar 30 2023", "Mar 31 2023",
-    "Apr 01 2023", "Apr 02 2023", "Apr 03 2023", "Apr 04 2023", "Apr 05 2023", "Apr 06 2023", "Apr 07 2023", "Apr 08 2023", "Apr 09 2023", "Apr 10 2023", "Apr 11 2023", "Apr 12 2023", "Apr 13 2023", "Apr 14 2023", "Apr 15 2023", "Apr 16 2023", "Apr 17 2023", "Apr 18 2023", "Apr 19 2023", "Apr 20 2023","Apr 21 2023", "Apr 22 2023", "Apr 23 2023", "Apr 24 2023", "Apr 25 2023", "Apr 26 2023", "Apr 27 2023", "Apr 28 2023", "Apr 29 2023", "Apr 30 2023",
-    "May 01 2023", "May 02 2023", "May 03 2023", "May 04 2023", "May 05 2023", "May 06 2023", "May 07 2023", "May 08 2023", "May 09 2023", "May 10 2023", "May 11 2023", "May 12 2023", "May 13 2023", "May 14 2023", "May 15 2023", "May 16 2023", "May 17 2023", "May 18 2023", "May 19 2023", "May 20 2023","May 21 2023", "May 22 2023", "May 23 2023", "May 24 2023", "May 25 2023", "May 26 2023", "May 27 2023", "May 28 2023", "May 29 2023", "May 30 2023",
-  ]
-  
-
-
-
-
-  // Date Picker
+ 
+    // Date Picker
   if($('#dashboardDate').length) {
     flatpickr("#dashboardDate", {
       wrap: true,
@@ -195,109 +30,260 @@ $(function() {
   }
   // Date Picker - END
 
+//Jenis lembaga konservasi
+  $.ajax({
+    url: '/get-lembaga-konservasi',
+    type: 'GET',
+    success: function(data) {
+      
+        console.log('Data berhasil diambil:', data);
+  
+        // Menghitung jumlah lembaga per provinsi
+        const bentukCounts = data.reduce((counts, item) => {
+            const bentuk_lk = item.bentuk_lk || "Tidak Diketahui";
+            counts[bentuk_lk] = (counts[bentuk_lk] || 0) + 1;
+            return counts;
+        }, {});
+  
+        // Mengonversi hasil ke format yang dapat digunakan di chart
+        const bentukLKData = Object.keys(bentukCounts);
+        const jumlahData = Object.values(bentukCounts);
+  
+        // console.log('Data bentuk LK:', bentukLKData);
+        // console.log('Jumlah lembaga per bentuk LK:', jumlahData);
+  
+        // Konfigurasi chart dengan data provinsi dan jumlah lembaga
+        var options = {
+            chart: {
+                type: "bar",
+                height: 250,
+            },
+            plotOptions: {
+              bar: {
+                  horizontal: true,  // Mengubah bar menjadi horizontal
+                  columnWidth: '60%',  // Lebar bar, semakin kecil semakin besar jaraknya
+                  barSpacing: 50
+              }
+            },
+            series: [{
+                name: "Jumlah Lembaga",
+                data: jumlahData  // Jumlah lembaga per provinsi
+            }],
+            xaxis: {
+                categories: bentukLKData  // Daftar provinsi
+            },
+            colors: ["#FF4560", "#008FFB", "#00E396", "#FEB019"],
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + " lembaga";
+                    }
+                }
+            }
+        };
+  
+        new ApexCharts(document.querySelector("#jenisLKChart"), options).render();
+    },
+    error: function(error) {
+        console.log("Error fetching data: ", error);
+    }
+  });
 
+//Wilayah LK
+$(document).ready(function() {
+  
+    $.ajax({
+        url: '/get-lembaga-konservasi',
+        type: 'GET',
+        success: function(data) {
+      // console.log('Data berhasil diambil:', data);
 
+            const provinsiCounts = data.reduce((counts, item) => {
+                const provinsi = item.provinsi || "Tidak Diketahui";
+                counts[provinsi] = (counts[provinsi] || 0) + 1;
+                return counts;
+            }, {});
 
+            const provinsiData = Object.keys(provinsiCounts);
+            const jumlahData = Object.values(provinsiCounts);
 
-  // New Customers Chart
-  if($('#customersChart').length) {
-    var options1 = {
-      chart: {
-        type: "line",
-        height: 60,
-        sparkline: {
-          enabled: !0
+            var options = {
+                chart: {
+                    type: "bar",
+                    height: 250,
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: true,
+                        columnWidth: '60%',
+                    }
+                },
+                series: [{
+                    name: "Jumlah Lembaga",
+                    data: jumlahData
+                }],
+                xaxis: {
+                    categories: provinsiData
+                },
+                colors: ["#FF4560", "#008FFB", "#00E396", "#FEB019"],
+                tooltip: {
+                    y: {
+                        formatter: function (val) {
+                            return val + " lembaga";
+                        }
+                    }
+                }
+            };
+
+            new ApexCharts(document.querySelector("#wilayahLKChart"), options).render();
+        },
+        error: function(error) {
+            console.log("Error fetching data: ", error);
         }
-      },
-      series: [{
-        name: '',
-        data: [3844, 3855, 3841, 3867, 3822, 3843, 3821, 3841, 3856, 3827, 3843]
-      }],
-      xaxis: {
-        type: 'datetime',
-        categories: ["Jan 01 2023", "Jan 02 2023", "Jan 03 2023", "Jan 04 2023", "Jan 05 2023", "Jan 06 2023", "Jan 07 2023", "Jan 08 2023", "Jan 09 2023", "Jan 10 2023", "Jan 11 2023",],
-      },
-      stroke: {
-        width: 2,
-        curve: "smooth"
-      },
-      markers: {
-        size: 0
-      },
-      colors: [colors.primary],
-    };
-    new ApexCharts(document.querySelector("#customersChart"),options1).render();
-  }
-  // New Customers Chart - END
+    });
+    
+});
 
+// //jmlh spesies individu
+// $.ajax({
+//   url: '/get-satwa',
+//   type: 'GET',
+//   success: function(data) {
+//       console.log('Data satwa berhasil diambil:', data);
 
+//       // Menghitung jumlah individu per spesies
+//       const speciesCounts = data.reduce((counts, item) => {
+//           const speciesName = item.spesies || "Tidak Diketahui";
+//           counts[speciesName] = (counts[speciesName] || 0) + item.jumlah_individu;
+//           return counts;
+//       }, {});
 
+//       // Mengonversi hasil ke format yang dapat digunakan di chart
+//       const speciesNames = Object.keys(speciesCounts);
+//       const individualCounts = Object.values(speciesCounts);
 
-  // Orders Chart
-  if($('#ordersChart').length) {
-    var options2 = {
-      chart: {
-        type: "bar",
-        height: 60,
-        sparkline: {
-          enabled: !0
-        }
+//       // Membatasi jumlah spesies yang ditampilkan menjadi 10 spesies teratas
+//       const topSpeciesData = speciesNames.slice(0, 10);
+//       const topIndividualCounts = individualCounts.slice(0, 10);
+
+//       console.log('Data spesies:', topSpeciesData);
+//       console.log('Jumlah individu per spesies:', topIndividualCounts);
+
+//       // Konfigurasi chart dengan data spesies dan jumlah individu
+//       var options = {
+//           chart: {
+//               type: "bar",
+//               height: 400,
+//           },
+//           plotOptions: {
+//             bar: {
+//                 horizontal: true,  // Mengubah bar menjadi horizontal
+//                 barHeight: '60%',  // Lebar bar
+//             }
+//           },
+//           series: [{
+//               name: "Jumlah Individu",
+//               data: topIndividualCounts  // Jumlah individu per spesies
+//           }],
+//           xaxis: {
+//               categories: topSpeciesData  // Daftar spesies (dibatasi 10)
+//           },
+//           colors: ["#FF4560"],
+//           tooltip: {
+//               y: {
+//                   formatter: function (val) {
+//                       return val + " individu";
+//                   }
+//               }
+//           }
+//       };
+
+//       // Render chart di elemen dengan id #jenisLKChart
+//       new ApexCharts(document.querySelector("#spesiesIndvChart"), options).render();
+//   },
+//   error: function(error) {
+//       console.log("Error fetching data: ", error);
+//   }
+// });
+
+// Pie chart
+$(document).ready(function() {
+  
+  $.ajax({
+      url: '/get-satwa',
+      type: 'GET',
+      success: function(response) {
+          const data = response.data;
+
+          // Menghitung jumlah taksa
+          const taksaCounts = data.reduce((counts, item) => {
+              const taksa = item.kelas || "Tidak Diketahui";
+              counts[taksa] = (counts[taksa] || 0) + 1;
+              return counts;
+          }, {});
+
+          // Menghitung jumlah jenis koleksi
+          const koleksiCounts = data.reduce((counts, item) => {
+              const koleksi = item.jenis_koleksi || "Tidak Diketahui";
+              counts[koleksi] = (counts[koleksi] || 0) + 1;
+              return counts;
+          }, {});
+
+          // // Menghitung jumlah jenis tagging
+          // const taggingCounts = data.reduce((counts, item) => {
+          //     const tagging = item.jenis_tagging || "Tidak Diketahui";
+          //     counts[tagging] = (counts[tagging] || 0) + 1;
+          //     return counts;
+          // }, {});
+
+          // Menyusun data untuk chart
+          const chartData = [
+              {
+                  data: Object.values(taksaCounts),
+                  labels: Object.keys(taksaCounts)
+              },
+              {
+                  data: Object.values(koleksiCounts),
+                  labels: Object.keys(koleksiCounts)
+              },
+              // {
+              //     data: Object.values(taggingCounts),
+              //     labels: Object.keys(taggingCounts)
+              // }
+          ];
+
+          // Membuat Pie Chart untuk masing-masing data
+          chartData.forEach((item, index) => {
+              var options = {
+                  chart: {
+                      type: 'pie',
+                      height: 350,
+                  },
+                  series: item.data,  // Data untuk Pie Chart
+                  labels: item.labels,  // Label kategori
+                  title: {
+                      text: item.name
+                  },
+                  tooltip: {
+                      y: {
+                          formatter: function(val) {
+                              return val + " satwa";  // Menampilkan jumlah satwa per kategori
+                          }
+                      }
+                  },
+                  colors: ["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0"],  // Warna untuk setiap kategori
+              };
+
+              // Render Pie Chart dalam elemen yang sesuai
+              new ApexCharts(document.querySelector("#chartContainer" + (index + 1)), options).render();
+          });
       },
-      plotOptions: {
-        bar: {
-          borderRadius: 2,
-          columnWidth: "60%"
-        }
-      },
-      colors: [colors.primary],
-      series: [{
-        name: '',
-        data: [36, 77, 52, 90, 74, 35, 55, 23, 47, 10, 63]
-      }],
-      xaxis: {
-        type: 'datetime',
-        categories: ["Jan 01 2023", "Jan 02 2023", "Jan 03 2023", "Jan 04 2023", "Jan 05 2023", "Jan 06 2023", "Jan 07 2023", "Jan 08 2023", "Jan 09 2023", "Jan 10 2023", "Jan 11 2023",],
-      },
-    };
-    new ApexCharts(document.querySelector("#ordersChart"),options2).render();
-  }
-  // Orders Chart - END
-
-
-
-
-  // Growth Chart
-  if($('#growthChart').length) {
-    var options3 = {
-      chart: {
-        type: "line",
-        height: 60,
-        sparkline: {
-          enabled: !0
-        }
-      },
-      series: [{
-        name: '',
-        data: [41, 45, 44, 46, 52, 54, 43, 74, 82, 82, 89]
-      }],
-      xaxis: {
-        type: 'datetime',
-        categories: ["Jan 01 2023", "Jan 02 2023", "Jan 03 2023", "Jan 04 2023", "Jan 05 2023", "Jan 06 2023", "Jan 07 2023", "Jan 08 2023", "Jan 09 2023", "Jan 10 2023", "Jan 11 2023",],
-      },
-      stroke: {
-        width: 2,
-        curve: "smooth"
-      },
-      markers: {
-        size: 0
-      },
-      colors: [colors.primary],
-    };
-    new ApexCharts(document.querySelector("#growthChart"),options3).render();
-  }
-  // Growth Chart - END
-
-
+      error: function(error) {
+          console.log("Error fetching data: ", error);
+      }
+  });
+  
+});
 
 
 

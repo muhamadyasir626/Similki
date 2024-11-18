@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_satwa')->constrained('satwas')->onDelete('cascade');
             $table->string('jenis_tagging',50)->nullable();
-            $table->string('kode_tagging',20)->nullable();
+            $table->string('kode_tagging',255)->nullable();
             $table->string('alasan_belum_tagging',255)->nullable();
-            $table->date('ba_tagging')->nullable();
+            $table->string('ba_tagging',255)->nullable();
+            // $table->date('tanggal_tagging',255)->nullable();
             $table->timestamps();
         });
     }
