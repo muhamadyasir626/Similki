@@ -19,10 +19,14 @@
         <h6 class="card-title">Data Tabel Satwa</h6>
         <form action="{{ route('satwa-search') }}" method="GET" class="mb-4">
           <div class="input-group">
-            <input type="text" name="query" class="form-control" placeholder="Cari satwa..." value="{{ request('query') }}">
+            <input type="text" name="query" class="form-control" placeholder="Cari satwa..." value="{{ old('query') }}">
             <button type="submit" class="btn btn-primary">Cari</button>
           </div>
         </form>
+        @php
+          $satwa = session('satwa') ?? $satwa;
+        @endphp
+
         <div class="table-responsive">
           <table id="dataTableExample" class="table">
             <thead>

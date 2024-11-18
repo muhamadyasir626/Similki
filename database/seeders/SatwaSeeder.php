@@ -104,7 +104,7 @@ class SatwaSeeder extends Seeder
         // }
         foreach ($data as $index => $row) { // Tambahkan $index untuk melacak baris
             try {
-            
+                dd($row[27]);
                 $id_lk = LembagaKonservasi::where('slug', $row[2])->value('id');
 
                 $id_species = ListSpecies::where('nama_lokal', $row[10])->value('id');
@@ -165,9 +165,9 @@ class SatwaSeeder extends Seeder
                         : NULL;
                     Tagging::create([
                         'id_satwa' => $satwa->id,
-                        'jenis_tagging' => $row[11] ?? NULL,
-                        'kode_tagging' => $row[12] ?? NULL,
-                        'alasan_belum_tagging' => $row[26] ?? NULL,
+                        'jenis_tagging' => $row[12] ?? NULL,
+                        'kode_tagging' => $row[13] ?? NULL,
+                        'alasan_belum_tagging' => $row[27] ?? NULL,
                         'tanggal_tagging' => $tanggal_tagging ?? NULL,
                     ]);
                     // if($index === 9){

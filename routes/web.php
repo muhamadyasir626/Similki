@@ -56,10 +56,11 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
 
     
     Route::resource('satwa', SatwaController::class);
-    Route::get('/pendataan-satwa', SatwaController::class)->name('form-satwa');
+    Route::get('/pendataan-satwa', [SatwaController::class,'form'])->name('form-satwa');
     Route::post('/satwa/pendataan1',[SatwaController::class, 'pendataan1'])->name('pendataan-satwa1');
     Route::post('/satwa/pendataan2',[SatwaController::class, 'pendataan2'])->name('pendataan-satwa2');
-    Route::get('/satwa/search',SatwaController::class)->name('satwa-search');
+    Route::get('/search',[SatwaController::class,'search'])->name('satwa-search');
+    
 
     Route::get('/permission', function(){
         return view('permission');

@@ -201,14 +201,31 @@ class SatwaController extends Controller
         return view('pages.satwa.daftar-satwa', compact('satwa'));
     }
 
-    //daftar satwa
-    public function __invoke(){
-        $user = User::with('lk','role', 'upt', 'spesies')->find(Auth::id());
-        $satwa = Satwa::with('lk')->get();
-        $lk = LembagaKonservasi::with('upt')->get();
+    
 
-        return view('pages.satwa.pendataan-satwa', compact('satwa','lk','user',));
+    public function search(Request $request)
+    {
+        $request->validate([
+            'query' => 'required|string|min:1',
+        ]);
+        $query = $request->input('query');
+
+        $satwa = Satwa::where('nama_panggilan', 'like', "%$query%")
+            ->orWhere('asal_satwa', 'like', "%$query%")
+            ->orWhere('jenis_koleksi', 'like', "%$query%")
+            ->orWhereHas('species', function ($queryRelasi) use ($query) {
+                $queryRelasi->where('spesies', 'like', "%$query%"); // Kolom dalam tabel list_species
+            })
+            ->orWhereHas('lk', function ($queryRelasi) use ($query) {
+                $queryRelasi->where('slug', 'like', "%$query%"); // Kolom dalam tabel list_lk
+            })
+            ->paginate(50);
+
+        session(['satwa' => $satwa]);
+
+        return view('pages.satwa.daftar-satwa', compact('satwa', 'query'));
     }
+
     /**
      * Store a newly created resource in storage.a
      */
@@ -346,5 +363,14 @@ class SatwaController extends Controller
     public function destroy(Satwa $Satwa)
     {
         //
+    }
+
+    //daftar satwa
+    public function form(){
+        $user = User::with('lk','role', 'upt', 'spesies')->find(Auth::id());
+        $satwa = Satwa::with('lk')->get();
+        $lk = LembagaKonservasi::with('upt')->get();
+
+        return view('pages.satwa.pendataan-satwa', compact('satwa','lk','user',));
     }
 }
