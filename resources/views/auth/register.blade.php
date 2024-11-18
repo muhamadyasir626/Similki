@@ -17,7 +17,6 @@
         </div>
         <p class="side-big-heading">Sudah memiliki Akun?</p>
         <a href="{{ route('login') }}" class="loginbtn">Login</a>
-
       </div>
       
       <div class="signup-form-container">
@@ -36,12 +35,9 @@
               <p class="stageno stageno-3">3</p>
           </div>
         </div>
-        
         <div id="validation-errors" class="mb-4">
-          
         </div>
         <br>
-
 
         <div class="signup-form-content">
           <form id="stage1" action="{{ route('register1') }}"  method="POST">
@@ -54,7 +50,7 @@
                              placeholder="Nama lengkap Anda" required 
                              pattern="[A-Za-z\s]+" 
                              title="Nama hanya boleh mengandung huruf alfabet dan spasi" />
-                  </div>
+                    </div>
                       <div class="gender-selection">
                           <p class="field-heading">Jenis Kelamin :</p>
                           <label for="jenis_kelamin_laki-laki"> <input type="radio" name="jenis_kelamin" value="1" {{ old('jenis_kelamin') == '1' ? 'checked' : '' }} id="jenis_kelamin_laki-laki" required/> Laki-Laki </label>
@@ -196,23 +192,6 @@
                          title="Format email tidak valid. Harus memiliki huruf setelah '@' dan diikuti oleh '.'" />
                 </div>
               </div>
-              {{-- <div class="button-container">
-                <div class="text-fields password">
-                    <label for="password">Password</label>
-                    <div class="input-wrapper">
-                        <input type="password" name="password" id="password" placeholder="Buat kata sandi Anda" required />
-                        <span onclick="togglePasswordVisibility('password')" class="toggle-password">👁️</span>
-                    </div>
-                </div>
-                
-                <div class="text-fields password_confirmation">
-                    <label for="password_confirmation">Confirmation password</label>
-                    <div class="input-wrapper">
-                        <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Ketika ulang kata sandi Anda" required />
-                        <span onclick="togglePasswordVisibility('password_confirmation')" class="toggle-password">👁️</span>
-                    </div>
-                </div>
-            </div> --}}
 
             <div class="button-container">
               <div class="text-fields password">
@@ -238,25 +217,16 @@
                       </span>
                   </div>
               </div>
-          {{-- </div> --}}
           </div>         
-
               <div class="pagination-btns">
                 <input type="button" value="Previous"  class="previousPage stagebtn3a" onclick="stage3to2()" />
               <input type="submit" value="Submit" class="nextPage stagebtn3b" />
               </div>              
           </div>
-          
         </form>
-      </div>
-      
-        
-          
-
+      </div>    
     </div>
     </div>
-
   </body>
   <script src="js/register.js"></script>
-  <!-- <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script> -->
 </html>

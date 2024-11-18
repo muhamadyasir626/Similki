@@ -23,8 +23,8 @@
                 @csrf
 
                 <div class="text-fields email">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" 
+                    <label for="login">login</label>
+                    <input type="email" name="login" id="login" 
                            placeholder="abcd@gmail.com" 
                            required 
                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z]+(\.[a-zA-Z]{2,})+" 

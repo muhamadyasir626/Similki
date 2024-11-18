@@ -66,7 +66,7 @@ $(function () {
             $("#form-tahun_titipan").show();
             $("#form-keterangan").show();
             $("#form-nama_satwa_ina").show();
-            // $("#form-nama_panggilan").show();
+            $("#form-nama_panggilan").show();
         } else {
             $("#form-jenis_tagging").hide();
             $("#kode_tagging").hide();

@@ -5,24 +5,43 @@ $(function () {
         headerTag: "h2",
         bodyTag: "section",
         transitionEffect: "slideLeft",
-        // Trigger untuk fetch data saat pindah ke step 2
         onStepChanging: function (event, currentIndex, newIndex) {
-            if (newIndex === 1) {
-                fetchData();
+            // Validasi langkah saat ini
+            if (currentIndex < newIndex) {
+                return validateCurrentStep();
             }
             return true;
         },
     });
 
+    // Fungsi untuk memvalidasi input pada langkah saat ini
+    function validateCurrentStep() {
+        let isValid = true;
 
-    function fetchData() {    
-        const apiUrl = "/api/satwa";    
+        // Cek semua input dalam langkah saat ini yang memiliki atribut required
+        $(
+            "#wizard .current section input[required], #wizard .current section textarea[required], #wizard .current section select[required]"
+        ).each(function () {
+            if ($(this).val().trim() === "") {
+                // Trim untuk menghindari spasi kosong
+                isValid = false;
+                $(this).addClass("error"); // Menandai input yang tidak valid
+                $(this).focus(); // Fokus pada input yang tidak valid
+            } else {
+                $(this).removeClass("error"); // Menghapus tanda jika valid
+            }
+        });
+
+        return isValid;
+    }
+
+    function fetchData() {
+        const apiUrl = "/api/satwa";
         fetch(apiUrl)
             .then((response) => response.json())
             .then((data) => {
-            
                 console.log(data);
-                if (data.someCondition) {                
+                if (data.someCondition) {
                     $("#form-satwa_koleksi").append(
                         "<div>Data baru: " + data.someValue + "</div>"
                     );
