@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     buttons.forEach((button) => {
         button.addEventListener("click", function () {
             const id = this.id; // Ambil ID tombol yang diklik
-            console.log(id);    
+            console.log(id);
             // Lakukan fetch data berdasarkan ID
             fetch(`/lembaga-konservasi/${id}`)
                 .then((response) => {
@@ -25,5 +25,22 @@ document.addEventListener("DOMContentLoaded", function () {
                     alert("Terjadi kesalahan saat memuat data.");
                 });
         });
+    });
+});
+
+//POPUP
+function openPopup(detail) {
+    document.getElementById("popupContent").innerHTML = detail;
+    document.getElementById("detailPopup").style.display = "block";
+}
+
+function closePopup() {
+    document.getElementById("detailPopup").style.display = "none";
+}
+
+document.querySelectorAll("button[id]").forEach((button) => {
+    button.addEventListener("click", function () {
+        const detail = `Detail untuk ID ${this.id}`;
+        openPopup(detail);
     });
 });

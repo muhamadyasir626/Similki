@@ -23,7 +23,7 @@
                 @csrf
 
                 <div class="text-fields email">
-                    <label for="login">login</label>
+                    <label for="login">Email</label>
                     <input type="email" name="login" id="login" 
                            placeholder="abcd@gmail.com" 
                            required 
@@ -43,7 +43,9 @@
                     <label for="password">Password</label>
                     <div class="input-wrapper">
                         <input type="password" id="password" name="password" required placeholder="Password">
-                        <span onclick="togglePasswordVisibility('password', this)" class="toggle-password" data-show="{{ asset('assets/images/others/eye-show-password.png') }}" data-hide="{{ asset('assets/images/others/eye-hide-password.png') }}">
+                        <span onclick="togglePasswordVisibility('password', this)" class="toggle-password" 
+                              data-show="{{ asset('assets/images/others/eye-show-password.png') }}" 
+                              data-hide="{{ asset('assets/images/others/eye-hide-password.png') }}">
                             <img src="{{ asset('assets/images/others/eye-hide-password.png') }}" alt="hide password" />
                         </span>
                     </div>

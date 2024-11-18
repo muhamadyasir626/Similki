@@ -48,6 +48,16 @@
     </div>
   </div>
 </div>
+
+<!-- Popup Modal -->
+<div id="detailPopup" class="modal" style="display:none;">
+  <div class="modal-content">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <h2>Detail Lembaga Konservasi</h2>
+      <div id="popupContent"></div>
+  </div>
+</div>
+
 @endsection
 
 @push('plugin-scripts')
@@ -58,4 +68,5 @@
 @push('custom-scripts')
   <script src="{{ asset('assets/js/data-table.js') }}"></script>
   <script src="{{ asset('assets/js/popup.js') }}"></script>
+  <link rel="stylesheet" href="css/popup.css" />
 @endpush
