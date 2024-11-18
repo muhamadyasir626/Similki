@@ -17,9 +17,15 @@ class ListUpt extends Model
         'slug',
     ];
 
-    public function LembagaKonservasi(){
+    public function lk(){
         return $this->belongsTo(LembagaKonservasi::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+  
 
 
 }

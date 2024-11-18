@@ -9,5 +9,10 @@ php artisan migrate --path=database\migrations\2024_10_25_042115_create_taggings
 php artisan migrate --path=database\migrations\2024_10_27_045643_add_indexes_to_users_table.php
 php artisan migrate 
 php artisan db:seed --class=RoleSeeder
+php artisan db:seed --class=ListSpeciesSeeder
+php artisan db:seed --class=ListUptSeeder
+php artisan db:seed --class=LembagaKonservasiSeeder
+php artisan db:seed --class=SatwaSeeder
 
 php artisan db:seed --class=CSVSeeder
+
