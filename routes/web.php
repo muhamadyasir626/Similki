@@ -58,12 +58,22 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::resource('lembaga-konservasi', LembagaKonservasiController::class);
     Route::resource('satwa', SatwaController::class);
     Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
+    Route::get('/monitoring',[LembagaKonservasiController::class,'monitoring'])->name('moniotring-lk');
 
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    
+    Route::resource('satwa', SatwaController::class);
+    Route::get('/pendataan-satwa', [SatwaController::class,'form'])->name('form-satwa');
     Route::post('/satwa/pendataan1',[SatwaController::class, 'pendataan1'])->name('pendataan-satwa1');
     Route::post('/satwa/pendataan2',[SatwaController::class, 'pendataan2'])->name('pendataan-satwa2');
-    Route::post('/satwa/pendataan3',[SatwaController::class, 'pendataan3'])->name('pendataan-satwa3');
-    Route::post('/satwa/pendataan4',[SatwaController::class, 'pendataan4'])->name('pendataan-satwa4');
+    Route::get('/search',[SatwaController::class,'search'])->name('satwa-search');
+    
+
+    Route::get('/permission', function(){
+        return view('permission');
+    })->name('permission');
+    Route::get('/verifikasi-akun',[AuthController::class,'index'])->name('verifikasi-akun');
+    Route::post('/updated-permission/id={id}',[AuthController::class,'updatePermission'])->name('updated-permission');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);
