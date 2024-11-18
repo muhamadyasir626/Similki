@@ -52,7 +52,7 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
 
     Route::resource('lembaga-konservasi', LembagaKonservasiController::class);
     Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
-    Route::get('/monitoring',[LembagaKonservasiController::class,'monitoring'])->name('moniotring-lk');
+    Route::get('/monitoring',[LembagaKonservasiController::class,'monitoring'])->name('monitoring-lk');
 
     
     Route::resource('satwa', SatwaController::class);

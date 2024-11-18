@@ -27,7 +27,7 @@
         </a>
       </li>
       <li class="nav-item {{ active_class(['/']) }}">
-        <a href="{{ route('moniotring-lk') }}" class="nav-link">
+        <a href="{{ route('monitoring-lk') }}" class="nav-link">
           <i class="link-icon" data-feather="monitor"></i>
           <span class="link-title">Monitoring LK</span>
         </a>
@@ -109,7 +109,7 @@
             <li class="nav-item">
               <a href="{{ url('/forms/input-investasi') }}" class="nav-link {{ active_class(['forms/input-investasi']) }}">Input Investasi</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-ite
               <a href="{{ url('/forms/monitoring-investasi') }}" class="nav-link {{ active_class(['forms/monitoring-investasi']) }}">Monitoring Investasi</a>
             </li>
             <li class="nav-item">
