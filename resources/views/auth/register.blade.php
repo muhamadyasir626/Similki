@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Registration</title>
+   <link rel="icon" href="{{ asset('/assets/images/klhk.png') }}" type="image/png">
+
     <link rel="stylesheet" href="css/register.css" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   </head>
@@ -13,7 +15,7 @@
     <div class="container">
       <div class="login-link">
         <div class="logo">
-          <img src="img/klhk.png" alt="klhk" />
+          <img src="/assets/images/klhk.png" alt="klhk" />
         </div>
         <p class="side-big-heading">Sudah memiliki Akun?</p>
         <a href="{{ route('login') }}" class="loginbtn">Login</a>
@@ -72,10 +74,10 @@
                       </div>
                       <div class="text-fields bidang">
                           <label for="id_role">Bidang</label>
-                          <select id="id_role" class="option-input" name="id_role" required autofocus>
+                          <select id="id_role" class="option-input" name="id_role"  autofocus>
                               <option value="" hidden>Pilih Bidang</option>
                               @foreach($roles as $role)
-                                  <option id="{{ $role->tag }}"  value="{{ $role->id }}" required>{{ $role->name }}</option>
+                                  <option id="{{ $role->tag }}"  value="{{ $role->id }}" >{{ $role->name }}</option>
                               @endforeach
                           </select>
                       </div>
@@ -85,13 +87,13 @@
                           <select id="bentuk_upt" class="option-input" name="bentuk_upt"  autofocus>
                               <option value="" hidden>BBKSDA/BKSDA</option>
                               @foreach($upt_bentuk as $upt)
-                                  <option id="{{ $upt->bentuk }}" value="{{ $upt->bentuk }}" >{{ $upt->bentuk }}</option>
+                                  <option id="{{ $upt->bentuk }}" value="{{ $upt->bentuk }}"  >{{ $upt->bentuk }}</option>
                               @endforeach
                           </select>
                   </div>
                   <div class="text-fields wilayah_upt" >
                   <label for="wilayah_upt" >Pilih Wilayah UPT </label>
-                          <select id="wilayah_upt" class="option-input upt-wilayah" name="wilayah_upt"  autofocus>
+                          <select id="wilayah_upt" class="option-input upt-wilayah" name="wilayah_upt"   autofocus>
                               <option value="" hidden>Pilih Wilayah</option>
                               @foreach($upt_wilayah as $upt)
                                   <option id="{{ $upt->wilayah }}" value="{{ $upt->wilayah }}" >{{ $upt->wilayah }}</option>
@@ -112,7 +114,7 @@
                           <select id="id_spesies" class="option-input id_spesies" name="id_spesies"  autofocus>
                               <option value="" hidden>Pilih Species</option>
                               @foreach($list_species as $species)
-                                  <option id="{{ $species->spesies }}" value="{{ $species->id }}" >{{ $species->spesies }}</option>
+                                  <option id="{{ $species->spesies }}" value="{{ $species->id }}"  >{{ $species->spesies }}</option>
                               @endforeach
                           </select>
                       </div>
@@ -172,7 +174,7 @@
               <div class="button-container">
                 <div class="text-fields email">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="abcd@gmail.com" required />
+                    <input type="email" name="email" id="email" placeholder="abcd@gmail.com" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Masukkan alamat email yang valid. Contoh: user@example.com" required />
                 </div>
               </div>
               <div class="button-container">

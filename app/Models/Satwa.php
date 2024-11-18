@@ -11,10 +11,10 @@ class Satwa extends Model
 
     protected $guard = ['id'];
 
-    public function Tagging(){
-        return $this->belongsTo(Tagging::class);
-    }
-    public function spesies(){
+    // public function tagging(){
+    //     return $this->belongsTo(Tagging::class);
+    // }
+    public function species(){
         return $this->belongsTo(ListSpecies::class,'id_spesies');
     }
 

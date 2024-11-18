@@ -11,7 +11,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\checkpermission;
 use App\Http\Controllers\LembagaKonservasiController;
 use App\Http\Controllers\SatwaController;
-use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +50,7 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
 
     
     Route::get('/dashboard', function () {
-        $lk_count = LembagaKonservasi::count();
+            $lk_count = LembagaKonservasi::count();
         $species_count = ListSpecies::count();
         $skoleksi_count = Satwa::where('status_satwa','satwa koleksi')->count();
         $stitipan_count = Satwa::where('status_satwa','satwa titipan')->count();
