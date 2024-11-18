@@ -209,6 +209,21 @@ class SatwaController extends Controller
 
         return view('pages.satwa.pendataan-satwa', compact('satwa','lk','user',));
     }
+
+    public function search(Request $request)
+{
+    $query = $request->input('query');
+
+    // Pencarian berdasarkan kolom tertentu
+    $satwa = Satwa::where('nama_panggilan', 'like', "%$query%")
+                ->orWhere('asal_satwa', 'like', "%$query%")
+                ->orWhere('jenis_koleksi', 'like', "%$query%")
+                ->orWhere('spesies', 'like', "%$query%")
+                ->paginate(10);
+
+    return view('satwa.index', compact('satwa', 'query'));
+}
+
     /**
      * Store a newly created resource in storage.a
      */
@@ -302,46 +317,16 @@ class SatwaController extends Controller
         } else {
             return response()->json([
                 'success' => false,
-                'errors' => $validator->errors()
-            ],422);
+                'message' => 'Section tidak valid.'
+            ], 400);
         }
-
-        $pendataanSatwa1 = $request->session()->get('pendataan_satwa1');
-        $pendataanSatwa2 = $request->session()->get('pendataan_satwa2');
-
-        if(!$pendataanSatwa1 && !$pendataanSatwa2 ){
-            return response()->json([
-                'success' => false,
-                'message' => 'Silangkan ulangi proses pendataan satwa.'
-            ]);
-        }
-
-        $data = array_merge($pendataanSatwa1,$pendataanSatwa2, $validator->validated());
-
-        $result = Satwa::create($data);
-
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Pendataan satwa berhasil'
-        ]);
     }
-
-    public function index(){
-        $user = User::with('lk','role', 'upt', 'spesies')->find(Auth::id());
-        $satwa = Satwa::with('lk')->get();
-        $lk = LembagaKonservasi::with('ListUpt')->get();
-
-        return view('pages.LK.pendataan-satwa', compact('satwa','lk','user',));
-    }
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-    //     $validator = validator::make($request->all(),[
-    //         'file' => 'required|file|mimes:csv',
-    //     ]);
+    
+    
+    // public function store(Request $request){
+    // //     $validator = validator::make($request->all(),[
+    // //         'file' => 'required|file|mimes:csv',
+    // //     ]);
 
     // //     Excel::import(new DataImport, request()->file('file'));
     // }
