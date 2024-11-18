@@ -1,7 +1,7 @@
 // Get Postal Kode
 document.getElementById("kodepos").addEventListener("input", debounce(searchPostalCode, 1000));
 
-function searchPostalCode() {
+  function searchPostalCode() {
   var postalCode = document.getElementById("kodepos").value;
 
   if (postalCode.length === 5) {
@@ -12,7 +12,7 @@ function searchPostalCode() {
           var locationData = data.data[0];
           
           document.getElementById("provinsi").value = locationData.province || "";
-          document.getElementById("kota/kab").value = locationData.regency || "";
+          document.getElementById("kota_kab").value = locationData.regency || "";
           document.getElementById("kecamatan").value = locationData.district || "";
           document.getElementById("kelurahan").value = locationData.village || "";
         } else {
@@ -223,31 +223,51 @@ function toggleinput() {
   var id_lk = document.getElementsByClassName('id_lk');
   var id_spesies = document.getElementsByClassName('id_spesies');
 
-  // Hide all elements in each category
-  Array.from(bentuk_upt).forEach(el => el.style.display = "none");
-  Array.from(wilayah_upt).forEach(el => el.style.display = "none");
-  Array.from(id_lk).forEach(el => el.style.display = "none");
-  Array.from(id_spesies).forEach(el => el.style.display = "none");
+  // Function to hide and un-require elements
+  function hideAndUnrequire(elements) {
+    Array.from(elements).forEach(el => {
+      el.style.display = "none";
+      el.removeAttribute('required');  // Remove required attribute when hidden
+    });
+  }
+
+  // Hide all elements and remove required attribute
+  hideAndUnrequire(bentuk_upt);
+  hideAndUnrequire(wilayah_upt);
+  hideAndUnrequire(id_lk);
+  hideAndUnrequire(id_spesies);
 
   var selectedOptionRole = roleSelect.options[roleSelect.selectedIndex].id.toLowerCase();
-  // console.log(selectedOptionRole);
 
   switch (selectedOptionRole) {
     case "lk":
     case "drh":
     case "sk":
-      Array.from(id_lk).forEach(el => el.style.display = "block");
-      // console.log('berhasil');
+      Array.from(id_lk).forEach(el => {
+        el.style.display = "block";
+        el.setAttribute('required', 'true');
+      });
       break;
     case "upt":
-      Array.from(bentuk_upt).forEach(el => el.style.display = "block");
-      Array.from(wilayah_upt).forEach(el => el.style.display = "block");
+      Array.from(bentuk_upt).forEach(el => {
+        el.style.display = "block";
+        el.setAttribute('required', 'true');
+      });
+      Array.from(wilayah_upt).forEach(el => {
+        el.style.display = "block";
+        el.setAttribute('required', 'true');
+      });
       break;
     case "sb":
-      Array.from(id_spesies).forEach(el => el.style.display = "block");
+      Array.from(id_spesies).forEach(el => {
+        el.style.display = "block";
+        el.setAttribute('required', 'true');
+      });
       break;
   }
+  
 }
+
 function togglePasswordVisibility(fieldId) {
     const field = document.getElementById(fieldId);
     const type =

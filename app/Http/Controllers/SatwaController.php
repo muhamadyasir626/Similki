@@ -10,185 +10,311 @@ use App\Http\Requests\UpdateSatwaRequest;
 use App\Models\LembagaKonservasi;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class SatwaController extends Controller
 {
     //pendataan satwa
-    public function pendataan1(Request $request){
-        $validator  = Validator::make($request->all(),[
-            'id_lk' => 'required',
-            'jenis_koleksi' => 'required|in:satwa hidup,awetan',
-            'status_satwa' => 'in:koleksi,titipan,rehabilitasi,breeding loan',
-            'no_peroleh_izin' => 'string|max:50|required_if:status_satwa, koleksi',
-            'asal_satwa'=>'in:endemik,eksotik',
-            'nomor_sats_ln'=>'string|nullable|max:50',
-            'status_perlindungan' => 'required_if:jenis_koleksi, satwa hidup|in:dilindungi, tidak lindungi',
-            'no_sk_kepala_balai' => 'string|max:50',
-            'no_sk_dirjen_ksdae' => 'string|max:50',
-            'no_sk_menteri_lhk' => 'string|max:50',
+    // public function pendataan1(Request $request){
+    //     $validator  = Validator::make($request->all(),[
+    //         'id_lk' => 'required',
+    //         'jenis_koleksi' => 'required|in:satwa hidup,awetan',
+    //         'status_satwa' => 'in:koleksi,titipan,rehabilitasi,breeding loan',
+    //         'no_peroleh_izin' => 'string|max:50|required_if:status_satwa, koleksi',
+    //         'asal_satwa'=>'in:endemik,eksotik',
+    //         'nomor_sats_ln'=>'string|nullable|max:50',
+    //         'status_perlindungan' => 'required_if:jenis_koleksi, satwa hidup|in:dilindungi, tidak lindungi',
+    //         'no_sk_kepala_balai' => 'string|max:50',
+    //         'no_sk_dirjen_ksdae' => 'string|max:50',
+    //         'no_sk_menteri_lhk' => 'string|max:50',
             
             
-        ], [
-            'string' => ':attribute harus berupa string.',
-            'max' => ':attribute tidak boleh lebih dari :max karakter.',
-            'status_satwa.in' => 'status satwa harus salah satu dari berikut: koleksi, titipan, rehabilitasi, breeding loan',
-            'asal_satwa.in' => 'asal satwa harus salah satu dari berikut: endemik atau eksotik',
-            'required_if' => 'Wajib diisi',
-        ]);
+    //     ], [
+    //         'string' => ':attribute harus berupa string.',
+    //         'max' => ':attribute tidak boleh lebih dari :max karakter.',
+    //         'status_satwa.in' => 'status satwa harus salah satu dari berikut: koleksi, titipan, rehabilitasi, breeding loan',
+    //         'asal_satwa.in' => 'asal satwa harus salah satu dari berikut: endemik atau eksotik',
+    //         'required_if' => 'Wajib diisi',
+    //     ]);
 
-        if($validator->fails()){
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors()
-            ],422);
-        }
+    //     if($validator->fails()){
+    //         return response()->json([
+    //             'success' => false,
+    //             'errors' => $validator->errors()
+    //         ],422);
+    //     }
 
-        $sessionData = $request->only([
-            'id_lk','jenis_koleksi','status_satwa','no_peroleh_izin','asal_satwa',
-            'nomor_sats_ln','no_sk_kepala_balai','no_sk_dirjen_ksdae', 'no_sk_menteri_lhk'
-        ]);
+    //     $sessionData = $request->only([
+    //         'id_lk','jenis_koleksi','status_satwa','no_peroleh_izin','asal_satwa',
+    //         'nomor_sats_ln','no_sk_kepala_balai','no_sk_dirjen_ksdae', 'no_sk_menteri_lhk'
+    //     ]);
 
-        $request->session()->put('pendataan_satwa1',$sessionData);
+    //     $request->session()->put('pendataan_satwa1',$sessionData);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Pendataan informasi status satwa berhasil'
-        ]);
-    }
+    //     return response()->json([
+    //         'success' => true,
+    //         'message' => 'Pendataan informasi status satwa berhasil'
+    //     ]);
+    // }
 
-    public function pendataan2(Request $request){
-        $validator  = Validator::make($request->all(),[
-            'perilaku_satwa'=> 'required|in:individu, kelompok',
-            'jenis_kelamin'=>'required_if:perilaku_satwa, individu|in:jantan, betina, Tidak diketahui',
-            'id_tagging' => 'required|in:ring, belum, label, chip, eartag', 
-            'kode_tagging' => 'required_if:id_tagging|string|max:20',
-            'alasan_belum_tagging' => 'required_if:id_tagging, belum|string|max:255|',
-            'berita_acara_tagging' => 'required_if:id_tagging, ring, chip, label, chip, eartag|string|max:50'
-        ], [
-            'required' => 'Wajib Diisi',
-            'string' => ':atribut harus berupa huruf.',
-            'integer' => ':atribut harus berupa angka.',
-            'max' => ':atribut tidak boleh lebih dari :max karakter.',
-            'required_if' => 'wajib diisi, mohon diperhatikan dengan baik.'
-        ]);
+    // public function pendataan2(Request $request){
+    //     $validator  = Validator::make($request->all(),[
+    //         'perilaku_satwa'=> 'required|in:individu, kelompok',
+    //         'jenis_kelamin'=>'required_if:perilaku_satwa, individu|in:jantan, betina, Tidak diketahui',
+    //         'id_tagging' => 'required|in:ring, belum, label, chip, eartag', 
+    //         'kode_tagging' => 'required_if:id_tagging|string|max:20',
+    //         'alasan_belum_tagging' => 'required_if:id_tagging, belum|string|max:255|',
+    //         'berita_acara_tagging' => 'required_if:id_tagging, ring, chip, label, chip, eartag|string|max:50',
+    //         'nama_lokal '=> ['string','max:50', 'nullable'],
+    //         'nama_panggilan'=>['string','max:50', 'nullable'],
+    //         'class'=>['string','max:50', 'nullable'],
+    //         'genus'=>['string','max:50', 'nullable'],
+    //         'spesies'=>['string','max:50', 'nullable'],
+    //         'sub_spesies'=>['string','max:50', 'nullable'],
+    //         'jumlah_keseluruhan_gender '=> ['decimal', 'nullable'],
+    //     ], [
+    //         'required' => 'Wajib Diisi',
+    //         'string' => ':atribut harus berupa huruf.',
+    //         'integer' => ':atribut harus berupa angka.',
+    //         'max' => ':atribut tidak boleh lebih dari :max karakter.',
+    //         'required_if' => 'wajib diisi, mohon diperhatikan dengan baik.'
+    //     ]);
 
-        if($validator->fails()){
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors()
-            ],422);
-        }
+    //     if($validator->fails()){
+    //         return response()->json([
+    //             'success' => false,
+    //             'errors' => $validator->errors()
+    //         ],422);
+    //     }
 
-        $sessionData = $request->only([
-            'perilaku_satwa','jenis_kelamin_individu','no_sats_ln','status_perlindungan','sk_kepala',
-            'pengambilan_satwa','sk_ksdae','sk_menteri'
-        ]);
+    //     $pendataanSatwa1 = $request->session()->get('pendataan_satwa1');
 
-        $request->session()->put('pendataan_satwa2',$sessionData);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Pendataan satwa (informasi status satwa) berhasil'
-        ]);
-    }
+    //     if(!$pendataanSatwa1){
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Silangkan ulangi proses pendataan satwa.'
+    //         ]);
+    //     }
+    //     $data = array_merge($pendataanSatwa1, $validator->validated());
+    //     $result = Satwa::create($data);
+
+
+    //     return response()->json([
+    //         'success' => true,
+    //         'message' => 'Pendataan satwa berhasil'
+    //     ]);
+    // }
 
     //perilaku individu
-    public function pendataan3(Request $request){
-        $validator  = Validator::make($request->all(),[
-            'nama_lokal '=> ['string','max:50', 'nullable'],
-            'nama_panggilan'=>['string','max:50', 'nullable'],
-            'class'=>['string','max:50', 'nullable'],
-            'genus'=>['string','max:50', 'nullable'],
-            'spesies'=>['string','max:50', 'nullable'],
-            'sub_spesies'=>['string','max:50', 'nullable'],
-        ], [
-            'string' => ':attribute harus berupa string.',              
-            'max' => ':attribute tidak boleh lebih dari :max karakter.',
-        ]);
+    // public function pendataan3(Request $request){
+    //     $validator  = Validator::make($request->all(),[
+    //         'nama_lokal '=> ['string','max:50', 'nullable'],
+    //         'nama_panggilan'=>['string','max:50', 'nullable'],
+    //         'class'=>['string','max:50', 'nullable'],
+    //         'genus'=>['string','max:50', 'nullable'],
+    //         'spesies'=>['string','max:50', 'nullable'],
+    //         'sub_spesies'=>['string','max:50', 'nullable'],
+    //     ], [
+    //         'string' => ':attribute harus berupa string.',              
+    //         'max' => ':attribute tidak boleh lebih dari :max karakter.',
+    //     ]);
 
-        if($validator->fails()){
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors()
-            ],422);
-        }
+    //     if($validator->fails()){
+    //         return response()->json([
+    //             'success' => false,
+    //             'errors' => $validator->errors()
+    //         ],422);
+    //     }
 
-        $pendataanSatwa1 = $request->session()->get('pendataan_satwa1');
-        $pendataanSatwa2 = $request->session()->get('pendataan_satwa2');
+    //     $pendataanSatwa1 = $request->session()->get('pendataan_satwa1');
+    //     $pendataanSatwa2 = $request->session()->get('pendataan_satwa2');
 
-        if(!$pendataanSatwa1 && !$pendataanSatwa2 ){
-            return response()->json([
-                'success' => false,
-                'message' => 'Silangkan ulangi proses pendataan satwa.'
-            ]);
-        }
+    //     if(!$pendataanSatwa1 && !$pendataanSatwa2 ){
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Silangkan ulangi proses pendataan satwa.'
+    //         ]);
+    //     }
 
-        $data = array_merge($pendataanSatwa1,$pendataanSatwa2, $validator->validated());
+    //     $data = array_merge($pendataanSatwa1,$pendataanSatwa2, $validator->validated());
 
-        $result = Satwa::create($data);
-
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Pendataan satwa berhasil'
-        ]);
-    }
-
-    // perilaku berkelompok
-    public function pendataan4(Request $request){
-        $validator  = Validator::make($request->all(),[
-            'jumlah_keseluruhan_gender '=> ['decimal', 'nullable'],
-            'nama_panggilan' => ['required', 'array','nullable'],
-            'nama_panggilan.*' => ['string','nullable']
-        ]);
-
-        if($validator->fails()){
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors()
-            ],422);
-        }
-
-        $pendataanSatwa1 = $request->session()->get('pendataan_satwa1');
-        $pendataanSatwa2 = $request->session()->get('pendataan_satwa2');
-
-        if(!$pendataanSatwa1 && !$pendataanSatwa2 ){
-            return response()->json([
-                'success' => false,
-                'message' => 'Silangkan ulangi proses pendataan satwa.'
-            ]);
-        }
-
-        $data = array_merge($pendataanSatwa1,$pendataanSatwa2, $validator->validated());
-
-        $result = Satwa::create($data);
+    //     $result = Satwa::create($data);
 
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Pendataan satwa berhasil'
-        ]);
-    }
+    //     return response()->json([
+    //         'success' => true,
+    //         'message' => 'Pendataan satwa berhasil'
+    //     ]);
+    // }
+
+    // // perilaku berkelompok
+    // public function pendataan4(Request $request){
+    //     $validator  = Validator::make($request->all(),[
+    //         'jumlah_keseluruhan_gender '=> ['decimal', 'nullable'],
+    //         'nama_panggilan' => ['required', 'array','nullable'],
+    //         'nama_panggilan.*' => ['string','nullable']
+    //     ]);
+
+    //     if($validator->fails()){
+    //         return response()->json([
+    //             'success' => false,
+    //             'errors' => $validator->errors()
+    //         ],422);
+    //     }
+
+    //     $pendataanSatwa1 = $request->session()->get('pendataan_satwa1');
+    //     $pendataanSatwa2 = $request->session()->get('pendataan_satwa2');
+
+    //     if(!$pendataanSatwa1 && !$pendataanSatwa2 ){
+    //         return response()->json([
+    //             'success' => false,
+    //             'message' => 'Silangkan ulangi proses pendataan satwa.'
+    //         ]);
+    //     }
+
+    //     $data = array_merge($pendataanSatwa1,$pendataanSatwa2, $validator->validated());
+
+    //     $result = Satwa::create($data);
+
+
+    //     return response()->json([
+    //         'success' => true,
+    //         'message' => 'Pendataan satwa berhasil'
+    //     ]);
+    // }
 
     public function index(){
+        
+        $satwa = Satwa::with(['species','lk' => function ($query) {
+            $query->select('id', 'nama_spesies');
+        }])->select('id', 'nama_panggilan', 'asal_satwa', 'jenis_koleksi', 'status_perlindungan')->paginate(50);
+
+        // $satwa = Satwa::with('lk', 'species',)->simplePaginate(15);
+        // if ($satwa instanceof LengthAwarePaginator) {
+        //     // Confirm that $data is indeed a LengthAwarePaginator
+        //     echo "Yes, it is a LengthAwarePaginator.";
+        //     echo $satwa;
+        // } else {
+        //     echo "No, it is not a LengthAwarePaginator.";
+        // }
+        return view('pages.satwa.daftar-satwa', compact('satwa'));
+    }
+
+    //daftar satwa
+    public function __invoke(){
         $user = User::with('lk','role', 'upt', 'spesies')->find(Auth::id());
         $satwa = Satwa::with('lk')->get();
-        $lk = LembagaKonservasi::with('ListUpt')->get();
+        $lk = LembagaKonservasi::with('upt')->get();
 
-
-        return view('pages.LK.pendataan-satwa', compact('satwa','lk','user',));
+        return view('pages.satwa.pendataan-satwa', compact('satwa','lk','user',));
     }
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage.a
      */
     public function store(Request $request)
     {
-    //     $validator = validator::make($request->all(),[
-    //         'file' => 'required|file|mimes:csv',
-    //     ]);
-
-    //     Excel::import(new DataImport, request()->file('file'));
+        // Cek bagian yang akan diproses
+        $section = $request->input('section');
+    
+        if ($section === 'pendataan1') {
+            // Proses pendataan1
+            $validator = Validator::make($request->all(), [
+                'id_lk' => 'required',
+                'jenis_koleksi' => 'required|in:satwa hidup,awetan',
+                'status_satwa' => 'in:koleksi,titipan,rehabilitasi,breeding loan',
+                'no_peroleh_izin' => 'string|max:50|required_if:status_satwa, koleksi',
+                'asal_satwa' => 'in:endemik,eksotik',
+                'nomor_sats_ln' => 'string|nullable|max:50',
+                'status_perlindungan' => 'required_if:jenis_koleksi, satwa hidup|in:dilindungi, tidak lindungi',
+                'no_sk_kepala_balai' => 'string|max:50',
+                'no_sk_dirjen_ksdae' => 'string|max:50',
+                'no_sk_menteri_lhk' => 'string|max:50',
+            ], [
+                'string' => ':attribute harus berupa string.',
+                'max' => ':attribute tidak boleh lebih dari :max karakter.',
+                'required_if' => 'Wajib diisi',
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+    
+            // Simpan data sesi untuk pendataan1
+            $sessionData = $validator->validated();
+            $request->session()->put('pendataan_satwa1', $sessionData);
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Pendataan informasi status satwa berhasil'
+            ]);
+    
+        } elseif ($section === 'pendataan2') {
+            // Proses pendataan2
+            $validator = Validator::make($request->all(), [
+                'perilaku_satwa' => 'required|in:individu, kelompok',
+                'jenis_kelamin' => 'required_if:perilaku_satwa, individu|in:jantan, betina, Tidak diketahui',
+                'id_tagging' => 'required|in:ring, belum, label, chip, eartag', 
+                'kode_tagging' => 'required_if:id_tagging|string|max:20',
+                'alasan_belum_tagging' => 'required_if:id_tagging, belum|string|max:255',
+                'berita_acara_tagging' => 'required_if:id_tagging, ring, chip, label, chip, eartag|string|max:50',
+                'nama_lokal' => ['string', 'max:50', 'nullable'],
+                'nama_panggilan' => ['string', 'max:50', 'nullable'],
+                'class' => ['string', 'max:50', 'nullable'],
+                'genus' => ['string', 'max:50', 'nullable'],
+                'spesies' => ['string', 'max:50', 'nullable'],
+                'sub_spesies' => ['string', 'max:50', 'nullable'],
+                'jumlah_keseluruhan_gender' => ['decimal', 'nullable'],
+            ], [
+                'required' => 'Wajib Diisi',
+                'string' => ':atribut harus berupa huruf.',
+                'max' => ':atribut tidak boleh lebih dari :max karakter.',
+                'required_if' => 'wajib diisi, mohon diperhatikan dengan baik.'
+            ]);
+    
+            if ($validator->fails()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+    
+            // Ambil data sesi pendataan1
+            $pendataanSatwa1 = $request->session()->get('pendataan_satwa1');
+            if (!$pendataanSatwa1) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Silakan ulangi proses pendataan satwa.'
+                ]);
+            }
+    
+            // Gabungkan data pendataan1 dengan data baru yang valid
+            $data = array_merge($pendataanSatwa1, $validator->validated());
+            $result = Satwa::create($data);
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Pendataan satwa berhasil'
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Section tidak valid.'
+            ], 400);
+        }
     }
+    
+    
+    // public function store(Request $request){
+    // //     $validator = validator::make($request->all(),[
+    // //         'file' => 'required|file|mimes:csv',
+    // //     ]);
+
+    // //     Excel::import(new DataImport, request()->file('file'));
+    // }
 
     /**
      * Display the specified resource.

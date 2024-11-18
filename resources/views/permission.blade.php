@@ -9,7 +9,7 @@
   <title>Wait Permission</title>
 </head>
 <body style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-  <img src="{{ asset('img/verifikasi.png') }}" alt="waiting for permission" style="width: 50%;">
+  <img src="{{ asset('assets/images/verifikasi.png') }}" alt="waiting for permission" style="width: 50%;">
   <script>
     window.onload = function() {
       const token = localStorage.getItem('access_token'); // Pastikan kunci ini sesuai dengan yang Anda gunakan saat menyimpan

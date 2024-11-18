@@ -6,8 +6,21 @@ function setLogoutTimer() {
   document.onkeypress = resetTimer;
 
   function logout() {
-      console.log("User has been logged out.");
-      window.location.href = '/logout';
+      fetch('/logout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+      })
+      .then(response => {
+          if (response.ok) {
+              window.location.href = '/logout';
+          }
+          return response.json();
+      })
+      .then(data => console.log(data))
+      .catch(error => console.log('Error:', error));
   }
 
   function resetTimer() {

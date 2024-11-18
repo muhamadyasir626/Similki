@@ -14,16 +14,16 @@ class LembagaKonservasi extends Model
 
     protected $guard =['id'];
 
-    public function ListUpt(){
+    public function upt(){
         return $this->belongsTo(ListUpt::class, 'id_upt');
     }
-    public function User(){
+    public function user(){
         return $this->belongsTo(User::class);
     }
-    public function Satwa(){
+    public function satwa(){
         return $this->belongsTo(Satwa::class);
     }
-    public function MonitoringInvestasi(){
+    public function monitoring(){
         return $this->belongsTo(MonitoringInvestasi::class);
     }
 }

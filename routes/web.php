@@ -9,7 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\checkpermission;
 use App\Http\Controllers\LembagaKonservasiController;
 use App\Http\Controllers\SatwaController;
-use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,23 +47,27 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::get('/check-permission',[checkpermission::class,'check']);
 
     Route::get('/dashboard', function () {
-        return view('dashboard');
+            return view('dashboard');
     })->name('dashboard');
+
+    Route::resource('lembaga-konservasi', LembagaKonservasiController::class);
+    Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
+    Route::get('/monitoring',[LembagaKonservasiController::class,'monitoring'])->name('moniotring-lk');
+
+    
+    Route::resource('satwa', SatwaController::class);
+    Route::get('/pendataan-satwa', SatwaController::class)->name('form-satwa');
+    Route::post('/satwa/pendataan1',[SatwaController::class, 'pendataan1'])->name('pendataan-satwa1');
+    Route::post('/satwa/pendataan2',[SatwaController::class, 'pendataan2'])->name('pendataan-satwa2');
+    Route::get('/satwa/search',SatwaController::class)->name('satwa-search');
 
     Route::get('/permission', function(){
         return view('permission');
     })->name('permission');
-    
-    Route::resource('lembaga-konservasi', LembagaKonservasiController::class);
-    Route::resource('satwa', SatwaController::class);
-    Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
-
+    Route::get('/verifikasi-akun',[AuthController::class,'index'])->name('verifikasi-akun');
+    Route::post('/updated-permission/id={id}',[AuthController::class,'updatePermission'])->name('updated-permission');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);
 
-//undefined route 
-// Route::any('/{page}', function () {
-//     return View::make()
-// });

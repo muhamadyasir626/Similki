@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="css/login.css" />
+    <link rel="icon" href="{{ asset('/assets/images/klhk.png') }}" type="image/png">
+
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
         <div class="login-link">
             <div class="logo">
-                <img src="img/klhk.png" alt="klhk" />
+                <img src="/assets/images/klhk.png" alt="klhk" />
             </div>
             <p class="side-big-heading">Belum punya akun?</p>
             <a href="/register" class="registerbtn">Daftar</a>
