@@ -268,9 +268,17 @@ function toggleinput() {
   
 }
 
-function togglePasswordVisibility(fieldId) {
-    const field = document.getElementById(fieldId);
-    const type =
-        field.getAttribute("type") === "password" ? "text" : "password";
-    field.setAttribute("type", type);
+function togglePasswordVisibility(fieldId, imgElement) {
+  const field = document.getElementById(fieldId);
+  const type = field.getAttribute("type") === "password" ? "text" : "password";
+  field.setAttribute("type", type);
+
+  const img = imgElement.querySelector('img');
+  if (type === "text") {
+      img.src = imgElement.getAttribute('data-show'); 
+      img.alt = "show password";
+  } else {
+      img.src = imgElement.getAttribute('data-hide');
+      img.alt = "hide password";
+  }
 }

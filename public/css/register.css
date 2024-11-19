@@ -232,12 +232,22 @@ a.loginbtn:hover {
     background-color: #5a5a5a;
 }
 
+.input-wrapper {
+    position: relative;
+}
+
 .toggle-password {
-    display: flex;
     position: absolute;
-    top: 33%;
-    right: 11px;
+    top: 35%;
+    right: 15px;
     transform: translateY(-50%);
     cursor: pointer;
     z-index: 1;
+    display: flex;
+    justify-content: end;
+}
+
+.toggle-password img {
+    width: 4%;
+    height: auto;
 }

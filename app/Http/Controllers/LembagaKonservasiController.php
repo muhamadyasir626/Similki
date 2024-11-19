@@ -125,4 +125,13 @@ class LembagaKonservasiController extends Controller
 
         return view('pages.lk.monitoring', compact('investasi'));
     }
+
+    public function getall() {
+        try {
+            $data = LembagaKonservasi::all();
+            return response()->json($data);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }

@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Registration</title>
-   <link rel="icon" href="{{ asset('/assets/images/klhk.png') }}" type="image/png">
-
     <link rel="stylesheet" href="css/register.css" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   </head>
@@ -15,7 +13,7 @@
     <div class="container">
       <div class="login-link">
         <div class="logo">
-          <img src="/assets/images/klhk.png" alt="klhk" />
+          <img src="assets/images/klhk.png" alt="klhk" />
         </div>
         <p class="side-big-heading">Sudah memiliki Akun?</p>
         <a href="{{ route('login') }}" class="loginbtn">Login</a>
@@ -23,7 +21,7 @@
       </div>
       
       <div class="signup-form-container">
-        <p class="big-heading">Daftar Akun</p>
+        <p class="big-heading">Membuat Akun</p>
         <div class="progress-bar">
             <div class="stage">
               <p class="tool-tip">Informasi Pribadi</p>
@@ -65,19 +63,30 @@
                   </div>
                   <div class="button-container">
                       <div class="text-fields nip">
-                          <label for="nip">NIP</label>
-                          <input type="text" name="nip" id="nip" pattern="[0-9]{18}" placeholder="Isi dengan Angka" required title="Hanya boleh angka saja dan berjumlah 18 digit" />
+                        <label for="nip">NIP</label>
+                        <input type="text" name="nip" id="nip" 
+                              pattern="^[0-9]{18}$" 
+                              placeholder="Isi dengan Angka" 
+                              required 
+                              title="Hanya boleh angka saja dan berjumlah 18 digit" 
+                              maxlength="18"
+                              oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
                       </div>
                       <div class="text-fields nomor_telepon">
-                          <label for="nomor_telepon">Nomor Telepon</label>
-                          <input type="text" name="nomor_telepon" id="nomor_telepon" placeholder="628123456789" pattern="[6]{1}[2]{1}[0-9]{3}[0-9]{4}[0-9]{4}" required title="Awali dengan 62 dan minimal 11 digit"/>
-                      </div>
+                        <label for="nomor_telepon">Nomor Telepon</label>
+                        <input type="text" name="nomor_telepon" id="nomor_telepon"
+                               oninput='this.value=this.value.replace(/[^0-9]/g,"")' 
+                               placeholder="628123456789"
+                               pattern="^62[0-9]{9,11}$" 
+                               required title="Harus diawali dengan 62 dan terdiri dari 11 hingga 13 digit!" 
+                               maxlength="13"/>
+                    </div>
                       <div class="text-fields bidang">
                           <label for="id_role">Bidang</label>
-                          <select id="id_role" class="option-input" name="id_role"  autofocus>
+                          <select id="id_role" class="option-input" name="id_role" required autofocus>
                               <option value="" hidden>Pilih Bidang</option>
                               @foreach($roles as $role)
-                                  <option id="{{ $role->tag }}"  value="{{ $role->id }}" >{{ $role->name }}</option>
+                                  <option id="{{ $role->tag }}"  value="{{ $role->id }}" required>{{ $role->name }}</option>
                               @endforeach
                           </select>
                       </div>
@@ -87,13 +96,13 @@
                           <select id="bentuk_upt" class="option-input" name="bentuk_upt"  autofocus>
                               <option value="" hidden>BBKSDA/BKSDA</option>
                               @foreach($upt_bentuk as $upt)
-                                  <option id="{{ $upt->bentuk }}" value="{{ $upt->bentuk }}"  >{{ $upt->bentuk }}</option>
+                                  <option id="{{ $upt->bentuk }}" value="{{ $upt->bentuk }}" >{{ $upt->bentuk }}</option>
                               @endforeach
                           </select>
                   </div>
                   <div class="text-fields wilayah_upt" >
                   <label for="wilayah_upt" >Pilih Wilayah UPT </label>
-                          <select id="wilayah_upt" class="option-input upt-wilayah" name="wilayah_upt"   autofocus>
+                          <select id="wilayah_upt" class="option-input upt-wilayah" name="wilayah_upt"  autofocus>
                               <option value="" hidden>Pilih Wilayah</option>
                               @foreach($upt_wilayah as $upt)
                                   <option id="{{ $upt->wilayah }}" value="{{ $upt->wilayah }}" >{{ $upt->wilayah }}</option>
@@ -114,7 +123,7 @@
                           <select id="id_spesies" class="option-input id_spesies" name="id_spesies"  autofocus>
                               <option value="" hidden>Pilih Species</option>
                               @foreach($list_species as $species)
-                                  <option id="{{ $species->spesies }}" value="{{ $species->id }}"  >{{ $species->spesies }}</option>
+                                  <option id="{{ $species->spesies }}" value="{{ $species->id }}" >{{ $species->spesies }}</option>
                               @endforeach
                           </select>
                       </div>
@@ -128,8 +137,14 @@
               <div class="stage2-content">
               <div class="button-container">
                 <div class="text-fields kodepos">
-                  <label for="kodepos">Kode pos</label>
-                  <input type="text" name="kodepos" id="kodepos" placeholder="Isi Kode Pos Anda (5 digit)" required />
+                  <label for="kodepos">Kode Pos</label>
+                  <input type="text" name="kodepos" id="kodepos" 
+                         placeholder="Isi Kode Pos Anda (5 digit)" 
+                         required 
+                         pattern="^[0-9]{5}$" 
+                         title="Hanya boleh angka dan berjumlah 5 digit" 
+                         maxlength="5"
+                         oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
                 </div>
                 <div class="text-fields provinsi">
                   <label for="provinsi">Provinsi</label>
@@ -173,11 +188,15 @@
               </div>
               <div class="button-container">
                 <div class="text-fields email">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="abcd@gmail.com" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Masukkan alamat email yang valid. Contoh: user@example.com" required />
+                  <label for="email">Email</label>
+                  <input type="email" name="email" id="email" 
+                         placeholder="abcd@gmail.com" 
+                         required 
+                         pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z]+(\.[a-zA-Z]{2,})+" 
+                         title="Format email tidak valid. Harus memiliki huruf setelah '@' dan diikuti oleh '.'" />
                 </div>
               </div>
-              <div class="button-container">
+              {{-- <div class="button-container">
                 <div class="text-fields password">
                     <label for="password">Password</label>
                     <div class="input-wrapper">
@@ -193,7 +212,35 @@
                         <span onclick="togglePasswordVisibility('password_confirmation')" class="toggle-password">👁️</span>
                     </div>
                 </div>
-            </div>
+            </div> --}}
+
+            <div class="button-container">
+              <div class="text-fields password">
+                  <label for="password">Password</label>
+                  <div class="input-wrapper">
+                      <input type="password" id="password" name="password" required placeholder="Password">
+                      <span onclick="togglePasswordVisibility('password', this)" class="toggle-password"
+                            data-show="{{ asset('assets/images/others/eye-show-password.png') }}"
+                            data-hide="{{ asset('assets/images/others/eye-hide-password.png') }}">
+                          <img src="{{ asset('assets/images/others/eye-hide-password.png') }}" alt="hide password" />
+                      </span>
+                  </div>
+              </div>
+          
+              <div class="text-fields password_confirmation">
+                  <label for="password_confirmation">Konfirmasi Password</label>
+                  <div class="input-wrapper">
+                      <input type="password" id="password_confirmation" name="password_confirmation" required placeholder="Konfirmasi Password">
+                      <span onclick="togglePasswordVisibility('password_confirmation', this)" class="toggle-password"
+                            data-show="{{ asset('assets/images/others/eye-show-password.png') }}"
+                            data-hide="{{ asset('assets/images/others/eye-hide-password.png') }}">
+                          <img src="{{ asset('assets/images/others/eye-hide-password.png') }}" alt="hide password" />
+                      </span>
+                  </div>
+              </div>
+          {{-- </div> --}}
+          </div>         
+
               <div class="pagination-btns">
                 <input type="button" value="Previous"  class="previousPage stagebtn3a" onclick="stage3to2()" />
               <input type="submit" value="Submit" class="nextPage stagebtn3b" />

@@ -14,5 +14,4 @@ php artisan db:seed --class=ListUptSeeder
 php artisan db:seed --class=LembagaKonservasiSeeder
 php artisan db:seed --class=SatwaSeeder
 
-php artisan db:seed --class=CSVSeeder
 
