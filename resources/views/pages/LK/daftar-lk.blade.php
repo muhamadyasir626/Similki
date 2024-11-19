@@ -16,7 +16,7 @@
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <h6 class="card-title">Data Table</h6>
+        <h6 class="card-title">Daftar Nama Lembaga Konservasi</h6>
         <div class="table-responsive">
           <table id="dataTableExample" class="table">
             <thead>
@@ -24,20 +24,20 @@
                     <th>Nama</th>
                     <th>UPT</th>
                     <th>Bentuk Lembaga Konservasi</th>
-                    <th>Akreditasi</th>
-                    <th>Tahun izin</th>
-                    <th>Action</th>
+                    <th style="text-align: center;>">Akreditasi</th>
+                    <th style="text-align: center;>">Tahun izin</th>
+                    <th style="text-align: center;>">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($ListLK as $lk)
                     <tr>
-                        <td>{{ $lk->nama }}</td>
+                        <td>{{ Str::limit($lk->nama, 30, '...') }}</td>
                         <td>{{ $lk->upt->wilayah}}</td> <!-- Nama UPT melalui relasi, gunakan null check -->
                         <td>{{ $lk->bentuk_lk }}</td>
-                        <td>{{ $lk->nilai_akred ?? '-' }}</td>
-                        <td>{{ $lk->tahun_izin }}</td>
-                        <td><button>Detail</button></td>
+                        <td style="text-align: center;>">{{ $lk->nilai_akred ?? '-' }}</td>
+                        <td style="text-align: center;>">{{ $lk->tahun_izin }}</td>
+                        <td style="text-align: center;>"><button>Detail</button></td>
                     </tr>
                 @endforeach
             </tbody>
