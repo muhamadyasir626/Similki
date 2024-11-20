@@ -13,14 +13,14 @@
     <div class="container">
       <div class="login-link">
         <div class="logo">
-          <img src="img/klhk.png" alt="klhk" />
+          <img src="assets/images/klhk.png" alt="klhk" />
         </div>
         <p class="side-big-heading">Sudah memiliki Akun?</p>
         <a href="{{ route('login') }}" class="loginbtn">Login</a>
       </div>
       
       <div class="signup-form-container">
-        <p class="big-heading">Daftar Akun</p>
+        <p class="big-heading">Membuat Akun</p>
         <div class="progress-bar">
             <div class="stage">
               <p class="tool-tip">Informasi Pribadi</p>
@@ -192,6 +192,23 @@
                          title="Format email tidak valid. Harus memiliki huruf setelah '@' dan diikuti oleh '.'" />
                 </div>
               </div>
+              {{-- <div class="button-container">
+                <div class="text-fields password">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" name="password" id="password" placeholder="Buat kata sandi Anda" required />
+                        <span onclick="togglePasswordVisibility('password')" class="toggle-password">👁️</span>
+                    </div>
+                </div>
+                
+                <div class="text-fields password_confirmation">
+                    <label for="password_confirmation">Confirmation password</label>
+                    <div class="input-wrapper">
+                        <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Ketika ulang kata sandi Anda" required />
+                        <span onclick="togglePasswordVisibility('password_confirmation')" class="toggle-password">👁️</span>
+                    </div>
+                </div>
+            </div> --}}
 
             <div class="button-container">
               <div class="text-fields password">
@@ -217,7 +234,9 @@
                       </span>
                   </div>
               </div>
+          {{-- </div> --}}
           </div>         
+
               <div class="pagination-btns">
                 <input type="button" value="Previous"  class="previousPage stagebtn3a" onclick="stage3to2()" />
               <input type="submit" value="Submit" class="nextPage stagebtn3b" />

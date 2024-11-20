@@ -122,4 +122,19 @@ class LembagaKonservasiController extends Controller
             return redirect()->with('Failed', "File/Data import gagal!");
         }
     }
+
+    public function monitoring(){
+        $investasi = MonitoringInvestasi::with('lk')->get(); 
+
+        return view('pages.lk.monitoring', compact('investasi'));
+    }
+
+    public function getall() {
+        try {
+            $data = LembagaKonservasi::all();
+            return response()->json($data);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }

@@ -189,18 +189,8 @@ class SatwaController extends Controller
             $query->select('id', 'nama_spesies');
         }])->select('id', 'nama_panggilan', 'asal_satwa', 'jenis_koleksi', 'status_perlindungan')->paginate(50);
 
-        // $satwa = Satwa::with('lk', 'species',)->simplePaginate(15);
-        // if ($satwa instanceof LengthAwarePaginator) {
-        //     // Confirm that $data is indeed a LengthAwarePaginator
-        //     echo "Yes, it is a LengthAwarePaginator.";
-        //     echo $satwa;
-        // } else {
-        //     echo "No, it is not a LengthAwarePaginator.";
-        // }
         return view('pages.satwa.daftar-satwa', compact('satwa'));
     }
-
-    
 
     public function search(Request $request)
     {
@@ -228,8 +218,7 @@ class SatwaController extends Controller
     /**
      * Store a newly created resource in storage.a
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         // Cek bagian yang akan diproses
         $section = $request->input('section');
     
@@ -371,5 +360,29 @@ class SatwaController extends Controller
         $lk = LembagaKonservasi::with('upt')->get();
 
         return view('pages.satwa.pendataan-satwa', compact('satwa','lk','user',));
+    }
+    public function getall(){
+    try {
+        // Ambil data dan cek apakah relasi berhasil di-load
+        // $satwa = Satwa::with(['lk', 'species'])
+        //               ->select('id', 'status_satwa', 'jenis_kelamin_individu')
+        //               ->whereIn('status_satwa', ['Satwa Koleksi', 'Satwa Titipan'])
+        //               ->get();
+        $satwa = Satwa::select('status_satwa')->count();
+
+        // Debugging: Tampilkan hasil query
+        // dd($satwa);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => $satwa
+        ]);
+    } catch (\Exception $e) {
+        // Tangkap error dan tampilkan pesan
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage()
+        ], 500);
+    }
     }
 }

@@ -10,4 +10,4 @@ php artisan migrate --path=database\migrations\2024_10_27_045643_add_indexes_to_
 php artisan migrate 
 php artisan db:seed --class=RoleSeeder
 
-php artisan db:seed --class=CSVSeeder
+

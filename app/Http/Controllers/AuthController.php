@@ -239,7 +239,7 @@ class  AuthController extends Controller
         $request->session()->regenerateToken();
         $cookie = Cookie::forget('auth_token');
 
-        return redirect('/login')->withCookie($cookie)->with('message', 'Successfully logged out.');
+        return redirect('/')->withCookie($cookie)->with('message', 'Successfully logged out.');
     }
     
 }

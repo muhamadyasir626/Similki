@@ -104,7 +104,7 @@ class SatwaSeeder extends Seeder
         // }
         foreach ($data as $index => $row) { // Tambahkan $index untuk melacak baris
             try {
-                dd($row[27]);
+                // dd($row[]);
                 $id_lk = LembagaKonservasi::where('slug', $row[2])->value('id');
 
                 $id_species = ListSpecies::where('nama_lokal', $row[10])->value('id');
@@ -151,24 +151,24 @@ class SatwaSeeder extends Seeder
                         'jumlah_betina' => $row[24],
                         'jumlah_unsex' => $row[25],
                         'jumlah_keseluruhan_gender' => $row[26],
-                        'no_izin_peroleh' => $row[16] ?? NULL,
+                        'no_izin_peroleh' => $row[15] ?? NULL,
                         'no_ba_titipan' => $row[29] ?? NULL,
-                        'no_ba_kelahiran' => $row[20] ?? NULL,
+                        'no_ba_kelahiran' => $row[30] ?? NULL,
                         'no_ba_kematian' => $row[31] ?? NULL,
                         'nama_panggilan' => $row[32] ?? NULL,
                         'validasi_tanggal' => $validasi_tanggal,
                         'tahun_titipan' => $tahun_titipan,
                         'keterangan' => $row[35] ?? NULL,
                     ]);
-                    $tanggal_tagging = (!empty(trim($row[27])) && preg_match('/^\d{4}-\d{2}-\d{2}$/', trim($row[27]))) 
-                        ? $row[27] 
-                        : NULL;
+                    // $tanggal_tagging = (!empty(trim($row[27])) && preg_match('/^\d{4}-\d{2}-\d{2}$/', trim($row[27]))) 
+                    //     ? $row[27] 
+                    //     : NULL;
                     Tagging::create([
                         'id_satwa' => $satwa->id,
                         'jenis_tagging' => $row[12] ?? NULL,
                         'kode_tagging' => $row[13] ?? NULL,
                         'alasan_belum_tagging' => $row[27] ?? NULL,
-                        'tanggal_tagging' => $tanggal_tagging ?? NULL,
+                        // 'tanggal_tagging' => $tanggal_tagging ?? NULL,
                     ]);
                     // if($index === 9){
                     //     dd("Row-index " . ($index + 1) . " successfully saved to database.\n") ;

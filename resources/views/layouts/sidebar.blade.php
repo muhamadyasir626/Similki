@@ -15,7 +15,7 @@
       <li class="nav-item nav-category">Main</li>
       <li class="nav-item {{ active_class(['/']) }}">
         <a href="{{ url('/dashboard') }}" class="nav-link">
-          <i class="link-icon" data-feather="box"></i>
+          <i class="link-icon" data-feather="home"></i>
           <span class="link-title">Dashboard</span>
         </a>
       </li>
@@ -27,7 +27,13 @@
         </a>
       </li>
       <li class="nav-item {{ active_class(['/']) }}">
-        <a href="{{ route('satwa.index') }}" class="nav-link">
+        <a href="{{ route('monitoring-lk') }}" class="nav-link">
+          <i class="link-icon" data-feather="monitor"></i>
+          <span class="link-title">Monitoring LK</span>
+        </a>
+      </li>
+      <li class="nav-item {{ active_class(['/']) }}">
+        <a href="" class="nav-link">
           <i class="link-icon" data-feather="plus-circle"></i>
           <span class="link-title">Pendataan Satwa</span>
         </a>
@@ -58,7 +64,7 @@
             <li class="nav-item">
               <a href="{{ url('/forms/input-investasi') }}" class="nav-link {{ active_class(['forms/input-investasi']) }}">Input Investasi</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-ite
               <a href="{{ url('/forms/monitoring-investasi') }}" class="nav-link {{ active_class(['forms/monitoring-investasi']) }}">Monitoring Investasi</a>
             </li>
             <li class="nav-item">

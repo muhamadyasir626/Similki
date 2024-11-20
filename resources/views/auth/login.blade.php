@@ -6,6 +6,8 @@
     <title>Login</title>
     <link rel="stylesheet" href="css/login.css" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="icon" href="{{ asset('/assets/images/klhk.png') }}" type="image/png">
+
 </head>
 <body>
     <div class="container">
@@ -18,18 +20,27 @@
         </div>
 
         <div class="login-form-container">
-            <p class="big-heading">Login Akun</p>
+            <p class="big-heading">Welcome to SIMILKI </p>
             <form method="POST" action="{{ route('authenticate') }}">
                 @csrf
 
-                <div class="text-fields email">
-                    <label for="login">Email</label>
-                    <input type="email" name="login" id="login" 
-                           placeholder="abcd@gmail.com" 
-                           required 
-                           pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z]+(\.[a-zA-Z]{2,})+" 
-                           title="Format email tidak valid. Harus memiliki huruf setelah '@' dan diikuti oleh '.'" />
+                @if (session('error'))
+                <div class="validation" id="validation">
+                    {{ session('error') }}
                 </div>
+                @endif
+
+                <div class="text-fields email">
+                    <label for="login">Username atau Email</label>
+                    <input type="text" name="login" id="login" 
+                           placeholder="Masukkan username atau email" 
+                           required 
+                           oninput="validateInput()" />
+                    <span id="error-message" style="color: red; font-size: 12px; display: none; margin-bottom:10px">
+                        Input harus berupa username atau email yang valid.
+                    </span>
+                </div>
+                
 
                 {{-- <div class="text-fields">
                     <label for="password">Password</label>
@@ -39,27 +50,25 @@
                     </div>
                 </div> --}}
 
-                <div class="text-fields"> 
+                <div class="text-fields "> 
                     <label for="password">Password</label>
-                    <div class="input-wrapper">
+                    <div class="input-wrapper password">
                         <input type="password" id="password" name="password" required placeholder="Password">
-                        <span onclick="togglePasswordVisibility('password', this)" class="toggle-password" 
-                              data-show="{{ asset('assets/images/others/eye-show-password.png') }}" 
-                              data-hide="{{ asset('assets/images/others/eye-hide-password.png') }}">
+                        <span onclick="togglePasswordVisibility('password', this)" class="toggle-password" data-show="{{ asset('assets/images/others/eye-show-password.png') }}" data-hide="{{ asset('assets/images/others/eye-hide-password.png') }}">
                             <img src="{{ asset('assets/images/others/eye-hide-password.png') }}" alt="hide password" />
                         </span>
                     </div>
                 </div>
 
                 <div class="checkbox-container">
-                    <label for="remember_me" class="checkbox-label">
+                    <label for="remember_me" class="checkbox-label" style="cursor: pointer;">
                         <input id="remember_me" type="checkbox" name="remember">
                         <span>Ingat Saya</span>
                     </label>
                 </div>
 
                 <div class="pagination-btns">
-                    <button type="submit" class="login-btn">Login</button>
+                    <button type="submit" id="submitBtn" class="login-btn">Login</button>
                 </div>
 
                 @if (Route::has('password.request'))
@@ -69,6 +78,7 @@
         </div>
     </div>
 
-    <script src="js/register.js"></script>
+    <script src="js/login.js"></script>
+   
 </body>
 </html>
