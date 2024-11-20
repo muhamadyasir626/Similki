@@ -12,6 +12,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\checkpermission;
 use App\Http\Controllers\SatwaController;
 use App\Http\Controllers\LembagaKonservasiController;
+use App\Http\Controllers\ListSpeciesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,11 +58,13 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
         $sbelumtag_count = Tagging::where('jenis_tagging','belum ditagging')->count();
         $shidup_count = Satwa::where('jenis_koleksi','satwa hidup')->count();
         $taksa = ListSpecies::select('spesies')->count();
+        
         return view('dashboard', compact('lk_count', 'species_count', 'skoleksi_count', 'stitipan_count', 'sbelumtag_count', 'shidup_count','taksa',));
     })->name('dashboard');
 
     Route::get('/get-satwa', [SatwaController::class, 'getall']);
     Route::get('/get-lembaga-konservasi', [LembagaKonservasiController::class, 'getall']);
+    Route::get('/get-spesies', [ListSpeciesController::class, 'index']);
 
     Route::resource('lembaga-konservasi', LembagaKonservasiController::class);
     Route::resource('satwa', SatwaController::class);

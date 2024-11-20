@@ -40,15 +40,6 @@
                         Input harus berupa username atau email yang valid.
                     </span>
                 </div>
-                
-
-                {{-- <div class="text-fields">
-                    <label for="password">Password</label>
-                    <div class="input-wrapper">
-                        <input type="password" id="password" name="password" required placeholder="Password">
-                        <span onclick="togglePasswordVisibility('password')" class="toggle-password">👁️</span>
-                    </div>
-                </div> --}}
 
                 <div class="text-fields "> 
                     <label for="password">Password</label>

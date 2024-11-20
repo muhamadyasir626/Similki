@@ -192,23 +192,6 @@
                          title="Format email tidak valid. Harus memiliki huruf setelah '@' dan diikuti oleh '.'" />
                 </div>
               </div>
-              {{-- <div class="button-container">
-                <div class="text-fields password">
-                    <label for="password">Password</label>
-                    <div class="input-wrapper">
-                        <input type="password" name="password" id="password" placeholder="Buat kata sandi Anda" required />
-                        <span onclick="togglePasswordVisibility('password')" class="toggle-password">👁️</span>
-                    </div>
-                </div>
-                
-                <div class="text-fields password_confirmation">
-                    <label for="password_confirmation">Confirmation password</label>
-                    <div class="input-wrapper">
-                        <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Ketika ulang kata sandi Anda" required />
-                        <span onclick="togglePasswordVisibility('password_confirmation')" class="toggle-password">👁️</span>
-                    </div>
-                </div>
-            </div> --}}
 
             <div class="button-container">
               <div class="text-fields password">
