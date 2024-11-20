@@ -2,7 +2,7 @@
 
 @push('plugin-styles')
   <link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet" />
-  <style>
+  {{-- <style>
     h3{
         display: flex;
         justify-content: flex-end;
@@ -16,7 +16,7 @@
       padding: 10px;
     }
 
-</style>
+</style> --}}
 @endpush
 
 @section('content')
@@ -122,26 +122,25 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-4">
-    <div class="card h-100 custom-card-size">
-      <div class="card-body-2">
+  <div class="col-lg-6">
+    <div class="card h-200 custom-card-size">
+      <div class="card-body-3">
         <h5 class="card-title">Taksa</h5>
-        <h3>{{ $taksa }}</h3>
-        {{-- <div id="chartContainer1"></div> --}}
+        <div id="chartContainer1"></div>
       </div>
     </div>
   </div>
-  <div class="col-lg-4">
-    <div class="card h-100 custom-card-size">
-      <div class="card-body-2">
+  <div class="col-lg-6">
+    <div class="card h-200 custom-card-size">
+      <div class="card-body-3">
         <h5 class="card-title">Jenis Tagging</h5>
         <div id="chartContainer2"></div>
       </div>
     </div>
   </div>
-  <div class="col-lg-4">
+  <div class="col-lg-12">
     <div class="card h-100 custom-card-size">
-      <div class="card-body-2">
+      <div class="card-body-3">
         <h5 class="card-title">Jenis Koleksi</h5>
         <div id="chartContainer3"></div>
       </div>
@@ -154,7 +153,7 @@
         <div class="card h-100 custom-card-size">
             <div class="card-body">
                 <h5 class="card-title">Jumlah Spesies Individu</h5>
-                <div id="spesiesIndChart"></div>
+                <div id="spesiesIndvChart"></div>
             </div>
         </div>
     </div>

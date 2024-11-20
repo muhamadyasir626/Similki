@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreSatwaRequest;
 use App\Http\Requests\UpdateSatwaRequest;
 use App\Models\LembagaKonservasi;
+use App\Models\ListSpecies;
+use App\Models\Tagging;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -364,22 +366,38 @@ class SatwaController extends Controller
     }
     public function getall(){
     try {
-        // Ambil data dan cek apakah relasi berhasil di-load
-        // $satwa = Satwa::with(['lk', 'species'])
-        //               ->select('id', 'status_satwa', 'jenis_kelamin_individu')
-        //               ->whereIn('status_satwa', ['Satwa Koleksi', 'Satwa Titipan'])
-        //               ->get();
-        $satwa = Satwa::select('status_satwa')->count();
+        $class = ListSpecies::select('class')->get()->map(function ($item) {
+            return strtolower($item->class);
+        });
 
-        // Debugging: Tampilkan hasil query
-        // dd($satwa);
+        $jenis_tagging = Tagging::select('jenis_tagging')->get()->map(function($item){
+            return strtolower( $item->jenis_tagging);
+        });
+
+        $jenis_koleksi = Satwa::select('jenis_koleksi')->get()->map(function($item){
+            return $item->jenis_koleksi;
+        });
+
+        // $spesies = ListSpecies::select('spesies')->get()->map(function($item){
+        //     return strtolower( $item->spesies);
+        // });
+
+        $spesies = Satwa::with('species')->select('')
+
+        // $spesies = ListSpecies::withCount(['satwas as jumlah_individu'])
+        //     ->get(['nama_ilmiah', 'jumlah_individu']);
+
+        
 
         return response()->json([
             'status' => 'success',
-            'data' => $satwa
+            'class' => $class,
+            'jenis_tagging' => $jenis_tagging,
+            'jenis_koleksi'=> $jenis_koleksi,
+            'spesies' => $spesies,
+
         ]);
     } catch (\Exception $e) {
-        // Tangkap error dan tampilkan pesan
         return response()->json([
             'status' => 'error',
             'message' => $e->getMessage()

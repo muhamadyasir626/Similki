@@ -10,6 +10,7 @@ class Satwa extends Model
     use HasFactory;
 
     protected $guard = ['id'];
+    protected $table = 'satwas';
 
     // public function tagging(){
     //     return $this->belongsTo(Tagging::class);
