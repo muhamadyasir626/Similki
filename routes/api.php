@@ -17,10 +17,6 @@ use App\Http\Controllers\checkpermission;
 |
 */
 
-
-
-
-
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users',  function (Request $request) {
         return $request->user();
@@ -36,7 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 });
 
-
-
 Route::get('/search',[KodePosAPI::class,'search']);
+
+Route::delete('/lembaga-konservasi/{id}', [YourController::class, 'destroy']);
 

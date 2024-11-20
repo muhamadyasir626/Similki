@@ -82,3 +82,12 @@ Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);
 // Route::any('/{page}', function () {
 //     return View::make()
 // });
+
+Route::group(['prefix' => 'forms'], function(){
+    Route::get('data_lk', function () { return view('pages.forms.data_lk'); });
+    Route::get('input-investasi', function () { return view('pages.forms.input-investasi'); });
+    Route::get('input-lk', function () { return view('pages.forms.input-lk'); });
+    Route::get('monitoring-investasi', function () { return view('pages.forms.monitoring-investasi'); });
+    Route::get('pendataan-satwa', function () { return view('pages.forms.pendataan-satwa'); });
+});
+
