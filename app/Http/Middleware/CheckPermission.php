@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 class CheckPermission
 {
@@ -19,7 +20,9 @@ class CheckPermission
     {
         $user = Auth::user();
         
-        // Check if the user's permission status is 0 and they are not accessing the 'permission' view
+        if ($user) {
+            View::share('user', $user);
+        }
         if ($user && $user->status_permission == 0 && !$this->isRoutePermission($request)) {
             return redirect()->route('permission');
         }
@@ -33,7 +36,7 @@ class CheckPermission
      * @param  \Illuminate\Http\Request  $request
      * @return bool
      */
-    protected function isRoutePermission(Request $request)
+    protected function isRoutePermission(Request $request) 
     {
         // Check if the current route name is 'permission'
         return $request->route()->named('permission');

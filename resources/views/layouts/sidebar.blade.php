@@ -2,7 +2,7 @@
   <div class="sidebar-header">
     <a href="#" class="sidebar-brand">
       {{-- SIMILKI - {{$user->role->tag}} --}}
-      {{-- {{$user->role->tag}} --}}
+      {{$user->role->tag}}
     </a>
     <div class="sidebar-toggler not-active">
       <span></span>

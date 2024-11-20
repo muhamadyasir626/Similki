@@ -49,6 +49,7 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::get('/check-permission',[checkpermission::class,'check']);
 
     Route::get('/dashboard', function () {
+        // dd(Auth::user() ); 
         $lk_count = LembagaKonservasi::count();
         $species_count = ListSpecies::count();
         $skoleksi_count = Satwa::where('status_satwa','satwa koleksi')->count();
