@@ -364,37 +364,10 @@ class SatwaController extends Controller
 
         return view('pages.satwa.pendataan-satwa', compact('satwa','lk','user',));
     }
-    public function getall(){
+    public function updateDashboard(){
     try {
-        $class = ListSpecies::select('class')->get()->map(function ($item) {
-            return strtolower($item->class);
-        });
-
-        $jenis_tagging = Tagging::select('jenis_tagging')->get()->map(function($item){
-            return strtolower( $item->jenis_tagging);
-        });
-
-        $jenis_koleksi = Satwa::select('jenis_koleksi')->get()->map(function($item){
-            return $item->jenis_koleksi;
-        });
-
-        // $spesies = ListSpecies::select('spesies')->get()->map(function($item){
-        //     return strtolower( $item->spesies);
-        // });
-
-        $spesies = Satwa::with('species')->select('')
-
-        // $spesies = ListSpecies::withCount(['satwas as jumlah_individu'])
-        //     ->get(['nama_ilmiah', 'jumlah_individu']);
-
-        
 
         return response()->json([
-            'status' => 'success',
-            'class' => $class,
-            'jenis_tagging' => $jenis_tagging,
-            'jenis_koleksi'=> $jenis_koleksi,
-            'spesies' => $spesies,
 
         ]);
     } catch (\Exception $e) {

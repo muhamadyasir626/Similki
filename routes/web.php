@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\checkpermission;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SatwaController;
 use App\Http\Controllers\LembagaKonservasiController;
 use App\Http\Controllers\ListSpeciesController;
@@ -49,19 +50,9 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
 ->group(function () {
     Route::get('/check-permission',[checkpermission::class,'check']);
 
-    Route::get('/dashboard', function () {
-        $lk_count = LembagaKonservasi::count();
-        $species_count = ListSpecies::count();
-        $skoleksi_count = Satwa::where('status_satwa','satwa koleksi')->count();
-        $stitipan_count = Satwa::where('status_satwa','satwa titipan')->count();
-        $sbelumtag_count = Tagging::where('jenis_tagging','belum ditagging')->count();
-        $shidup_count = Satwa::where('jenis_koleksi','satwa hidup')->count();
-        $taksa = ListSpecies::select('spesies')->count();
-        
-        return view('dashboard', compact('lk_count', 'species_count', 'skoleksi_count', 'stitipan_count', 'sbelumtag_count', 'shidup_count','taksa',));
-    })->name('dashboard');
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 
-    Route::get('/get-satwa', [SatwaController::class, 'getall']);
+    Route::get('/get-satwa', [SatwaController::class, 'updateDashboard']);
     Route::get('/get-lembaga-konservasi', [LembagaKonservasiController::class, 'getall']);
     Route::get('/get-spesies', [ListSpeciesController::class, 'index']);
 

@@ -14,6 +14,6 @@ class ListSpecies extends Model
         return $this->belongsTo(User::class);
     }
     public function satwa(){
-        return $this->belongsTo (Satwa::class);
+        return $this->hasMany(Satwa::class,'id_spesies');
     }
 }

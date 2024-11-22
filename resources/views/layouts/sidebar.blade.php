@@ -1,6 +1,6 @@
 <nav class="sidebar">
   <div class="sidebar-header">
-    <a href="#" class="sidebar-brand">
+    <a href="#" class="sidebar-brand" id="{{ strtolower($user->role->tag) }}">
       {{-- Noble<span>UI</span> --}}
       {{ $user->role->tag }}
     </a>
