@@ -11,7 +11,6 @@ class Satwa extends Model
 
     protected $guard = ['id'];
     protected $table = 'satwas';
-    protected $primaryKey = 'id';
 
     public function tagging(){
         return $this->belongsTo(Tagging::class);

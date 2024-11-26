@@ -15,7 +15,7 @@ function setLogoutTimer() {
       })
       .then(response => {
           if (response.ok) {
-              window.location.href = '/logout';
+              window.location.href = '/';
           }
           return response.json();
       })

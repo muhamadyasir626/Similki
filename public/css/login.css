@@ -89,10 +89,11 @@ body {
     font-weight: 600;
 }
 
-.input-wrapper {
+/* .input-wrapper {
     position: relative;
-    width: 100%;
-}
+    border-radius:4px 4px 0px 0px ;
+    width: 90%;
+} */
 
 .text-fields label {
     font-size: 0.9rem;
@@ -102,12 +103,35 @@ body {
     width: 100%;
     padding: 10px 10px 10px;
     border: 1px solid #d3d3d3;
-    border-radius: 10px;
     outline: none;
     background: #f9f9f9;
     transition: border-color 0.3s;
     margin-bottom: 15px;
+    border-radius: 4px;
+
 }
+
+/* Tombol dalam kondisi nonaktif */
+#submitBtn.disabled {
+    background-color: #d3d3d3; /* Warna tombol nonaktif */
+    color: #a1a1a1; /* Warna teks nonaktif */
+    cursor: not-allowed; /* Nonaktifkan kursor */
+}
+
+/* Tombol dalam kondisi aktif */
+#submitBtn.enabled {
+    background-color: #6a994e; /* Warna tombol aktif */
+    color: white; /* Warna teks aktif */
+    cursor: pointer; /* Kursor aktif */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover untuk tombol aktif */
+#submitBtn.enabled:hover {
+    background-color: #386641; /* Warna tombol saat hover */
+    color: #f0f0f0; /* Warna teks saat hover */
+}
+
 
 .pagination-btns {
     display: flex;
@@ -124,28 +148,57 @@ body {
     background-color: #6a994e;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: 100%;
+    margin-top: 12px;
 }
 
-.pagination-btns button:hover{
-    background-color: #386641;
+.pagination-btns button:hover {
+    background-color: #6a994e;
     color: white;
 }
 
-.toggle-password {
+.forgot-password {
+    text-decoration: none;
+    opacity: 70%;
+    font-size: 12px;
     display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.input-wrapper {
+    position: relative; 
+}
+
+.password{
+    display: flex;
+}
+
+.toggle-password {
     position: absolute;
-    top: 33%;
-    right: 11px;
+    top: 35%;
+    right: 15px;
     transform: translateY(-50%);
     cursor: pointer;
     z-index: 1;
+    display: flex;
+    /* justify-content: end; */
+    width: 20px;
+    
 }
 
-.forgot-password{
-    text-decoration: none;
+.toggle-password img {
+    transform: translateX(20%);
+    width: 100%;
+    height: auto;
+}
+
+.validation {
     color: red;
-    display: flex;
-    justify-content: end;
-    padding-top: 10px;
-    font-style: italic;
+    background-color: #ffe6e6;
+    padding: 10px;
+    border: 1px solid #ffcccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    display: none; /* Default disembunyikan */
 }

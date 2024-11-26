@@ -9,7 +9,7 @@ class Tagging extends Model
 {
     use HasFactory;
 
-    public function Satwa(){
+    public function satwa(){
         return $this->belongsTo(Satwa::class,'id_satwa');
     }
 

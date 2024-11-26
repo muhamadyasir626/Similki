@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreSatwaRequest;
 use App\Http\Requests\UpdateSatwaRequest;
 use App\Models\LembagaKonservasi;
+use App\Models\ListSpecies;
+use App\Models\Tagging;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -215,18 +217,8 @@ public function getall()
             $query->select('id', 'nama_spesies');
         }])->select('id', 'nama_panggilan', 'asal_satwa', 'jenis_koleksi', 'status_perlindungan')->paginate(50);
 
-        // $satwa = Satwa::with('lk', 'species',)->simplePaginate(15);
-        // if ($satwa instanceof LengthAwarePaginator) {
-        //     // Confirm that $data is indeed a LengthAwarePaginator
-        //     echo "Yes, it is a LengthAwarePaginator.";
-        //     echo $satwa;
-        // } else {
-        //     echo "No, it is not a LengthAwarePaginator.";
-        // }
         return view('pages.satwa.daftar-satwa', compact('satwa'));
     }
-
-    
 
     public function search(Request $request)
     {
@@ -254,8 +246,7 @@ public function getall()
     /**
      * Store a newly created resource in storage.a
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         // Cek bagian yang akan diproses
         $section = $request->input('section');
     
@@ -397,5 +388,18 @@ public function getall()
         $lk = LembagaKonservasi::with('upt')->get();
 
         return view('pages.satwa.pendataan-satwa', compact('satwa','lk','user',));
+    }
+    public function updateDashboard(){
+    try {
+
+        return response()->json([
+
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage()
+        ], 500);
+    }
     }
 }

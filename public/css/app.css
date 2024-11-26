@@ -657,7 +657,7 @@ progress {
 }
 .row {
   --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 0;
+  --bs-gutter-y: 1rem;
   display: flex;
   flex-wrap: wrap;
   margin-top: calc(-1 * var(--bs-gutter-y));
@@ -2929,7 +2929,7 @@ textarea.is-invalid.typeahead.tt-hint, .select2-container--default .select2-sear
   --bs-btn-bg: transparent;
   --bs-btn-border-width: 1px;
   --bs-btn-border-color: transparent;
-  --bs-btn-border-radius: 0.25rem;
+  --bs-btn-border-radius: 10px;
   --bs-btn-hover-border-color: transparent;
   --bs-btn-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
   --bs-btn-disabled-opacity: 0.65;
@@ -21613,7 +21613,11 @@ div.apexcharts-canvas .apexcharts-toolbar-custom-icon svg {
 div.apexcharts-canvas .apexcharts-legend.apexcharts-align-right .apexcharts-legend-series,
 div.apexcharts-canvas .apexcharts-legend.apexcharts-align-left .apexcharts-legend-series {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+}
+div.apexcharts-legend{
+  display: flex;
+  align-items: flex-start;
 }
 div.apexcharts-canvas .apexcharts-legend-marker {
   margin-right: 3px;
@@ -22414,6 +22418,8 @@ div.tox .tox-dialog__body {
 .custom-card-size {
   height: 100%;
   width: 100%;
+  min-width: 200px;
+  min-height: 90px;
   display: flex;
   margin-bottom: 20px; 
   border: 1px solid var(--bs-card-border-color);
@@ -22421,7 +22427,9 @@ div.tox .tox-dialog__body {
   border-radius: var(--bs-card-border-radius);
   background-color: var(--bs-card-bg);
   text-align: center;
+  
 }
+
 
 .card-body-1 {
   display: flex;
@@ -22429,6 +22437,8 @@ div.tox .tox-dialog__body {
   align-items: center;
   justify-content: center;
   height: 100%;
+  border-radius: 10px;
+
 }
 .card-body-2 {
   padding: 1rem;
@@ -22437,16 +22447,47 @@ div.tox .tox-dialog__body {
   height: 100%;
 }
 
-/* Mengatur lebar margin bawah setiap kartu */
+.card-body-3 {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  /* height: 100%;
+  width: 100%; */
+
+}
+
+#chartContainer1, #chartContainer2, #chartContainer3 {
+  width: 100%;  
+  height: 400px;
+  display: flex;
+  justify-content: center; 
+  align-items: center; /* Tambahkan ini jika Anda juga ingin pusat secara vertikal */
+}
+
+.row-container{
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: calc(-1* var(--bs-gutter-y));
+  margin-right: calc(-0.5* var(--bs-gutter-x));
+  margin-left: calc(-0.5* var(--bs-gutter-x));
+}
+
+
+
 .mb-2 {
   margin-bottom: 10px;
 }
 
 #wilayahLKChart {
-  transition: transform 0.2s ease-in-out; /* Smooth transition for scale transformation */
+  transition: transform 0.2s ease-in-out; 
 }
 
 #wilayahLKChart:hover {
-  transform: scale(1.1); /* Zoom in by scaling to 110% when hovered */
+  transform: scale(1.1);
 }
 
