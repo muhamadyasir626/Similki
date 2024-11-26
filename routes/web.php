@@ -11,6 +11,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CheckPermission;
 use App\Http\Controllers\LembagaKonservasiController;
 use App\Http\Controllers\SatwaController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -47,17 +48,63 @@ Route::post('login', [AuthController::class, 'login'])->name('authenticate');
 // Protected Routes (Requires Authentication)
 Route::middleware(['auth:sanctum', 'check.permission', config('jetstream.auth_session'), 'verified'])
     ->group(function () {
-        // Dashboard
-        Route::get('/dashboard', function () {
-            $lk_count = LembagaKonservasi::count();
-            $species_count = ListSpecies::count();
-            $skoleksi_count = Satwa::where('status_satwa', 'satwa koleksi')->count();
-            $stitipan_count = Satwa::where('status_satwa', 'satwa titipan')->count();
-            $sbelumtag_count = Tagging::where('jenis_tagging', 'belum ditagging')->count();
-            $shidup_count = Satwa::where('jenis_koleksi', 'satwa hidup')->count();
+        // Dashboard KKH
+        // Route::get('/dashboard', function () {
+        //     $lk_count = LembagaKonservasi::count();
+        //     $species_count = ListSpecies::count();
+        //     $skoleksi_count = Satwa::where('status_satwa', 'satwa koleksi')->count();
+        //     $stitipan_count = Satwa::where('status_satwa', 'satwa titipan')->count();
+        //     $sbelumtag_count = Tagging::where('jenis_tagging', 'belum ditagging')->count();
+        //     $shidup_count = Satwa::where('jenis_koleksi', 'satwa hidup')->count();
             
-            return view('dashboard', compact('lk_count', 'species_count', 'skoleksi_count', 'stitipan_count', 'sbelumtag_count', 'shidup_count'));
+        //     return view('dashboard', compact('lk_count', 'species_count', 'skoleksi_count', 'stitipan_count', 'sbelumtag_count', 'shidup_count'));
+        // })->name('dashboard');
+
+        // Dashboard UPT
+
+        // Dashboard LK
+
+        Route::get('/dashboard', function () {
+            $lk = Auth::user()->lk->id;
+            // dd(Auth::user());
+            $species_count = Satwa::where('id_lk', $lk)->count();
+            $skoleksi_count = Satwa::where('id_lk', $lk)->where('status_satwa', 'satwa koleksi')->count();
+            $stitipan_count = Satwa::where('id_lk', $lk)->where('status_satwa', 'satwa titipan')->count();
+            $sbelumtag_count = Tagging::whereHas('satwa', function ($query) use ($lk) {
+                $query->where('id_lk', $lk);
+            })->where('jenis_tagging', 'belum ditagging')->count();
+            $shidup_count = Satwa::where('id_lk', $lk)->where('jenis_koleksi', 'satwa hidup')->count();
+            $bentuk_lk = LembagaKonservasi::where('id', $lk)->value('bentuk_lk');
+            $satwaLK = Satwa::whereHas('lk', function ($query) use ($lk){
+                $query->where('id_lk',$lk);
+            })->where('id_lk', $lk)->get();
+
+            // dd($satwaLK);
+            $satwaLK = Satwa::where('id_lk', $lk)
+                        ->select('id_spesies as spesies', DB::raw('COUNT(*) as jumlah'))
+                        ->groupBy('spesies')
+                        ->get();
+            return view('dashboard', compact( 'species_count', 'skoleksi_count', 'stitipan_count', 'sbelumtag_count', 'shidup_count', 'bentuk_lk', 'satwaLK'));
+            // return view('dashboard');
         })->name('dashboard');
+
+
+        Route::get('/get-data/{role}', [DashboardController::class, 'getData']);
+       
+
+        // $id_lembaga = auth()->user()->id_lk;
+        
+        // Route::get('/dashboard', function () {
+        //     $lk_count = LembagaKonservasi::where('id', $id_lembaga)->count();
+        //     $species_count = ListSpecies::where('id_lk', $id_lembaga)->count();
+        //     $stitipan_count = Satwa::where('id_lk', $id_lembaga)->where('status_satwa', 'satwa titipan')->count();
+        //     $sbelumtag_count = Tagging::where('id_lk', $id_lembaga)->where('jenis_tagging', 'belum ditagging')->count();
+        //     $shidup_count = Satwa::where('id_lk', $id_lembaga)->where('jenis_koleksi', 'satwa hidup')->count();
+        //     return view('dashboard', compact('lk_count', 'species_count', 'skoleksi_count', 'stitipan_count', 'sbelumtag_count', 'shidup_count'));
+        // })->name('dashboard');
+            
+
+
 
         // Permission Routes
         Route::get('/check-permission', [CheckPermission::class, 'check']);

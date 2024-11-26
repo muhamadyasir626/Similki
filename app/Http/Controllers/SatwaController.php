@@ -25,12 +25,9 @@ public function getall()
         //               ->get();
         $satwa = Satwa::select('status_satwa')->count();
 
-        // Debugging: Tampilkan hasil query
-        // dd($satwa);
-
         return response()->json([
             'status' => 'success',
-            'data' => $satwa
+            'data' => $satwa,
         ]);
     } catch (\Exception $e) {
         // Tangkap error dan tampilkan pesan

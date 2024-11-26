@@ -4379,7 +4379,7 @@ div.fc .btn-group-vertical > .btn-group:not(:first-child) > .fc-button-primary {
   --bs-card-title-spacer-y: 0.875rem;
   --bs-card-border-width: 1px;
   --bs-card-border-color: #f2f4f9;
-  --bs-card-border-radius: 0.25rem;
+  --bs-card-border-radius: 10px;
   --bs-card-box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
   --bs-card-inner-border-radius: calc(0.25rem - 1px);
   --bs-card-cap-padding-y: 0.875rem;
