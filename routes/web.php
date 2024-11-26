@@ -26,44 +26,29 @@ use App\Http\Controllers\ListSpeciesController;
 |
 */
 
-// Authentication Routes
-Route::get('/', function () {
-    return view('auth.login');
-})->name('login');
+Route::get('/', function () {return view('auth.login');})->name('login');
 
+//Auth
 Route::get('/register', function () {
     $roles = Role::all();
     $upt_bentuk = ListUpt::distinct()->select('bentuk')->get();
     $upt_wilayah = ListUpt::distinct()->select('wilayah')->get();
-    $list_lk = LembagaKonservasi::orderBy('nama', 'asc')->get();
-    $list_species = ListSpecies::all();
+    $list_lk = LembagaKonservasi::orderBy('nama','asc')->get();
+    // dd($list_lk);
+    $list_species =ListSpecies::all();
 
-    return view('auth.register', compact('roles', 'upt_bentuk', 'upt_wilayah', 'list_lk', 'list_species'));
+    // dd($upt_bentuk);
+    return view('auth.register',compact('roles','upt_bentuk','upt_wilayah','list_lk','list_species'));
 });
 
-Route::post('register1', [AuthController::class, 'register1'])->name('register1');
-Route::post('register2', [AuthController::class, 'register2'])->name('register2');
-Route::post('register3', [AuthController::class, 'register3'])->name('register3');
-Route::post('login', [AuthController::class, 'login'])->name('authenticate');
+Route::post('/register1',[AuthController::class, 'register1'])->name('register1');
+Route::post('/register2',[AuthController::class, 'register2'])->name('register2');
+Route::post('/register3',[AuthController::class, 'register3'])->name('register3');
+Route::post('/login', [AuthController::class, 'login'])->name('authenticate');
 
-// Protected Routes (Requires Authentication)
-Route::middleware(['auth:sanctum', 'check.permission', config('jetstream.auth_session'), 'verified'])
-    ->group(function () {
-        // Dashboard KKH
-        // Route::get('/dashboard', function () {
-        //     $lk_count = LembagaKonservasi::count();
-        //     $species_count = ListSpecies::count();
-        //     $skoleksi_count = Satwa::where('status_satwa', 'satwa koleksi')->count();
-        //     $stitipan_count = Satwa::where('status_satwa', 'satwa titipan')->count();
-        //     $sbelumtag_count = Tagging::where('jenis_tagging', 'belum ditagging')->count();
-        //     $shidup_count = Satwa::where('jenis_koleksi', 'satwa hidup')->count();
-            
-        //     return view('dashboard', compact('lk_count', 'species_count', 'skoleksi_count', 'stitipan_count', 'sbelumtag_count', 'shidup_count'));
-        // })->name('dashboard');
-
-        // Dashboard UPT
-
-        // Dashboard LK
+Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_session'),'verified'])
+->group(function () {
+    Route::get('/check-permission',[checkpermission::class,'check']);
 
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 
@@ -92,7 +77,4 @@ Route::middleware(['auth:sanctum', 'check.permission', config('jetstream.auth_se
 
 });
 
-// API Data Fetching
-Route::get('/get-satwa', [SatwaController::class, 'getall']);
-Route::get('/get-lembaga-konservasi', [LembagaKonservasiController::class, 'getall']);
-Route::get('/get-wilayah-upt', [AuthController::class, 'getWilayahUPT']);
+Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);

@@ -12,13 +12,14 @@
   <img src="{{ asset('assets/images/verifikasi.png') }}" alt="waiting for permission" style="width: 50%;">
   <script>
     window.onload = function() {
-      const token = localStorage.getItem('access_token'); // Pastikan kunci ini sesuai dengan yang Anda gunakan saat menyimpan
+      // const token = localStorage.getItem('access_token'); 
+      const token = localStorage.getItem('auth_token'); 
 
       fetch(`/check-permission`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` // Sesuaikan format Bearer jika backend Anda memerlukannya
+          'Authorization': `Bearer ${token}`
         }
       })
       .then(response => response.json())

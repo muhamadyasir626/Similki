@@ -88,53 +88,39 @@
 
 <!-- Baris kedua untuk Jenis LK dan Wilayah LK -->
 <div class="row">
-    <div class="col-lg-6">
-        <div class="card h-100 custom-card-size">
-            <div class="card-body-2">
-                <h5 class="card-title">Jumlah Satwa Individu</h5>
-                <div id="satwaChart"></div>
-            </div>
+  <div class="col-lg-6">
+    <div class="card h-1000 custom-card-size jumlah-species-individu">
+        <div class="card-body">
+            <h5 class="card-title">Jumlah Spesies Individu</h5>
+            <div id="spesiesIndvChart" data-counts="{{ $total_jumlahIndvSpesies }}"></div>
         </div>
     </div>
-</div>
-
-<div class="row">
-  <div class="col-lg-4">
+  </div>
+  <div class="col-lg-6">
     <div class="card h-100 custom-card-size">
-      <div class="card-body-2">
+      <div class="card-body-3">
         <h5 class="card-title">Taksa</h5>
-        <div id="chartContainer1"></div>
+        <div id="chartContainer1" data-counts="{{ $total_class }}"></div>
       </div>
     </div>
   </div>
-  <div class="col-lg-4">
+  <div class="col-lg-6">
     <div class="card h-100 custom-card-size">
-      <div class="card-body-2">
+      <div class="card-body-3">
         <h5 class="card-title">Jenis Tagging</h5>
-        <div id="chartContainer2"></div>
+        <div id="chartContainer2" data-counts="{{ $total_tagging }}"></div>
       </div>
     </div>
   </div>
-  <div class="col-lg-4">
+  <div class="col-lg-6">
     <div class="card h-100 custom-card-size">
-      <div class="card-body-2">
+      <div class="card-body-3">
         <h5 class="card-title">Jenis Koleksi</h5>
-        <div id="chartContainer3"></div>
+        <div id="chartContainer3" data-counts="{{ $total_jenis_koleksi }}"></div>
       </div>
     </div>
   </div>
 </div> 
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card h-100 custom-card-size">
-            <div class="card-body">
-                <h5 class="card-title">Jumlah Spesies Individu</h5>
-                <div id="satwaChart"></div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 
 @push('plugin-scripts')
@@ -144,5 +130,5 @@
 @endpush
 
 @push('custom-scripts')
-  <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+  <script src="{{ asset('assets/js/dashboard-lk.js') }}"></script>
 @endpush

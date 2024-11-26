@@ -13,7 +13,7 @@ class Satwa extends Model
     protected $table = 'satwas';
 
     public function tagging(){
-        return $this->belongsTo(Tagging::class);
+        return $this->belongsTo(Tagging::class, 'id_satwa');
     }
     public function species(){
         return $this->belongsTo(ListSpecies::class,'id_spesies');

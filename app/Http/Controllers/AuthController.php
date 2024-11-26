@@ -203,17 +203,14 @@ class  AuthController extends Controller
                 $cookie = cookie('auth_token', $token, $expiryMinutes, null, null, true, true);
                 $auth->remember_token = Str::random(60); // Generate random token
                 $auth->save();
-                $response = [
+
+                return response()->json([
                     'success' => true,
                     'message' => 'Login berhasil',
                     'data' => [
                         'token' => $token
-                    ],
-                    'url' => '/permission'
-                ];    
-                // return response()->json($response)->withCookie($cookie);
-                // return redirect('/permission')->header('Authorization', 'Bearer'. $token);
-                return redirect('/permission')->withCookie($cookie);                     
+                    ]
+                ])->withCookie($cookie);                  
             } catch (\Exception $e) {
                 return response()->json([
                     'success' => false,

@@ -1,9 +1,6 @@
-const role = document.querySelector('.sidebar-brand');
-// console.log(role.id);
 $(function () {
-    'use strict';
+    'use strict'
 
-    // Warna dan font global
     var colors = {
         primary: "#6571ff",
         secondary: "#7987a1",
@@ -16,12 +13,12 @@ $(function () {
         muted: "#7987a1",
         gridBorder: "rgba(77, 138, 240, .15)",
         bodyColor: "#000",
-        cardBg: "#fff",
-    };
+        cardBg: "#fff"
+    }
 
-    var fontFamily = "'Roboto', Helvetica, sans-serif";
+    var fontFamily = "'Roboto', Helvetica, sans-serif"
 
-    // Inisialisasi Date Picker
+    // Date Picker
     if ($('#dashboardDate').length) {
         flatpickr("#dashboardDate", {
             wrap: true,
@@ -30,251 +27,344 @@ $(function () {
         });
     }
 
-    var fontFamily = "'Roboto', Helvetica, sans-serif"
- 
-    // Date Picker
-  if($('#dashboardDate').length) {
-    flatpickr("#dashboardDate", {
-      wrap: true,
-      dateFormat: "d-M-Y",
-      defaultDate: "today",
-    });
-  }
-  // Date Picker - END
+    //bentuk lk
+    $(document).ready(function () {
+        const dataContainer = $('#jenisLKChart');
+        const dataObj = JSON.parse(dataContainer.attr('data-counts'));
 
-// // Ambil data spesies satwa berdasarkan LK
-// $.ajax({
-//     url: '/get-satwa',
-//     type: 'GET',
-//     success: function(data) {
-//       console.log('Data berhasil diambil:', data);
-  
-//       // Mengolah data untuk chart
-//       const spesiesNames = data.map(item => item.spesies);
-//       const jumlahSatwa = data.map(item => item.jumlah);
-  
-//       // Konfigurasi dan render chart
-//       var options = {
-//         chart: {
-//           type: "bar",
-//           height: 300
-//         },
-//         series: [{
-//           name: "Jumlah Satwa",
-//           data: jumlahSatwa
-//         }],
-//         xaxis: {
-//           categories: spesiesNames
-//         },
-//         colors: ["#008FFB"],
-//         tooltip: {
-//           y: {
-//             formatter: function (val) {
-//               return val + " ekor";
-//             }
-//           }
-//         }
-//       };
-  
-//       new ApexCharts(document.querySelector("#chartContainer"), options).render();
-//     },
-//     error: function(error) {
-//       console.log("Error fetching data: ", error);
-//     }
-//   });
+        let labels = [];
+        let totals = [];
 
-// 
-
-// $.ajax({
-//     url: '/getData', // URL endpoint untuk data satwa
-//     type: 'GET',
-//     success: function(response) {
-//         console.log('Data berhasil diambil:', response);
-
-//         // Ambil data satwa per lembaga konservasi
-//         const satwaData = response.satwa_by_lk || [];
-
-//         // Cek apakah data ada dan tidak kosong
-//         if (satwaData.length === 0) {
-//             console.error("Data satwa kosong");
-//             return;
-//         }
-
-//         // Siapkan data untuk chart
-//         const spesiesNames = [];
-//         const jumlahSatwa = [];
-
-//         satwaData.forEach(function(item) {
-//             if (item.spesies && item.jumlah) {
-//                 spesiesNames.push(item.spesies); // Nama spesies
-//                 jumlahSatwa.push(item.jumlah);  // Jumlah individu
-//             }
-//         });
-
-//         // Pastikan data untuk grafik valid
-//         if (spesiesNames.length === 0 || jumlahSatwa.length === 0) {
-//             console.error("Data untuk chart tidak lengkap.");
-//             return;
-//         }
-
-//         // Konfigurasi dan render chart menggunakan ApexCharts
-//         const options = {
-//             chart: {
-//                 type: "bar",
-//                 height: 400, // Tinggi chart
-//                 toolbar: { show: false }
-//             },
-//             series: [{
-//                 name: "Jumlah Individu",
-//                 data: jumlahSatwa
-//             }],
-//             xaxis: {
-//                 categories: spesiesNames,
-//                 title: { text: "Spesies" }
-//             },
-//             yaxis: {
-//                 title: { text: "Jumlah Individu" }
-//             },
-//             colors: ["#1E90FF"], // Warna bar
-//             tooltip: {
-//                 y: {
-//                     formatter: function(val) {
-//                         return val + " ekor";
-//                     }
-//                 }
-//             },
-//             plotOptions: {
-//                 bar: {
-//                     horizontal: true, // Bar horizontal
-//                     barHeight: "70%"  // Tinggi bar
-//                 }
-//             },
-//             dataLabels: {
-//                 enabled: true, // Menampilkan jumlah di bar
-//                 style: {
-//                     fontSize: '12px',
-//                     colors: ['#333']
-//                 }
-//             }
-//         };
-
-//         // Render chart
-//         const chartElement = document.querySelector("#jumlahSatwa");
-//         if (chartElement) {
-//             new ApexCharts(chartElement, options).render();
-//         } else {
-//             console.error("Elemen chart tidak ditemukan.");
-//         }
-//     },
-//     error: function(error) {
-//         console.error("Error fetching data: ", error);
-//     }
-// });
-
-// Reduce function for species count
-const speciesCounts = spesies.reduce((counts, item) => {
-    const speciesName = item.species.nama_ilmiah || "Tidak Diketahui"; // Ganti 'id_spesies' dengan 'nama_ilmiah' jika tersedia
-    counts[speciesName] = (counts[speciesName] || 0) + 1;// Pastikan mengakumulasi 'jumlah_individu'
-    // console.log(counts);
-    
-    return counts;
-    }, {});
-    const speciesNames = Object.keys(speciesCounts);
-    const individualCounts = Object.values(speciesCounts);
-    
-    // Jika Anda ingin menampilkan hanya top 10 spesies dengan jumlah terbanyak
-    const topSpeciesData = speciesNames.sort((a, b) => speciesCounts[b] - speciesCounts[a]).slice(0, 10);
-    const topIndividualCounts = topSpeciesData.map(name => speciesCounts[name]);
-    
-
-$.ajax({
-    url: `/get-data/${role.id}`,
-    method: 'GET',
-    success: function (response) {
-        console.log(response);
-       // Options for the bar chart
-                var barOptions = {
-                    chart: {
-                        type: "bar",
-                        height: 400,
-                        events: {
-                            dataPointSelection: function(event, chartContext, config) {
-                                const selectedLabel = config.w.config.labels[config.dataPointIndex];
-                                alert(`You clicked on: ${selectedLabel}`);
-                                console.log('Clicked on pie chart data:', selectedLabel);
-                            }
-                        }
-                    },
-                    plotOptions: {
-                        bar: {
-                            horizontal: true,
-                            barHeight: '60%'
-                        }
-                    },
-                    series: [{
-                        name: "Jumlah Individu",
-                        data: topIndividualCounts
-                    }],
-                    xaxis: {
-                        categories: topSpeciesData
-                    },
-                    colors: ["#FF4560"],
-                    tooltip: {
-                        y: {
-                            formatter: function (val) {
-                                return val + " individu";
-                            }
-                        }
-                    }
-                };
-
-                // Render the bar chart
-                new ApexCharts(document.querySelector("#spesiesIndChart"), barOptions).render();
-            },
-            error: function(error) {
-                console.log("Error fetching data: ", error);
-            }
-        });
-    });
-
-        // if (response.status === 'success') {
-        //     const dataSatwa = response.data;
-
-        //     // Pisahkan data untuk label dan jumlah
-        //     const labels = dataSatwa.map(item => `Spesies ${item.spesies}`);
-        //     const jumlah = dataSatwa.map(item => item.jumlah);
-
-        //     // Buat grafik
-        //     const ctx = document.getElementById('satwaChart').getContext('2d');
-        //     const satwaChart = new Chart(ctx, {
-        //         type: 'bar', // Tipe grafik (bisa 'line', 'pie', dll)
-        //         data: {
-        //             labels: labels, // Label untuk sumbu X
-        //             datasets: [{
-        //                 label: 'Jumlah Satwa',
-        //                 data: jumlah, // Data untuk sumbu Y
-        //                 backgroundColor: 'rgba(75, 192, 192, 0.2)', // Warna batang grafik
-        //                 borderColor: 'rgba(75, 192, 192, 1)', // Warna border batang
-        //                 borderWidth: 1 // Ketebalan border
-        //             }]
-        //         },
-        //         options: {
-        //             scales: {
-        //                 y: {
-        //                     beginAtZero: true // Mulai dari 0
-        //                 }
-        //             }
-        //         }
-        //     });
-        // } else {
-        //     alert('Gagal mengambil data.');
+        //label
+        // for (let key in dataObj) {
+        //     if (dataObj.hasOwnProperty(key)) {
+        //         labels.push(dataObj[key].label); 
+        //         totals.push(dataObj[key].total); 
+        //     }
         // }
-//     },
 
+        //total
+        for (let label in dataObj) {
+            if (dataObj.hasOwnProperty(label)) {
+                labels.push(label); 
+                totals.push(dataObj[label]); 
+            }
+        }
 
-//     error: function () {
-//         alert('Terjadi kesalahan saat mengambil data.');
-//     }
-// });
+        
+    
+        var options = {
+            chart: {
+                type: "bar",
+                height: 400,
+                events: {
+                    dataPointSelection: function (event, chartContext, config) {
+                        const selectedLabel = config.w.config.xaxis.categories[config.dataPointIndex];
+                        alert(`You clicked on: ${selectedLabel}`);
+                        console.log(`Clicked on bar chart data:`, selectedLabel);
+                    }
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                    columnWidth: '60%',
+                    barSpacing: 50
+                }
+            },
+            series: [{
+                name: "Jumlah Lembaga",
+                data: totals,
+            }],
+            xaxis: {
+                categories: labels,
+            },
+            colors: [ "#008FFB", "#00E396", "#FEB019"],
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + " lembaga";
+                    }
+                }
+            }
+        };
+    
+        new ApexCharts(document.querySelector("#jenisLKChart"), options).render();
+    });
 
-// });
+    //wilayah lk
+    $(document).ready(function () {
+        const dataContainer = $('#wilayahLKChart');
+        const dataObj = JSON.parse(dataContainer.attr('data-counts'));
+
+        let labels = [];
+        let totals = [];
+
+        //label
+        // for (let key in dataObj) {
+        //     if (dataObj.hasOwnProperty(key)) {
+        //         labels.push(dataObj[key].label); 
+        //         totals.push(dataObj[key].total); 
+        //     }
+        // }
+
+        //total
+        for (let label in dataObj) {
+            if (dataObj.hasOwnProperty(label)) {
+                labels.push(label); 
+                totals.push(dataObj[label]); 
+            }
+        }
+
+        
+    
+        var options = {
+            chart: {
+                type: "bar",
+                height: 400,
+                events: {
+                    dataPointSelection: function (event, chartContext, config) {
+                        const selectedLabel = config.w.config.xaxis.categories[config.dataPointIndex];
+                        alert(`You clicked on: ${selectedLabel}`);
+                        console.log(`Clicked on bar chart data:`, selectedLabel);
+                    }
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                    columnWidth: '60%',
+                    barSpacing: 50
+                }
+            },
+            series: [{
+                name: "Jumlah Lembaga",
+                data: totals,
+            }],
+            xaxis: {
+                categories: labels,
+            },
+            colors: [ "#008FFB", "#00E396", "#FEB019"],
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + " lembaga";
+                    }
+                }
+            }
+        };
+    
+        new ApexCharts(document.querySelector("#wilayahLKChart"), options).render();
+    });
+
+    //jumlah individu spesies
+    $(document).ready(function () {
+        const dataContainer = $('#spesiesIndvChart');
+        const dataObj = JSON.parse(dataContainer.attr('data-counts'));
+        console.log(dataObj);
+
+        let labels = [];
+        let totals = [];
+
+        //label
+        // for (let key in dataObj) {
+        //     if (dataObj.hasOwnProperty(key)) {
+        //         labels.push(dataObj[key].label); 
+        //         totals.push(dataObj[key].total); 
+        //     }
+        // }
+
+        //total
+        for (let label in dataObj) {
+            if (dataObj.hasOwnProperty(label)) {
+                labels.push(label); 
+                totals.push(dataObj[label]); 
+            }
+        }
+
+        
+    
+        var options = {
+            chart: {
+                type: "bar",
+                height: 400,
+                events: {
+                    dataPointSelection: function (event, chartContext, config) {
+                        const selectedLabel = config.w.config.xaxis.categories[config.dataPointIndex];
+                        alert(`You clicked on: ${selectedLabel}`);
+                        console.log(`Clicked on bar chart data:`, selectedLabel);
+                    }
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                    columnWidth: '100%',
+                    barSpacing: 100
+                }
+            },
+            series: [{
+                name: "Jumlah satwa",
+                data: totals,
+            }],
+            xaxis: {
+                categories: labels,
+            },
+            colors: [ "#008FFB", "#00E396", "#FEB019"],
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + " satwa";
+                    }
+                }
+            }
+        };
+    
+        new ApexCharts(document.querySelector("#spesiesIndvChart"), options).render();
+    });
+
+     //jumlah tagging
+    $(document).ready(function () {
+        const dataContainer = $('#chartContainer2');
+        const dataObj = JSON.parse(dataContainer.attr('data-counts'));
+        console.log(dataObj);
+    
+        let labels = [];
+        let totals = [];
+        let colors = []; 
+    
+        for (let label in dataObj) {
+            if (dataObj.hasOwnProperty(label)) {
+                labels.push(label);
+                totals.push(dataObj[label]);
+                colors.push(generateRandomColor()); 
+            }
+        }
+    
+        var options = {
+            chart: {
+                type: "pie",
+                height: 400,
+                events: {
+                    dataPointSelection: function (event, chartContext, config) {
+                        const selectedLabel = labels[config.dataPointIndex];
+                        alert(`You clicked on: ${selectedLabel}`);
+                        console.log(`Clicked on pie chart data:`, selectedLabel);
+                    }
+                }
+            },
+            series: totals,
+            labels: labels,
+            colors: colors, 
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + " satwa";
+                    }
+                }
+            }
+        };
+    
+        new ApexCharts(document.querySelector("#chartContainer2"), options).render();
+    });
+
+     //jumlah tagging
+    $(document).ready(function () {
+        const dataContainer = $('#chartContainer1');
+        const dataObj = JSON.parse(dataContainer.attr('data-counts'));
+        console.log(dataObj);
+    
+        let labels = [];
+        let totals = [];
+        let colors = []; 
+    
+        for (let label in dataObj) {
+            if (dataObj.hasOwnProperty(label)) {
+                labels.push(label);
+                totals.push(dataObj[label]);
+                colors.push(generateRandomColor()); 
+            }
+        }
+    
+        var options = {
+            chart: {
+                type: "pie",
+                height: 400,
+                events: {
+                    dataPointSelection: function (event, chartContext, config) {
+                        const selectedLabel = labels[config.dataPointIndex];
+                        alert(`You clicked on: ${selectedLabel}`);
+                        console.log(`Clicked on pie chart data:`, selectedLabel);
+                    }
+                }
+            },
+            series: totals,
+            labels: labels,
+            colors: colors, 
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + " satwa";
+                    }
+                }
+            }
+        };
+    
+        new ApexCharts(document.querySelector("#chartContainer1"), options).render();
+    });
+
+    //jumlah satwa koleksi
+    $(document).ready(function () {
+        const dataContainer = $('#chartContainer3');
+        const dataObj = JSON.parse(dataContainer.attr('data-counts'));
+        console.log(dataObj);
+    
+        let labels = [];
+        let totals = [];
+        let colors = []; 
+    
+        for (let label in dataObj) {
+            if (dataObj.hasOwnProperty(label)) {
+                labels.push(label);
+                totals.push(dataObj[label]);
+                colors.push(generateRandomColor()); 
+            }
+        }
+    
+        var options = {
+            chart: {
+                type: "pie",
+                height: 400,
+                events: {
+                    dataPointSelection: function (event, chartContext, config) {
+                        const selectedLabel = labels[config.dataPointIndex];
+                        alert(`You clicked on: ${selectedLabel}`);
+                        console.log(`Clicked on pie chart data:`, selectedLabel);
+                    }
+                }
+            },
+            series: totals,
+            labels: labels,
+            colors: colors, 
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + " satwa";
+                    }
+                }
+            }
+        };
+    
+        new ApexCharts(document.querySelector("#chartContainer3"), options).render();
+    });
+    
+
+    function generateRandomColor() {
+        let maxVal = 0xFFFFFF; 
+        let randomNumber = Math.random() * maxVal; 
+        randomNumber = Math.floor(randomNumber);
+        randomNumber = randomNumber.toString(16);
+        let randColor = randomNumber.padStart(6, 0);   
+        return `#${randColor.toUpperCase()}`
+    }      
+});
