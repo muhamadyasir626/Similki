@@ -62,4 +62,44 @@ if (errorMessage) {
     errorMessage.style.display = 'block';
 }
 
+document.getElementById('submitBtn').addEventListener('click', function (event) {
+    event.preventDefault();
+    const login = document.getElementById('login').value;
+    const password = document.getElementById('password').value;
+    const remember = document.getElementById('remember_me').checked;
+    const csrfToken = document.querySelector('input[name="_token"]').value;
+    
+    console.log('Button clicked');
 
+    fetch(`/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken
+        },
+        body: JSON.stringify({
+            login: login,
+            password: password,
+            remember: remember,
+            _token: csrfToken
+        })
+    })
+    .then(response => response.json())
+    .then(response => {
+        if (response.data) {
+            localStorage.setItem('auth_token', response.data.token);
+            window.location.href = '/permission';
+        } else {
+            console.error('Email/Username atau password salah, silakan coba lagi');
+            const errorDiv = document.getElementById('error-message');
+        if (errorDiv) {
+            errorDiv.textContent = 'Email/Username atau password salah, silakan coba lagi' || 'Terjadi kesalahan yang tidak diketahui.';
+            errorDiv.style.display = 'block';
+        }
+        }
+        
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});

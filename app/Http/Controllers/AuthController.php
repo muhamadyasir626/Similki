@@ -194,36 +194,30 @@ class  AuthController extends Controller
         $remember = $request->has('remember_me');
         
         if (Auth::attempt($credentials, $remember)) {
-            try {
-                $auth = Auth::user();
-                
-                $expiryMinutes = 60 * 24 * 7; 
-                
-                $token = $auth->createToken('auth_token', [], now()->addMinutes($expiryMinutes))->plainTextToken;
-                $cookie = cookie('auth_token', $token, $expiryMinutes, null, null, true, true);
-                $auth->remember_token = Str::random(60); // Generate random token
-                $auth->save();
-                $response = [
-                    'success' => true,
-                    'message' => 'Login berhasil',
-                    'data' => [
-                        'token' => $token
-                    ],
-                    'url' => '/permission'
-                ];    
-                // return response()->json($response)->withCookie($cookie);
-                // return redirect('/permission')->header('Authorization', 'Bearer'. $token);
-                return redirect('/permission')->withCookie($cookie);                     
-            } catch (\Exception $e) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Gagal saat menggenerate token: ' . $e->getMessage()
-                ], 500);
-            }
+            $auth = Auth::user();
+            
+            $expiryMinutes = 60 * 24 * 7; // Token expires after 1 week
+            
+            $token = $auth->createToken('auth_token', [], now()->addMinutes($expiryMinutes))->plainTextToken;
+            $cookie = cookie('auth_token', $token, $expiryMinutes, null, null, true, true);
+            $auth->remember_token = Str::random(60); 
+            $auth->save();
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Login berhasil',
+                'data' => [
+                    'token' => $token
+                ]
+            ])->withCookie($cookie);                  
         } else {
-            return redirect('/')->with('error', 'Email/Username atau password salah, silakan coba lagi');
+            return response()->json([
+                'success' => false,
+                'message' => 'Email/Username atau password salah, silakan coba lagi.'
+            ], 401); 
         }
     }
+    
     
 
 
