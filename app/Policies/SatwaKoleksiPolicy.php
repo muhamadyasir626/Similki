@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\SatwaKoleksi;
+use App\Models\Satwa;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class SatwaKoleksiPolicy
+class SatwaPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,11 +19,10 @@ class SatwaKoleksiPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, SatwaKoleksi $satwaKoleksi): bool
+    public function view(User $user, Satwa $Satwa): bool
     {
         //
     }
-
     /**
      * Determine whether the user can create models.
      */
@@ -35,7 +34,7 @@ class SatwaKoleksiPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, SatwaKoleksi $satwaKoleksi): bool
+    public function update(User $user, Satwa $Satwa): bool
     {
         //
     }
@@ -43,7 +42,7 @@ class SatwaKoleksiPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, SatwaKoleksi $satwaKoleksi): bool
+    public function delete(User $user, Satwa $Satwa): bool
     {
         //
     }
@@ -51,7 +50,7 @@ class SatwaKoleksiPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, SatwaKoleksi $satwaKoleksi): bool
+    public function restore(User $user, Satwa $Satwa): bool
     {
         //
     }
@@ -59,7 +58,7 @@ class SatwaKoleksiPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, SatwaKoleksi $satwaKoleksi): bool
+    public function forceDelete(User $user, Satwa $Satwa): bool
     {
         //
     }

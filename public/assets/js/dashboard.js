@@ -21,6 +21,8 @@ $(function() {
   var fontFamily = "'Roboto', Helvetica, sans-serif"
  
     // Date Picker
+ 
+    // Date Picker
   if($('#dashboardDate').length) {
     flatpickr("#dashboardDate", {
       wrap: true,

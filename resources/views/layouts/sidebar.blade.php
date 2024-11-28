@@ -28,6 +28,7 @@
       </li>
       <li class="nav-item {{ active_class(['/']) }}">
         <a href="{{ route('monitoring-lk') }}" class="nav-link">
+          
           <i class="link-icon" data-feather="monitor"></i>
           <span class="link-title">Monitoring LK</span>
         </a>

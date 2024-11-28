@@ -14,6 +14,15 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class LembagaKonservasiController extends Controller
 {
+    public function getall() {
+        try {
+            $data = LembagaKonservasi::all();
+            return response()->json($data);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+    
     /**
      * Display a listing of the resource.
      */

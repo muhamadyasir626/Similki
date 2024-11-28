@@ -16,7 +16,7 @@ class SatwaSeeder extends Seeder
      */
     public function run(): void
     {
-        $csvFile = base_path('resources/data/db satwa.csv');
+        $csvFile = base_path('resources/data/data satwa.csv');
         $data = array_map(function ($line) {
             return str_getcsv($line, ',');
         }, file($csvFile));

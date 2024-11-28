@@ -1174,6 +1174,10 @@ progress {
     flex: 0 0 auto;
     width: 100%;
   }
+  .col-md-13 {
+    flex: 0 0 auto;
+    width: 100%;
+  }
   .offset-md-0 {
     margin-left: 0;
   }
@@ -21004,6 +21008,7 @@ div.fc .btn-group-lg > .btn-icon-text.fc-button-primary .btn-icon-append {
 }
 .card .card-title {
   text-transform: uppercase;
+  font-size: 0.850rem;
   font-size: 0.850rem;
   font-weight: 500;
 }

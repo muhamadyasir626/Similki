@@ -48,7 +48,7 @@
             <!-- Kartu 1 -->
             <div class="card mb-2 custom-card-size">
                 <div class="card-body-1">
-                    <h5 style="" class="card-title">Jumlah LK</h5>
+                    <h5 class="card-title">Jumlah LK</h5>
                     <h3>{{ $lk_count }}</h3>
                 </div>
             </div>
@@ -122,25 +122,25 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-6">
-    <div class="card h-200 custom-card-size">
-      <div class="card-body-3">
+  <div class="col-lg-4">
+    <div class="card h-100 custom-card-size">
+      <div class="card-body-2">
         <h5 class="card-title">Taksa</h5>
         <div id="chartContainer1"></div>
       </div>
     </div>
   </div>
-  <div class="col-lg-6">
-    <div class="card h-200 custom-card-size">
-      <div class="card-body-3">
+  <div class="col-lg-4">
+    <div class="card h-100 custom-card-size">
+      <div class="card-body-2">
         <h5 class="card-title">Jenis Tagging</h5>
         <div id="chartContainer2"></div>
       </div>
     </div>
   </div>
-  <div class="col-lg-12">
+  <div class="col-lg-4">
     <div class="card h-100 custom-card-size">
-      <div class="card-body-3">
+      <div class="card-body-2">
         <h5 class="card-title">Jenis Koleksi</h5>
         <div id="chartContainer3"></div>
       </div>
@@ -153,7 +153,7 @@
         <div class="card h-100 custom-card-size">
             <div class="card-body">
                 <h5 class="card-title">Jumlah Spesies Individu</h5>
-                <div id="spesiesIndvChart"></div>
+                <div id="spesiesIndChart"></div>
             </div>
         </div>
     </div>
