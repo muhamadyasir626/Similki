@@ -1,0 +1,145 @@
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-container {
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  position: fixed; /* Tetap relatif terhadap viewport */
+  display: flex;
+  flex-direction: column;
+  color: var(--bs-modal-color);
+  pointer-events: auto;
+  background-color: var(--bs-modal-bg);
+  background-clip: padding-box;
+  padding: 0;
+  border: var(--bs-modal-border-width) solid var(--bs-modal-border-color);
+  border-radius: var(--bs-modal-border-radius);
+  outline: 0;
+  width: 60%; 
+  max-height: 80%; 
+  overflow-y: auto;
+  white-space:wrap;
+}
+
+.popup-header {
+  display: flex;
+  position: sticky;
+  top: 0; 
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  background-color: bisque;
+  z-index: 10; 
+}
+
+#popupContent {
+  padding: 10px;
+}
+
+
+.close {
+  cursor: pointer;
+  font-size: 28px;
+  color: #aaa;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+}
+
+.detail-item {
+  margin-bottom: 10px;
+  display: flex;
+  
+}
+
+.detail-item strong {
+  display: inline-block;
+  width: 150px;
+  white-space: wrap;
+}
+
+.action-popup{
+  display: flex;
+  gap: 10px;
+}
+
+.btn-popup{
+  width: 70px;
+}
+
+.detail-item span {
+  flex: 1;
+  
+}
+
+.btn {
+  padding: 5px;
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+
+.btn-danger {
+  background-color: red;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: gray;
+  color: white;
+}
+
+#popupContent{
+  margin-top:10px;
+  margin-bottom: 10px;
+}
+
+.detail-item label {
+  font-weight: bold;
+  width: 150px;
+  margin-left: 30px;
+  flex: 0 0 200px; 
+  margin-right: 20px;
+} 
+
+.detail-item input {
+  width: 100%;
+  border: none;
+}
+.detail-item input:disabled {
+  background-color: #fff;
+}
+.detail-item textarea:disabled {
+  background-color: #fff;
+}
+
+textarea {
+  width: 50rem;
+  border: none;
+}
+
+#badges-akreditasi {
+  width: 50rem;
+  font-size: 1em;
+  max-width: 30px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+

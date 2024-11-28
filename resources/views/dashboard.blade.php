@@ -101,7 +101,7 @@
     </div>
 
     <!-- Baris kedua untuk Jenis LK dan Wilayah LK -->
-    <div class="row">
+    <div class="row" style="margin-bottom: 20px">
         <div class="col-lg-6">
             <div class="card h-100 custom-card-size">
                 <div class="card-body-2">
@@ -112,20 +112,20 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="card h-100 custom-card-size">
-                <div class="card-body-2">
-                    <h5 class="card-title">Wilayah Lembaga Konservasi</h5>
-                    <div id="wilayahLKChart" data-counts="{{ $total_wilayahLk }}"></div>
-                </div>
-            </div>
+          <div class="card h-100 custom-card-size">
+              <div class="card-body-2">
+                  <h5 class="card-title">Wilayah Lembaga Konservasi</h5>
+                  <div id="wilayahLKChart" data-counts="{{ $total_wilayahLk }}"></div>
+              </div>
+          </div>
         </div>
     </div>
 </div>
 
 <div class="row">
   <div class="col-lg-6">
-    <div class="card h-1000 custom-card-size jumlah-species-individu">
-        <div class="card-body">
+    <div class="card h-100 custom-card-size jumlah-species-individu">
+        <div class="card-body-3">
             <h5 class="card-title">Jumlah Spesies Individu</h5>
             <div id="spesiesIndvChart" data-counts="{{ $total_jumlahIndvSpesies }}"></div>
         </div>

@@ -41,10 +41,10 @@ Route::get('/register', function () {
     return view('auth.register',compact('roles','upt_bentuk','upt_wilayah','list_lk','list_species'));
 });
 
-Route::post('register1',[AuthController::class, 'register1'])->name('register1');
-Route::post('register2',[AuthController::class, 'register2'])->name('register2');
-Route::post('register3',[AuthController::class, 'register3'])->name('register3');
-Route::post('login', [AuthController::class, 'login'])->name('authenticate');
+Route::post('/register1',[AuthController::class, 'register1'])->name('register1');
+Route::post('/register2',[AuthController::class, 'register2'])->name('register2');
+Route::post('/register3',[AuthController::class, 'register3'])->name('register3');
+Route::post('/login', [AuthController::class, 'login'])->name('authenticate');
 
 Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_session'),'verified'])
 ->group(function () {

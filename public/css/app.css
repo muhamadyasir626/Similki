@@ -5529,7 +5529,7 @@ div.fc .btn-group-vertical > .btn-group:not(:first-child) > .fc-button-primary {
 }
 
 .modal-content {
-  position: relative;
+  position: absolute;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -22419,7 +22419,7 @@ div.tox .tox-dialog__body {
   height: 100%;
   width: 100%;
   min-width: 200px;
-  min-height: 90px;
+  min-height: 10px;
   display: flex;
   margin-bottom: 20px; 
   border: 1px solid var(--bs-card-border-color);
@@ -22429,7 +22429,6 @@ div.tox .tox-dialog__body {
   text-align: center;
   
 }
-
 
 .card-body-1 {
   display: flex;
@@ -22455,10 +22454,9 @@ div.tox .tox-dialog__body {
   border-radius: 10px;
   /* height: 100%;
   width: 100%; */
-
 }
 
-#chartContainer1, #chartContainer2, #chartContainer3 {
+#chartContainer1, #chartContainer2, #chartContainer3,#spesiesIndvChart {
   width: 100%;  
   height: 400px;
   display: flex;
@@ -22481,6 +22479,7 @@ div.tox .tox-dialog__body {
 
 .mb-2 {
   margin-bottom: 10px;
+  padding:10px;
 }
 
 #wilayahLKChart {
