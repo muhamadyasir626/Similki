@@ -12,37 +12,10 @@ use App\Models\ListSpecies;
 use App\Models\Tagging;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class SatwaController extends Controller
 {
-
-public function getall()
-{
-    try {
-        // Ambil data dan cek apakah relasi berhasil di-load
-        // $satwa = Satwa::with(['lk', 'species'])
-        //               ->select('id', 'status_satwa', 'jenis_kelamin_individu')
-        //               ->whereIn('status_satwa', ['Satwa Koleksi', 'Satwa Titipan'])
-        //               ->get();
-        $satwa = Satwa::select('status_satwa')->count();
-
-        // Debugging: Tampilkan hasil query
-        // dd($satwa);
-
-        return response()->json([
-            'status' => 'success',
-            'data' => $satwa
-        ]);
-    } catch (\Exception $e) {
-        // Tangkap error dan tampilkan pesan
-        return response()->json([
-            'status' => 'error',
-            'message' => $e->getMessage()
-        ], 500);
-    }
-}
-
-
     //pendataan satwa
     // public function pendataan1(Request $request){
     //     $validator  = Validator::make($request->all(),[
@@ -348,32 +321,32 @@ public function getall()
     // //         'file' => 'required|file|mimes:csv',
     // //     ]);
 
-    //     Excel::import(new DataImport, request()->file('file'));
+    // //     Excel::import(new DataImport, request()->file('file'));
     // }
 
-    // /**
-    //  * Display the specified resource.
-    //  */
-    // public function show(Satwa $Satwa)
-    // {
-    //     //
-    // }
+    /**
+     * Display the specified resource.
+     */
+    public function show(Satwa $Satwa)
+    {
+        //
+    }
 
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  */
-    // public function edit(Satwa $Satwa)
-    // {
-    //     //
-    // }
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Satwa $Satwa)
+    {
+        //
+    }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    // public function update(UpdateSatwaRequest $request, Satwa $Satwa)
-    // {
-    //     //
-    // }
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateSatwaRequest $request, Satwa $Satwa)
+    {
+        //
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -389,7 +362,7 @@ public function getall()
         $satwa = Satwa::with('lk')->get();
         $lk = LembagaKonservasi::with('upt')->get();
 
-        return view('pages.satwa.pendataan-satwa', compact('satwa','lk','user',));
+        return view('pages.forms.pendataan-satwa', compact('satwa','lk','user',));
     }
     public function getall(){
     try {
@@ -409,12 +382,10 @@ public function getall()
         //     return strtolower( $item->spesies);
         // });
 
-        $spesies = Satwa::with('species')->select('')
+        $spesies = Satwa::with('species')->select('');
 
         // $spesies = ListSpecies::withCount(['satwas as jumlah_individu'])
         //     ->get(['nama_ilmiah', 'jumlah_individu']);
-
-        
 
         return response()->json([
             'status' => 'success',
