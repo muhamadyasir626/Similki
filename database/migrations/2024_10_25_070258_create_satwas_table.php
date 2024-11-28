@@ -30,11 +30,11 @@ return new class extends Migration
             $table->decimal('jumlah_betina', 10, 2);
             $table->decimal('jumlah_unsex', 10, 2);
             $table->decimal('jumlah_keseluruhan_gender', 10, 2);
-            $table->string('no_izin_peroleh',50);
+            $table->string('no_izin_peroleh',50)->nullable();
             $table->string('no_ba_titipan')->nullable();
             $table->string('no_ba_kelahiran')->nullable();
             $table->string('no_ba_kematian')->nullable();
-            $table->string('nama_panggilan', 50);
+            $table->string('nama_panggilan', 50)->nullable();
             $table->date('validasi_tanggal')->nullable();
             $table->string('tahun_titipan',4);
             $table->text('keterangan')->nullable();
