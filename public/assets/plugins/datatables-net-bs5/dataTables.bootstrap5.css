@@ -470,9 +470,9 @@ div.table-responsive
     }
 }
 
- .table td.name-column {
-        max-width: 4000px; /* Atur lebar maksimum sesuai kebutuhan */
-        word-wrap: break-word; /* Memungkinkan teks untuk membungkus ke baris berikutnya */
-        overflow-wrap: break-word; /* Untuk mendukung browser yang lebih lama */
-        white-space: normal; /* Pastikan teks bisa membungkus */
-    }
+.table td.name-column {
+    /* max-width: 350px;  */
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    white-space: normal;
+}

@@ -329,11 +329,21 @@
 }
 
 .custom-dropdown {
-    background-color: #fff !important; 
+    background-color: #fff !important;
     border: 1px solid rgb(103, 103, 103) !important;
-    color: black; 
+    color: black;
 }
 
 .custom-dropdown:hover {
-    background-color: #f2f2f2; 
+    background-color: #f2f2f2;
+}
+
+.is-invalid {
+    border: 2px solid red;
+}
+
+.error-message {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    color: #dc3545; /* Warna merah */
 }
