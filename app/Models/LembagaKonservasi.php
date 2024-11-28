@@ -14,7 +14,7 @@ class LembagaKonservasi extends Model
 
     protected $guard =['id'];
 
-    public function ListUpt(){
+    public function upt(){
         return $this->belongsTo(ListUpt::class, 'id_upt');
     }
     public function User(){
