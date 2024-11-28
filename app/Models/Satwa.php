@@ -9,7 +9,7 @@ class Satwa extends Model
 {
     use HasFactory;
 
-    protected $guard = ['id'];
+    protected $guarded = ['id'];
     protected $table = 'satwas';
 
     public function tagging(){

@@ -187,7 +187,8 @@ $(function () {
         var options = {
             chart: {
                 type: "bar",
-                height: 400,
+                height: 600,
+                width: '100%',
                 events: {
                     dataPointSelection: function (event, chartContext, config) {
                         const selectedLabel = config.w.config.xaxis.categories[config.dataPointIndex];
