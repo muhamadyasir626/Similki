@@ -99,7 +99,7 @@
   <div class="col-lg-6">
     <div class="card h-100 custom-card-size">
       <div class="card-body-3">
-        <h5 class="card-title">Taksa</h5>
+        <h5 class="card-title">Kelas Satwa</h5>
         <div id="chartContainer1" data-counts="{{ $total_class }}"></div>
       </div>
     </div>

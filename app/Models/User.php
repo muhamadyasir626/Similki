@@ -65,7 +65,7 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class,'id_role');
     }
     public function upt(){
-        return $this->belongsTo(ListUpt::class,'id_upt');
+        return $this->belongsTo(ListUpt::class,'id_list_upt');
     }
     public function spesies(){
         return $this->belongsTo(ListSpecies::class,'id_spesies');

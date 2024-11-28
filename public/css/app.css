@@ -19699,6 +19699,7 @@ body {
   transition: width 0.1s ease, margin 0.1s ease-in-out;
   z-index: 999;
 }
+
 .sidebar .sidebar-header {
   background: #fff;
   height: 60px;

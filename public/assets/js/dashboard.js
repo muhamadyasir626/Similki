@@ -268,7 +268,7 @@ $(function () {
         new ApexCharts(document.querySelector("#chartContainer2"), options).render();
     });
 
-     //jumlah tagging
+     //jumlah tagging & kelas satwa
     $(document).ready(function () {
         const dataContainer = $('#chartContainer1');
         const dataObj = JSON.parse(dataContainer.attr('data-counts'));
