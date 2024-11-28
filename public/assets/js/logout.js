@@ -1,6 +1,6 @@
 function setLogoutTimer() {
   var time;
-  const idle = 15;
+  const idle = 8;
   window.onload = resetTimer;
   document.onmousemove = resetTimer;
   document.onkeypress = resetTimer;
@@ -25,7 +25,7 @@ function setLogoutTimer() {
 
   function resetTimer() {
       clearTimeout(time);
-      time = setTimeout(logout, idle * 60 * 1000);  
+      time = setTimeout(logout, idle * 60 * 60 * 1000);  
   }
 }
 
