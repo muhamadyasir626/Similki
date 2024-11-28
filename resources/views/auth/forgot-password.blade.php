@@ -10,7 +10,7 @@
 
             <p class="big-heading">{{ __('Lupa password?') }}</p>
             <div class="mb-4 text-sm text-gray-600">
-                {{ __('Kirimkan email kamu yang terdaftar, kami akan mengirimkan link reset password ke email Anda. No problem.') }}
+                {{ __('Kirimkan email kamu yang terdaftar, kami akan mengirimkan link reset password ke email Anda.') }}
             </div>
 
             @if (session('status'))
