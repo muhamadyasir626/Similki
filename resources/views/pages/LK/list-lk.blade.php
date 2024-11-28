@@ -107,7 +107,9 @@
   <script src="{{ asset('assets/js/popup.js') }}"></script>
   <link rel="stylesheet" href="css/popup.css" />
 @endpush --}}
-@extends('layouts.master')
+
+
+{{-- @extends('layouts.master')
 
 @push('plugin-styles')
   <link href="{{ asset('assets/plugins/datatables-net-bs5/dataTables.bootstrap5.css') }}" rel="stylesheet" />
@@ -240,4 +242,4 @@
   <script src="{{ asset('assets/js/popup.js') }}"></script>
   <link rel="stylesheet" href="css/popup.css" />
 
-@endpush
+@endpush --}}
