@@ -39,6 +39,7 @@ return new class extends Migration
         // Index untuk tabel list_species
         Schema::table('list_species', function (Blueprint $table) {
             $table->index('id');
+            $table->index('spesies');
         });
     }
 
@@ -75,6 +76,7 @@ return new class extends Migration
         // Drop index untuk tabel list_species
         Schema::table('list_species', function (Blueprint $table) {
             $table->dropIndex(['id']);
+            $table->dropIndex(['spesies']);
         });
     }
 };
