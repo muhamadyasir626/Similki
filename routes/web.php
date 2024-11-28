@@ -6,8 +6,6 @@ use App\Models\ListUpt;
 use App\Models\Tagging;
 use App\Models\ListSpecies;
 use App\Models\LembagaKonservasi;
-use App\Models\Satwa;
-use App\Models\Tagging;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
