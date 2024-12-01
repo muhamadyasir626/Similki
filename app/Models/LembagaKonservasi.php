@@ -17,13 +17,13 @@ class LembagaKonservasi extends Model
     public function upt(){
         return $this->belongsTo(ListUpt::class, 'id_upt');
     }
-    public function user(){
+    public function User(){
         return $this->belongsTo(User::class);
     }
-    public function satwa(){
+    public function Satwa(){
         return $this->belongsTo(Satwa::class);
     }
-    public function monitoring(){
+    public function MonitoringInvestasi(){
         return $this->belongsTo(MonitoringInvestasi::class);
     }
 }

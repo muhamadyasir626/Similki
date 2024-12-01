@@ -236,6 +236,10 @@ a.loginbtn:hover {
     position: relative;
 }
 
+.input-wrapper {
+    position: relative;
+}
+
 .toggle-password {
     position: absolute;
     top: 35%;
@@ -252,5 +256,10 @@ a.loginbtn:hover {
 .toggle-password img {
     transform: translateX(20%);
     width: 100%;
+    height: auto;
+}
+
+.toggle-password img {
+    width: 4%;
     height: auto;
 }

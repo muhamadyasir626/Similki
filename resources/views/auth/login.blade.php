@@ -13,7 +13,7 @@
     <div class="container">
         <div class="login-link">
             <div class="logo">
-                <img src="/assets/images/klhk.png" alt="klhk" />
+                <img src="img/klhk.png" alt="klhk" />
             </div>
             <p class="side-big-heading">Belum punya akun?</p>
             <a href="/register" class="registerbtn">Daftar</a>

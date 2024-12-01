@@ -36,7 +36,7 @@ class CheckPermission
      * @param  \Illuminate\Http\Request  $request
      * @return bool
      */
-    protected function isRoutePermission(Request $request)
+    protected function isRoutePermission(Request $request) 
     {
         // Check if the current route name is 'permission'
         return $request->route()->named('permission');
