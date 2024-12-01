@@ -195,6 +195,8 @@ class  AuthController extends Controller
         
         if (Auth::attempt($credentials, $remember)) {
             $auth = Auth::user();
+            $status = $auth->status_permission;
+            // dd($status);
             
             $expiryMinutes = 60 * 24 * 7; // Token expires after 1 week
             
@@ -207,7 +209,8 @@ class  AuthController extends Controller
                 'success' => true,
                 'message' => 'Login berhasil',
                 'data' => [
-                    'token' => $token
+                    'token' => $token,
+                    'status'=> $status,
                 ]
             ])->withCookie($cookie);                  
         } else {

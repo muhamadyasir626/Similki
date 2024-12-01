@@ -57,11 +57,15 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::get('/get-spesies', [ListSpeciesController::class, 'index']);
 
     Route::resource('lembaga-konservasi', LembagaKonservasiController::class);
+
     Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
     Route::get('/monitoring',[LembagaKonservasiController::class,'monitoring'])->name('monitoring-lk');
 
     
-    Route::resource('satwa', SatwaController::class);
+    Route::resource('satwa', SatwaController::class)->parameters([
+        'satwa' => 'id'
+    ]);
+    
     Route::get('/pendataan-satwa', [SatwaController::class,'form'])->name('form-satwa');
     Route::post('/satwa/pendataan1',[SatwaController::class, 'pendataan1'])->name('pendataan-satwa1');
     Route::post('/satwa/pendataan2',[SatwaController::class, 'pendataan2'])->name('pendataan-satwa2');

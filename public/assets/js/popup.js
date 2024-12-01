@@ -196,7 +196,7 @@ function cancelEditForm() {
     
 function submitForm() {
     const csrfToken = document.querySelector('meta[name="_token"]').getAttribute('content');
-    const token = localStorage.getItem('auth_token');
+const token = localStorage.getItem('auth_token');
     const data = {
         nama: document.getElementById('nama').value,
         upt: document.getElementById('upt').value,

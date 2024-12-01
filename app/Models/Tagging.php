@@ -12,6 +12,9 @@ class Tagging extends Model
     protected $fillable = [
         'id_satwa',
         'jenis_tagging',
+        'alasan_belum_tagging',
+        'ba_tagging',
+        'kode_tagging',
     ];
 
     public function satwa(){

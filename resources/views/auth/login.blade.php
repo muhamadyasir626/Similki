@@ -26,11 +26,7 @@
             <form method="POST">
                 @csrf
 
-                @if (session('error'))
-                <div class="validation" id="validation">
-                    {{ session('error') }}
-                </div>
-                @endif
+                
 
 
                 <div class="text-fields email">
@@ -39,7 +35,7 @@
                            placeholder="Masukkan username atau email" 
                            required 
                            oninput="validateInput()" />
-                    <span id="error-message" style="color: red; font-size: 12px; display: none; margin-bottom:10px">
+                    <span id="input-invalid" style="color: red; font-size: 12px; display: none; margin-bottom:10px">
                         Input harus berupa username atau email yang valid.
                     </span>
                 </div>
@@ -47,7 +43,7 @@
                 <div class="text-fields "> 
                     <label for="password">Password</label>
                     <div class="input-wrapper password">
-                        <input type="password" id="password" name="password" required placeholder="Password">
+                        <input type="password" id="password" name="password" placeholder="Password" required>
                         <span onclick="togglePasswordVisibility('password', this)" class="toggle-password" data-show="{{ asset('assets/images/others/eye-show-password.png') }}" data-hide="{{ asset('assets/images/others/eye-hide-password.png') }}">
                             <img src="{{ asset('assets/images/others/eye-hide-password.png') }}" alt="hide password" />
                         </span>

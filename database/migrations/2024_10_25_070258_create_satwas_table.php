@@ -23,13 +23,11 @@ return new class extends Migration
             $table->string('sk_kepala')->nullable();
             $table->string('sk_ksdae')->nullable();
             $table->string('sk_menteri')->nullable();
+            $table->date('tanggal_kelahiran');
+            $table->date('tanggal_kematian')->nullable();
             $table->boolean('perilaku_satwa'); // individu (1) || berkelompok (0)
             $table->boolean('jenis_kelamin_individu')->nullable(); // jantan (1) || betina (0)
             $table->string('status_satwa', 50); // satwa {titipan, koleksi}, breeding loan, rehabilitasi
-            $table->decimal('jumlah_jantan', 10, 2);
-            $table->decimal('jumlah_betina', 10, 2);
-            $table->decimal('jumlah_unsex', 10, 2);
-            $table->decimal('jumlah_keseluruhan_gender', 10, 2);
             $table->string('no_izin_peroleh',50)->nullable();
             $table->string('no_ba_titipan')->nullable();
             $table->string('no_ba_kelahiran')->nullable();

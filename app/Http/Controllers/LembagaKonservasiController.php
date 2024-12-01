@@ -6,7 +6,6 @@ use App\Models\ListUpt;
 use Illuminate\Http\Request;
 use App\Models\LembagaKonservasi;
 use App\Models\MonitoringInvestasi;
-use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Events\LembagaKonservasiUpdated;
 use App\Imports\LembagaKonservasiImport;
@@ -31,16 +30,17 @@ class LembagaKonservasiController extends Controller
         return view('lk.create');
     }
 
-    public function store(StoreLembagaKonservasiRequest $request)
-    {
+    public function store(Request $request)
+{
+    try {
         $validatedData = $request->validate([
             'nama' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:lembaga_konservasi,slug',
-            'id_upt' => 'required|exists:units,id',
+            'slug' => 'required|string|max:255|unique:lembaga_konservasis',
+            'id_upt' => 'required|exists:list_upts,id',
             'alamat' => 'required|string',
             'provinsi' => 'required|string|max:50',
             'kota_kab' => 'required|string|max:50',
-            'kelurahan' => 'required|string|max:50',
+            'kelurahan_desa' => 'required|string|max:50',
             'kecamatan' => 'required|string|max:50',
             'kode_pos' => 'required|string|size:5',
             'tahun_izin' => 'required|string|max:4',
@@ -52,14 +52,34 @@ class LembagaKonservasiController extends Controller
             'nama_pimpinan' => 'required|string|max:255',
             'izin_perolehan_tsl' => 'nullable|string',
             'tahun_akred' => 'required|string|max:4',
-            'nilai_akred' => 'required|string|size:2',
+            'nilai_akred' => 'required|string|min:1|max:2',
             'pks_dengan_lk_lainnya' => 'nullable|string'
         ]);
-    
-        LembagaKonservasi::create($validatedData);
-    
-        return redirect()->route('lk.index')->with('success', 'Lembaga Konservasi created successfully.');
+
+        $lembagaKonservasi = LembagaKonservasi::create($validatedData);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Lembaga Konservasi successfully created',
+            'data' => $lembagaKonservasi
+        ], 201);
+
+    } catch (\Illuminate\Validation\ValidationException $exception) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Validation failed',
+            'errors' => $exception->errors()
+        ], 422);
+    } catch (\Exception $exception) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Server Error',
+            'error' => $exception->getMessage()
+        ], 500);
     }
+}
+
+    
 
     /**
      * Display the specified resource.
@@ -70,20 +90,12 @@ class LembagaKonservasiController extends Controller
         return view('lk.show', compact('lembagaKonservasi'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(LembagaKonservasi $lembagaKonservasi)
-    {
-        return view('lk.edit', compact('lembagaKonservasi'));
-    }
 
     /**
      * Update the specified resource in storage.  */
     public function update(Request $request, $id)
     {
         try {
-            Log::info('Updating LembagaKonservasi with data:', $request->all());
             $lk = LembagaKonservasi::findOrFail($id);   
             $wilayah = $request->input('upt');
             $id_upt = ListUpt::where('wilayah',$wilayah)->first();
@@ -98,8 +110,8 @@ class LembagaKonservasiController extends Controller
                 'pengelola' => 'required|string|max:20',
                 'alamat' => 'required|string',
                 'link_sk' => 'required|string',
-                'legalitas_perizinan' => 'required|string|max:255',
-                'nomor_tanggal_surat' => 'required|string|max255',
+                'legalitas_perizinan' => 'required|string',
+                'nomor_tanggal_surat' => 'required|string',
                 'izin_perolehan_tsl' => 'required|string',
                 'pks_dengan_lk_lainnya' => 'required|string'
             ]);
@@ -147,13 +159,13 @@ class LembagaKonservasiController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => 'Lembaga Konservasi berhasil dihapus.'
-            ]);
+            ],303);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Penghapusan Lembaga Konservasi gagal.',
                 'error' => $e->getMessage()
-            ], 500);
+            ], 403);
         }
     }
     

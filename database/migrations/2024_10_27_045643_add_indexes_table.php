@@ -41,6 +41,18 @@ return new class extends Migration
             $table->index('id');
             $table->index('spesies');
         });
+
+        schema::table('family_members', function(Blueprint $table){
+            $table->index('id_ayah');
+            $table->index('id_ibu');
+            $table->index('id_anak');
+            $table->index('id_pasangan');
+        });
+
+        schema::table('couples', function(Blueprint $table){
+            $table->index('id_jantan');
+            $table->index('id_betina');
+        });
     }
 
     /**
@@ -77,6 +89,18 @@ return new class extends Migration
         Schema::table('list_species', function (Blueprint $table) {
             $table->dropIndex(['id']);
             $table->dropIndex(['spesies']);
+        });
+
+        schema::table('family_members', function(Blueprint $table){
+            $table->dropIndex('id_ayah');
+            $table->dropIndex('id_ibu');
+            $table->dropIndex('id_anak');
+            $table->dropIndex('id_pasangan');
+        });
+
+        schema::table('couples', function(Blueprint $table){
+            $table->dropIndex('id_jantan');
+            $table->dropIndex('id_betina');
         });
     }
 };

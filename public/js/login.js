@@ -34,7 +34,7 @@ function validateInput() {
 
 function validateInput() {
   const input = document.getElementById('login').value;
-  const errorMessage = document.getElementById('error-message');
+  const errorMessage = document.getElementById('input-invalid');
   const submitBtn = document.getElementById('submitBtn');
 
   // Pola untuk username
@@ -57,10 +57,7 @@ function validateInput() {
   }
 }
 
-const errorMessage = document.getElementById('validation');
-if (errorMessage) {
-    errorMessage.style.display = 'block';
-}
+
 
 document.getElementById('submitBtn').addEventListener('click', function (event) {
     event.preventDefault();
@@ -68,9 +65,13 @@ document.getElementById('submitBtn').addEventListener('click', function (event) 
     const password = document.getElementById('password').value;
     const remember = document.getElementById('remember_me').checked;
     const csrfToken = document.querySelector('input[name="_token"]').value;
-    
-    console.log('Button clicked');
+    const errorDiv = document.getElementById('error-message');
 
+    if (!password || !login) {
+        errorDiv.textContent = 'Tolong isi username/email dan password';
+        errorDiv.style.display = 'block';
+    }
+    
     fetch(`/login`, {
         method: 'POST',
         headers: {
@@ -85,21 +86,20 @@ document.getElementById('submitBtn').addEventListener('click', function (event) 
         })
     })
     .then(response => response.json())
-    .then(response => {
-        if (response.data) {
-            localStorage.setItem('auth_token', response.data.token);
-            window.location.href = '/permission';
+        .then(response => {
+        localStorage.setItem('auth_token', response.data.token);
+        console.log(response.data.status);
+    
+        if (response.data.status == 1) {
+            window.location.href = '/dashboard';
         } else {
-            console.error('Email/Username atau password salah, silakan coba lagi');
-            const errorDiv = document.getElementById('error-message');
-        if (errorDiv) {
-            errorDiv.textContent = 'Email/Username atau password salah, silakan coba lagi' || 'Terjadi kesalahan yang tidak diketahui.';
-            errorDiv.style.display = 'block';
+            window.location.href = '/permission';
         }
-        }
-        
+    
     })
     .catch(error => {
         console.error('Error:', error);
+        errorDiv.textContent = 'Email/Username atau password salah, silakan coba lagi'
+        errorDiv.style.display = 'block';
     });
 });
