@@ -75,6 +75,9 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::post('/updated-permission/id={id}',[AuthController::class,'updatePermission'])->name('updated-permission');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+    
+
 });
 
 Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);
+Route::get('/filter-class', [DashboardController::class, 'filterClass'])->name('dashboard.filter-class');

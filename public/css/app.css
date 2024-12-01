@@ -4379,7 +4379,7 @@ div.fc .btn-group-vertical > .btn-group:not(:first-child) > .fc-button-primary {
   --bs-card-title-spacer-y: 0.875rem;
   --bs-card-border-width: 1px;
   --bs-card-border-color: #f2f4f9;
-  --bs-card-border-radius: 10px;
+  --bs-card-border-radius: ;
   --bs-card-box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
   --bs-card-inner-border-radius: calc(0.25rem - 1px);
   --bs-card-cap-padding-y: 0.875rem;
@@ -4401,6 +4401,7 @@ div.fc .btn-group-vertical > .btn-group:not(:first-child) > .fc-button-primary {
   background-clip: border-box;
   border: var(--bs-card-border-width) solid var(--bs-card-border-color);
   border-radius: var(--bs-card-border-radius);
+  box-shadow: 50%;
 }
 .card > hr {
   margin-right: 0;
@@ -22438,8 +22439,6 @@ div.tox .tox-dialog__body {
   align-items: center;
   justify-content: center;
   height: 100%;
-  border-radius: 10px;
-
 }
 .card-body-2 {
   padding: 1rem;
@@ -22447,16 +22446,13 @@ div.tox .tox-dialog__body {
   flex-direction: column;
   height: 100%;
 }
-
 .card-body-3 {
   padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 10px;
   /* height: 100%;
   width: 100%; */
-
 }
 
 #chartContainer1, #chartContainer2, #chartContainer3 {

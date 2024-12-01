@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Cache;
 class DashboardController extends Controller
 {
     public function index(){
+        
         $role = Auth::user()->role->tag;
         switch($role){
             case'KKHSG':
@@ -137,15 +138,16 @@ class DashboardController extends Controller
                         });
                 });
                 $total_jenis_koleksi = $label_jenis_koleksi->pluck('total', 'label');
-
+                
+                
                 return view('dashboard', compact(
                     'lk_count', 'species_count', 'skoleksi_count', 
                     'stitipan_count', 'sbelumtag_count', 'shidup_count',
                     'total_bentukLk', 'taksa', 'total_wilayahLk',
                     'total_jumlahIndvSpesies', 'total_tagging',
-                    'total_jenis_koleksi', 'total_class'
-                ));
-            case'LK':
+                    'total_jenis_koleksi', 'total_class',                 ));
+                
+                case'LK':
                 $lk = Auth::user()->lk->id;
                     $bentuk_lk = LembagaKonservasi::where('id', $lk)->value('bentuk_lk');
                     $species_count = Satwa::where('id_lk', $lk)->count();
@@ -479,5 +481,28 @@ class DashboardController extends Controller
     public function updateData()
     {
         
+    }
+
+    public function filterClass()
+    {
+        try {
+            $filter_class = Cache::remember('filter_class', 60, function () {
+                return Satwa::with('species:id,class')
+                            ->get()
+                            ->pluck('species.class')
+                            ->map(function ($class) {
+                                return strtolower(trim($class));
+                            })
+                            ->unique()
+                            ->filter()
+                            ->values();
+            });
+            
+            return response()->json($filter_class); // Pastikan response dalam format JSON
+            
+        } catch (\Exception $e) {
+            // Menangani error dan memberi response yang sesuai
+            return response()->json(['error' => 'Data tidak ditemukan', 'message' => $e->getMessage()], 500);
+        }
     }
 }
