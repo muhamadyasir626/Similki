@@ -81,6 +81,7 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
 });
 
 Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);
+Route::get('/filter-class', [DashboardController::class, 'filterClass'])->name('dashboard.filter-class');
 
 //undefined route 
 // Route::any('/{page}', function () {

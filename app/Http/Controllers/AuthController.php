@@ -206,7 +206,7 @@ class  AuthController extends Controller
                         'token' => $token
                     ],
                     'url' => '/permission'
-                ];    
+                ]);    
                 // return response()->json($response)->withCookie($cookie);
                 // return redirect('/permission')->header('Authorization', 'Bearer'. $token);
                 return redirect('/permission')->withCookie($cookie);                

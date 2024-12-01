@@ -389,7 +389,7 @@ public function getall()
 
         return view('pages.forms.pendataan-satwa', compact('satwa','lk','user',));
     }
-    public function getall(){
+    public function updateDashboard(){
     try {
         $class = ListSpecies::select('class')->get()->map(function ($item) {
             return strtolower($item->class);
