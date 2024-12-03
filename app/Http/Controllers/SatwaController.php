@@ -13,6 +13,7 @@ use App\Models\Tagging;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Cache;
 
 class SatwaController extends Controller
 {
@@ -382,13 +383,39 @@ public function getall()
     }
 
     //daftar satwa
-    public function form(){
-        $user = User::with('lk','role', 'upt', 'spesies')->find(Auth::id());
-        $satwa = Satwa::with('lk')->get();
-        $lk = LembagaKonservasi::with('upt')->get();
+    public function form(Request $request){
 
-        return view('pages.forms.pendataan-satwa', compact('satwa','lk','user',));
+        $users = User::with('lk','role', 'upt', 'spesies')->find(Auth::id());
+        // $satwas = Satwa::with('lk')->get();
+        $classes = ListSpecies::select('class')->distinct()->pluck('class');
+        $genus = ListSpecies::select('genus')->distinct()->pluck('genus');
+        $spesies = ListSpecies::select('spesies')->distinct()->pluck('spesies');
+        $subSpesies = ListSpecies::select('subspesies')->distinct()->pluck('subspesies');
+        $lks = LembagaKonservasi::select('id','nama')->get();
+        $taggings = Tagging::select('jenis_tagging')->distinct()->pluck('jenis_tagging')->map(fn($tag) => ucfirst(strtolower($tag)))
+        ->toArray();
+
+        if ($request->ajax()) {
+            // Filter data berdasarkan parameter yang dikirim
+            if ($request->has('class')) {
+                $genus = ListSpecies::where('class', $request->class)->pluck('genus');
+                return response()->json($genus);
+            }
+            if ($request->has('genus')) {
+                $species = ListSpecies::where('genus', $request->genus)->pluck('spesies');
+                return response()->json($species);
+            }
+            if ($request->has('species')) {
+                $subSpecies = ListSpecies::where('spesies', $request->species)->pluck('subspesies');
+                return response()->json($subSpecies);
+            }
+        }
+        // dd($lks);
+        return view('pages.forms.pendataan-satwa', compact('lks','users','classes','genus','spesies','subSpesies', 'taggings'));
     }
+
+    
+
     public function updateDashboard(){
     try {
         $class = ListSpecies::select('class')->get()->map(function ($item) {

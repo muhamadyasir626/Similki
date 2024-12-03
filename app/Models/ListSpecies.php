@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ListSpecies extends Model
 {
     use HasFactory;
+    protected $fillable = ['class', 'genus', 'spesies', 'subspesies'];
+
 
 
     public function user(){

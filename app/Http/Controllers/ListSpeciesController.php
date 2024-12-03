@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ListSpecies;
 use App\Http\Requests\StoreListSpeciesRequest;
 use App\Http\Requests\UpdateListSpeciesRequest;
+use Illuminate\Http\Request;
+
 
 class ListSpeciesController extends Controller
 {

@@ -99,7 +99,7 @@ $(function () {
     ).hide();
 
     $("input[name='satwa_koleksi']").on("change", function () {
-        const isHidup = $(this).val() === "Hidup";
+        const isHidup = $(this).val().toLowerCase() === "hidup";
         $("#form-jenis_koleksi").toggle(isHidup);
         if (!isHidup) {
             $("#form-jenis_koleksi")
@@ -113,19 +113,22 @@ $(function () {
 
     // Show 'No. Perolehan' and 'Asal Satwa' based on 'jenis_koleksi' selection
     $("#form-jenis_koleksi input[type='radio']").on("change", function () {
-        const selectedValue = $(this).val();
-        if (selectedValue === "Satwa Koleksi") {
+        const selectedValue = $(this).val().toLowerCase();
+        if (selectedValue === "satwa koleksi") {
             $("#form-perolehan").show();
+            $("#form-perolehan").slideDown();
             $("#form-asal_satwa").show();
         } else {
             $("#form-perolehan").hide();
             $("#form-asal_satwa").show();
+            $("#form-asal_satwa").slideDown();
         }
     });
 
     $("input[name='asal_satwa']").on("change", function () {
-        if ($(this).val() === "Endemik") {
+        if ($(this).val().toLowerCase() === "endemik") {
             $("#form-status_perlindungan").show();
+            $("#form-status_perlindungan").slideDown();
             $("#form-confirm_no_sats-ln").hide();
             $("#form-no_sats-ln").hide();
         } else {
@@ -135,21 +138,23 @@ $(function () {
     });
 
     $("input[name='confirm_no_sats-ln']").on("change", function () {
-        $("#form-no_sats-ln").toggle($(this).val() === "Ya");
+        $("#form-no_sats-ln").toggle($(this).val().toLowerCase() === "ya");
     });
 
     $("input[name='status_perlindungan']").on("change", function () {
         if ($(this).val() === "1") {
             $("#form-pengambilan_satwa").show();
+            $("#form-pengambilan_satwa").slideDown();
             $("#form-confirm_sk_kepala").hide();
         } else {
             $("#form-confirm_sk_kepala").show();
+            $("#form-confirm_sk_kepala").slideDown();
             $("#form-pengambilan_satwa").hide();
         }
     });
 
     $("input[name='confirm_sk_kepala']").on("change", function () {
-        $("#form-sk_kepala").toggle($(this).val() === "Ya");
+        $("#form-sk_kepala").toggle($(this).val().toLowerCase() === "ya");
     });
 
     $("input[name='pengambilan_satwa']").on("change", function () {
@@ -163,11 +168,11 @@ $(function () {
     });
 
     $("input[name='confirm_sk_menteri']").on("change", function () {
-        $("#form-sk_menteri").toggle($(this).val() === "Ya");
+        $("#form-sk_menteri").toggle($(this).val().toLowerCase() === "ya");
     });
 
     $("input[name='confirm_sk_ksdae']").on("change", function () {
-        $("#form-sk_ksdae").toggle($(this).val() === "Ya");
+        $("#form-sk_ksdae").toggle($(this).val().toLowerCase() === "ya");
     });
 
     // Ensure only visible inputs are required
