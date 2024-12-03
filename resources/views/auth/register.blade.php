@@ -10,6 +10,8 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   </head>
   <body>
+    @include('components.notifikasi-action')
+
     <div class="container">
       <div class="login-link">
         <div class="logo">

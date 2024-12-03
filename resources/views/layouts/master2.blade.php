@@ -17,7 +17,7 @@ License: For each use you must have a valid license purchased only from above li
 	<meta name="author" content="NobleUI">
 	<meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, laravel, theme, front-end, ui kit, web">
 
-  <title>SIMILKI - Sistem Informasi Manajemen Lembaga Konservasi</title>
+  <title>NobleUI - Laravel Admin Dashboard Template</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,13 +26,12 @@ License: For each use you must have a valid license purchased only from above li
   <!-- End fonts -->
   
   <!-- CSRF Token -->
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <link rel="icon" href="{{ asset('/assets/images/klhk.png') }}" type="image/png">
+  <meta name="_token" content="{{ csrf_token() }}">
   
   <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
+
   <!-- plugin css -->
   <link href="{{ asset('assets/fonts/feather-font/css/iconfont.css') }}" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="{{ asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet" />
   <!-- end plugin css -->
 
@@ -44,26 +43,19 @@ License: For each use you must have a valid license purchased only from above li
 
   @stack('style')
 </head>
-<body data-base-url="{{url('/dashboard')}}">
+<body data-base-url="{{url('/')}}">
 
   <script src="{{ asset('assets/js/spinner.js') }}"></script>
 
   <div class="main-wrapper" id="app">
-    @include('layouts.sidebar')
-    <div class="page-wrapper">
-      @include('layouts.header')
-      <div class="page-content">
-        @yield('content')
-      </div>
-      {{-- @include('layouts.footer') --}}
+    <div class="page-wrapper full-page">
+      @yield('content')
     </div>
   </div>
 
     <!-- base js -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('assets/plugins/feather-icons/feather.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/logout.js') }}"></script>
     <!-- end base js -->
 
     <!-- plugin js -->

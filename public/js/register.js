@@ -103,9 +103,9 @@ forms.forEach(function(form) {
     
     document.getElementById('validation-errors').innerHTML = '';
     
-    for (let entry of formData.entries()) {
-        console.log(entry[0] + ': ' + entry[1]);
-    }
+    // for (let entry of formData.entries()) {
+    //     console.log(entry[0] + ': ' + entry[1]);
+    // }
 
 
       if (!form.checkValidity()) {
@@ -132,7 +132,14 @@ forms.forEach(function(form) {
   })
       .then(data => {
         if (data.success) {
-        transitionStage(formId)
+          // console.log(formId);
+          if (formId == 'stage3') {
+            showNotification(data.message, data.success);    
+            transitionStage(formId)
+          } else {
+            transitionStage(formId)
+            
+          }
         }
       })
       .catch(error => {
@@ -147,8 +154,8 @@ function displayValidationErrors(errors) {
   let errorsHtml = '';
 
   if (errors) {
-    errorsHtml += '<div class="font-medium text-red-600">Tolong Periksa kembali</div>';
-    errorsHtml += '<ul class="mt-3 list-disc list-inside text-sm text-red-600">';
+    errorsHtml += '<div class="font-medium text-red-600">Tolong Periksa kembali:</div>';
+    errorsHtml += '<ul class="mt-3 list-disc list-inside text-sm text-red-600" style="color:red;">';
     Object.keys(errors).forEach(function(key) {
       errors[key].forEach(function(error) {
         errorsHtml += '<li>' + error + '</li>';
@@ -168,7 +175,7 @@ function displayValidationErrors(errors) {
         case 'stage2':
             stage2to3();
             break; // Mencegah eksekusi lanjut ke case berikutnya
-        case 'stage3':
+      case 'stage3':
           window.location.href = '/';
           break;
         default:
@@ -181,7 +188,7 @@ function displayValidationErrors(errors) {
 document.getElementById('bentuk_upt').addEventListener('change', debounce(getWilayahUpt, 100));
 function getWilayahUpt() {
   var bentuk_upt = document.getElementById('bentuk_upt').value;
-  console.log('value bentuk ' + bentuk_upt);
+  // console.log('value bentuk ' + bentuk_upt);
 
   fetch(`/get-wilayah-upt?bentuk=${bentuk_upt}`)
     .then((response) => {
@@ -191,7 +198,7 @@ function getWilayahUpt() {
       return response.json();
     })
     .then((data) => {
-      console.log(data.data);
+      // console.log(data.data);
       if (data.data && data.data.length > 0) {
         updateWilayahDropdown(data.data);
       }

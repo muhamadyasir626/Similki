@@ -2,30 +2,17 @@
 
 @push('plugin-styles')
   <link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet" />
-  {{-- <style>
-    h3{
-        display: flex;
-        justify-content: flex-end;
-    }
 
-    .card-body-1,.card-body-2{
-      padding: 10px;
-    }
-
-    .row{
-      padding: 10px;
-    }
-
-</style> --}}
 @endpush
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
   <div>
-    <h4 class="mb-3 mb-md-0">Welcome to SIMILKI</h4>
+    <h4 class="mb-3 mb-md-10">Welcome to SIMILKI</h4>
   </div>
   <div class="d-flex align-items-center flex-wrap text-nowrap">
-    <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
+  
+    {{-- <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
       <span class="input-group-text input-group-addon bg-transparent border-primary" data-toggle><i data-feather="calendar" class="text-primary"></i></span>
       <input type="text" class="form-control bg-transparent border-primary" placeholder="Select date" data-input>
     </div>
@@ -37,7 +24,7 @@
       <i class="btn-icon-prepend" data-feather="download-cloud"></i>
       Download Report
     </button>
-  </div>
+  </div> --}}
 </div>
 
 <div class="container-fluid px-0">
@@ -167,4 +154,5 @@
 
 @push('custom-scripts')
   <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+  <script src="{{ asset('assets/js/search-filter.js') }}"></script>
 @endpush

@@ -13,7 +13,7 @@ function showNotification(message, type, duration = 5000) {
 
     // Set background color based on the type of notification
     switch (type) {
-        case 'success':
+        case 'success'|| true:
             notificationContainer.style.backgroundColor = '#4CAF50'; // Green
             break;
         case 'error':

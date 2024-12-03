@@ -11,8 +11,11 @@ class Family_members extends Model
 
     protected $guarded = ['id'];
 
-    public function satwa(){
-        return $this->hasMany(satwa::class,'id_ayah','id_ibu');
+    public function satwaAsAyah(){
+        return $this->hasMany(satwa::class,'id_ayah');
+    }
+    public function satwaAsIbu(){
+        return $this->hasMany(satwa::class,'id_ibu');
     }
 
 }

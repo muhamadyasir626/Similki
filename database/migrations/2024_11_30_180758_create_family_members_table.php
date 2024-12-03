@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->boolean('jenis_kelamin'); //laki-laki (1) || perempuan (0)
-            $table->foreignId('id_ayah')->references('id')->on('satwas')->onDelete('set null')->nullable();
-            $table->foreignId('id_ibu')->references('id')->on('satwas')->onDelete('set null')->nullable();
-            $table->foreignId('id_pasangan')->references('id')->on('satwas')->onDelete('set null')->nullable();
-            $table->foreignId('id_anak')->references('id')->on('satwas')->onDelete('set null')->nullable();
+            $table->foreignId('id_ayah')->nullable()->constrained('satwas')->onDelete('set null');
+            $table->foreignId('id_ibu')->nullable()->constrained('satwas')->onDelete('set null');
+            $table->foreignId('id_pasangan')->nullable()->constrained('satwas')->onDelete('set null');
+            $table->foreignId('id_anak')->nullable()->constrained('satwas')->onDelete('set null');
             $table->timestamps();
         });
     }

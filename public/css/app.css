@@ -326,7 +326,7 @@ th {
 }
 
 label {
-  display: inline-block;
+  display: flex;
 }
 
 button {
@@ -18955,7 +18955,7 @@ code {
 
 @media (min-width: 768px) {
   .grid-margin-md-0 {
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
   }
 }
 
@@ -22418,13 +22418,14 @@ div.tox .tox-dialog__body {
 .custom-card-size {
   height: 100%;
   width: 100%;
-  min-width: 200px;
+  min-width: 120px;
   min-height: 10px;
   display: flex;
   margin-bottom: 20px; 
   border: 1px solid var(--bs-card-border-color);
   box-shadow: var(--bs-card-box-shadow);
-  border-radius: var(--bs-card-border-radius);
+  border-radius: 5px;
+  /* border-radius: var(--bs-card-border-radius); */
   background-color: var(--bs-card-bg);
   text-align: center;
   
@@ -22490,3 +22491,53 @@ div.tox .tox-dialog__body {
   transform: scale(1.1);
 }
 
+
+.form-check {
+  margin-bottom: 10px;
+}
+
+.form-check-label {
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.nav-item label {
+  margin-bottom: 5px;
+  gap: 4px;
+
+  /* font-weight: bold; */
+}
+
+.filter-item{
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  font-size: 10px;
+  max-height: 400px;
+  margin-left: -25px;
+
+}
+
+.filter-item-label {
+  font-size: 14px;
+}
+
+
+#name-label{
+  position: -webkit-sticky;
+  margin-bottom:10px;
+  margin-top:10px;
+  background-color: white;
+  position: sticky;
+  top: 0; 
+  z-index: 1000; 
+}
+
+#search-input-filter{
+  position: sticky;
+  z-index: 1000; 
+  top: 0; 
+  background-color: white;
+  margin-bottom:5px;
+
+}

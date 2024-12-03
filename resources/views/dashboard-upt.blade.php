@@ -2,12 +2,28 @@
 
 @push('plugin-styles')
   <link href="{{ asset('assets/plugins/flatpickr/flatpickr.min.css') }}" rel="stylesheet" />
+  {{-- <style>
+    h3{
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .card-body-1,.card-body-2{
+      padding: 10px;
+    }
+
+    .row{
+      padding: 10px;
+    }
+
+</style> --}}
 @endpush
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
   <div>
-    <h4 class="mb-3 mb-md-0">{{ $user->lk->nama }}</h4>
+    <h4 class="mb-3 mb-md-0">{{ $user->upt->bentuk && $user->upt->wilayah ? $user->upt->bentuk . ' - ' . $user->upt->wilayah : 'Data tidak tersedia' }}
+    </h4>
   </div>
   <div class="d-flex align-items-center flex-wrap text-nowrap">
     <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0" id="dashboardDate">
@@ -26,18 +42,18 @@
 </div>
 
 <div class="container-fluid px-0">
-    <div class="row mb-3">
     <!-- Baris pertama untuk Kartu 1-6 -->
-    <div class="col-lg-2 col-md-4 col-sm-6">
-            <!-- Kartu 6 -->
+    <div class="row mb-3">
+        <!-- Loop untuk membuat semua kartu dalam satu baris -->
+        <div class="col-lg-2 col-md-4 col-sm-6"> <!-- Lebar kolom disesuaikan agar semua kartu muat dalam satu baris -->
+            <!-- Kartu 1 -->
             <div class="card mb-2 custom-card-size">
                 <div class="card-body-1">
-                    <h5 class="card-title">Bentuk LK</h5>
-                    <h3> {{ $bentuk_lk }}</h3>
+                    <h5 class="card-title">Jumlah LK</h5>
+                    <h3>{{ $lk_count }}</h3>
                 </div>
             </div>
         </div>
-        <!-- Loop untuk membuat semua kartu dalam satu baris -->
         <div class="col-lg-2 col-md-4 col-sm-6">
             <!-- Kartu 2 -->
             <div class="card mb-2 custom-card-size">
@@ -83,44 +99,52 @@
                 </div>
             </div>
         </div>
-    </div>
+  </div>
 </div>
 
-<!-- Baris kedua untuk Jenis LK dan Wilayah LK -->
-<div class="row">
-  <div class="col-lg-6">
-    <div class="card h-1000 custom-card-size jumlah-species-individu">
-        <div class="card-body">
-            <h5 class="card-title">Jumlah Spesies Individu</h5>
-            <div id="spesiesIndvChart" data-counts="{{ $total_jumlahIndvSpesies }}"></div>
-        </div>
-    </div>
-  </div>
+<!-- Row pertama untuk Bentuk LK dan Kelas Satwa -->
+<div class="row mb-4"> <!-- Menambahkan margin-bottom untuk memberikan jarak antar row -->
+  <!-- Kolom untuk Bentuk LK -->
   <div class="col-lg-6">
     <div class="card h-100 custom-card-size">
-      <div class="card-body-3">
+      <div class="card-body-2">
+        <h5 class="card-title">Bentuk LK</h5>
+        <div id="jenisLKChart" data-counts="{{ $total_bentukLk }}"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kolom untuk Kelas Satwa -->
+  <div class="col-lg-6">
+    <div class="card h-100 custom-card-size">
+      <div class="card-body-2">
         <h5 class="card-title">Kelas Satwa</h5>
-        <div id="chartContainer1" data-counts="{{ $total_class }}"></div>
+        <div id="chartContainer2" data-counts="{{ $total_class }}"></div>
       </div>
     </div>
   </div>
-  <div class="col-lg-6">
-    <div class="card h-100 custom-card-size">
-      <div class="card-body-3">
-        <h5 class="card-title">Jenis Tagging</h5>
-        <div id="chartContainer2" data-counts="{{ $total_tagging }}"></div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-lg-12">
+    <div class="card h-100 custom-card-size jumlah-species-individu">
+      <div class="card-body">
+        <h5 class="card-title">Jumlah Spesies Individu</h5>
+        <!-- Input Search -->
+        <input 
+          type="text" 
+          id="searchSpecies" 
+          class="form-control mb-3" 
+          placeholder="Cari spesies..." 
+          oninput="filterChartData()">
+        
+        <!-- Grafik -->
+        <div id="spesiesIndvChart" data-counts="{{ $total_jumlahIndvSpesies }}"></div>
       </div>
     </div>
   </div>
-  <div class="col-lg-6">
-    <div class="card h-100 custom-card-size">
-      <div class="card-body-3">
-        <h5 class="card-title">Jenis Koleksi</h5>
-        <div id="chartContainer3" data-counts="{{ $total_jenis_koleksi }}"></div>
-      </div>
-    </div>
-  </div>
-</div> 
+</div>
+
 @endsection
 
 @push('plugin-scripts')
@@ -130,5 +154,5 @@
 @endpush
 
 @push('custom-scripts')
-  <script src="{{ asset('assets/js/dashboard-lk.js') }}"></script>
+  <script src="{{ asset('assets/js/dashboard-upt.js') }}"></script>
 @endpush

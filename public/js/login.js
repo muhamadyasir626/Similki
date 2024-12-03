@@ -103,3 +103,7 @@ document.getElementById('submitBtn').addEventListener('click', function (event) 
         errorDiv.style.display = 'block';
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadNotification();
+  });

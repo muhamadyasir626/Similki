@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('couples', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('male_id')->constrained('satwas')->onDelete('cascade');  
-            $table->foreignId('female_id')->constrained('satwas')->onDelete('cascade');
-            $table->date('pairing_date')->nullable();   
-            $table->date('separation_date')->nullable();
+            $table->foreignId('id_jantan')->constrained('satwas')->onDelete('cascade');  
+            $table->foreignId('id_betina')->constrained('satwas')->onDelete('cascade');
+            $table->date('tanggal_dipasangkan')->nullable();   
+            $table->date('tanggal_dipisahan')->nullable();
             $table->timestamps();
         });
     }

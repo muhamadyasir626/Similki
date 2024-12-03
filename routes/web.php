@@ -76,7 +76,7 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
         return view('permission');
     })->name('permission');
     Route::get('/verifikasi-akun',[AuthController::class,'index'])->name('verifikasi-akun');
-    Route::post('/updated-permission/id={id}',[AuthController::class,'updatePermission'])->name('updated-permission');
+    Route::post('/updated-permission/{id}',[AuthController::class,'updatePermission'])->name('updated-permission');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });

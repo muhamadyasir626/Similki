@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Validator;
 class  AuthController extends Controller
 {
     public function index(){
-        $user = User::all();
-        // dd($user)
-        return view('pages.account.verifikasi-akun',compact('user'));
+        $users = User::all();
+        // dd($users);
+        return view('pages.account.verifikasi-akun',compact('users'));
     }
 
     public function register1(Request $request){
@@ -108,7 +108,8 @@ class  AuthController extends Controller
         $request->session()->put('register2', $sessionData);
     
         return response()->json([
-            'success' => true,
+            'success'=>true,
+            'status' => 'succes',
             'message' => 'Registrasi berhasil step 2',
         ]);
     }
@@ -245,10 +246,13 @@ class  AuthController extends Controller
     public function updatePermission(Request $request, $id){
         $user = User::findOrFail($id);
         $user->status_permission = $request->status; 
-        // dd($user);
+        // dd($user->status_permission);
         $user->save();
 
-        return response()->json(['message' => 'Status permission updated successfully!']);
+        return response()->json([
+            'message' => 'Status permission updated successfully!',
+            'status' => $user->status_permission,
+        ]);
     }
     
 }

@@ -1,5 +1,6 @@
+
 $(function () {
-    'use strict'
+    'use strict'  
 
     var colors = {
         primary: "#6571ff",
@@ -19,13 +20,13 @@ $(function () {
     var fontFamily = "'Roboto', Helvetica, sans-serif"
 
     // Date Picker
-    if ($('#dashboardDate').length) {
-        flatpickr("#dashboardDate", {
-            wrap: true,
-            dateFormat: "d-M-Y",
-            defaultDate: "today",
-        });
-    }
+    // if ($('#dashboardDate').length) {
+    //     flatpickr("#dashboardDate", {
+    //         wrap: true,
+    //         dateFormat: "d-M-Y",
+    //         defaultDate: "today",
+    //     });
+    // }
 
     //bentuk lk
     $(document).ready(function () {
@@ -368,4 +369,32 @@ $(function () {
         let randColor = randomNumber.padStart(6, 0);   
         return `#${randColor.toUpperCase()}`
     }      
+
+    $(document).ready(function () {
+        // Inisialisasi Select2 untuk semua filter
+        $('#filterLK, #filterTaksa, #filterUPT').select2({
+          placeholder: 'Pilih opsi',
+          allowClear: true, // Tambahkan tombol clear
+          width: '100%' // Sesuaikan lebar dropdown
+        });
+      
+        // Event untuk menangkap pilihan di Lembaga Konservasi
+        $('#filterLK').on('change', function () {
+          const selectedLK = $(this).val();
+          console.log('Lembaga Konservasi dipilih:', selectedLK);
+        });
+      
+        // Event untuk menangkap pilihan di Taksa
+        $('#filterTaksa').on('change', function () {
+          const selectedTaksa = $(this).val();
+          console.log('Taksa dipilih:', selectedTaksa);
+        });
+      
+        // Event untuk menangkap pilihan di UPT
+        $('#filterUPT').on('change', function () {
+          const selectedUPT = $(this).val();
+          console.log('UPT dipilih:', selectedUPT);
+        });
+      });
+      
 });

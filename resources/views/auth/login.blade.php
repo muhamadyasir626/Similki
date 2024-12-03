@@ -10,6 +10,7 @@
     <link rel="icon" href="{{ asset('/assets/images/klhk.png') }}" type="image/png">
 </head>
 <body>
+    @include('components.notifikasi-action')
     <div class="container">
         <div class="login-link">
             <div class="logo">
