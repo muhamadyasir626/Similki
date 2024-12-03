@@ -22497,3 +22497,8 @@ div.tox .tox-dialog__body {
   width: 180px;
   padding: 10px;
 }
+
+#spesiesIndvChart {
+  width: 100%;
+  display: flex;
+}
