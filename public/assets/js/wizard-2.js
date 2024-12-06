@@ -1,107 +1,6 @@
-// $(function () {
-//     "use strict";
-
-//     // Fungsi untuk mengumpulkan data dari form
-//     function collectData() {
-//         const data = {};
-//         $("#wizard section").each(function () {
-//             const formData = $(this)
-//                 .find("input, select, textarea")
-//                 .serializeArray();
-//             formData.forEach((item) => {
-//                 data[item.name] = item.value;
-//             });
-//         });
-//         return data;
-//     }
-
-//     // Tombol submit
-//     $("#submit-button").on("click", function (event) {
-//         event.preventDefault();
-
-//         if (validateCurrentStep()) {
-//             const formData = collectData();
-//             console.log("Data berhasil dikumpulkan:", formData);
-
-//             alert("Data berhasil disimpan ke console!");
-//         } else {
-//             alert("Silakan periksa kembali form yang belum valid.");
-//         }
-//     });
-
-//     // Awalnya sembunyikan semua form lanjutan
-//     $(
-//         "#form-jumlah, #form-jumlah_keseluruhan_gender, #form-jenis_kelamin, #form-confirm_tagging, #form-alasan_belum_tagging, #form-jenis_tagging, #kode_tagging, #form-ba_tagging, #form-tanggal_tagging, #form-no_ba_titipan, #form-no_ba_kelahiran, #form-no_ba_kematian, #form-nama_panggilan, #form-validasi_tanggal, #form-tahun_titipan, #form-keterangan, #form-nama_satwa_ina, #form-nama_panggilan, #takson_hewan, #form-total_satwa"
-//     ).hide();
-
-//     // Fungsi untuk validasi hanya pada elemen yang terlihat
-//     function validateVisibleFields() {
-//         let isValid = true;
-//         $(
-//             ":visible input[required], :visible textarea[required], :visible select[required]"
-//         ).each(function () {
-//             if (!this.checkValidity()) {
-//                 isValid = false;
-//                 $(this).addClass("is-invalid");
-//                 $(this).siblings(".error-message").remove();
-//                 $(this).after(
-//                     `<span class="error-message text-danger">${this.validationMessage}</span>`
-//                 );
-//             } else {
-//                 $(this).removeClass("is-invalid");
-//                 $(this).siblings(".error-message").remove();
-//             }
-//         });
-//         return isValid;
-//     }
-
-//     // Tampilkan atau sembunyikan form berdasarkan pilihan perilaku_satwa
-//     $("input[name='perilaku_satwa']").on("change", function () {
-//         if ($(this).val() === "Ya") {
-//             $("#form-jumlah").show();
-//             $("#form-total_satwa").show();
-//             $(
-//                 "#form-jenis_kelamin, #form-jumlah_keseluruhan_gender, #takson_hewan, #form-jenis_tagging, #kode_tagging, #form-ba_tagging, #form-tanggal_tagging, #form-no_ba_titipan, #form-no_ba_kelahiran, #form-no_ba_kematian, #form-alasan_belum_tagging, #form-validasi_tanggal, #form-tahun_titipan, #form-keterangan, #form-nama_satwa_ina"
-//             ).hide();
-//         } else {
-//             $("#form-jumlah").hide();
-//             $("#form-total_satwa").hide();
-//             $("#form-jenis_kelamin").show();
-//             $("#form-jumlah_keseluruhan_gender").show();
-//             $("#takson_hewan").show();
-//         }
-//         validateVisibleFields();
-//     });
-
-//     // Tampilkan form confirm_tagging setelah memilih jenis kelamin
-//     $("#form-jenis_kelamin input[type='radio']").on("change", function () {
-//         $("#form-confirm_tagging").show();
-//         validateVisibleFields();
-//     });
-
-//     // Tampilkan atau sembunyikan form berdasarkan pilihan confirm_tagging
-//     $("input[name='confirm_tagging']").on("change", function () {
-//         if ($(this).val() === "Ya") {
-//             $(
-//                 "#form-jenis_tagging, #kode_tagging, #form-ba_tagging, #form-tanggal_tagging, #form-no_ba_titipan, #form-no_ba_kelahiran, #form-no_ba_kematian, #form-validasi_tanggal, #form-tahun_titipan, #form-keterangan, #form-nama_satwa_ina"
-//             ).show();
-//             $("#form-alasan_belum_tagging").hide();
-//         } else {
-//             $(
-//                 "#form-jenis_tagging, #kode_tagging, #form-ba_tagging, #form-tanggal_tagging, #form-no_ba_titipan, #form-no_ba_kelahiran, #form-no_ba_kematian"
-//             ).hide();
-//             $(
-//                 "#form-alasan_belum_tagging, #form-validasi_tanggal, #form-tahun_titipan, #form-keterangan, #form-nama_satwa_ina"
-//             ).show();
-//         }
-//         validateVisibleFields();
-//     });
-// });
-
 $(function () {
     "use strict";
 
-    // Fungsi untuk mengumpulkan data dari form
     function collectFormData(formSections) {
         const data = {};
 
@@ -118,7 +17,6 @@ $(function () {
         return data;
     }
 
-    // Fungsi untuk validasi field visible
     function validateVisibleFields(formSection) {
         let isValid = true;
 
@@ -164,113 +62,182 @@ $(function () {
         return isValid;
     }
 
-    // Custom submit button for final step
     function onFinishedSubmit(event) {
         alert("Form submitted successfully!");
     }
 
-    // Awalnya sembunyikan semua form lanjutan
-    $(
-        "#form-jumlah, #form-jumlah_keseluruhan_gender, #form-jenis_kelamin, #form-confirm_tagging, #form-alasan_belum_tagging, #form-jenis_tagging, #kode_tagging, #form-ba_tagging, #form-tanggal_tagging, #form-no_ba_titipan, #form-no_ba_kelahiran, #form-no_ba_kematian, #form-nama_panggilan, #form-validasi_tanggal, #form-tahun_titipan, #form-keterangan, #form-nama_satwa_ina, #takson_hewan, #form-total_satwa"
-    ).hide();
-
-    $("input[name='perilaku_satwa']").on("change", function () {
-        if ($(this).val() === "1") {
-            $("#form-jumlah").show();
-            $("#form-jenis_kelamin").hide();
-            $("#form-jumlah_keseluruhan_gender").hide();
-            $("#form-confirm_tagging").hide();
-            //individu form
-            $("#form-nama_satwa_ina").hide();
-            $("#form-nama_panggilan").hide();
-            $("#takson_hewan").hide();
-            //berkelompok form
-            $("#form-total_satwa").show();
-        } else {
-            $("#form-jenis_kelamin").show();
-            $("#form-jumlah_keseluruhan_gender").show();
-            $("#form-confirm_tagging").show();
-            $("#form-jumlah").hide();
-            //individu form
-            $("#form-nama_satwa_ina").show();
-            $("#form-nama_panggilan").show();
-            $("#takson_hewan").show();
-            //berkelompok form
-            $("#form-total_satwa").hide();
-        }
-    });
-
-    $("input[name='confirm_tagging']").on("change", function () {
-        if ($(this).val() === "Ya") {
-            $("#form-jenis_tagging").show();
-            $("#form-ba_tagging").show();
-            $("#form-tanggal_tagging").show();
-            $("#form-no_ba_titipan").show();
-            $("#form-no_ba_kelahiran").show();
-            $("#form-no_ba_kematian").show();
-            $("#form-validasi_tanggal").show();
-            $("#form-tahun_titipan").show();
-            $("#form-keterangan").show();
-            $("#form-alasan_belum_tagging").hide();
-        } else {
-            $("#form-alasan_belum_tagging").show();
-            $("#form-jenis_tagging").hide();
-            $("#form-ba_tagging").hide();
-            $("#form-tanggal_tagging").hide();
-            $("#form-no_ba_titipan").hide();
-            $("#form-no_ba_kelahiran").hide();
-            $("#form-no_ba_kematian").hide();
-            $("#form-validasi_tanggal").hide();
-            $("#form-tahun_titipan").hide();
-            $("#form-keterangan").hide();
-        }
-    });
-
-    // Ensure only visible inputs are required
-    $("form").on("change", function () {
-        $(this)
+    function clearFormValues(formId) {
+        $(formId)
             .find("input, select, textarea")
             .each(function () {
-                const isVisible = $(this).is(":visible");
-                $(this).prop("required", isVisible);
+                $(this).val("");
             });
+    }
+    $(function () {
+        "use strict";
+
+        $(
+            "#form-jumlah, #form-jumlah_keseluruhan_gender, #form-jenis_kelamin, #form-confirm_tagging, #form-alasan_belum_tagging, #form-jenis_tagging, #kode_tagging, #form-ba_tagging, #form-tanggal_tagging, #form-no_ba_titipan, #form-no_ba_kelahiran, #form-no_ba_kematian, #form-nama_panggilan, #form-validasi_tanggal, #form-tahun_titipan, #form-keterangan, #form-nama_satwa_ina, #takson_hewan, #form-total_satwa"
+        ).hide();
+
+        $("input[name='perilaku_satwa']").on("change", function () {
+            if ($(this).val() === "1") {
+                // Individu
+                $("#form-jenis_kelamin").show();
+                $("#form-confirm_tagging").show();
+                $("#form-nama_satwa_ina").show();
+                $("#form-nama_panggilan").show();
+                $("#takson_hewan").show();
+                clearFormValues("#form-total_satwa");
+            } else {
+                // Berkelompok
+                $("#form-jenis_kelamin").show();
+                $("#form-confirm_tagging").show();
+                $("#form-nama_satwa_ina").show();
+                $("#form-nama_panggilan").show();
+                $("#takson_hewan").show();
+                clearFormValues("#form-jumlah");
+                clearFormValues("#form-total_satwa");
+            }
+        });
+
+        $("input[name='confirm_tagging']").on("change", function () {
+            if ($(this).val().toLowerCase() === "ya") {
+                $("#form-jenis_tagging").show();
+                $("#form-ba_tagging").show();
+                $("#form-tanggal_tagging").show();
+                $("#form-no_ba_titipan").show();
+                $("#form-no_ba_kelahiran").show();
+                $("#form-no_ba_kematian").show();
+                $("#form-validasi_tanggal").show();
+                $("#form-tahun_titipan").show();
+                $("#form-keterangan").show();
+                $("#form-alasan_belum_tagging").hide();
+
+                // Clear hidden form values
+                clearFormValues("#form-ba_tagging");
+                clearFormValues("#form-no_ba_titipan");
+                clearFormValues("#form-no_ba_kelahiran");
+                clearFormValues("#form-no_ba_kematian");
+                clearFormValues("#form-keterangan");
+                clearFormValues("#form-jenis_tagging");
+                clearFormValues("#form-tanggal_tagging");
+                clearFormValues("#form-validasi_tanggal");
+                clearFormValues("#form-tahun_titipan");
+            } else {
+                $("#form-alasan_belum_tagging").show();
+                $("#form-jenis_tagging").hide();
+                $("#form-ba_tagging").hide();
+                $("#form-tanggal_tagging").hide();
+
+                clearFormValues("#form-alasan_belum_tagging");
+            }
+        });
+
+        function clearFormValues(formId) {
+            $(formId)
+                .find("input, select, textarea")
+                .each(function () {
+                    $(this).val("");
+                });
+        }
+
+        $("form").on("change", function () {
+            $(this)
+                .find("input, select, textarea")
+                .each(function () {
+                    const isVisible = $(this).is(":visible");
+                    $(this).prop("required", isVisible);
+                });
+        });
     });
 
-    $("#submit-button").on("click", function (event) {
-        event.preventDefault();
+    var forms = document.querySelectorAll("[id^='stage']");
 
-        const formSection = $("your-form-section-selector"); // Replace with your actual form section selector
-        const csrf_token = document.
-        if (validateVisibleFields(formSection)) {
-            const formData = collectFormData(formSection);
-            console.log("Data collected:", formData);
+    forms.forEach(function (form) {
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            var formId = form.id;
+            var url = form.action;
+            var formData = new FormData(form);
+            const token = document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content");
 
-            // Send data to the backend
-            fetch("/satwa", {
-                // URL of your API endpoint
+            document.getElementById("validation-errors").innerHTML = "";
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            fetch(url, {
                 method: "POST",
+                body: formData,
                 headers: {
-                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": token,
                 },
-                body: JSON.stringify(formData), // Convert formData object to JSON string
             })
-                .then((response) => response.json())
+                .then((response) => {
+                    if (!response.ok) {
+                        return response.json().then((errorData) => {
+                            displayValidationErrors(errorData.errors);
+                            throw new Error("Validation failed");
+                        });
+                    }
+
+                    return response.json();
+                })
                 .then((data) => {
                     if (data.success) {
-                        alert("Data successfully submitted to the database!");
-                    } else {
-                        alert("An error occurred. Please try again.");
+                        transitionStage(formId);
                     }
                 })
                 .catch((error) => {
                     console.error("Error:", error);
-                    alert("There was an issue submitting the form.");
                 });
-        } else {
-            alert("Please complete all required fields before submitting.");
-        }
+        });
     });
 
-    // Inisialisasi logika form bersyarat
+    function displayValidationErrors(errors) {
+        let errorsContainer = document.getElementById("validation-errors");
+        let errorsHtml = "";
+
+        if (errors) {
+            errorsHtml +=
+                '<div class="font-medium text-red-600">Tolong Periksa kembali</div>';
+            errorsHtml +=
+                '<ul class="mt-3 list-disc list-inside text-sm text-red-600">';
+            Object.keys(errors).forEach(function (key) {
+                errors[key].forEach(function (error) {
+                    errorsHtml += "<li>" + error + "</li>";
+                });
+            });
+            errorsHtml += "</ul>";
+        }
+
+        errorsContainer.innerHTML = errorsHtml;
+    }
+
+    function transitionStage(formId) {
+        switch (formId) {
+            case "stage1":
+                stage1to2();
+                break;
+            case "stage2":
+                window.location.href = "/";
+                break;
+            default:
+                console.log(
+                    "No such stage exists or no transition function is defined."
+                );
+                break;
+        }
+    }
+
     toggleConditionalForms();
+    function toggleConditionalForms() {
+        $("input[name='perilaku_satwa']").trigger("change");
+        $("input[name='confirm_tagging']").trigger("change");
+    }
 });

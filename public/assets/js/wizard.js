@@ -5,7 +5,6 @@ $(function () {
         transitionEffect: "fade",
         autoFocus: true,
         onStepChanging: function (event, currentIndex, newIndex) {
-            console.log("Moving from step", currentIndex, "to step", newIndex);
 
             // Allow moving back
             if (newIndex < currentIndex) {
@@ -15,7 +14,6 @@ $(function () {
             let isValid = true;
             const currentSection = $("#wizard-p-" + currentIndex);
 
-            // Validate all visible fields in the current step
             currentSection.find("div[id^='form-']").each(function () {
                 $(this)
                     .find("input, select, textarea")
@@ -23,16 +21,6 @@ $(function () {
                         const isVisible = $(this).is(":visible");
                         const inputName = $(this).attr("name");
 
-                        console.log(
-                            "Validating:",
-                            inputName,
-                            "Value:",
-                            $(this).val(),
-                            "Visible:",
-                            isVisible
-                        );
-
-                        // Validate required fields
                         if (
                             $(this).prop("required") &&
                             isVisible &&
@@ -47,12 +35,10 @@ $(function () {
                             $(this).siblings(".error-message").hide();
                         }
 
-                        // Validate radio/checkbox groups
                         if ($(this).is(":radio") || $(this).is(":checkbox")) {
                             const groupName = $(this).attr("name");
                             const isChecked =
-                                $(`input[name='${groupName}']:checked`).length >
-                                0;
+                            $(`input[name='${groupName}']:checked`).length > 0;
                             if (!isChecked && isVisible) {
                                 isValid = false;
                                 $(this)
@@ -74,16 +60,14 @@ $(function () {
                 alert("Isi semua kolom jika ingin melanjutkan pertanyaan.");
             }
 
-            return isValid; // Return whether the step is valid
+            return isValid;
         },
 
-        // Custom submit button for final step
         onFinished: function () {
             alert("Form submitted successfully!");
         },
     });
 
-    // Ensure only visible inputs are required
     function toggleRequiredFields() {
         $("form")
             .find("input, select, textarea")
@@ -93,13 +77,12 @@ $(function () {
             });
     }
 
-    // Hide all conditional forms initially
     $(
         "#form-jenis_koleksi, #form-asal_satwa, #form-perolehan, #form-status_perlindungan, #form-confirm_no_sats-ln, #form-no_sats-ln, #form-pengambilan_satwa, #form-confirm_sk_menteri, #form-sk_menteri, #form-confirm_sk_kepala, #form-sk_kepala, #form-confirm_sk_ksdae, #form-sk_ksdae"
     ).hide();
 
     $("input[name='satwa_koleksi']").on("change", function () {
-        const isHidup = $(this).val() === "Hidup";
+        const isHidup = $(this).val().toLowerCase() === "hidup";
         $("#form-jenis_koleksi").toggle(isHidup);
         if (!isHidup) {
             $("#form-jenis_koleksi")
@@ -111,21 +94,23 @@ $(function () {
         }
     });
 
-    // Show 'No. Perolehan' and 'Asal Satwa' based on 'jenis_koleksi' selection
     $("#form-jenis_koleksi input[type='radio']").on("change", function () {
-        const selectedValue = $(this).val();
-        if (selectedValue === "Satwa Koleksi") {
+        const selectedValue = $(this).val().toLowerCase();
+        if (selectedValue === "satwa koleksi") {
             $("#form-perolehan").show();
+            $("#form-perolehan").slideDown();
             $("#form-asal_satwa").show();
         } else {
             $("#form-perolehan").hide();
             $("#form-asal_satwa").show();
+            $("#form-asal_satwa").slideDown();
         }
     });
 
     $("input[name='asal_satwa']").on("change", function () {
-        if ($(this).val() === "Endemik") {
+        if ($(this).val().toLowerCase() === "endemik") {
             $("#form-status_perlindungan").show();
+            $("#form-status_perlindungan").slideDown();
             $("#form-confirm_no_sats-ln").hide();
             $("#form-no_sats-ln").hide();
         } else {
@@ -135,21 +120,23 @@ $(function () {
     });
 
     $("input[name='confirm_no_sats-ln']").on("change", function () {
-        $("#form-no_sats-ln").toggle($(this).val() === "Ya");
+        $("#form-no_sats-ln").toggle($(this).val().toLowerCase() === "ya");
     });
 
     $("input[name='status_perlindungan']").on("change", function () {
         if ($(this).val() === "1") {
             $("#form-pengambilan_satwa").show();
+            $("#form-pengambilan_satwa").slideDown();
             $("#form-confirm_sk_kepala").hide();
         } else {
             $("#form-confirm_sk_kepala").show();
+            $("#form-confirm_sk_kepala").slideDown();
             $("#form-pengambilan_satwa").hide();
         }
     });
 
     $("input[name='confirm_sk_kepala']").on("change", function () {
-        $("#form-sk_kepala").toggle($(this).val() === "Ya");
+        $("#form-sk_kepala").toggle($(this).val().toLowerCase() === "ya");
     });
 
     $("input[name='pengambilan_satwa']").on("change", function () {
@@ -163,14 +150,13 @@ $(function () {
     });
 
     $("input[name='confirm_sk_menteri']").on("change", function () {
-        $("#form-sk_menteri").toggle($(this).val() === "Ya");
+        $("#form-sk_menteri").toggle($(this).val().toLowerCase() === "ya");
     });
 
     $("input[name='confirm_sk_ksdae']").on("change", function () {
-        $("#form-sk_ksdae").toggle($(this).val() === "Ya");
+        $("#form-sk_ksdae").toggle($(this).val().toLowerCase() === "ya");
     });
 
-    // Ensure only visible inputs are required
     $("form").on("change", function () {
         $(this)
             .find("input, select, textarea")
@@ -180,12 +166,10 @@ $(function () {
             });
     });
 
-    // Trigger next step manually
     $("#custom-next").on("click", function () {
         $("#wizard").steps("next");
     });
 
-    // Trigger previous step manually
     $("#custom-previous").on("click", function () {
         $("#wizard").steps("previous");
     });
