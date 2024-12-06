@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Login</title>
     <link rel="stylesheet" href="css/login.css" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="icon" href="{{ asset('/assets/images/klhk.png') }}" type="image/png">
-
 </head>
 <body>
     <div class="container">
@@ -21,7 +21,9 @@
 
         <div class="login-form-container">
             <p class="big-heading">Welcome to SIMILKI </p>
-            <form method="POST" action="{{ route('authenticate') }}">
+            {{-- <form method="POST" action="{{ route('authenticate') }}"> --}}
+                <div id="error-message" style="color: red; display: none; padding:10px;"></div>
+            <form method="POST">
                 @csrf
 
                 @if (session('error'))
@@ -29,6 +31,7 @@
                     {{ session('error') }}
                 </div>
                 @endif
+
 
                 <div class="text-fields email">
                     <label for="login">Username atau Email</label>
@@ -70,6 +73,8 @@
     </div>
 
     <script src="js/login.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
    
 </body>
 </html>

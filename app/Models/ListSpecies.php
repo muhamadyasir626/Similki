@@ -13,7 +13,7 @@ class ListSpecies extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
-    public function Satwa(){
-        return $this->belongsTo (Satwa::class);
+    public function satwa(){
+        return $this->hasMany(Satwa::class,'id_spesies');
     }
 }

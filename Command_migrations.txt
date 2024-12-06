@@ -6,7 +6,7 @@ php artisan migrate --path=database\migrations\2014_10_12_000000_create_users_ta
 php artisan migrate --path=database\migrations\2024_10_25_041735_create_monitoring_investasis_table.php
 php artisan migrate --path=database\migrations\2024_10_25_070258_create_satwas_table.php
 php artisan migrate --path=database\migrations\2024_10_25_042115_create_taggings_table.php
-php artisan migrate --path=database\migrations\2024_10_27_045643_add_indexes_to_users_table.php
+php artisan migrate --path=database\migrations\2024_10_27_045643_add_indexes_table.php
 php artisan migrate 
 php artisan db:seed --class=RoleSeeder
 

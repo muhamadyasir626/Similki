@@ -5526,7 +5526,7 @@ div.fc .btn-group-vertical > .btn-group:not(:first-child) > .fc-button-primary {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 50%;
   color: var(--bs-modal-color);
   pointer-events: auto;
   background-color: var(--bs-modal-bg);

@@ -14,6 +14,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+use function PHPUnit\Framework\isNull;
+
 class SatwaController extends Controller
 {
     //pendataan satwa
@@ -50,6 +52,7 @@ class SatwaController extends Controller
     //         'id_lk','jenis_koleksi','status_satwa','no_peroleh_izin','asal_satwa',
     //         'nomor_sats_ln','no_sk_kepala_balai','no_sk_dirjen_ksdae', 'no_sk_menteri_lhk'
     //     ]);
+
 
     //     $request->session()->put('pendataan_satwa1',$sessionData);
 
@@ -231,13 +234,14 @@ class SatwaController extends Controller
                 'id_lk' => 'required',
                 'jenis_koleksi' => 'required|in:satwa hidup,awetan',
                 'status_satwa' => 'in:koleksi,titipan,rehabilitasi,breeding loan',
-                'no_peroleh_izin' => 'string|max:50|required_if:status_satwa, koleksi',
+                'no_peroleh_izin' => 'string|max:50|required_if:status_satwa, koleksi|nullable',
+                'pengambilan_satwa' => 'in:1,0||nullable',
                 'asal_satwa' => 'in:endemik,eksotik',
+                'status_perlindungan' => 'required_if:jenis_koleksi, satwa hidup|in:1, 0|nullable', // dilindungi (1) || tidak dilindungi (0)
                 'nomor_sats_ln' => 'string|nullable|max:50',
-                'status_perlindungan' => 'required_if:jenis_koleksi, satwa hidup|in:dilindungi, tidak lindungi',
-                'no_sk_kepala_balai' => 'string|max:50',
-                'no_sk_dirjen_ksdae' => 'string|max:50',
-                'no_sk_menteri_lhk' => 'string|max:50',
+                'no_sk_kepala_balai' => 'string|max:50|nullable',
+                'no_sk_dirjen_ksdae' => 'string|max:50|nullable',
+                'no_sk_menteri_lhk' => 'string|max:50|nullable',
             ], [
                 'string' => ':attribute harus berupa string.',
                 'max' => ':attribute tidak boleh lebih dari :max karakter.',
@@ -263,19 +267,28 @@ class SatwaController extends Controller
         } elseif ($section === 'pendataan2') {
             // Proses pendataan2
             $validator = Validator::make($request->all(), [
-                'perilaku_satwa' => 'required|in:individu, kelompok',
-                'jenis_kelamin' => 'required_if:perilaku_satwa, individu|in:jantan, betina, Tidak diketahui',
-                'id_tagging' => 'required|in:ring, belum, label, chip, eartag', 
-                'kode_tagging' => 'required_if:id_tagging|string|max:20',
-                'alasan_belum_tagging' => 'required_if:id_tagging, belum|string|max:255',
-                'berita_acara_tagging' => 'required_if:id_tagging, ring, chip, label, chip, eartag|string|max:50',
-                'nama_lokal' => ['string', 'max:50', 'nullable'],
-                'nama_panggilan' => ['string', 'max:50', 'nullable'],
-                'class' => ['string', 'max:50', 'nullable'],
-                'genus' => ['string', 'max:50', 'nullable'],
-                'spesies' => ['string', 'max:50', 'nullable'],
-                'sub_spesies' => ['string', 'max:50', 'nullable'],
-                'jumlah_keseluruhan_gender' => ['decimal', 'nullable'],
+                'perilaku_satwa' => 'required|in:1,0', // individu (1) atau kelompok (0)
+                //individu
+                'jenis_kelamin' => 'required_if:perilaku_satwa,1|in:jantan,betina,Tidak diketahui|nullable',
+                'jenis_tagging' => 'required_if:perilaku_satwa,1|in:ring,belum,label,chip,eartag|nullable', 
+                'kode_tagging' => 'required_if:perilaku_satwa,1|required_if:jenis_tagging,ring|required_if:jenis_tagging,label|required_if:jenis_tagging,chip|required_if:jenis_tagging,eartag|string|max:20|nullable',
+                'alasan_belum_tagging' => 'required_if:jenis_tagging,belum|string|max:255|nullable',
+                'ba_tagging' => 'required_if:perilaku_satwa,1|required_if:jenis_tagging,ring|required_if:jenis_tagging,label|required_if:jenis_tagging,chip|required_if:jenis_tagging,eartag|string|max:50|nullable',
+                'nama_lokal' => 'required_if:perilaku_satwa,1|string|max:50|nullable',
+                'nama_panggilan' => 'required_if:perilaku_satwa,1|string|max:50|nullable',
+                'class' => 'required_if:perilaku_satwa,1|string|max:50|nullable',
+                'genus' => 'required_if:perilaku_satwa,1|string|max:50|nullable',
+                'spesies' => 'required_if:perilaku_satwa,1|string|max:50|nullable',
+                'sub_spesies' => 'required_if:perilaku_satwa,1|string|max:50|nullable',
+                'nama_ilmiah' => 'required_if:perilaku_satwa,1|string|nullable',
+                //kelompok
+                'jumlah_jantan' => 'numeric|nullable',
+                'jumlah_betina' => 'numeric|nullable',
+                'jumlah_unsex' => 'numeric|nullable',
+                'tahun_titipan' => 'string|max:4',
+                'jumlah_keseluruhan_gender' => 'numeric|nullable',
+
+                'keterangan' => 'string|max:255|nullable',
             ], [
                 'required' => 'Wajib Diisi',
                 'string' => ':atribut harus berupa huruf.',
@@ -298,46 +311,54 @@ class SatwaController extends Controller
                     'message' => 'Silakan ulangi proses pendataan satwa.'
                 ]);
             }
-    
-            // Gabungkan data pendataan1 dengan data baru yang valid
-            $data = array_merge($pendataanSatwa1, $validator->validated());
+
+            $pendataanSatwa2 = $request->only([
+                'perilaku_satwa','jenis_kelamin',
+                'nama_panggilan',
+                'jumlah_keseluruhan_gender','jumlah_jantan','jumlah_betina','jumlah_unsex',
+                'tahun_titipan',
+                'keterangan',
+            ]);
+            
+            $species = strtolower($request->input('species'));
+            $id_spesies = ListSpecies::whereRaw('LOWER(spesies) = ?', [$species])->first()->id ?? null;
+
+            if (is_null($id_spesies)) {
+                $addSpesies = $request->only(['spesies', 'genus', 'class', 'nama_lokal', 'sub_spesies', 'nama_ilmiah']);
+                $createSatwa = ListSpecies::create($addSpesies);
+                $id_spesies = $createSatwa->id;
+            }
+
+            
+
+            $data = array_merge($request->session()->get('pendataan_satwa1', []), $pendataanSatwa2);
+            $data['id_spesies'] = $id_spesies;
+            // dd($data);
+
             $result = Satwa::create($data);
-    
+            $id_satwa = $result->id;
+
+            // dd($id_satwa);
+
+            $dataTagging = $request->only([
+                'jenis_tagging', 'kode_tagging', 'alasan_belum_tagging', 'ba_tagging'
+            ]);
+            $dataTagging['id_satwa'] = $id_satwa;
+            // dd($dataTagging);
+
+            $result2 = Tagging::create($dataTagging);
+
             return response()->json([
                 'success' => true,
                 'message' => 'Pendataan satwa berhasil'
             ]);
+
         } else {
             return response()->json([
                 'success' => false,
                 'message' => 'Section tidak valid.'
             ], 400);
         }
-    }
-    
-    
-    // public function store(Request $request){
-    // //     $validator = validator::make($request->all(),[
-    // //         'file' => 'required|file|mimes:csv',
-    // //     ]);
-
-    // //     Excel::import(new DataImport, request()->file('file'));
-    // }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Satwa $Satwa)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Satwa $Satwa)
-    {
-        //
     }
 
     /**
@@ -382,10 +403,12 @@ class SatwaController extends Controller
         //     return strtolower( $item->spesies);
         // });
 
-        $spesies = Satwa::with('species')->select('');
+        $spesies = Satwa::with('species')->select('')
 
         // $spesies = ListSpecies::withCount(['satwas as jumlah_individu'])
         //     ->get(['nama_ilmiah', 'jumlah_individu']);
+
+        
 
         return response()->json([
             'status' => 'success',

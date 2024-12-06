@@ -4383,7 +4383,7 @@ div.fc .btn-group-vertical > .btn-group:not(:first-child) > .fc-button-primary {
   --bs-card-title-spacer-y: 0.875rem;
   --bs-card-border-width: 1px;
   --bs-card-border-color: #f2f4f9;
-  --bs-card-border-radius: 0.25rem;
+  --bs-card-border-radius: 10px;
   --bs-card-box-shadow: 0 0 10px 0 rgba(183, 192, 206, 0.2);
   --bs-card-inner-border-radius: calc(0.25rem - 1px);
   --bs-card-cap-padding-y: 0.875rem;
@@ -5533,7 +5533,7 @@ div.fc .btn-group-vertical > .btn-group:not(:first-child) > .fc-button-primary {
 }
 
 .modal-content {
-  position: relative;
+  position: absolute;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -22424,6 +22424,7 @@ div.tox .tox-dialog__body {
   height: 100%;
   width: 100%;
   min-width: 200px;
+  min-height: 10px;
   display: flex;
   margin-bottom: 20px; 
   border: 1px solid var(--bs-card-border-color);
@@ -22431,6 +22432,7 @@ div.tox .tox-dialog__body {
   border-radius: var(--bs-card-border-radius);
   background-color: var(--bs-card-bg);
   text-align: center;
+  
 }
 
 .card-body-1 {
@@ -22439,6 +22441,8 @@ div.tox .tox-dialog__body {
   align-items: center;
   justify-content: center;
   height: 100%;
+  border-radius: 10px;
+
 }
 .card-body-2 {
   padding: 1rem;
@@ -22452,23 +22456,35 @@ div.tox .tox-dialog__body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
-  width: 100%;
-
+  border-radius: 10px;
+  /* height: 100%;
+  width: 100%; */
 }
 
-#chartContainer1, #chartContainer2, #chartContainer3 {
+#chartContainer1, #chartContainer2, #chartContainer3,#spesiesIndvChart {
   width: 100%;  
-  height: 400px; /* Contoh tinggi tetap */
+  height: 400px;
   display: flex;
   justify-content: center; 
   align-items: center; /* Tambahkan ini jika Anda juga ingin pusat secara vertikal */
+}
+
+.row-container{
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: calc(-1* var(--bs-gutter-y));
+  margin-right: calc(-0.5* var(--bs-gutter-x));
+  margin-left: calc(-0.5* var(--bs-gutter-x));
 }
 
 
 
 .mb-2 {
   margin-bottom: 10px;
+  padding:10px;
 }
 
 #wilayahLKChart {

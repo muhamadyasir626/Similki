@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ListUpt;
+use Illuminate\Http\Request;
 use App\Models\LembagaKonservasi;
+use App\Models\MonitoringInvestasi;
+use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Events\LembagaKonservasiUpdated;
+use App\Imports\LembagaKonservasiImport;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreLembagaKonservasiRequest;
 use App\Http\Requests\UpdateLembagaKonservasiRequest;
-use App\Imports\LembagaKonservasiImport;
-use App\Models\MonitoringInvestasi;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Maatwebsite\Excel\Facades\Excel;
+
 
 class LembagaKonservasiController extends Controller
 {
@@ -22,17 +26,11 @@ class LembagaKonservasiController extends Controller
         return view('pages.lk.daftar-lk', compact('ListLK'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('lk.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreLembagaKonservasiRequest $request)
     {
         $validatedData = $request->validate([
@@ -45,18 +43,17 @@ class LembagaKonservasiController extends Controller
             'kelurahan' => 'required|string|max:50',
             'kecamatan' => 'required|string|max:50',
             'kode_pos' => 'required|string|size:5',
-            'tahun_izin' => 'required|integer|digits:4|min:1900|max:' . date('Y'),
-            'no_izin_peroleh' => 'required|string|max:255',
-            'link_sk' => 'nullable|url',
+            'tahun_izin' => 'required|string|max:4',
+            'link_sk' => 'required|string',
             'legalitas_perizinan' => 'required|string|max:255',
             'nomor_tanggal_surat' => 'required|string|max:255',
             'bentuk_lk' => 'required|string|max:50',
             'pengelola' => 'required|string|max:20',
             'nama_pimpinan' => 'required|string|max:255',
             'izin_perolehan_tsl' => 'nullable|string',
-            'tahun_akreditasi' => 'required|integer|digits:4|min:1900|max:' . date('Y'),
-            'nilai_akreditasi' => 'required|string|size:2',
-            'pks_dengan_lk_lain' => 'nullable|string'
+            'tahun_akred' => 'required|string|max:4',
+            'nilai_akred' => 'required|string|size:2',
+            'pks_dengan_lk_lainnya' => 'nullable|string'
         ]);
     
         LembagaKonservasi::create($validatedData);
@@ -82,24 +79,84 @@ class LembagaKonservasiController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateLembagaKonservasiRequest $request, LembagaKonservasi $lembagaKonservasi)
+     * Update the specified resource in storage.  */
+    public function update(Request $request, $id)
     {
-        // Validate and update existing Lembaga Konservasi entry
-        $validatedData = $request->validated();
-        $lembagaKonservasi->update($validatedData);
+        try {
+            Log::info('Updating LembagaKonservasi with data:', $request->all());
+            $lk = LembagaKonservasi::findOrFail($id);   
+            $wilayah = $request->input('upt');
+            $id_upt = ListUpt::where('wilayah',$wilayah)->first();
+    
+            $validatedData = $request->validate([
+                'nama' => 'required|string|max:255',
+                'bentuk_lk' => 'required|string|max:50',
+                'nama_pimpinan' => 'required|string|max:255',
+                'nilai_akred' => 'required|string|max:2',
+                'tahun_akred' => 'required|string|max:4',
+                'tahun_izin' => 'required|string|max:4',
+                'pengelola' => 'required|string|max:20',
+                'alamat' => 'required|string',
+                'link_sk' => 'required|string',
+                'legalitas_perizinan' => 'required|string|max:255',
+                'nomor_tanggal_surat' => 'required|string|max255',
+                'izin_perolehan_tsl' => 'required|string',
+                'pks_dengan_lk_lainnya' => 'required|string'
+            ]);
+    
+            if ($id_upt) {
+                $validatedData['id_upt'] = $id_upt->id;
+                $lk->update($validatedData);
+                
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Wilayah UPT tidak ditemukan.',
+                ], 404);
+            }
 
-        return redirect()->route('lk.index')->with('success', 'Lembaga Konservasi updated successfully.');
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Lembaga Konservasi berhasil diperbarui.',
+                'data' => $validatedData,
+                'wilayah'=>$wilayah
+
+            ]);
+            
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validasi gagal.',
+                'errors' => $e->validator->errors()->messages() // Mendapatkan pesan error yang lebih detail
+            ], 422);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Error: ' . $e->getMessage()
+            ], 500);
+        }
     }
+    
+    
 
     
     public function destroy(LembagaKonservasi $lembagaKonservasi)
     {
-        $lembagaKonservasi->delete();
-
-        return redirect()->route('lk.index')->with('success', 'Lembaga Konservasi deleted successfully.');
+        try {
+            $lembagaKonservasi->delete();
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Lembaga Konservasi berhasil dihapus.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Penghapusan Lembaga Konservasi gagal.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
+    
 
     public function import(Request $request){
         $validatedFile = Validator::make($request->all(),[
@@ -124,14 +181,5 @@ class LembagaKonservasiController extends Controller
         $investasi = MonitoringInvestasi::with('lk')->get(); 
 
         return view('pages.lk.monitoring', compact('investasi'));
-    }
-
-    public function getall() {
-        try {
-            $data = LembagaKonservasi::all();
-            return response()->json($data);
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
     }
 }

@@ -9,8 +9,13 @@ class Tagging extends Model
 {
     use HasFactory;
 
-    public function Satwa(){
-        return $this->belongsTo(Satwa::class);
+    protected $fillable = [
+        'id_satwa',
+        'jenis_tagging',
+    ];
+
+    public function satwa(){
+        return $this->belongsTo(Satwa::class,'id_satwa');
     }
 
     

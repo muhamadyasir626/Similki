@@ -12,7 +12,7 @@ class LembagaKonservasi extends Model
 {
     use HasFactory;
 
-    protected $guard =['id'];
+    protected $guarded =['id'];
 
     public function upt(){
         return $this->belongsTo(ListUpt::class, 'id_upt');

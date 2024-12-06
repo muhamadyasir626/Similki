@@ -9,14 +9,14 @@ class Satwa extends Model
 {
     use HasFactory;
 
-    protected $guard = ['id'];
+    protected $guarded = ['id'];
     protected $table = 'satwas';
 
-    public function Tagging(){
+    public function tagging(){
         return $this->belongsTo(Tagging::class);
     }
-    public function ListSpecies(){
-        return $this->belongsTo(ListSpecies::class);
+    public function species(){
+        return $this->belongsTo(ListSpecies::class,'id_spesies');
     }
 
     public function lk(){

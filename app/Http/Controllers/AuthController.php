@@ -208,7 +208,7 @@ class  AuthController extends Controller
                 ];    
                 // return response()->json($response)->withCookie($cookie);
                 // return redirect('/permission')->header('Authorization', 'Bearer'. $token);
-                return redirect('/permission')->withCookie($cookie);                
+                return redirect('/permission')->withCookie($cookie);                     
             } catch (\Exception $e) {
                 return response()->json([
                     'success' => false,
@@ -216,12 +216,10 @@ class  AuthController extends Controller
                 ], 500);
             }
         } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Email/Username atau password salah, silakan coba lagi'
-            ], 401);
+            return redirect('/')->with('error', 'Email/Username atau password salah, silakan coba lagi');
         }
     }
+    
     
 
 

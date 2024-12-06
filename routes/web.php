@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\checkpermission;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SatwaController;
 use App\Http\Controllers\LembagaKonservasiController;
 use App\Http\Controllers\ListSpeciesController;
@@ -40,10 +41,10 @@ Route::get('/register', function () {
     return view('auth.register', compact('roles', 'upt_bentuk', 'upt_wilayah', 'list_lk', 'list_species'));
 });
 
-Route::post('register1', [AuthController::class, 'register1'])->name('register1');
-Route::post('register2', [AuthController::class, 'register2'])->name('register2');
-Route::post('register3', [AuthController::class, 'register3'])->name('register3');
-Route::post('login', [AuthController::class, 'login'])->name('authenticate');
+Route::post('/register1',[AuthController::class, 'register1'])->name('register1');
+Route::post('/register2',[AuthController::class, 'register2'])->name('register2');
+Route::post('/register3',[AuthController::class, 'register3'])->name('register3');
+Route::post('/login', [AuthController::class, 'login'])->name('authenticate');
 
 Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_session'),'verified'])
 ->group(function () {
@@ -61,8 +62,9 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
         
         return view('dashboard', compact('lk_count', 'species_count', 'skoleksi_count', 'stitipan_count', 'sbelumtag_count', 'shidup_count','taksa',));
     })->name('dashboard');
+    Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 
-    Route::get('/get-satwa', [SatwaController::class, 'getall']);
+    Route::get('/get-satwa', [SatwaController::class, 'updateDashboard']);
     Route::get('/get-lembaga-konservasi', [LembagaKonservasiController::class, 'getall']);
     Route::get('/get-spesies', [ListSpeciesController::class, 'index']);
 
