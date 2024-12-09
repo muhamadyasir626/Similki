@@ -57,12 +57,15 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::get('/get-spesies', [ListSpeciesController::class, 'index']);
 
     Route::resource('lembaga-konservasi', LembagaKonservasiController::class);
-    Route::resource('satwa', SatwaController::class);
+
     Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
     Route::get('/monitoring',[LembagaKonservasiController::class,'monitoring'])->name('monitoring-lk');
 
     
-    Route::resource('satwa', SatwaController::class);
+    Route::resource('satwa', SatwaController::class)->parameters([
+        'satwa' => 'id'
+    ]);
+    
     Route::get('/pendataan-satwa', [SatwaController::class,'form'])->name('form-satwa');
     Route::post('/satwa/pendataan1',[SatwaController::class, 'pendataan1'])->name('pendataan-satwa1');
     Route::post('/satwa/pendataan2',[SatwaController::class, 'pendataan2'])->name('pendataan-satwa2');
@@ -73,26 +76,11 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
         return view('permission');
     })->name('permission');
     Route::get('/verifikasi-akun',[AuthController::class,'index'])->name('verifikasi-akun');
-    Route::post('/updated-permission/id={id}',[AuthController::class,'updatePermission'])->name('updated-permission');
+    Route::post('/updated-permission/{id}',[AuthController::class,'updatePermission'])->name('updated-permission');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-    
 
 });
 
 Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);
-Route::get('/filter-class', [DashboardController::class, 'filterClass'])->name('dashboard.filter-class');
 
-//undefined route 
-// Route::any('/{page}', function () {
-//     return View::make()
-// });
-
-Route::group(['prefix' => 'forms'], function(){
-    Route::get('data_lk', function () { return view('pages.forms.data_lk'); });
-    Route::get('input-investasi', function () { return view('pages.forms.input-investasi'); });
-    Route::get('input-lk', function () { return view('pages.forms.input-lk'); });
-    Route::get('monitoring-investasi', function () { return view('pages.forms.monitoring-investasi'); });
-    Route::get('pendataan-satwa', function () { return view('pages.forms.pendataan-satwa'); });
-});
 

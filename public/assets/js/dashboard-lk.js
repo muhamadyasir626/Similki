@@ -1,6 +1,6 @@
 $(function () {
     'use strict'
-
+  
     var colors = {
         primary: "#6571ff",
         secondary: "#7987a1",
@@ -15,9 +15,9 @@ $(function () {
         bodyColor: "#000",
         cardBg: "#fff"
     }
-
+  
     var fontFamily = "'Roboto', Helvetica, sans-serif"
-
+  
     // Date Picker
     if ($('#dashboardDate').length) {
         flatpickr("#dashboardDate", {
@@ -26,15 +26,15 @@ $(function () {
             defaultDate: "today",
         });
     }
-
+  
     //bentuk lk
     $(document).ready(function () {
         const dataContainer = $('#jenisLKChart');
         const dataObj = JSON.parse(dataContainer.attr('data-counts'));
-
+  
         let labels = [];
         let totals = [];
-
+  
         //label
         // for (let key in dataObj) {
         //     if (dataObj.hasOwnProperty(key)) {
@@ -42,7 +42,7 @@ $(function () {
         //         totals.push(dataObj[key].total); 
         //     }
         // }
-
+  
         //total
         for (let label in dataObj) {
             if (dataObj.hasOwnProperty(label)) {
@@ -50,7 +50,7 @@ $(function () {
                 totals.push(dataObj[label]); 
             }
         }
-
+  
         
     
         var options = {
@@ -91,15 +91,15 @@ $(function () {
     
         new ApexCharts(document.querySelector("#jenisLKChart"), options).render();
     });
-
+  
     //wilayah lk
     $(document).ready(function () {
         const dataContainer = $('#wilayahLKChart');
         const dataObj = JSON.parse(dataContainer.attr('data-counts'));
-
+  
         let labels = [];
         let totals = [];
-
+  
         //label
         // for (let key in dataObj) {
         //     if (dataObj.hasOwnProperty(key)) {
@@ -107,7 +107,7 @@ $(function () {
         //         totals.push(dataObj[key].total); 
         //     }
         // }
-
+  
         //total
         for (let label in dataObj) {
             if (dataObj.hasOwnProperty(label)) {
@@ -115,7 +115,7 @@ $(function () {
                 totals.push(dataObj[label]); 
             }
         }
-
+  
         
     
         var options = {
@@ -156,16 +156,16 @@ $(function () {
     
         new ApexCharts(document.querySelector("#wilayahLKChart"), options).render();
     });
-
+  
     //jumlah individu spesies
     $(document).ready(function () {
         const dataContainer = $('#spesiesIndvChart');
         const dataObj = JSON.parse(dataContainer.attr('data-counts'));
         console.log(dataObj);
-
+  
         let labels = [];
         let totals = [];
-
+  
         //label
         // for (let key in dataObj) {
         //     if (dataObj.hasOwnProperty(key)) {
@@ -173,7 +173,7 @@ $(function () {
         //         totals.push(dataObj[key].total); 
         //     }
         // }
-
+  
         //total
         for (let label in dataObj) {
             if (dataObj.hasOwnProperty(label)) {
@@ -181,7 +181,7 @@ $(function () {
                 totals.push(dataObj[label]); 
             }
         }
-
+  
         
     
         var options = {
@@ -222,7 +222,7 @@ $(function () {
     
         new ApexCharts(document.querySelector("#spesiesIndvChart"), options).render();
     });
-
+  
      //jumlah tagging
     $(document).ready(function () {
         const dataContainer = $('#chartContainer2');
@@ -267,7 +267,7 @@ $(function () {
     
         new ApexCharts(document.querySelector("#chartContainer2"), options).render();
     });
-
+  
      //jumlah tagging
     $(document).ready(function () {
         const dataContainer = $('#chartContainer1');
@@ -312,7 +312,7 @@ $(function () {
     
         new ApexCharts(document.querySelector("#chartContainer1"), options).render();
     });
-
+  
     //jumlah satwa koleksi
     $(document).ready(function () {
         const dataContainer = $('#chartContainer3');
@@ -358,7 +358,7 @@ $(function () {
         new ApexCharts(document.querySelector("#chartContainer3"), options).render();
     });
     
-
+  
     function generateRandomColor() {
         let maxVal = 0xFFFFFF; 
         let randomNumber = Math.random() * maxVal; 
@@ -367,4 +367,4 @@ $(function () {
         let randColor = randomNumber.padStart(6, 0);   
         return `#${randColor.toUpperCase()}`
     }      
-});
+  });

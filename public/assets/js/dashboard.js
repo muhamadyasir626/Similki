@@ -1,4 +1,3 @@
-
 $(function () {
     'use strict'  
 
@@ -27,6 +26,25 @@ $(function () {
     //         defaultDate: "today",
     //     });
     // }
+
+    //statis
+    document.addEventListener('DOMContentLoaded', () => {
+        // Ambil elemen-elemen dengan atribut data-*
+        const lk_count = document.querySelector('[data-lkcount]').getAttribute('data-lkcount');
+        const species_count = document.querySelector('[data-species]').getAttribute('data-species');
+        const skoleksi_count = document.querySelector('[data-skoleksi]').getAttribute('data-skoleksi');
+        const stitipan_count = document.querySelector('[data-stitipan]').getAttribute('data-stitipan');
+        const sbelumtag_count = document.querySelector('[data-sbelumtag]').getAttribute('data-sbelumtag');
+        const shidup_count = document.querySelector('[data-shidup]').getAttribute('data-shidup');
+    
+        console.log('Jumlah LK:', lk_count);
+        console.log('Total Jenis Satwa:', species_count);
+        console.log('Satwa Koleksi:', skoleksi_count);
+        console.log('Satwa Titipan:', stitipan_count);
+        console.log('Satwa Belum Tagging:', sbelumtag_count);
+        console.log('Satwa Hidup:', shidup_count);
+    });
+    
 
     //bentuk lk
     $(document).ready(function () {
@@ -216,7 +234,7 @@ $(function () {
             tooltip: {
                 y: {
                     formatter: function (val) {
-                        return val + " lembaga";
+                        return val + " satwa";
                     }
                 }
             }

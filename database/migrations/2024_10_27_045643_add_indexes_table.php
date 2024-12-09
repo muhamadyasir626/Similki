@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Index untuk tabel users
         Schema::table('users', function (Blueprint $table) {
-            $table->unique('email', 'unique_email');  
-            $table->unique('username', 'unique_username'); 
+            $table->unique('email');  
+            $table->unique('username'); 
         });
 
         // Index untuk tabel satwas
@@ -39,6 +38,19 @@ return new class extends Migration
         // Index untuk tabel list_species
         Schema::table('list_species', function (Blueprint $table) {
             $table->index('id');
+            $table->index('spesies');
+        });
+
+        schema::table('family_members', function(Blueprint $table){
+            $table->index('id_ayah');
+            $table->index('id_ibu');
+            $table->index('id_anak');
+            $table->index('id_pasangan');
+        });
+
+        schema::table('couples', function(Blueprint $table){
+            $table->index('id_jantan');
+            $table->index('id_betina');
         });
     }
 
@@ -49,32 +61,45 @@ return new class extends Migration
     {
         // Drop unique index untuk tabel users
         Schema::table('users', function (Blueprint $table) {
-            $table->dropUnique('unique_email');
-            $table->dropUnique('unique_username');
+            $table->dropUnique('users_email_unique');
+            $table->dropUnique('users_username_unique');
         });
 
         // Drop index untuk tabel satwas
         Schema::table('satwas', function (Blueprint $table) {
-            $table->dropIndex(['id']);
-            $table->dropIndex(['id_lk']);
-            $table->dropIndex(['id_spesies']);
+            $table->dropIndex(['satwas_id']);
+            $table->dropIndex(['satwas_id_lk']);
+            $table->dropIndex(['satwas_id_spesies']);
         });
 
         // Drop index untuk tabel lembagakonservasis
         Schema::table('lembagakonservasis', function (Blueprint $table) {
-            $table->dropIndex(['id']);
-            $table->dropIndex(['id_upt']);
+            $table->dropIndex(['lembagakonservasis_id']);
+            $table->dropIndex(['lembagakonservasis_id_upt']);
         });
 
         // Drop index untuk tabel taggings
         Schema::table('taggings', function (Blueprint $table) {
-            $table->dropIndex(['id']);
-            $table->dropIndex(['id_satwa']);
+            $table->dropIndex(['taggings_id']);
+            $table->dropIndex(['taggings_id_satwa']);
         });
 
         // Drop index untuk tabel list_species
         Schema::table('list_species', function (Blueprint $table) {
-            $table->dropIndex(['id']);
+            $table->dropIndex(['list_species_id']);
+            $table->dropIndex(['list_species_spesies']);
+        });
+
+        schema::table('family_members', function(Blueprint $table){
+            $table->dropIndex('family_members_id_ayah');
+            $table->dropIndex('family_members_id_ibu');
+            $table->dropIndex('family_members_id_anak');
+            $table->dropIndex('family_members_id_pasangan');
+        });
+
+        schema::table('couples', function(Blueprint $table){
+            $table->dropIndex('couples_id_jantan');
+            $table->dropIndex('couples_id_betina');
         });
     }
 };

@@ -10,6 +10,8 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   </head>
   <body>
+    @include('components.notifikasi-action')
+
     <div class="container">
       <div class="login-link">
         <div class="logo">
@@ -17,6 +19,7 @@
         </div>
         <p class="side-big-heading">Sudah memiliki Akun?</p>
         <a href="{{ route('login') }}" class="loginbtn">Login</a>
+
       </div>
       
       <div class="signup-form-container">
@@ -35,9 +38,12 @@
               <p class="stageno stageno-3">3</p>
           </div>
         </div>
+        
         <div id="validation-errors" class="mb-4">
+          
         </div>
         <br>
+
 
         <div class="signup-form-content">
           <form id="stage1" action="{{ route('register1') }}"  method="POST">
@@ -50,7 +56,7 @@
                              placeholder="Nama lengkap Anda" required 
                              pattern="[A-Za-z\s]+" 
                              title="Nama hanya boleh mengandung huruf alfabet dan spasi" />
-                    </div>
+                  </div>
                       <div class="gender-selection">
                           <p class="field-heading">Jenis Kelamin :</p>
                           <label for="jenis_kelamin_laki-laki"> <input type="radio" name="jenis_kelamin" value="1" {{ old('jenis_kelamin') == '1' ? 'checked' : '' }} id="jenis_kelamin_laki-laki" required/> Laki-Laki </label>
@@ -225,10 +231,17 @@
               <input type="submit" value="Submit" class="nextPage stagebtn3b" />
               </div>              
           </div>
+          
         </form>
-      </div>    
+      </div>
+      
+        
+          
+
     </div>
     </div>
+
   </body>
   <script src="js/register.js"></script>
+  <!-- <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script> -->
 </html>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Satwa;
 use App\Models\Tagging;
 use App\Models\ListSpecies;
+use App\Models\ListUpt;
 use Illuminate\Http\Request;
 use App\Models\LembagaKonservasi;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,10 @@ class DashboardController extends Controller
         $role = Auth::user()->role->tag;
         switch($role){
             case'KKHSG':
+                $lks = LembagaKonservasi::with('upt')->select('id','nama')->get();
+                $upts = ListUpt::distinct()->select('id','wilayah')->get();
+                $classes = ListSpecies::distinct()->select('class')->get();
+
                 //statis
                 $lk_count = LembagaKonservasi::count();
                 $species_count = ListSpecies::count();
@@ -145,7 +150,8 @@ class DashboardController extends Controller
                     'stitipan_count', 'sbelumtag_count', 'shidup_count',
                     'total_bentukLk', 'taksa', 'total_wilayahLk',
                     'total_jumlahIndvSpesies', 'total_tagging',
-                    'total_jenis_koleksi', 'total_class',                 ));
+                    'total_jenis_koleksi', 'total_class', 'lks', 'upts', 'classes'
+                                ));
                 
                 case'LK':
                 $lk = Auth::user()->lk->id;

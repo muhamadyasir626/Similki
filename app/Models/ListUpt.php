@@ -18,7 +18,7 @@ class ListUpt extends Model
     ];
 
     public function LembagaKonservasi(){
-        return $this->belongsTo(LembagaKonservasi::class);
+        return $this->hasMany(LembagaKonservasi::class);
     }
 
 

@@ -17,7 +17,7 @@ License: For each use you must have a valid license purchased only from above li
 	<meta name="author" content="NobleUI">
 	<meta name="keywords" content="nobleui, bootstrap, bootstrap 5, bootstrap5, admin, dashboard, template, responsive, css, sass, html, laravel, theme, front-end, ui kit, web">
 
-  <title>NobleUI - Laravel Admin Dashboard Template</title>
+  <title>SIMILKI - Sistem Informasi Manajemen Lembaga Konservasi</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,10 +26,10 @@ License: For each use you must have a valid license purchased only from above li
   <!-- End fonts -->
   
   <!-- CSRF Token -->
-  <meta name="_token" content="{{ csrf_token() }}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link rel="icon" href="{{ asset('/assets/images/klhk.png') }}" type="image/png">
   
   <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
-
   <!-- plugin css -->
   <link href="{{ asset('assets/fonts/feather-font/css/iconfont.css') }}" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

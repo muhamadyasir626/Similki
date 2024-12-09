@@ -1,6 +1,6 @@
 $(function () {
     'use strict';
-
+  
     // Warna dan font global
     var colors = {
         primary: "#6571ff",
@@ -16,9 +16,9 @@ $(function () {
         bodyColor: "#000",
         cardBg: "#fff",
     };
-
+  
     var fontFamily = "'Roboto', Helvetica, sans-serif";
-
+  
     // Inisialisasi Date Picker
     if ($('#dashboardDate').length) {
         flatpickr("#dashboardDate", {
@@ -31,10 +31,10 @@ $(function () {
     $(document).ready(function () {
         const dataContainer = $('#jenisLKChart');
         const dataObj = JSON.parse(dataContainer.attr('data-counts'));
-
+  
         let labels = [];
         let totals = [];
-
+  
         //label
         // for (let key in dataObj) {
         //     if (dataObj.hasOwnProperty(key)) {
@@ -42,7 +42,7 @@ $(function () {
         //         totals.push(dataObj[key].total); 
         //     }
         // }
-
+  
         //total
         for (let label in dataObj) {
             if (dataObj.hasOwnProperty(label)) {
@@ -50,7 +50,7 @@ $(function () {
                 totals.push(dataObj[label]); 
             }
         }
-
+  
         var options = {
             chart: {
                 type: "bar",
@@ -88,7 +88,7 @@ $(function () {
         };
         new ApexCharts(document.querySelector("#jenisLKChart"), options).render();
     });
-
+  
     //kelas satwa 
     $(document).ready(function () {
         const dataContainer = $('#chartContainer2');
@@ -133,16 +133,16 @@ $(function () {
     
         new ApexCharts(document.querySelector("#chartContainer2"), options).render();
     });
-
+  
     $(document).ready(function () {
     const dataContainer = $('#spesiesIndvChart');
     const dataObj = JSON.parse(dataContainer.attr('data-counts'));
-
+  
     let labels = [];
     let totals = [];
     let filteredLabels = [];
     let filteredTotals = [];
-
+  
     // Parse data
     for (let label in dataObj) {
         if (dataObj.hasOwnProperty(label)) {
@@ -150,7 +150,7 @@ $(function () {
             totals.push(dataObj[label]);
         }
     }
-
+  
     // Grafik awal
     const chartOptions = {
         chart: {
@@ -180,23 +180,23 @@ $(function () {
             }
         }
     };
-
+  
     const speciesChart = new ApexCharts(document.querySelector("#spesiesIndvChart"), chartOptions);
     speciesChart.render();
-
+  
     // Fungsi untuk filter data
     window.filterChartData = function () {
         const searchQuery = $('#searchSpecies').val().toLowerCase();
         filteredLabels = [];
         filteredTotals = [];
-
+  
         labels.forEach((label, index) => {
             if (label.toLowerCase().includes(searchQuery)) {
                 filteredLabels.push(label);
                 filteredTotals.push(totals[index]);
             }
         });
-
+  
         // Update grafik dengan data hasil filter
         speciesChart.updateOptions({
             xaxis: {
@@ -208,21 +208,21 @@ $(function () {
             }]
         });
     };
-});
-
-
-
-
+  });
+  
+  
+  
+  
     // // Fungsi untuk mengambil data dari backend
     // async function fetchData() {
     //     try {
     //         const response = await fetch('get_data.php'); // Pastikan path ke file PHP benar
     //         const data = await response.json();
-
+  
     //         // Data dari backend
     //         const lembagaData = data.lembaga;
     //         const satwaData = data.satwa;
-
+  
     //         // Grafik 1: Statistik Lembaga Konservasi di bawah UPT
     //         const optionsLembaga = {
     //             chart: {
@@ -252,10 +252,10 @@ $(function () {
     //                 align: 'center'
     //             }
     //         };
-
+  
     //         const chartLembaga = new ApexCharts(document.querySelector("#chart-upt-lembaga"), optionsLembaga);
     //         chartLembaga.render();
-
+  
     //         // Grafik 2: Jumlah Spesies Satwa per Lembaga Konservasi
     //         const optionsSatwa = {
     //             chart: {
@@ -270,18 +270,18 @@ $(function () {
     //                 align: 'center'
     //             }
     //         };
-
+  
     //         const chartSatwa = new ApexCharts(document.querySelector("#chart-satwa-lembaga"), optionsSatwa);
     //         chartSatwa.render();
-
+  
     //     } catch (error) {
     //         console.error("Error fetching data:", error);
     //     }
     // }
-
+  
     // // Panggil fungsi fetchData untuk memuat grafik
     // fetchData();
-
+  
     function generateRandomColor() {
         let maxVal = 0xFFFFFF; 
         let randomNumber = Math.random() * maxVal; 
@@ -290,4 +290,4 @@ $(function () {
         let randColor = randomNumber.padStart(6, 0);   
         return `#${randColor.toUpperCase()}`
     }      
-});
+  });
