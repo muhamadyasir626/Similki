@@ -35,8 +35,8 @@
             <!-- Kartu 1 -->
             <div class="card mb-2 custom-card-size">
                 <div class="card-body-1">
-                    <h5 style="" class="card-title">Jumlah LK</h5>
-                    <h3>{{ $lk_count }}</h3>
+                    <h5 style="" class="card-title">Lembaga Konservasi</h5>
+                    <h3 id="lk_count" data-lk-count = {{ $lk_count }}>0</h3>
                 </div>
             </div>
         </div>
@@ -44,8 +44,8 @@
             <!-- Kartu 2 -->
             <div class="card mb-2 custom-card-size">
                 <div class="card-body-1">
-                    <h5 class="card-title">Total Jenis Satwa</h5>
-                    <h3>{{ $species_count }}</h3>
+                    <h5 class="card-title">Jenis Satwa</h5>
+                    <h3 id="species_count" data-spesies_count="{{ $species_count }}">0</h3>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
             <div class="card mb-2 custom-card-size">
                 <div class="card-body-1">
                     <h5 class="card-title">Satwa Koleksi</h5>
-                    <h3>{{ $skoleksi_count }}</h3>
+                    <h3 id="skoleksi_count" data-skoleksi-count="{{ $skoleksi_count }}">0</h3>
                 </div>
             </div>
         </div>
@@ -63,7 +63,7 @@
             <div class="card mb-2 custom-card-size">
                 <div class="card-body-1">
                     <h5 class="card-title">Satwa Titipan</h5>
-                    <h3>{{ $stitipan_count }}</h3>
+                    <h3 id="stitipan_count" data-stitipan-count ="{{ $stitipan_count }}">0</h3>
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
             <div class="card mb-2 custom-card-size">
                 <div class="card-body-1">
                     <h5 class="card-title">Satwa Belum Tagging</h5>
-                    <h3>{{ $sbelumtag_count }}</h3>
+                    <h3 id="sbelumtag_count" data-sbelumtag-count="{{ $sbelumtag_count }}">0</h3>
                 </div>
             </div>
         </div>
@@ -81,7 +81,7 @@
             <div class="card mb-2 custom-card-size">
                 <div class="card-body-1">
                     <h5 class="card-title">Satwa Hidup</h5>
-                    <h3> {{ $shidup_count }}</h3>
+                    <h3 id="shidup_count" data-shidup_count="{{ $shidup_count }}">0</h3>
                 </div>
             </div>
         </div>

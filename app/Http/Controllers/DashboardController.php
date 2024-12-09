@@ -26,13 +26,28 @@ class DashboardController extends Controller
                 // dd($classes);
 
                 //statis
-                $lk_count = LembagaKonservasi::count();
-                $species_count = ListSpecies::count();
-                $skoleksi_count = Satwa::where('status_satwa','satwa koleksi')->count();
-                $stitipan_count = Satwa::where('status_satwa','satwa titipan')->count();
-                $sbelumtag_count = Tagging::where('jenis_tagging','belum ditagging')->count();
-                $shidup_count = Satwa::where('jenis_koleksi','satwa hidup')->count();
-                $taksa = ListSpecies::select('spesies')->count();
+                // $lk_count = LembagaKonservasi::count();
+                // $species_count = ListSpecies::count();
+                // $skoleksi_count = Satwa::where('status_satwa','satwa koleksi')->count();
+                // $stitipan_count = Satwa::where('status_satwa','satwa titipan')->count();
+                // $sbelumtag_count = Tagging::where('jenis_tagging','belum ditagging')->count();
+                // $shidup_count = Satwa::where('jenis_koleksi','satwa hidup')->count();
+                // $taksa = ListSpecies::select('spesies')->count();
+
+                $lk_count = LembagaKonservasi::select('id')->get(); //diubah jd select id sm nama upt / slug 
+                $species_count = ListSpecies::distinct()->select('spesies')->get(); //ini jg ambil id sm nama
+                // dd($species_count);
+                $skoleksi_count = Satwa::where('status_satwa','satwa koleksi')->select('id')->get(); //id sm id upt sm id lk 
+                // dd($skoleksi_count); 
+                $stitipan_count = Satwa::where('status_satwa','satwa titipan')->select('id', 'id_lk')->get();
+                // dd($stitipan_count);
+                $sbelumtag_count = Tagging::where('jenis_tagging','belum ditagging')->select('id', 'id_satwa')->get();
+                // dd($sbelumtag_count);
+                $shidup_count = Satwa::where('jenis_koleksi','satwa hidup')->select('id', 'id_lk')->get();
+                // dd($shidup_count);
+                $taksa = ListSpecies::distinct()->select('class')->get();
+                // dd($taksa);
+
 
                 //data chart Bentuk lembaga konservasi
                 $lastUpdateBentukLk = LembagaKonservasi::max('updated_at');

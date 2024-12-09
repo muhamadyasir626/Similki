@@ -1,51 +1,72 @@
 // Get Postal Kode
 document.getElementById("kodepos").addEventListener("input", debounce(searchPostalCode, 1000));
 
-  function searchPostalCode() {
-  var postalCode = document.getElementById("kodepos").value;
+function searchPostalCode() {
+    var postalCode = document.getElementById("kodepos").value;
 
-  if (postalCode.length === 5) {
-    fetch(`/api/search?postalCode=${postalCode}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.data && data.data.length > 0) {
-          var locationData = data.data[0];
-          
-          document.getElementById("provinsi").value = locationData.province || "";
-          document.getElementById("kota_kab").value = locationData.regency || "";
-          document.getElementById("kecamatan").value = locationData.district || "";
-          document.getElementById("kelurahan").value = locationData.village || "";
-        } else {
-          clearLocationFields();
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
+    if (postalCode.length === 5) {
+        fetch(`/api/search?postalCode=${postalCode}`)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.data && data.data.length > 0) {
+                    var locationData = data.data[0];
+
+                    document.getElementById("provinsi").value = locationData.province || "";
+                    document.getElementById("kota_kab").value = locationData.regency || "";
+                    document.getElementById("kecamatan").value = locationData.district || "";
+                    
+                    // Clear existing options
+                    clearKelurahanDropdown();
+                    
+                    // Assume `data.data` is an array of village objects
+                    data.data.forEach(village => {
+                        addKelurahanOption(village.village);
+                    });
+                } else {
+                    clearLocationFields();
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching data:", error);
+                clearLocationFields();
+            });
+    } else {
         clearLocationFields();
-      });
-  } else {
-    clearLocationFields();
-  }
+    }
 }
 
 function clearLocationFields() {
-  document.getElementById("provinsi").value = "";
-  document.getElementById("kota").value = "";
-  document.getElementById("kecamatan").value = "";
-  document.getElementById("kelurahan").value = "";
+    document.getElementById("provinsi").value = "";
+    document.getElementById("kota_kab").value = "";
+    document.getElementById("kecamatan").value = "";
+    clearKelurahanDropdown();
+}
+
+function clearKelurahanDropdown() {
+    var select = document.getElementById("kelurahan");
+    select.innerHTML = '<option value="" hidden>Pilih Kelurahan/Desa</option>'; // Reset to default prompt
+}
+
+function addKelurahanOption(kelurahanName) {
+    var select = document.getElementById("kelurahan");
+    var option = document.createElement("option");
+    option.value = kelurahanName;
+    option.textContent = kelurahanName;
+    select.appendChild(option);
 }
 
 function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
     };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
 }
+
 
 
 
@@ -155,7 +176,7 @@ function displayValidationErrors(errors) {
 
   if (errors) {
     errorsHtml += '<div class="font-medium text-red-600">Tolong Periksa kembali:</div>';
-    errorsHtml += '<ul class="mt-3 list-disc list-inside text-sm text-red-600" style="color:red;">';
+    errorsHtml += '<ul class="mt-3 list-disc list-inside text-sm text-red-600" style="color:red; padding:10px;">';
     Object.keys(errors).forEach(function(key) {
       errors[key].forEach(function(error) {
         errorsHtml += '<li>' + error + '</li>';

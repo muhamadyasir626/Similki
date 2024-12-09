@@ -162,7 +162,7 @@ $(function () {
     $(document).ready(function () {
         const dataContainer = $('#spesiesIndvChart');
         const dataObj = JSON.parse(dataContainer.attr('data-counts'));
-        console.log(dataObj);
+        // console.log(dataObj);
 
         let labels = [];
         let totals = [];
@@ -229,7 +229,7 @@ $(function () {
     $(document).ready(function () {
         const dataContainer = $('#chartContainer2');
         const dataObj = JSON.parse(dataContainer.attr('data-counts'));
-        console.log(dataObj);
+        // console.log(dataObj);
     
         let labels = [];
         let totals = [];
@@ -274,7 +274,7 @@ $(function () {
     $(document).ready(function () {
         const dataContainer = $('#chartContainer1');
         const dataObj = JSON.parse(dataContainer.attr('data-counts'));
-        console.log(dataObj);
+        // console.log(dataObj);
     
         let labels = [];
         let totals = [];
@@ -319,7 +319,7 @@ $(function () {
     $(document).ready(function () {
         const dataContainer = $('#chartContainer3');
         const dataObj = JSON.parse(dataContainer.attr('data-counts'));
-        console.log(dataObj);
+        // console.log(dataObj);
     
         let labels = [];
         let totals = [];
@@ -398,3 +398,6 @@ $(function () {
       });
       
 });
+
+
+

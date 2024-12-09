@@ -7,6 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Registration</title>
     <link rel="stylesheet" href="css/register.css" />
+  <link rel="icon" href="{{ asset('/assets/images/klhk.png') }}" type="image/png">
+
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   </head>
   <body>
@@ -17,8 +19,10 @@
         <div class="logo">
           <img src="assets/images/klhk.png" alt="klhk" />
         </div>
+      <div class="label-logo">
         <p class="side-big-heading">Sudah memiliki Akun?</p>
         <a href="{{ route('login') }}" class="loginbtn">Login</a>
+      </div>
 
       </div>
       
@@ -165,8 +169,10 @@
               </div>
               <div class="button-container">
                 <div class="text-fields kelurahan">
-                  <label for="kelurahan">Kelurahan</label>
-                  <input type="text" name="kelurahan" id="kelurahan" placeholder="Isi Kode Pos" readonly />
+                  <label for="kelurahan">Kelurahan/Desa</label>
+                  <Select id="kelurahan" class="option-input-kelurahan" name="kelurahan" autofocus>
+                    <option value="" hidden> Pilih Kelurahan/Desa</option>
+                  </Select>
                 </div>
                 <div class="text-fields alamat_lengkap">
                   <label for="alamat_lengkap">Alamat Lengkap</label>

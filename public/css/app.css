@@ -22522,22 +22522,126 @@ div.tox .tox-dialog__body {
   font-size: 14px;
 }
 
+.filter-item-label input{
+  width: 120px;
+}
+
 
 #name-label{
   position: -webkit-sticky;
   margin-bottom:10px;
   margin-top:10px;
-  background-color: white;
   position: sticky;
+  background-color: white;
   top: 0; 
   z-index: 1000; 
 }
 
+summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary:hover{
+  color:  --bs-link-hover-color;
+}
+
+.search{
+  border: 1px solid #ccc;
+}
+
+
+
 #search-input-filter{
-  position: sticky;
-  z-index: 1000; 
+  /* position: sticky; */
+  /* width: 100%; */
+  /* z-index: 1000;  */
   top: 0; 
   background-color: white;
   margin-bottom:5px;
+  width: 180px;
+  border-radius: 2px;
+  /* margin-left: -39px; */
+}
+
+.custom-dropdown {
+  display: flex;
+  flex-direction: column;
+  margin-left: -6px;
+  z-index: 100000;
+}
+
+.dropdown-input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.dropdown-content {
+  display: none; /* Hidden by default */
+  position: relative;
+  background-color: #f9f9f9;
+  min-width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 100000;
+  max-height: 250px; /* Limit the height and add scroll */
+  overflow-y: auto;
+  width: 220px;
+  margin-left: -39px;
+}
+
+.dropdown-item {
+  color: black;
+  font-size: 10px;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: flex;
+  align-items: center; /* Display as block to fill the parent's width */
+}
+
+.dropdown-item:hover {
+  background-color: --bs-link-hover-color1;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
+summary:hover{
+  color : #6571ff;
 
 }
+
+details[open] summary{
+  color : #6571ff;
+}
+
+.filter-label:hover{
+  color : #6571ff;
+}
+.filter-label{
+  cursor: pointer;
+}
+
+
+details[open] .filter-link-arrow {
+  
+  transform: rotate(-180deg); /* Rotasi ikon ketika details terbuka */
+  transition: transform 0.3s ease; /* Animasi rotasi */
+}
+
+.clear-btn{
+  height: 25px;
+  display: flex;
+  align-items: center;
+  border-radius: 2px;
+}
+
+

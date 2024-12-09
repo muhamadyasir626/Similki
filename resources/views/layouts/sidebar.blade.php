@@ -18,62 +18,78 @@
           <span class="link-title">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item ">
-        <a class="nav-link" data-bs-toggle="collapse" href="#filter" role="button" aria-expanded="" aria-controls="filter">
-          <i class="link-icon" data-feather="filter"></i>
-          <span class="link-title">Filter</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-        <div class="collapse" id="filter">
-          <ul class="nav sub-menu">     
-            <li class="nav-item">
-              <details class="filter-item details">
-                <summary class="filter-item-label" id="name-label">Lembaga Konservasi</summary>
-                <summary class="filter-item-label" id="search-input-filter">
-                  <input type="text" id="search-input-filter" placeholder="Cari...">
-                </summary>
-                @foreach ($lks as $lk )
-                <label class="filter-label">
-                  <input type="checkbox" value="{{ $lk->id }}">
-                  <span class="dot dot-yellow"></span>
-                  {{ $lk->nama }}
-                </label>
-                @endforeach
-              </details>
-            </li>
-            <li class="nav-item">
-              <details class="filter-item details">
-                <summary class="filter-item-label" id="name-label">UPT</summary>
-                <summary class="filter-item-label" id="search-input-filter">
-                  <input type="text" id="search-input-filter" placeholder="Cari...">
-                </summary>
-                @foreach ($upts as $upt )
-                <label class="filter-label">
-                  <input type="checkbox" value="{{ $upt->id }}">
-                  <span class="dot dot-yellow"></span>
-                  {{ $upt->wilayah }}
-                </label>
-                @endforeach
-              </details>
-            </li>
-            <li class="nav-item">
-              <details class="filter-item details">
-                <summary class="filter-item-label" id="name-label">Class</summary>
-                <summary class="filter-item-label" id="search-input-filter">
-                  <input type="text" id="search-input-filter" placeholder="Cari...">
-                </summary>
-                @foreach ($classes as $class )
-                <label class="filter-label">
-                  <input type="checkbox" value="{{ $class->id }}">
-                  <span class="dot dot-yellow"></span>
-                  {{ $class->class }}
-                </label>
-                @endforeach
-              </details>
-            </li>
-          </ul>
-        </div>
+
+
+@if(request()->is('dashboard'))
+<li class="nav-item ">
+  <a class="nav-link" data-bs-toggle="collapse" href="#filter" role="button" aria-expanded="" aria-controls="filter">
+    <i class="link-icon" data-feather="filter"></i>
+    <span class="link-title">Filter</span>
+    <i class="link-arrow" data-feather="chevron-down"></i>
+  </a>
+  <div class="collapse" id="filter">
+    <ul class="nav sub-menu">
+      <!-- Lembaga Konservasi -->
+      <li class="nav-item">
+        <details class="filter-item details">
+          <summary class="filter-item-label link-title" id="name-label">Lembaga Konservasi
+            <i class="filter-link-arrow" style="width: 14px; height:14px;" data-feather="chevron-down"></i>
+          </summary>
+          <summary class="filter-item-label" id="search-input-filter">
+            <input type="text" class="conservation-search" placeholder="Filter LK...">
+            <button class="btn btn-sm btn-danger mt-2 mb-2 clear-btn clear-conservation">Clear</button>
+          </summary>
+          @foreach ($lks as $lk )
+          <label class="filter-label">
+            <input type="checkbox" value="{{ $lk->id }}" data-category="LK">
+            {{ $lk->nama }}
+          </label>
+          @endforeach
+        </details>
       </li>
+      <!-- UPT -->
+      <li class="nav-item">
+        <details class="filter-item details">
+          <summary class="filter-item-label" id="name-label">UPT
+            <i class="filter-link-arrow" style="width: 14px; height:14px;" data-feather="chevron-down"></i>
+          </summary>
+          <summary class="filter-item-label" id="search-input-filter">
+            <input type="text" class="upt-search" placeholder="Filter UPT...">
+            <button class="btn btn-sm btn-danger mt-2 mb-2 clear-btn clear-upt">Clear</button>
+          </summary>
+          @foreach ($upts as $upt )
+          <label class="filter-label">
+            <input type="checkbox" value="{{ $upt->id }}" data-category="UPT">
+            {{ $upt->wilayah }}
+          </label>
+          @endforeach
+        </details>
+      </li>
+      <!-- Class -->
+      <li class="nav-item">
+        <details class="filter-item details">
+          <summary class="filter-item-label" id="name-label">Class
+            <i class="filter-link-arrow" style="width: 14px; height:14px;" data-feather="chevron-down"></i>
+          </summary>
+          <summary class="filter-item-label" id="search-input-filter">
+            <input type="text" class="class-search" placeholder="Filter Class...">
+            <button class="btn btn-sm btn-danger mt-2 mb-2 clear-btn  clear-class">Clear</button>
+          </summary>
+          @foreach ($classes as $class )
+          <label class="filter-label">
+            <input type="checkbox" value="{{ $class->id }}" data-category="Class">
+            {{ $class->class }}
+          </label>
+          @endforeach
+        </details>
+      </li>
+    </ul>
+  </div>
+</li>
+@endif
+
+
+
       <li class="nav-item nav-category">LEMBAGA KONSERVASI</li>
       <li class="nav-item {{ active_class('lembaga-konservasi') }}">
         <a href="{{ route('lembaga-konservasi.index') }}" class="nav-link">
@@ -155,35 +171,6 @@
   </div>
 </nav>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // Fungsi untuk melakukan pencarian dan filter item
-    function filterItems(event) {
-      const searchTerm = event.target.value.toLowerCase();  // Ambil teks yang dimasukkan pengguna dan ubah menjadi huruf kecil
-  
-      // Lakukan pencarian di setiap grup filter
-      document.querySelectorAll('.filter-item').forEach(detail => {
-        let hasVisibleChildren = false;
-        const labels = detail.querySelectorAll('.filter-label');
-  
-        labels.forEach(label => {
-          // Jika teks label mengandung kata yang dicari, tampilkan label tersebut
-          if (label.textContent.toLowerCase().includes(searchTerm)) {
-            label.style.display = '';  // Tampilkan label
-            hasVisibleChildren = true;
-          } else {
-            label.style.display = 'none';  // Sembunyikan label
-          }
-        });
-  
-        // Secara opsional, sembunyikan atau tampilkan grup filter berdasarkan ada/tidaknya label yang tampil
-        detail.style.display = hasVisibleChildren ? '' : 'none';
-      });
-    }
-  
-    // Tambahkan event listener untuk input pencarian
-    const searchInput = document.getElementById('search-input');  // Pastikan ada elemen input dengan id 'search-input'
-    searchInput.addEventListener('input', filterItems);
-  });
-  </script>
-  
+
+<script src="search-filter.js"></script> 
+
