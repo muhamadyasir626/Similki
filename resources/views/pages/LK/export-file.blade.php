@@ -14,19 +14,20 @@
 </nav>
 
 <div class="container">
-  <h3 class="mb-4">Export File</h3>
+  {{-- <h3 class="mb-4">Export File</h3> --}}
 
   <!-- Form Ekspor -->
   <form id="exportForm" method="POST" action="/export-data">
       @csrf 
 
       <div class="mb-3 flex text-start col-md-6">
-        <label for="format" class="form-label"><h6>Mau export data apa?</h6></label>
-        <select id="format" name="format" class="form-select" required>
+        <label for="data_type" class="form-label"><h6>Mau export data apa?</h6></label>
+        <select id="data_type" name="data_type" class="form-select" required>
             <option value="" disabled selected>Pilih Data</option>
-            <option value="csv">Monitoring LK</option>
-            <option value="excel">Monitoring Investasi</option>
-            <option value="pdf">Satwa</option>
+            <option value="lembaga_konservasi">Lembaga Konservasi</option>
+            <option value="monitoring_lk">Monitoring LK</option>
+            <option value="monitoring_investasi">Monitoring Investasi</option>
+            <option value="satwa">Satwa</option>
         </select>
       </div>
       
