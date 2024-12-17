@@ -5,10 +5,8 @@ $(function () {
         transitionEffect: "fade",
         autoFocus: true,
         onStepChanging: function (event, currentIndex, newIndex) {
-
-            // Allow moving back
             if (newIndex < currentIndex) {
-                return true;
+                return true; // Mengizinkan navigasi mundur tanpa validasi
             }
 
             let isValid = true;
@@ -21,6 +19,7 @@ $(function () {
                         const isVisible = $(this).is(":visible");
                         const inputName = $(this).attr("name");
 
+                        // Validasi input yang required
                         if (
                             $(this).prop("required") &&
                             isVisible &&
@@ -35,10 +34,12 @@ $(function () {
                             $(this).siblings(".error-message").hide();
                         }
 
+                        // Validasi radio atau checkbox
                         if ($(this).is(":radio") || $(this).is(":checkbox")) {
                             const groupName = $(this).attr("name");
                             const isChecked =
-                            $(`input[name='${groupName}']:checked`).length > 0;
+                                $(`input[name='${groupName}']:checked`).length >
+                                0;
                             if (!isChecked && isVisible) {
                                 isValid = false;
                                 $(this)
@@ -56,16 +57,50 @@ $(function () {
                     });
             });
 
-            if (!isValid) {
-                alert("Isi semua kolom jika ingin melanjutkan pertanyaan.");
+            if (isValid) {
+                // Ambil data dari formulir di langkah saat ini
+                const formData = {};
+                currentSection
+                    .find("input, select, textarea")
+                    .each(function () {
+                        const name = $(this).attr("name");
+                        if (name) {
+                            formData[name] = $(this).val();
+                        }
+                    });
+
+                // Simpan data ke sessionStorage
+                const sessionData = getSessionData();
+                sessionData[`step_${currentIndex}`] = formData;
+                sessionStorage.setItem("data", JSON.stringify(sessionData));
+            } else {
+                $("#popup-warning").fadeIn();
             }
 
             return isValid;
         },
 
         onFinished: function () {
-            alert("Form submitted successfully!");
+            sessionStorage.setItem("data", "{}");
+
+            const data = JSON.parse(sessionStorage.getItem("data"));
+            $.ajax({
+                type: "POST",
+                url: "/satwas",
+                data: data,
+                success: function (response) {
+                    alert("Form submitted successfully!");
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                    alert("An error occurred. Please try again.");
+                },
+            });
         },
+    });
+
+    $("#close-popup").on("click", function () {
+        $("#popup-warning").fadeOut();
     });
 
     function toggleRequiredFields() {
@@ -77,85 +112,289 @@ $(function () {
             });
     }
 
+    function getSessionData() {
+        const data = sessionStorage.getItem("data");
+        return data ? JSON.parse(data) : {};
+    }
+
+    function setSessionData(stepKey, formData) {
+        const data = getSessionData();
+        data[stepKey] = formData;
+        sessionStorage.setItem("data", JSON.stringify(data));
+        console.log("Data tersimpan:", data);
+    }
+
+    function checkSessionData() {
+        const data = sessionStorage.getItem("data");
+        console.log("Data di sessionStorage:", data);
+    }
+
+    checkSessionData();
+
     $(
         "#form-jenis_koleksi, #form-asal_satwa, #form-perolehan, #form-status_perlindungan, #form-confirm_no_sats-ln, #form-no_sats-ln, #form-pengambilan_satwa, #form-confirm_sk_menteri, #form-sk_menteri, #form-confirm_sk_kepala, #form-sk_kepala, #form-confirm_sk_ksdae, #form-sk_ksdae"
     ).hide();
 
+    //form
+
     $("input[name='satwa_koleksi']").on("change", function () {
+        const selectedValue = $(this).val();
+        setSessionData("satwa_koleksi", selectedValue);
+
+        $("#form-jenis_koleksi input[type='radio']").prop("checked", false);
+        $("#form-perolehan input").val("");
+        $("#form-asal_satwa input[type='radio']").prop("checked", false);
+        $("#form-status_perlindungan input[type='radio']").prop(
+            "checked",
+            false
+        );
+        $("#form-confirm_no_sats-ln input[type='radio']").prop(
+            "checked",
+            false
+        );
+        $("#form-no_sats-ln input").val("");
+        $("#form-pengambilan_satwa input[type='radio']").prop("checked", false);
+        $("#form-confirm_sk_menteri input[type='radio']").prop(
+            "checked",
+            false
+        );
+        $("#form-sk_menteri input").val("");
+        $("#form-confirm_sk_kepala input[type='radio']").prop("checked", false);
+        $("#form-sk_kepala input").val("");
+        $("#form-confirm_sk_ksdae input[type='radio']").prop("checked", false);
+        $("#form-sk_ksdae input").val("");
+
+        $("#form-jenis_koleksi").hide();
+        $("#form-perolehan").hide();
+        $("#form-asal_satwa").hide();
+        $("#form-status_perlindungan").hide();
+        $("#form-confirm_no_sats-ln").hide();
+        $("#form-no_sats-ln").hide();
+        $("#form-pengambilan_satwa").hide();
+        $("#form-confirm_sk_menteri").hide();
+        $("#form-sk_menteri").hide();
+        $("#form-confirm_sk_kepala").hide();
+        $("#form-sk_kepala").hide();
+        $("#form-confirm_sk_ksdae").hide();
+        $("#form-sk_ksdae").hide();
+
         const isHidup = $(this).val().toLowerCase() === "hidup";
-        $("#form-jenis_koleksi").toggle(isHidup);
-        if (!isHidup) {
-            $("#form-jenis_koleksi")
-                .find("input, select, textarea")
-                .prop("required", false);
-            // Jika bukan satwa hidup, langsung tampilkan asal satwa
-            $("#form-asal_satwa").hide();
-            $("#form-perolehan").hide();
+        if (isHidup) {
+            $("#form-jenis_koleksi").show();
         }
     });
 
     $("#form-jenis_koleksi input[type='radio']").on("change", function () {
-        const selectedValue = $(this).val().toLowerCase();
-        if (selectedValue === "satwa koleksi") {
+        const selectedValue = $(this).val();
+        setSessionData("form-jenis_koleksi", selectedValue);
+
+        $("#form-perolehan input").val("");
+        $("#form-asal_satwa input[type='radio']").prop("checked", false);
+        $("#form-status_perlindungan input[type='radio']").prop(
+            "checked",
+            false
+        );
+        $("#form-confirm_no_sats-ln input[type='radio']").prop(
+            "checked",
+            false
+        );
+        $("#form-no_sats-ln input").val("");
+        $("#form-pengambilan_satwa input[type='radio']").prop("checked", false);
+        $("#form-confirm_sk_menteri input[type='radio']").prop(
+            "checked",
+            false
+        );
+        $("#form-sk_menteri input").val("");
+        $("#form-confirm_sk_kepala input[type='radio']").prop("checked", false);
+        $("#form-sk_kepala input").val("");
+        $("#form-confirm_sk_ksdae input[type='radio']").prop("checked", false);
+        $("#form-sk_ksdae input").val("");
+
+        $("#form-perolehan").hide();
+        $("#form-asal_satwa").hide();
+        $("#form-status_perlindungan").hide();
+        $("#form-confirm_no_sats-ln").hide();
+        $("#form-no_sats-ln").hide();
+        $("#form-pengambilan_satwa").hide();
+        $("#form-confirm_sk_menteri").hide();
+        $("#form-sk_menteri").hide();
+        $("#form-confirm_sk_kepala").hide();
+        $("#form-sk_kepala").hide();
+        $("#form-confirm_sk_ksdae").hide();
+        $("#form-sk_ksdae").hide();
+
+        const selectVal = $(this).val().toLowerCase();
+        if (selectVal === "satwa koleksi") {
             $("#form-perolehan").show();
-            $("#form-perolehan").slideDown();
             $("#form-asal_satwa").show();
         } else {
-            $("#form-perolehan").hide();
             $("#form-asal_satwa").show();
-            $("#form-asal_satwa").slideDown();
         }
     });
 
     $("input[name='asal_satwa']").on("change", function () {
+        const selectedValue = $(this).val();
+        setSessionData("asal_satwa", selectedValue);
+
+        $("#form-status_perlindungan input[type='radio']").prop(
+            "checked",
+            false
+        );
+        $("#form-confirm_no_sats-ln input[type='radio']").prop(
+            "checked",
+            false
+        );
+        $("#form-no_sats-ln input").val("");
+        $("#form-pengambilan_satwa input[type='radio']").prop("checked", false);
+        $("#form-confirm_sk_menteri input[type='radio']").prop(
+            "checked",
+            false
+        );
+        $("#form-sk_menteri input").val("");
+        $("#form-confirm_sk_kepala input[type='radio']").prop("checked", false);
+        $("#form-sk_kepala input").val("");
+        $("#form-confirm_sk_ksdae input[type='radio']").prop("checked", false);
+        $("#form-sk_ksdae input").val("");
+
+        $("#form-status_perlindungan").hide();
+        $("#form-confirm_no_sats-ln").hide();
+        $("#form-no_sats-ln").hide();
+        $("#form-pengambilan_satwa").hide();
+        $("#form-confirm_sk_menteri").hide();
+        $("#form-sk_menteri").hide();
+        $("#form-confirm_sk_kepala").hide();
+        $("#form-sk_kepala").hide();
+        $("#form-confirm_sk_ksdae").hide();
+        $("#form-sk_ksdae").hide();
+
         if ($(this).val().toLowerCase() === "endemik") {
             $("#form-status_perlindungan").show();
-            $("#form-status_perlindungan").slideDown();
-            $("#form-confirm_no_sats-ln").hide();
-            $("#form-no_sats-ln").hide();
         } else {
             $("#form-confirm_no_sats-ln").show();
-            $("#form-status_perlindungan").hide();
         }
     });
 
     $("input[name='confirm_no_sats-ln']").on("change", function () {
+        const selectedValue = $(this).val();
+        setSessionData("confirm_no_sats-ln", selectedValue);
+
         $("#form-no_sats-ln").toggle($(this).val().toLowerCase() === "ya");
     });
 
     $("input[name='status_perlindungan']").on("change", function () {
+        const selectedValue = $(this).val();
+        setSessionData("status_perlindungan", selectedValue);
+
+        $("#form-pengambilan_satwa input[type='radio']").prop("checked", false);
+        $("#form-confirm_sk_menteri input[type='radio']").prop(
+            "checked",
+            false
+        );
+        $("#form-sk_menteri input").val("");
+        $("#form-confirm_sk_kepala input[type='radio']").prop("checked", false);
+        $("#form-sk_kepala input").val("");
+        $("#form-confirm_sk_ksdae input[type='radio']").prop("checked", false);
+        $("#form-sk_ksdae input").val("");
+
+        $("#form-pengambilan_satwa").hide();
+        $("#form-confirm_sk_menteri").hide();
+        $("#form-sk_menteri").hide();
+        $("#form-confirm_sk_kepala").hide();
+        $("#form-sk_kepala").hide();
+        $("#form-confirm_sk_ksdae").hide();
+        $("#form-sk_ksdae").hide();
+
         if ($(this).val() === "1") {
             $("#form-pengambilan_satwa").show();
-            $("#form-pengambilan_satwa").slideDown();
-            $("#form-confirm_sk_kepala").hide();
         } else {
             $("#form-confirm_sk_kepala").show();
-            $("#form-confirm_sk_kepala").slideDown();
-            $("#form-pengambilan_satwa").hide();
         }
     });
 
     $("input[name='confirm_sk_kepala']").on("change", function () {
-        $("#form-sk_kepala").toggle($(this).val().toLowerCase() === "ya");
-    });
+        const selectedValue = $(this).val();
+        setSessionData("confirm_sk_kepala", selectedValue);
 
-    $("input[name='pengambilan_satwa']").on("change", function () {
-        if ($(this).val() === "1") {
-            $("#form-confirm_sk_menteri").show();
-            $("#form-confirm_sk_ksdae").hide();
+        $("#form-sk_kepala input").val("");
+        $("#form-confirm_sk_ksdae input[type='radio']").prop("checked", false);
+        $("#form-sk_ksdae input").val("");
+
+        $("#form-sk_kepala").hide();
+        $("#form-confirm_sk_ksdae").hide();
+        $("#form-sk_ksdae").hide();
+
+        if ($(this).val().toLowerCase() === "ya") {
+            $("#form-sk_kepala").show();
         } else {
-            $("#form-confirm_sk_menteri").hide();
             $("#form-confirm_sk_ksdae").show();
         }
     });
 
+    $("input[name='pengambilan_satwa']").on("change", function () {
+        const selectedValue = $(this).val();
+        setSessionData("pengambilan_satwa", selectedValue);
+
+        $("#form-confirm_sk_menteri input[type='radio']").prop(
+            "checked",
+            false
+        );
+        $("#form-sk_menteri input").val("");
+        $("#form-confirm_sk_kepala input[type='radio']").prop("checked", false);
+        $("#form-sk_kepala input").val("");
+        $("#form-confirm_sk_ksdae input[type='radio']").prop("checked", false);
+        $("#form-sk_ksdae input").val("");
+
+        $("#form-confirm_sk_menteri").hide();
+        $("#form-sk_menteri").hide();
+        $("#form-confirm_sk_kepala").hide();
+        $("#form-sk_kepala").hide();
+        $("#form-confirm_sk_ksdae").hide();
+        $("#form-sk_ksdae").hide();
+
+        if ($(this).val() === "1") {
+            $("#form-confirm_sk_menteri").show();
+        } else {
+            $("#form-confirm_sk_kepala").show();
+        }
+    });
+
     $("input[name='confirm_sk_menteri']").on("change", function () {
-        $("#form-sk_menteri").toggle($(this).val().toLowerCase() === "ya");
+        const selectedValue = $(this).val();
+        setSessionData("confirm_sk_menteri", selectedValue);
+
+        $("#form-sk_menteri input").val("");
+        $("#form-confirm_sk_kepala input[type='radio']").prop("checked", false);
+        $("#form-sk_kepala input").val("");
+        $("#form-confirm_sk_ksdae input[type='radio']").prop("checked", false);
+        $("#form-sk_ksdae input").val("");
+
+        $("#form-sk_menteri").hide();
+        $("#form-confirm_sk_kepala").hide();
+        $("#form-sk_kepala").hide();
+        $("#form-confirm_sk_ksdae").hide();
+        $("#form-sk_ksdae").hide();
+
+        if ($(this).val().toLowerCase() === "ya") {
+            $("#form-sk_menteri").show();
+        } else {
+            $("#form-confirm_sk_kepala").show();
+        }
     });
 
     $("input[name='confirm_sk_ksdae']").on("change", function () {
-        $("#form-sk_ksdae").toggle($(this).val().toLowerCase() === "ya");
+        const selectedValue = $(this).val();
+        setSessionData("confirm_sk_ksdae", selectedValue);
+
+        $("#form-sk_ksdae input").val("");
+
+        $("#form-sk_ksdae").hide();
+
+        if ($(this).val().toLowerCase() === "ya") {
+            $("#form-sk_ksdae").show();
+        }
     });
+
+    //form
 
     $("form").on("change", function () {
         $(this)
