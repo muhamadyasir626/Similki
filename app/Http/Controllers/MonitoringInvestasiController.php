@@ -21,7 +21,8 @@ class MonitoringInvestasiController extends Controller
      */
     public function create()
     {
-        //
+        // $data = MonitoringInvestasi::all(); 
+        return view('pages.forms.monitoring-investasi');
     }
 
     /**
