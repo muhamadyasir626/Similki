@@ -69,6 +69,7 @@ document.getElementById('submitBtn').addEventListener('click', function (event) 
     const remember = document.getElementById('remember_me').checked;
     const csrfToken = document.querySelector('input[name="_token"]').value;
     
+    
     console.log('Button clicked');
 
     fetch(`/login`, {
@@ -81,7 +82,6 @@ document.getElementById('submitBtn').addEventListener('click', function (event) 
             login: login,
             password: password,
             remember: remember,
-            _token: csrfToken
         })
     })
     .then(response => response.json())
