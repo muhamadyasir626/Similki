@@ -59,8 +59,8 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::get('/lembaga-konservasi/import',[LembagaKonservasiController::class,'viewImport'])->name('import-lk');
     Route::get('/lembaga-konservasi/export',[LembagaKonservasiController::class,'viewExport'])->name('export-lk');
 
-    Route::get('/get-preview-data', [SatwaController::class, 'getPreviewData']);
-    Route::post('/export-data', [SatwaController::class, 'exportData']);
+    // Route::get('/get-preview-data', [SatwaController::class, 'getPreviewData']);
+    // Route::post('/export-data', [SatwaController::class, 'exportData']);
 
     Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class]);
     Route::resource('lembaga-konservasi', LembagaKonservasiController::class);
