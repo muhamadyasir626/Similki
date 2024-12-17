@@ -21,7 +21,7 @@
           <h2>Informasi Status Satwa</h2>
           <section>
             <form id="pendataan1" method="POST" action="{{ route('satwa.store') }}">
-              @csrf
+              @csrf 
               {{-- NAMA LK --}}
               @if ($user->role && $user->role->tag == 'LK')           
               <div id="nama_lk" style="margin:10px 0px; padding-bottom:10px;">
@@ -303,14 +303,63 @@
                   </label>
                 </div>
               </div>
+
+              {{-- TAKSON SATWA --}}
+              <div id="takson_hewan" class="takson-hewan" style="padding-bottom: 20px;">
+                <h5 style="margin-bottom: 8px;">Takson Hewan</h5>
+                <span class="error-message" style="color: red; display: none;"></span>
+                <div style="display: flex; gap: 10px;">
+                    
+                    <select name="class" id="class" style="width: 180px; padding:10px;" required>
+                          <option value="" disabled selected>Pilih Kelas</option>
+                          @foreach($classes as $class)
+                            <option id="{{ $class }}"  value="{{ $class }}" required>{{ $class }}</option>
+                            @endforeach
+                      </select>                        
+
+                    <select name="genus" id="genus" style="width: 180px; padding:10px;" required>
+                        <option value="" disabled selected>Pilih Genus</option>
+                        @foreach($genus as $genus)
+                            <option id="{{ $genus }}"  value="{{ $genus }}" required >{{ $genus }}</option>
+                            @endforeach
+                    </select>
+
+                    <select name="species" id="species" style="width: 180px; padding:10px;" required>
+                        <option value="" disabled selected>Pilih Spesies</option>
+                        @foreach($spesies as $spesies)
+                            <option id="{{ $spesies }}"  value="{{ $spesies }}" required >{{ $spesies }}</option>
+                            @endforeach
+                    </select>
+
+                    <select name="sub_species" id="sub_species" style="width: 180px; padding:10px;" required>
+                        <option value="" disabled selected>Pilih Sub Spesies</option>
+                        @foreach($subSpesies as $subSpesies)
+                            <option id="{{ $subSpesies }}"  value="{{ $subSpesies }}" required >{{ $subSpesies }}</option>
+                            @endforeach
+                    </select>
+                </div>
+              </div>   
             
               <div id="form-alasan_belum_tagging" class="form-alasan_belum_tagging" style="margin-bottom: 10px">
                 <label for="additional_notes"><h5>Alasan satwa belum dilakukan tagging</h5></label>
                 <span class="error-message" style="color: red; display: none;"></span>
                 <textarea class="form-control" id="alasan_belum_tagging" name="alasan_belum_tagging" rows="4" placeholder="Alasan..." required></textarea>
               </div>
-            
-          
+
+              {{-- JENIS TAGGING --}}
+              <div id="form-jenis_tagging" style="margin-bottom:10px; padding-bottom:10px;">
+                <h5 style="margin-bottom: 8px">Jenis Tagging</h5>
+                <div style="display: flex; gap: 10px;">
+                  <select name="jenis_tagging" id="jenis_tagging" style="width: 180px; padding:10px;">
+                    <option value="" disabled selected>Pilih Jenis Tagging</option>
+                    <option value="ring">Ring</option>
+                    <option value="chip">Chip</option>
+                    <option value="eartag">Eartag</option>
+                    <option value="label">Label</option>
+                    <option value="tattoo">Tattoo</option>
+                  </select>
+                </div>
+              </div>           
                         
               <div id="form-ba_tagging" style="margin-bottom:10px; padding-bottom:10px;">
                 <h5 style="margin-bottom: 8px">Berita Acara Tagging</h5>
@@ -371,8 +420,7 @@
                 <span class="error-message" style="color: red; display: none;"></span>
                 <input class="" type="text" name="nama_panggilan" id="nama_panggilan" placeholder="Masukkan nama panggilan satwa" style="width: 400px; padding:10px;" required>
               </div>
-            
-             
+                     
             </form>
           </section>    
           
@@ -486,38 +534,84 @@
             </form>
           </section>
         </div>
-        <button type="button" onclick="h(this.form)">Submit All</button>
+
+        <div id="popup-warning" class="popup">
+          <div class="popup-content">
+              <p>Isi semua kolom jika ingin melanjutkan pertanyaan.</p>
+              <button id="close-popup">Tutup</button>
+          </div>
+        </div>
+      
+      <style>
+          .popup {
+              display: none;
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: rgba(0, 0, 0, 0.5);
+              z-index: 9999;
+          }
+          .popup-content {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              background: white;
+              padding: 20px;
+              border-radius: 8px;
+              text-align: center;
+              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          }
+          .popup-content p {
+              margin: 0 0 15px;
+          }
+          .popup-content button {
+              background: #007bff;
+              color: white;
+              border: none;
+              padding: 10px 20px;
+              border-radius: 5px;
+              cursor: pointer;
+          }
+          .popup-content button:hover {
+              background: #0056b3;
+          }
+      </style>
+      
 
         <script>
           document.addEventListener('DOMContentLoaded', function() {
               const form = document.getElementById('pendataan1');
-          
+
               form.addEventListener('submit', function(event) {
-                  event.preventDefault(); // Prevent the default form submission
-          
-                  const formData = new FormData(form); // Create a FormData object from the form
-          
+                  event.preventDefault();
+
+                  const formData = new FormData(form); 
+
                   fetch('/satwas', {
                       method: 'POST',
                       body: formData,
                       headers: {
-                          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') // Include CSRF token
+                          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') 
                       }
                   })
                   .then(response => response.json())
                   .then(data => {
                       if (data.success) {
-                          alert(data.message); // Display success message
-                          form.reset(); // Reset the form
+                          alert(data.message);
+                          form.reset(); 
                       } else {
-                          // Handle validation errors
                           const errorMessages = document.querySelectorAll('.error-message');
-                          errorMessages.forEach(msg => msg.style.display = 'none'); // Hide previous error messages
+                          errorMessages.forEach(msg => msg.style.display = 'none');
                           
                           for (const [key, value] of Object.entries(data.errors)) {
                               const errorMessageElement = document.querySelector(`#${key}`).nextElementSibling;
-                              errorMessageElement.textContent = value[0]; // Show error message next to the input field
-                              errorMessageElement.style.display = 'block'; // Display the error message
+                              if (errorMessageElement) {
+                                  errorMessageElement.textContent = value[0]; 
+                                  errorMessageElement.style.display = 'block'; 
+                              }
                           }
                       }
                   })
@@ -531,9 +625,7 @@
 @endsection
 
 @push('plugin-scripts') 
-  <script src="{{ asset('assets/plugins/jquery-steps/jquery.steps.min.js') }}"></script>
-  {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">></script> --}}
-  
+  <script src="{{ asset('assets/plugins/jquery-steps/jquery.steps.min.js') }}"></script>  
 @endpush
 
 @push('custom-scripts')
