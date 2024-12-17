@@ -28,7 +28,7 @@ class LembagaKonservasiController extends Controller
 
     public function create()
     {
-        return view('lk.create');
+        return view('pages.forms.input-lk');
     }
 
     public function store(StoreLembagaKonservasiRequest $request)
@@ -155,8 +155,72 @@ class LembagaKonservasiController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
+    } 
+    public function viewImport(){
+        return view ('pages.lk.import-file');   
     }
     
+    public function viewExport(){
+        return view ('pages.lk.export-file');   
+    }
+    
+    public function getPreviewData()
+    {
+        $satwa = Satwa::select('nama_panggilan', 'asal_satwa', 'jenis_koleksi')->limit(10)->get();
+        return response()->json($satwa);
+    }
+    
+    public function exportData(Request $request)
+    {
+        $format = $request->input('format');
+        $data = Satwa::select('nama_panggilan', 'asal_satwa', 'jenis_koleksi')->get();
+        
+        switch ($format) {
+            case 'csv':
+                return $this->exportCsv($data);
+            case 'pdf':
+                return $this->exportPdf($data);
+            case 'jpg':
+            case 'jpeg':
+                return $this->exportImage($data, $format);
+            default:
+                return response()->json(['error' => 'Format tidak valid'], 400);
+        }
+    }
+
+    private function exportCsv($satwa)
+    {
+        $csv = Writer::createFromFileObject(new SplTempFileObject());
+        $csv->insertOne(['Nama Panggilan', 'Asal Satwa', 'Jenis Koleksi', 'Spesies', 'Status Perlindungan']);
+        foreach ($satwa as $s) {
+            $csv->insertOne([
+                $s->nama_panggilan,
+                $s->asal_satwa,
+                $s->jenis_koleksi,
+                $s->spesies,
+                $s->status_perlindungan == '1' ? 'Dilindungi' : 'Tidak Dilindungi'
+            ]);
+        }
+        return response((string) $csv)->withHeaders([
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="satwa_data.csv"',
+        ]);
+    }
+
+    private function exportPdf($satwa)
+    {
+        $pdf = PDF::loadView('pdf.satwa', compact('satwa'));
+        return $pdf->download('satwa_data.pdf');
+    }
+
+    private function exportImage($satwa, $format)
+    {
+        // Implement logic to export satwa data as an image (e.g., use a package like Intervention Image)
+        // This is just a placeholder method.
+        return response('Image export not implemented.', 404);
+    }
+
+
 
     public function import(Request $request){
         $validatedFile = Validator::make($request->all(),[
@@ -174,6 +238,25 @@ class LembagaKonservasiController extends Controller
             return redirect()->route('lk.index')->with('Success', 'File/Data import berhasil');
         }catch(\Exception$e){
             return redirect()->with('Failed', "File/Data import gagal!");
+        }
+    }
+     
+    public function export(Request $request){
+        $validatedFile = Validator::make($request->all(),[
+            'file' =>'required|mimes:csv',
+        ]);
+
+        if($validatedFile->fails()){
+            return redirect()->route('lk.create')
+                    ->withErrors($validatedFile)
+                    ->withInput();
+        }
+        try{
+            Excel::export(new LembagaKonservasiImport, $request->file('file'));
+            
+            return redirect()->route('lk.index')->with('Success', 'File/Data export berhasil');
+        }catch(\Exception$e){
+            return redirect()->with('Failed', "File/Data export gagal!");
         }
     }
 
