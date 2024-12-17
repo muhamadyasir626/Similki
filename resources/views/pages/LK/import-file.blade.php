@@ -13,6 +13,17 @@
   </ol>
 </nav>
 
+<div class="mb-3 flex text-start col-md-6">
+  <label for="data_type" class="form-label"><h6>Mau import data kemana?</h6></label>
+  <select id="data_type" name="data_type" class="form-select" required>
+      <option value="" disabled selected>Pilih Data</option>
+      <option value="lembaga_konservasi">Lembaga Konservasi</option>
+      <option value="monitoring_lk">Monitoring LK</option>
+      <option value="monitoring_investasi">Monitoring Investasi</option>
+      <option value="satwa">Satwa</option>
+  </select>
+</div>
+
 <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
