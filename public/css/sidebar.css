@@ -1,0 +1,9 @@
+.sidebar .nav-link.active {
+    background-color: #d1e7dd; /* Ganti dengan warna aktif yang Anda inginkan */
+    color: #0f5132; /* Warna teks */
+    font-weight: bold; /* Opsional untuk menonjolkan teks */
+}
+
+.sidebar .nav-link:hover {
+    background-color: #e0e0e0; /* Warna saat hover */
+}
