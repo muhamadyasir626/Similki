@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ListSpecies;
 use App\Http\Requests\StoreListSpeciesRequest;
 use App\Http\Requests\UpdateListSpeciesRequest;
+use Illuminate\Http\Request;
 
 class ListSpeciesController extends Controller
 {
@@ -16,6 +17,39 @@ class ListSpeciesController extends Controller
         //
     }
 
+     // Fungsi untuk mengambil data taksonomi
+     public function getTaksonSatwa(Request $request)
+     {
+         // Get filter parameters from request
+         $class = $request->query('class');
+         $genus = $request->query('genus');
+         $species = $request->query('spesies');
+         $subspecies = $request->query('subspesies');
+     
+         // Initialize the query
+         $query = ListSpecies::query();
+     
+         // Apply filters if provided
+         if ($class) {
+             $query->where('class', $class);
+         }
+         if ($genus) {
+             $query->where('genus', $genus);
+         }
+         if ($species) {
+             $query->where('spesies', $species);
+         }
+         if ($subspecies) {
+             $query->where('subspesies', $subspecies);
+         }
+     
+         // Get filtered data
+         $taksonHewan = $query->get(['class', 'genus', 'spesies', 'subspesies']);
+     
+         // Return filtered data as JSON
+         return response()->json($taksonHewan);
+     }
+     
     /**
      * Show the form for creating a new resource.
      */
@@ -63,4 +97,6 @@ class ListSpeciesController extends Controller
     {
         //
     }
+
+    public function getSpecies(){}
 }
