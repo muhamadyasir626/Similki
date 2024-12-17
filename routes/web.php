@@ -26,19 +26,19 @@ use App\Http\Controllers\ListSpeciesController;
 |
 */
 
-// Authentication Routes
-Route::get('/', function () {
-    return view('auth.login');
-})->name('login');
+Route::get('/', function () {return view('auth.login');})->name('login');
 
+//Auth
 Route::get('/register', function () {
     $roles = Role::all();
     $upt_bentuk = ListUpt::distinct()->select('bentuk')->get();
     $upt_wilayah = ListUpt::distinct()->select('wilayah')->get();
-    $list_lk = LembagaKonservasi::orderBy('nama', 'asc')->get();
-    $list_species = ListSpecies::all();
+    $list_lk = LembagaKonservasi::orderBy('nama','asc')->get();
+    // dd($list_lk);
+    $list_species =ListSpecies::all();
 
-    return view('auth.register', compact('roles', 'upt_bentuk', 'upt_wilayah', 'list_lk', 'list_species'));
+    // dd($upt_bentuk);
+    return view('auth.register',compact('roles','upt_bentuk','upt_wilayah','list_lk','list_species'));
 });
 
 Route::post('/register1',[AuthController::class, 'register1'])->name('register1');
@@ -50,27 +50,20 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
 ->group(function () {
     Route::get('/check-permission',[checkpermission::class,'check']);
 
-    Route::get('/dashboard', function () {
-        // dd(Auth::user() ); 
-        $lk_count = LembagaKonservasi::count();
-        $species_count = ListSpecies::count();
-        $skoleksi_count = Satwa::where('status_satwa','satwa koleksi')->count();
-        $stitipan_count = Satwa::where('status_satwa','satwa titipan')->count();
-        $sbelumtag_count = Tagging::where('jenis_tagging','belum ditagging')->count();
-        $shidup_count = Satwa::where('jenis_koleksi','satwa hidup')->count();
-        $taksa = ListSpecies::select('spesies')->count();
-        
-        return view('dashboard', compact('lk_count', 'species_count', 'skoleksi_count', 'stitipan_count', 'sbelumtag_count', 'shidup_count','taksa',));
-    })->name('dashboard');
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 
     Route::get('/get-satwa', [SatwaController::class, 'updateDashboard']);
     Route::get('/get-lembaga-konservasi', [LembagaKonservasiController::class, 'getall']);
     Route::get('/get-spesies', [ListSpeciesController::class, 'index']);
+    
+    Route::get('/lembaga-konservasi/import',[LembagaKonservasiController::class,'viewImport'])->name('import-lk');
+    Route::get('/lembaga-konservasi/export',[LembagaKonservasiController::class,'viewExport'])->name('export-lk');
 
+    Route::get('/get-preview-data', [SatwaController::class, 'getPreviewData']);
+    Route::post('/export-data', [SatwaController::class, 'exportData']);
+
+    Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class]);
     Route::resource('lembaga-konservasi', LembagaKonservasiController::class);
-    Route::resource('satwa', SatwaController::class);
-    Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
     Route::get('/monitoring',[LembagaKonservasiController::class,'monitoring'])->name('monitoring-lk');
 
     
@@ -78,7 +71,9 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::get('/pendataan-satwa', [SatwaController::class,'form'])->name('form-satwa');
     Route::post('/satwa/pendataan1',[SatwaController::class, 'pendataan1'])->name('pendataan-satwa1');
     Route::post('/satwa/pendataan2',[SatwaController::class, 'pendataan2'])->name('pendataan-satwa2');
+    Route::post('/satwa/pendataan3',[SatwaController::class, 'pendataan3'])->name('pendataan-satwa3');
     Route::get('/search',[SatwaController::class,'search'])->name('satwa-search');
+    Route::post('/satwas', [SatwaController::class, 'store'])->name('satwa.store');
     
 
     Route::get('/permission', function(){
@@ -88,9 +83,16 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::post('/updated-permission/id={id}',[AuthController::class,'updatePermission'])->name('updated-permission');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+    
+
 });
 
 Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);
+Route::get('/filter-class', [DashboardController::class, 'filterClass'])->name('dashboard.filter-class');
+Route::get('/get-jenis-tagging', [SatwaController::class, 'getJenisTagging']);
+// Route::get('/get-takson-satwa', [ListSpeciesController::class, 'getTaksonSatwa']);
+Route::get('/get-takson-satwa', [ListSpeciesController::class, 'getTaksonSatwa'])->name('getTaksonSatwa');
+
 
 //undefined route 
 // Route::any('/{page}', function () {
