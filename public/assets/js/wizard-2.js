@@ -309,24 +309,24 @@ $(function () {
                 $("#form-jenis_tagging").show();
                 $("#form-ba_tagging").show();
                 $("#form-tanggal_tagging").show();
-                $("#form-no_ba_titipan").show();
+                // $("#form-no_ba_titipan").show();
                 $("#form-no_ba_kelahiran").show();
                 $("#form-no_ba_kematian").show();
                 $("#form-validasi_tanggal").show();
-                $("#form-tahun_titipan").show();
+                // $("#form-tahun_titipan").show();
                 $("#form-keterangan").show();
                 $("#form-alasan_belum_tagging").hide(); // Pastikan ini tersembunyi
 
                 // Clear hidden form values
                 clearFormValues("#form-ba_tagging");
-                clearFormValues("#form-no_ba_titipan");
+                // clearFormValues("#form-no_ba_titipan");
                 clearFormValues("#form-no_ba_kelahiran");
                 clearFormValues("#form-no_ba_kematian");
                 clearFormValues("#form-keterangan");
                 clearFormValues("#form-jenis_tagging");
                 clearFormValues("#form-tanggal_tagging");
                 clearFormValues("#form-validasi_tanggal");
-                clearFormValues("#form-tahun_titipan");
+                // clearFormValues("#form-tahun_titipan");
             } else {
                 // console.log("Menampilkan alasan belum tagging");
                 $("#form-alasan_belum_tagging").show();

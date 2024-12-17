@@ -449,4 +449,11 @@ public function getall()
         ], 500);
     }
     }
+    
+    public function formSilsilah() {
+        $namaIlmiah = ListSpecies::select('nama_ilmiah')->distinct()->pluck('nama_ilmiah');
+        $namaPanggilan = Satwa::select('nama_panggilan')->pluck('nama_panggilan');
+
+        return view('pages.forms.pendataan-silsilah', compact('namaIlmiah', 'namaPanggilan'));
+    }
 }

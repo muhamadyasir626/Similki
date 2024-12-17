@@ -28,86 +28,106 @@
 </div>
 
 <div class="container-fluid px-0">
-    <!-- Baris pertama untuk Kartu 1-6 -->
-    <div class="row mb-3">
-        <!-- Loop untuk membuat semua kartu dalam satu baris -->
-        <div class="col-lg-2 col-md-4 col-sm-6"> <!-- Lebar kolom disesuaikan agar semua kartu muat dalam satu baris -->
-            <!-- Kartu 1 -->
+    <!-- Baris pertama untuk Kartu 1-4 -->
+    <div class="row mb-3" id="data-satwas" data-satwa="{{ $satwas }}">
+        <!-- Kartu 1 -->
+        <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="card mb-2 custom-card-size">
                 <div class="card-body-1">
-                    <h5 style="" class="card-title">Lembaga Konservasi</h5>
-                    <h3 id="lk_count" data-lk-count = {{ $lk_count }}>0</h3>
+                    <h5 class="card-title">Lembaga Konservasi</h5>
+                    <h3 id="lk_count">{{ $lk_count }}</h3>
                 </div>
             </div>
         </div>
-        <div class="col-lg-2 col-md-4 col-sm-6">
-            <!-- Kartu 2 -->
+        <!-- Kartu 2 -->
+        <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="card mb-2 custom-card-size">
                 <div class="card-body-1">
                     <h5 class="card-title">Jenis Satwa</h5>
-                    <h3 id="species_count" data-spesies_count="{{ $species_count }}">0</h3>
+                    <h3 id="species_count">{{ $species_count }}</h3>
                 </div>
             </div>
         </div>
-        <div class="col-lg-2 col-md-4 col-sm-6">
-            <!-- Kartu 3 -->
+        <!-- Kartu 3 -->
+        <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="card mb-2 custom-card-size">
                 <div class="card-body-1">
                     <h5 class="card-title">Satwa Koleksi</h5>
-                    <h3 id="skoleksi_count" data-skoleksi-count="{{ $skoleksi_count }}">0</h3>
+                    <h3 id="skoleksi_count">{{ $skoleksi_count }}</h3>
                 </div>
             </div>
         </div>
-        <div class="col-lg-2 col-md-4 col-sm-6">
-            <!-- Kartu 4 -->
+        <!-- Kartu 4 -->
+        <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="card mb-2 custom-card-size">
                 <div class="card-body-1">
                     <h5 class="card-title">Satwa Titipan</h5>
-                    <h3 id="stitipan_count" data-stitipan-count ="{{ $stitipan_count }}">0</h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-2 col-md-4 col-sm-6">
-            <!-- Kartu 5 -->
-            <div class="card mb-2 custom-card-size">
-                <div class="card-body-1">
-                    <h5 class="card-title">Satwa Belum Tagging</h5>
-                    <h3 id="sbelumtag_count" data-sbelumtag-count="{{ $sbelumtag_count }}">0</h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-2 col-md-4 col-sm-6">
-            <!-- Kartu 6 -->
-            <div class="card mb-2 custom-card-size">
-                <div class="card-body-1">
-                    <h5 class="card-title">Satwa Hidup</h5>
-                    <h3 id="shidup_count" data-shidup_count="{{ $shidup_count }}">0</h3>
+                    <h3 id="stitipan_count">{{ $stitipan_count }}</h3>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Baris kedua untuk Jenis LK dan Wilayah LK -->
-    <div class="row" style="margin-bottom: 20px">
-        <div class="col-lg-6">
-            <div class="card h-100 custom-card-size">
-                <div class="card-body-2">
-                    <h5 class="card-title">Bentuk Lembaga Konservasi</h5>
-                    <div id="jenisLKChart" data-counts="{{ $total_bentukLk }}">                      
-                    </div>
+    <!-- Baris kedua untuk Kartu 5-8 -->
+    <div class="row mb-3">
+        <!-- Kartu 5 -->
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card mb-2 custom-card-size">
+                <div class="card-body-1">
+                    <h5 class="card-title">Satwa Belum Tagging</h5>
+                    <h3 id="sbelumtag_count">{{ $sbelumtag_count }}</h3>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
-          <div class="card h-100 custom-card-size">
-              <div class="card-body-2">
-                  <h5 class="card-title">Wilayah Lembaga Konservasi</h5>
-                  <div id="wilayahLKChart" data-counts="{{ $total_wilayahLk }}"></div>
-              </div>
-          </div>
+        <!-- Kartu 6 -->
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card mb-2 custom-card-size">
+                <div class="card-body-1">
+                    <h5 class="card-title">Satwa Hidup</h5>
+                    <h3 id="shidup_count">{{ $shidup_count }}</h3>
+                </div>
+            </div>
+        </div>
+        <!-- Kartu 7 -->
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card mb-2 custom-card-size">
+                <div class="card-body-1">
+                    <h5 class="card-title">Satwa Endemik</h5>
+                    <h3 id="endemik_count">{{ $endemik_count }}</h3>
+                </div>
+            </div>
+        </div>
+        <!-- Kartu 8 -->
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="card mb-2 custom-card-size">
+                <div class="card-body-1">
+                    <h5 class="card-title">Satwa Eksotik</h5>
+                    <h3 id="eksotik_count">{{ $eksotik_count }}</h3>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+    <!-- Baris kedua untuk Jenis LK dan Wilayah LK -->
+<div class="row">
+  <div class="col-lg-6">
+      <div class="card h-100 custom-card-size">
+          <div class="card-body-3">
+              <h5 class="card-title">Bentuk Lembaga Konservasi</h5>
+              <div id="jenisLKChart" data-counts="{{ $total_bentukLk }}">                      
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card h-100 custom-card-size">
+        <div class="card-body-3">
+            <h5 class="card-title">Wilayah Lembaga Konservasi</h5>
+            <div id="wilayahLKChart" data-counts="{{ $total_wilayahLk }}"></div>
+        </div>
+    </div>
+  </div>
 
 <div class="row">
   <div class="col-lg-6">

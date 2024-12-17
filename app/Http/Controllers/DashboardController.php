@@ -23,28 +23,34 @@ class DashboardController extends Controller
                 $upts = ListUpt::distinct()->select('id','wilayah')->get();
                 $classes = ListSpecies::distinct()->select('class')->get();
 
-                //statis
-                // $lk_count = LembagaKonservasi::count();
-                // $species_count = ListSpecies::count();
-                // $skoleksi_count = Satwa::where('status_satwa','satwa koleksi')->count();
-                // $stitipan_count = Satwa::where('status_satwa','satwa titipan')->count();
-                // $sbelumtag_count = Tagging::where('jenis_tagging','belum ditagging')->count();
-                // $shidup_count = Satwa::where('jenis_koleksi','satwa hidup')->count();
-                // $taksa = ListSpecies::select('spesies')->count();
+                //filter database
+                $satwas = Satwa::with('lk')->select('id_spesies','id_lk','status_satwa','jenis_koleksi')->get();
+                $tag = Tagging::select('jenis_tagging')->get();
 
-                $lk_count = LembagaKonservasi::select('id')->get(); //diubah jd select id sm nama upt / slug 
-                $species_count = ListSpecies::distinct()->select('spesies')->get(); //ini jg ambil id sm nama
-                // dd($species_count);
-                $skoleksi_count = Satwa::where('status_satwa','satwa koleksi')->select('id')->get(); //id sm id upt sm id lk 
-                // dd($skoleksi_count); 
-                $stitipan_count = Satwa::where('status_satwa','satwa titipan')->select('id', 'id_lk')->get();
-                // dd($stitipan_count);
-                $sbelumtag_count = Tagging::where('jenis_tagging','belum ditagging')->select('id', 'id_satwa')->get();
-                // dd($sbelumtag_count);
-                $shidup_count = Satwa::where('jenis_koleksi','satwa hidup')->select('id', 'id_lk')->get();
-                // dd($shidup_count);
-                $taksa = ListSpecies::distinct()->select('class')->get();
-                // dd($taksa);
+                //statis
+                $lk_count = LembagaKonservasi::count();
+                $species_count = ListSpecies::count();
+                $skoleksi_count = Satwa::where('status_satwa','satwa koleksi')->count();
+                $stitipan_count = Satwa::where('status_satwa','satwa titipan')->count();
+                $sbelumtag_count = Tagging::where('jenis_tagging','belum ditagging')->count();
+                $shidup_count = Satwa::where('jenis_koleksi','satwa hidup')->count();
+                $taksa = ListSpecies::select('spesies')->count();
+                $endemik_count = Satwa::where('asal_satwa', 'endemik')->count();
+                $eksotik_count = Satwa::where('asal_satwa', 'eksotik')->count();
+
+                // $lk_count = LembagaKonservasi::select('id')->get(); //diubah jd select id sm nama upt / slug 
+                // $species_count = ListSpecies::distinct()->select('id','spesies')->get(); //ini jg ambil id sm nama
+                // // dd($species_count);
+                // $skoleksi_count = Satwa::where('status_satwa','satwa koleksi')->select('id','id_lk','id_spesies')->get(); //id sm id upt sm id lk 
+                // // dd($skoleksi_count); 
+                // $stitipan_count = Satwa::where('status_satwa','satwa titipan')->select('id', 'id_lk','id_spesies')->get();
+                // // dd($stitipan_count);
+                // $sbelumtag_count = Tagging::where('jenis_tagging','belum ditagging')->select('id', 'id_satwa')->get();
+                // // dd($sbelumtag_count);
+                // $shidup_count = Satwa::where('jenis_koleksi','satwa hidup')->select('id', 'id_lk','id_spesies')->get();
+                // // dd($shidup_count);
+                // $taksa = ListSpecies::distinct()->select('class')->get();
+                // // dd($taksa);
 
 
                 //data chart Bentuk lembaga konservasi
@@ -165,7 +171,8 @@ class DashboardController extends Controller
                     'stitipan_count', 'sbelumtag_count', 'shidup_count',
                     'total_bentukLk', 'taksa', 'total_wilayahLk',
                     'total_jumlahIndvSpesies', 'total_tagging',
-                    'total_jenis_koleksi', 'total_class', 'lks', 'upts', 'classes'
+                    'total_jenis_koleksi', 'total_class', 'lks', 'upts', 'classes',
+                    'satwas', 'endemik_count', 'eksotik_count'
                                 ));
                 
                 case'LK':
@@ -504,12 +511,17 @@ class DashboardController extends Controller
         
     }
 
-    public function filterClass()
+    public function filterClass(Request $request, $lk)
     {
         try {
-            $filter_class = Cache::remember('filter_class', 60, function () {
-                return Satwa::with('species:id,class')
-                            ->get()
+            $query = Satwa::with('species:id, class');
+            
+            if($lk) {
+                $query->where('id_lk', $lk);
+            }
+
+            $filter_class = Cache::remember('filter_class', $lk, 60, function () use($query) {
+                return $query->get()
                             ->pluck('species.class')
                             ->map(function ($class) {
                                 return strtolower(trim($class));
@@ -519,7 +531,7 @@ class DashboardController extends Controller
                             ->values();
             });
             
-            return response()->json($filter_class); // Pastikan response dalam format JSON
+            return view('sidebar', (compact('filter_class'))); // Pastikan response dalam format JSON
             
         } catch (\Exception $e) {
             // Menangani error dan memberi response yang sesuai

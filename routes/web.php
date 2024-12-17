@@ -69,7 +69,9 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::get('/pendataan-satwa', [SatwaController::class,'form'])->name('form-satwa');
     Route::post('/satwa/pendataan1',[SatwaController::class, 'pendataan1'])->name('pendataan-satwa1');
     Route::post('/satwa/pendataan2',[SatwaController::class, 'pendataan2'])->name('pendataan-satwa2');
+    Route::get('/pendataan-silsilah', [SatwaController::class,'formSilsilah'])->name('form-silsilah');
     Route::get('/search',[SatwaController::class,'search'])->name('satwa-search');
+    Route::get('/filter-class/{lk}', [DashboardController::class, 'filterClass']);
     
 
     Route::get('/permission', function(){
@@ -82,5 +84,4 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
 });
 
 Route::get('/get-wilayah-upt',[AuthController::class,'getWilayahUPT']);
-
 

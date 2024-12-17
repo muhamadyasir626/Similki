@@ -63,13 +63,13 @@
               <h5 style="margin-bottom:10px;">Jenis satwa hidup yang akan di data :</h5>
               <span class="error-message" style="color: red; display: none;"></span>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="jenis_koleksi" id="satwa_koleksi" value="satwa koleksi" required>
+                <input class="form-check-input" type="radio" name="jenis_koleksi" id="satwa_koleksi" value="koleksi" required>
                 <label class="form-check-label" for="satwa_koleksi">
                   Satwa Koleksi
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="jenis_koleksi" id="satwa_titipan" value="satwa titipan" required>
+                <input class="form-check-input" type="radio" name="jenis_koleksi" id="satwa_titipan" value="titipan" required>
                 <label class="form-check-label" for="satwa_titipan">
                   Satwa Titipan
                 </label>
@@ -87,6 +87,21 @@
                 </label>
               </div>
             </div>
+
+            {{-- Tanggal Titipan --}}
+            <div id="form-tanggal_titipan" style="margin-bottom:10px; padding-bottom:10px;">
+              <h5 style="margin-bottom: 8px">Tanggal Titipan</h5>
+              <span class="error-message" style="color: red; display: none;">Masukkan tanggal titipan</span>
+              <input type="date" name="tanggal_titipan" id="tanggal_titipan" style="width: 400px; padding:10px;" required>
+            </div>
+
+            {{-- NO BA TITIPAN --}}
+            <div id="form-no_ba_titipan" style="margin-bottom:10px; padding-bottom:10px;">
+              <h5 style="margin-bottom: 8px">No. BA Titipan</h5>
+              <span class="error-message" style="color: red; display: none;"></span>
+              <input class="" type="text" name="no_ba_titipan" id="no_ba_titipan" placeholder="Masukkan nomor berita acara titipan satwa" style="width: 400px; padding:10px;" required>
+            </div>
+
             {{-- NO Perolehan --}}
             <div id="form-perolehan" style="margin:10px 0px; padding-bottom:10px;">
               <h5>No. Perolehan</h5>
@@ -360,12 +375,12 @@
               <input class="" type="date" name="tanggal_tagging" id="tanggal_tagging" style="width: 400px; padding:10px;" required>
             </div>
           
-            {{-- NO BA TITIPAN --}}
+            <!-- {{-- NO BA TITIPAN --}}
             <div id="form-no_ba_titipan" style="margin-bottom:10px; padding-bottom:10px;">
               <h5 style="margin-bottom: 8px">No. BA Titipan</h5>
               <span class="error-message" style="color: red; display: none;"></span>
               <input class="" type="text" name="no_ba_titipan" id="no_ba_titipan" placeholder="Masukkan nomor berita acara titipan satwa" style="width: 400px; padding:10px;" required>
-            </div>
+            </div> -->
           
             {{-- NO BA KELAHIRAN --}}
             <div id="form-no_ba_kelahiran" style="margin-bottom:10px; padding-bottom:10px;">
@@ -394,11 +409,11 @@
               <span class="error-message" style="color: red; display: none;"></span>
               <input class="" type="date" name="tahun_titipan" id="tahun_titipan" style="width: 400px; padding:10px;" required>
             </div> -->
-            <div id="form-tahun_titipan" style="margin-bottom:10px; padding-bottom:10px;">
+            <!-- <div id="form-tahun_titipan" style="margin-bottom:10px; padding-bottom:10px;">
               <h5 style="margin-bottom: 8px">Tahun Titipan</h5>
               <span class="error-message" style="color: red; display: none;">Masukkan tahun dalam format yang benar (4 digit)</span>
               <input type="text" name="tahun_titipan" id="tahun_titipan" pattern="^[0-9]{4}$" placeholder="Masukkan tahun" style="width: 400px; padding:10px;" required>
-            </div>
+            </div> -->
           
             {{-- Keterangan --}}
             <div id="form-keterangan" class="form-keterangan" style="margin-bottom: 10px">
@@ -472,11 +487,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- 
 <script>
-  // Tahun Titipan
-  document.getElementById('tahun_titipan').addEventListener('input', function(event) {
-    this.value = this.value.replace(/[^0-9]/g, ''); // Menghapus karakter non-angka
-  });
-
   // AUTO CLEAR VALUE
   function clearInputOnRadioChange(confirmRadioName, inputId) {
     document.querySelectorAll(`input[name="${confirmRadioName}"]`).forEach(function (radio) {
@@ -647,6 +657,25 @@
 </script> -->
 <script>
     $(document).ready(function () {
+
+    // AUTO CLEAR VALUE
+    function clearInputOnRadioChange(confirmRadioName, inputId) {
+      document.querySelectorAll(`input[name="${confirmRadioName}"]`).forEach(function (radio) {
+        radio.addEventListener('change', function () {
+          // Jika memilih "Tidak", maka clear nilai input yang bersangkutan
+          if (document.getElementById(`${confirmRadioName}_tidak`).checked) {
+            document.getElementById(inputId).value = '';
+          }
+          
+          // Menyembunyikan atau menampilkan form input berdasarkan pilihan
+          if (document.getElementById(`${confirmRadioName}_ya`).checked) {
+            document.getElementById(`form-${inputId}`).style.display = 'block';
+          } else {
+            document.getElementById(`form-${inputId}`).style.display = 'none';
+          }
+        });
+      });
+    }
     // Ketika class dipilih
     $('#class').on('change', function () {
         let selectedClass = $(this).val();

@@ -36,6 +36,8 @@ $(function () {
         const stitipan_count = document.querySelector('[data-stitipan]').getAttribute('data-stitipan');
         const sbelumtag_count = document.querySelector('[data-sbelumtag]').getAttribute('data-sbelumtag');
         const shidup_count = document.querySelector('[data-shidup]').getAttribute('data-shidup');
+        const endemik_count = document.querySelector('[data-endemik]').getAttribute('data-endemik');
+        const eksotik_count = document.querySelector('[data-eksotik]').getAttribute('data-eksotik');
     
         console.log('Jumlah LK:', lk_count);
         console.log('Total Jenis Satwa:', species_count);
@@ -43,6 +45,8 @@ $(function () {
         console.log('Satwa Titipan:', stitipan_count);
         console.log('Satwa Belum Tagging:', sbelumtag_count);
         console.log('Satwa Hidup:', shidup_count);
+        console.log('Satwa Endemik:', endemik_count);
+        console.log('Satwa Eksotik:', eksotik_count);
     });
     
 

@@ -95,7 +95,7 @@ $(function () {
 
     // Hide all conditional forms initially
     $(
-        "#form-jenis_koleksi, #form-asal_satwa, #form-perolehan, #form-status_perlindungan, #form-confirm_no_sats-ln, #form-no_sats-ln, #form-pengambilan_satwa, #form-confirm_sk_menteri, #form-sk_menteri, #form-confirm_sk_kepala, #form-sk_kepala, #form-confirm_sk_ksdae, #form-sk_ksdae"
+        "#form-jenis_koleksi, #form-asal_satwa, #form-perolehan, #form-status_perlindungan, #form-confirm_no_sats-ln, #form-no_sats-ln, #form-pengambilan_satwa, #form-confirm_sk_menteri, #form-sk_menteri, #form-confirm_sk_kepala, #form-sk_kepala, #form-confirm_sk_ksdae, #form-sk_ksdae, #form-tanggal_titipan, #form-no_ba_titipan"
     ).hide();
 
     $("input[name='satwa_koleksi']").on("change", function () {
@@ -114,10 +114,21 @@ $(function () {
     // Show 'No. Perolehan' and 'Asal Satwa' based on 'jenis_koleksi' selection
     $("#form-jenis_koleksi input[type='radio']").on("change", function () {
         const selectedValue = $(this).val().toLowerCase();
-        if (selectedValue === "satwa koleksi") {
+        if (selectedValue === "koleksi") {
             $("#form-perolehan").show();
             $("#form-perolehan").slideDown();
             $("#form-asal_satwa").show();
+        } else {
+            $("#form-perolehan").hide();
+            $("#form-tanggal_titipan").hide();
+            $("#form-no_ba_titipan").hide();
+            $("#form-asal_satwa").show();
+            $("#form-asal_satwa").slideDown();
+        }
+        if (selectedValue === "titipan") {
+            $("#form-tanggal_titipan").show();
+            $("#form-tanggal_titipan").slideDown();
+            $("#form-no_ba_titipan").show();
         } else {
             $("#form-perolehan").hide();
             $("#form-asal_satwa").show();
