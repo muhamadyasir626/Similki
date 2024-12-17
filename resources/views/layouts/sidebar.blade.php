@@ -18,70 +18,78 @@
           <span class="link-title">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item ">
-        <a class="nav-link" data-bs-toggle="collapse" href="#filter" role="button" aria-expanded="" aria-controls="filter">
-          <i class="link-icon" data-feather="filter"></i>
-          <span class="link-title">Filter</span>
-          <i class="link-arrow" data-feather="chevron-down"></i>
-        </a>
-      <form method="GET" action="{{ route('dashboard') }}">
-        <div class="collapse" id="filter">
-          <ul class="nav sub-menu">
-            <!-- Filter Lembaga Konservasi -->
-            <li class="nav-item">
-              <details class="filter-item details">
-                <summary class="filter-item-label">Lembaga Konservasi</summary>
-                <div class="filter-search">
-                  <input type="text" class="search-input" data-filter-type="lk" placeholder="Cari Lembaga Konservasi...">
-                </div>
-                @foreach ($lks as $lk)
-                <label class="filter-label lk">
-                <input type="checkbox" name="lks[]" value="{{ $lk->id }}">
-                  <span class="dot dot-yellow"></span>
-                  {{ $lk->nama }}
-                </label>
-                @endforeach
-              </details>
-            </li>
 
-            <!-- Filter UPT -->
-            <li class="nav-item">
-              <details class="filter-item details">
-                <summary class="filter-item-label">UPT</summary>
-                <div class="filter-search">
-                  <input type="text" class="search-input" data-filter-type="upt" placeholder="Cari UPT...">
-                </div>
-                @foreach ($upts as $upt)
-                <label class="filter-label upt">
-                <input type="checkbox" name="upts[]" value="{{ $upt->id }}">
-                  <span class="dot dot-yellow"></span>
-                  {{ $upt->wilayah }}
-                </label>
-                @endforeach
-              </details>
-            </li>
 
-            <!-- Filter Class -->
-            <li class="nav-item">
-              <details class="filter-item details">
-                <summary class="filter-item-label">Class</summary>
-                <div class="filter-search">
-                  <input type="text" class="search-input" data-filter-type="class" placeholder="Cari Class...">
-                </div>
-                @foreach ($classes as $class)
-                <label class="filter-label class">
-                <input type="checkbox" name="classes[]" value="{{ $class->id }}">
-                  <span class="dot dot-yellow"></span>
-                  {{ $class->class }}
-                </label>
-                @endforeach
-              </details>
-            </li>
-          </ul>
-      </div>
-    <button type="submit">Filter</button>
-  </form>
-    
+@if(request()->is('dashboard'))
+<li class="nav-item ">
+  <a class="nav-link" data-bs-toggle="collapse" href="#filter" role="button" aria-expanded="" aria-controls="filter">
+    <i class="link-icon" data-feather="filter"></i>
+    <span class="link-title">Filter</span>
+    <i class="link-arrow" data-feather="chevron-down"></i>
+  </a>
+  <div class="collapse" id="filter">
+    <ul class="nav sub-menu">
+      <!-- Lembaga Konservasi -->
+      <li class="nav-item">
+        <details class="filter-item details">
+          <summary class="filter-item-label link-title" id="name-label">Lembaga Konservasi
+            <i class="filter-link-arrow" style="width: 14px; height:14px;" data-feather="chevron-down"></i>
+          </summary>
+          <summary class="filter-item-label" id="search-input-filter">
+            <input type="text" class="conservation-search" placeholder="Filter LK...">
+            <button class="btn btn-sm btn-danger mt-2 mb-2 clear-btn clear-conservation">Clear</button>
+          </summary>
+          @foreach ($lks as $lk )
+          <label class="filter-label">
+            <input type="checkbox" value="{{ $lk->id }}" data-category="LK">
+            {{ $lk->nama }}
+          </label>
+          @endforeach
+        </details>
+      </li>
+      <!-- UPT -->
+      <li class="nav-item">
+        <details class="filter-item details">
+          <summary class="filter-item-label" id="name-label">UPT
+            <i class="filter-link-arrow" style="width: 14px; height:14px;" data-feather="chevron-down"></i>
+          </summary>
+          <summary class="filter-item-label" id="search-input-filter">
+            <input type="text" class="upt-search" placeholder="Filter UPT...">
+            <button class="btn btn-sm btn-danger mt-2 mb-2 clear-btn clear-upt">Clear</button>
+          </summary>
+          @foreach ($upts as $upt )
+          <label class="filter-label">
+            <input type="checkbox" value="{{ $upt->id }}" data-category="UPT">
+            {{ $upt->wilayah }}
+          </label>
+          @endforeach
+        </details>
+      </li>
+      <!-- Class -->
+      <li class="nav-item">
+        <details class="filter-item details">
+          <summary class="filter-item-label" id="name-label">Class
+            <i class="filter-link-arrow" style="width: 14px; height:14px;" data-feather="chevron-down"></i>
+          </summary>
+          <summary class="filter-item-label" id="search-input-filter">
+            <input type="text" class="class-search" placeholder="Filter Class...">
+            <button class="btn btn-sm btn-danger mt-2 mb-2 clear-btn  clear-class">Clear</button>
+          </summary>
+          @foreach ($classes as $class )
+          <label class="filter-label">
+            <input type="checkbox" value="{{ $class->id }}" data-category="Class">
+            {{ $class->class }}
+          </label>
+          @endforeach
+        </details>
+      </li>
+    </ul>
+  </div>
+</li>
+@endif
+
+
+
       <li class="nav-item nav-category">LEMBAGA KONSERVASI</li>
       <li class="nav-item {{ active_class('lembaga-konservasi') }}">
         <a href="{{ route('lembaga-konservasi.index') }}" class="nav-link">
@@ -163,28 +171,6 @@
   </div>
 </nav>
 
-<script>
- document.addEventListener("DOMContentLoaded", function () {
-  // Fungsi untuk filter item
-  function filterItems(event) {
-    const searchTerm = event.target.value.toLowerCase(); // Ambil input pencarian
-    const filterType = event.target.getAttribute("data-filter-type"); // Jenis filter
 
-    // Seleksi elemen yang sesuai dengan tipe filter
-    document.querySelectorAll(`.filter-label.${filterType}`).forEach(label => {
-      const text = label.textContent.toLowerCase(); // Ambil teks label
-      if (text.includes(searchTerm)) {
-        label.style.display = ""; // Tampilkan jika cocok
-      } else {
-        label.style.display = "none"; // Sembunyikan jika tidak cocok
-      }
-    });
-  }
+<script src="search-filter.js"></script> 
 
-  // Tambahkan event listener untuk setiap input pencarian
-  document.querySelectorAll(".search-input").forEach(input => {
-    input.addEventListener("input", filterItems);
-  });
-});
-
-</script>
