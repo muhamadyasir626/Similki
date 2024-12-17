@@ -34,5 +34,3 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::get('/search',[KodePosAPI::class,'search']);
 
-Route::delete('/lembaga-konservasi/{id}', [YourController::class, 'destroy']);
-
