@@ -2,6 +2,7 @@
 
 @push('plugin-styles')
   <link href="{{ asset('assets/plugins/jquery-steps/jquery.steps.css') }}" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ asset('css/pendataan-popup.css') }}">
 @endpush
 
 @section('content')
@@ -95,6 +96,20 @@
                   <span class="error-message" style="color: red; display: none;"></span>
                   <input class="" type="text" name="perolehan" id="perolehan" placeholder="Masukkan nomor perolehan" style="width: 400px; padding:10px;" required>
                 </div>
+                {{-- Tanggal Titipan --}}
+                <div id="form-tanggal_titipan" style="margin-bottom:10px; padding-bottom:10px;">
+                  <h5 style="margin-bottom: 8px">Tanggal Titipan</h5>
+                  <span class="error-message" style="color: red; display: none;"></span>
+                  <input type="date" name="tanggal_titipan" id="tanggal_titipan" placeholder="Masukkan tanggal titipan" style="width: 400px; padding:10px;" required>
+                </div>
+  
+                {{-- NO BA Titipan --}}
+                <div id="form-no_ba_titipan" style="margin-bottom:10px; padding-bottom:10px;">
+                  <h5 style="margin-bottom: 8px">No. BA Titipan</h5>
+                  <span class="error-message" style="color: red; display: none;"></span>
+                  <input class="" type="text" name="no_ba_titipan" id="no_ba_titipan" placeholder="Masukkan nomor berita acara titipan satwa" style="width: 400px; padding:10px;" required>
+                </div>
+
                 {{-- ASAL SATWA --}}
                 <div id="form-asal_satwa">
                   <span class="error-message" style="color: red; display: none;"></span>
@@ -303,6 +318,81 @@
                   </label>
                 </div>
               </div>
+            
+              <div id="form-alasan_belum_tagging" class="form-alasan_belum_tagging" style="margin-bottom: 10px">
+                <label for="additional_notes"><h5>Alasan satwa belum dilakukan tagging</h5></label>
+                <span class="error-message" style="color: red; display: none;"></span>
+                <textarea class="form-control" id="alasan_belum_tagging" name="alasan_belum_tagging" rows="4" placeholder="Alasan..." required></textarea>
+              </div>
+
+              {{-- JENIS TAGGING --}}
+              <div id="form-jenis_tagging" style="margin-bottom:10px; padding-bottom:10px;">
+                <h5 style="margin-bottom: 8px">Jenis Tagging</h5>
+                <div style="display: flex; gap: 10px;">
+                  <select name="jenis_tagging" id="jenis_tagging" style="width: 180px; padding:10px;">
+                    <option value="" disabled selected>Pilih Jenis Tagging</option>
+                    <option value="ring">Ring</option>
+                    <option value="chip">Chip</option>
+                    <option value="eartag">Eartag</option>
+                    <option value="label">Label</option>
+                    <option value="tattoo">Tattoo</option>
+                  </select>
+                </div>
+              </div>           
+                        
+              <div id="form-kode_tagging" style="margin-bottom:10px; padding-bottom:10px;">
+                <h5 style="margin-bottom: 8px">Kode Tagging</h5>
+                <span class="error-message" style="color: red; display: none;"></span>
+                <input class="" type="text" name="kode_tagging" id="kode_tagging" placeholder="Masukkan kode " style="width: 400px; padding:10px;" required>
+              </div>
+
+              <div id="form-ba_tagging" style="margin-bottom:10px; padding-bottom:10px;">
+                <h5 style="margin-bottom: 8px">Berita Acara Tagging</h5>
+                <span class="error-message" style="color: red; display: none;"></span>
+                <input class="" type="text" name="ba_tagging" id="ba_tagging" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;" required>
+              </div>
+            
+              <div id="form-tanggal_tagging" style="margin-bottom:10px; padding-bottom:10px;">
+                <h5 style="margin-bottom: 8px">Tanggal Tagging</h5>
+                <span class="error-message" style="color: red; display: none;"></span>
+                <input class="" type="date" name="tanggal_tagging" id="tanggal_tagging" style="width: 400px; padding:10px;" required>
+              </div>
+            
+              <div id="form-no_ba_kelahiran" style="margin-bottom:10px; padding-bottom:10px;">
+                <h5 style="margin-bottom: 8px">No. BA Kelahiran</h5>
+                <span class="error-message" style="color: red; display: none;"></span>
+                <input class="" type="text" name="no_ba_kelahiran" id="no_ba_kelahiran" placeholder="Masukkan nomor berita acara kelahiran satwa" style="width: 400px; padding:10px;" required>
+              </div>
+            
+              <div id="form-no_ba_kematian" style="margin-bottom:10px; padding-bottom:10px;">
+                <h5 style="margin-bottom: 8px">No. BA Kematian</h5>
+                <span class="error-message" style="color: red; display: none;"></span>
+                <input class="" type="text" name="no_ba_kematian" id="no_ba_kematian" placeholder="Masukkan nomor berita acara kematian satwa" style="width: 400px; padding:10px;" required>
+              </div>
+                    
+              <div id="form-validasi_tanggal" style="margin-bottom:10px; padding-bottom:10px;">
+                <h5 style="margin-bottom: 8px">Validasi Tanggal</h5>
+                <span class="error-message" style="color: red; display: none;"></span>
+                <input class="" type="date" name="validasi_tanggal" id="validasi_tanggal" style="width: 400px; padding:10px;" required>
+              </div>
+        
+              <div id="form-keterangan" class="form-keterangan" style="margin-bottom: 10px">
+                <label for="additional_notes"><h5>Keterangan</h5></label>
+                <span class="error-message" style="color: red; display: none;"></span>
+                <textarea class="form-control" id="keterangan" name="keterangan" rows="4" placeholder="Keterangan..." required></textarea>
+              </div>
+            
+              <div id="form-nama_satwa_ina" style="margin-bottom:10px; padding-bottom:10px;">
+                <h5 style="margin-bottom: 8px">Nama Satwa dalam Bahasa Indonesia</h5>
+                <span class="error-message" style="color: red; display: none;"></span>
+                <input class="" type="text" name="nama_satwa_ina" id="nama_satwa_ina" placeholder="Masukkan nama satwa dalam bahasa Indonesia" style="width: 400px; padding:10px;" required>
+              </div>
+            
+              <div id="form-nama_panggilan" style="margin-bottom:10px; padding-bottom:10px;">
+                <h5 style="margin-bottom: 8px">Nama Panggilan Satwa</h5>
+                <span class="error-message" style="color: red; display: none;"></span>
+                <input class="" type="text" name="nama_panggilan" id="nama_panggilan" placeholder="Masukkan nama panggilan satwa" style="width: 400px; padding:10px;" required>
+              </div>
 
               {{-- TAKSON SATWA --}}
               <div id="takson_hewan" class="takson-hewan" style="padding-bottom: 20px;">
@@ -339,200 +429,10 @@
                     </select>
                 </div>
               </div>   
-            
-              <div id="form-alasan_belum_tagging" class="form-alasan_belum_tagging" style="margin-bottom: 10px">
-                <label for="additional_notes"><h5>Alasan satwa belum dilakukan tagging</h5></label>
-                <span class="error-message" style="color: red; display: none;"></span>
-                <textarea class="form-control" id="alasan_belum_tagging" name="alasan_belum_tagging" rows="4" placeholder="Alasan..." required></textarea>
-              </div>
-
-              {{-- JENIS TAGGING --}}
-              <div id="form-jenis_tagging" style="margin-bottom:10px; padding-bottom:10px;">
-                <h5 style="margin-bottom: 8px">Jenis Tagging</h5>
-                <div style="display: flex; gap: 10px;">
-                  <select name="jenis_tagging" id="jenis_tagging" style="width: 180px; padding:10px;">
-                    <option value="" disabled selected>Pilih Jenis Tagging</option>
-                    <option value="ring">Ring</option>
-                    <option value="chip">Chip</option>
-                    <option value="eartag">Eartag</option>
-                    <option value="label">Label</option>
-                    <option value="tattoo">Tattoo</option>
-                  </select>
-                </div>
-              </div>           
-                        
-              <div id="form-ba_tagging" style="margin-bottom:10px; padding-bottom:10px;">
-                <h5 style="margin-bottom: 8px">Berita Acara Tagging</h5>
-                <span class="error-message" style="color: red; display: none;"></span>
-                <input class="" type="text" name="ba_tagging" id="ba_tagging" placeholder="Masukkan berita acara" style="width: 400px; padding:10px;" required>
-              </div>
-            
-              <div id="form-tanggal_tagging" style="margin-bottom:10px; padding-bottom:10px;">
-                <h5 style="margin-bottom: 8px">Tanggal Tagging</h5>
-                <span class="error-message" style="color: red; display: none;"></span>
-                <input class="" type="date" name="tanggal_tagging" id="tanggal_tagging" style="width: 400px; padding:10px;" required>
-              </div>
-            
-              <div id="form-no_ba_titipan" style="margin-bottom:10px; padding-bottom:10px;">
-                <h5 style="margin-bottom: 8px">No. BA Titipan</h5>
-                <span class="error-message" style="color: red; display: none;"></span>
-                <input class="" type="text" name="no_ba_titipan" id="no_ba_titipan" placeholder="Masukkan nomor berita acara titipan satwa" style="width: 400px; padding:10px;" required>
-              </div>
-            
-              <div id="form-no_ba_kelahiran" style="margin-bottom:10px; padding-bottom:10px;">
-                <h5 style="margin-bottom: 8px">No. BA Kelahiran</h5>
-                <span class="error-message" style="color: red; display: none;"></span>
-                <input class="" type="text" name="no_ba_kelahiran" id="no_ba_kelahiran" placeholder="Masukkan nomor berita acara kelahiran satwa" style="width: 400px; padding:10px;" required>
-              </div>
-            
-              <div id="form-no_ba_kematian" style="margin-bottom:10px; padding-bottom:10px;">
-                <h5 style="margin-bottom: 8px">No. BA Kematian</h5>
-                <span class="error-message" style="color: red; display: none;"></span>
-                <input class="" type="text" name="no_ba_kematian" id="no_ba_kematian" placeholder="Masukkan nomor berita acara kematian satwa" style="width: 400px; padding:10px;" required>
-              </div>
-                    
-              <div id="form-validasi_tanggal" style="margin-bottom:10px; padding-bottom:10px;">
-                <h5 style="margin-bottom: 8px">Validasi Tanggal</h5>
-                <span class="error-message" style="color: red; display: none;"></span>
-                <input class="" type="date" name="validasi_tanggal" id="validasi_tanggal" style="width: 400px; padding:10px;" required>
-              </div>
-            
-              <div id="form-tahun_titipan" style="margin-bottom:10px; padding-bottom:10px;">
-                <h5 style="margin-bottom: 8px">Tahun Titipan</h5>
-                <span class="error-message" style="color: red; display: none;">Masukkan tahun dalam format yang benar (4 digit)</span>
-                <input type="text" name="tahun_titipan" id="tahun_titipan" pattern="^[0-9]{4}$" placeholder="Masukkan tahun" style="width: 400px; padding:10px;" required>
-              </div>
-
-              <div id="form-keterangan" class="form-keterangan" style="margin-bottom: 10px">
-                <label for="additional_notes"><h5>Keterangan</h5></label>
-                <span class="error-message" style="color: red; display: none;"></span>
-                <textarea class="form-control" id="keterangan" name="keterangan" rows="4" placeholder="Keterangan..." required></textarea>
-              </div>
-            
-              <div id="form-nama_satwa_ina" style="margin-bottom:10px; padding-bottom:10px;">
-                <h5 style="margin-bottom: 8px">Nama Satwa dalam Bahasa Indonesia</h5>
-                <span class="error-message" style="color: red; display: none;"></span>
-                <input class="" type="text" name="nama_satwa_ina" id="nama_satwa_ina" placeholder="Masukkan nama satwa dalam bahasa Indonesia" style="width: 400px; padding:10px;" required>
-              </div>
-            
-              <div id="form-nama_panggilan" style="margin-bottom:10px; padding-bottom:10px;">
-                <h5 style="margin-bottom: 8px">Nama Panggilan Satwa</h5>
-                <span class="error-message" style="color: red; display: none;"></span>
-                <input class="" type="text" name="nama_panggilan" id="nama_panggilan" placeholder="Masukkan nama panggilan satwa" style="width: 400px; padding:10px;" required>
-              </div>
                      
             </form>
           </section>    
-          
-          <h2>Genealogy</h2>
-          <section>
-            <form id="pendataan3" method="POST" action="{{ route('satwa.store') }}">
-              @csrf
-              <div>
-                <h4 style="margin-bottom: 8px !important;">Anggota Keluarga Satwa</h4>
-                <div class="grid grid-cols-12 gap-4 items-center mb-4" style="display: grid !important; grid-template-columns: repeat(12, 1fr) !important; gap: 1rem !important;">
-                  <div class="col-span-6" style="grid-column: span 6 / span 6 !important;">
-                    <label for="id_ayah" class="block text-sm font-extrabold text-black-700">Nama Ayah Satwa</label>
-                    <input 
-                      class="w-full border border-black-300 rounded-md p-2" 
-                      type="text" 
-                      name="id_ayah" 
-                      id="id_ayah" 
-                      placeholder="Masukkan nama ayah satwa" 
-                      style="width: 100% !important; padding: 10px !important; box-sizing: border-box !important;" 
-                      required
-                    >
-                  </div>
-                  <div class="col-span-6" style="grid-column: span 6 / span 6 !important;">
-                    <label for="id_ibu" class="block text-sm font-extrabold text-black-700">Nama Ibu Satwa</label>
-                    <input 
-                      class="w-full border border-gray-300 rounded-md p-2" 
-                      type="text" 
-                      name="id_ibu" 
-                      id="id_ibu" 
-                      placeholder="Masukkan nama ibu satwa" 
-                      style="width: 100% !important; padding: 10px !important; box-sizing: border-box !important;" 
-                      required
-                    >
-                  </div>
-                </div>
-                <div class="grid grid-cols-12 gap-4 items-center" style="display: grid !important; grid-template-columns: repeat(12, 1fr) !important; gap: 1rem !important;">
-                  <div class="col-span-6" style="grid-column: span 6 / span 6 !important;">
-                    <label for="id_anak" class="block text-sm font-extrabold text-black-700">Nama Anak Satwa</label>
-                    <input 
-                    class="w-full border border-black-300 rounded-md p-2" 
-                    type="text" 
-                      name="id_anak" 
-                      id="id_anak" 
-                      placeholder="Masukkan nama anak satwa" 
-                      style="width: 100% !important; padding: 10px !important; box-sizing: border-box !important;" 
-                      required
-                    >
-                  </div>
-                  <div class="col-span-6" style="grid-column: span 6 / span 6 !important;">
-                    <label for="id_pasangan" class="block text-sm font-extrabold text-black-700">Nama Pasangan Satwa</label>
-                    <input 
-                      class="w-full border border-gray-300 rounded-md p-2" 
-                      type="text" 
-                      name="id_pasangan" 
-                      id="id_pasangan" 
-                      placeholder="Masukkan nama pasangan satwa" 
-                      style="width: 100% !important; padding: 10px !important; box-sizing: border-box !important;" 
-                      required
-                      >
-                    </div>
-                  </div>
-                </div>
-              <div>
-                <h4 style="margin-bottom: 8px !important; margin-top:10px !important">Pasangan Satwa</h4>
-                <div class="grid grid-cols-12 gap-4 items-center mb-4" style="display: grid !important; grid-template-columns: repeat(12, 1fr) !important; gap: 1rem !important;">
-                  <div class="col-span-6" style="grid-column: span 6 / span 6 !important;">
-                    <label for="id_jantan" class="block text-sm font-extrabold text-black-700">Nama Satwa Jantan</label>
-                    <input class="w-full border border-black-300 rounded-md p-2" type="text" name="id_jantan" id="id_jantan" placeholder="Masukkan nama satwa jantan" style="width: 100% !important; padding: 10px !important; box-sizing: border-box !important;" required
-                    >
-                  </div>
-                  <div class="col-span-6" style="grid-column: span 6 / span 6 !important;">
-                    <label for="id_betina" class="block text-sm font-extrabold text-black-700">Nama Satwa Betina</label>
-                    <input class="w-full border border-gray-300 rounded-md p-2" type="text" name="id_betina" id="id_betina" placeholder="Masukkan nama satwa betina" style="width: 100% !important; padding: 10px !important; box-sizing: border-box !important;" required
-                    >
-                  </div>
-                </div>
-                {{-- SATWA DIPISAHKAN/DIPASANGKAN --}}
-                <div id="form-confirm_satwa" style="margin-bottom: 10px">
-                  <h5 style="margin-bottom:10px;">Apakah Satwa Sudah Dipasangkan/Dipisahkan?</h5>
-                  <div class="form-check">
-                      <input class="form-check-input" type="radio" name="satwa_status" id="satwa_dipasangkan" value="dipasangkan" required>
-                      <label class="form-check-label" for="satwa_dipasangkan">
-                          Dipasangkan
-                      </label>
-                  </div>
-                  <div class="form-check">
-                      <input class="form-check-input" type="radio" name="satwa_status" id="satwa_dipisahkan" value="dipisahkan" required>
-                      <label class="form-check-label" for="satwa_dipisahkan">
-                          Dipisahkan
-                      </label>
-                  </div>
-              </div>
-              
-                <div class="grid grid-cols-12 gap-4 items-center" style="display: grid !important; grid-template-columns: repeat(12, 1fr) !important; gap: 1rem !important;">
-                  <div id="form-tanggal-dipasangkan" class="col-span-6" style="grid-column: span 6 / span 6 !important;">
-                    <label for="tanggal_dipasangankan" class="block text-sm font-extrabold text-black-700">Tanggal Dipasangkan</label>
-                    <input class="w-full border border-black-300 rounded-md p-2" type="date" name="tanggal_dipasangankan" id="tanggal_dipasangankan" style="width: 100% !important; padding: 10px !important; box-sizing: border-box !important;" required
-                    >
-                  </div>
-                  <div id="form-tanggal-dipisahkan" class="col-span-6" style="grid-column: span 6 / span 6 !important;">
-                    <label for="tanggal_dipisahkan" class="block text-sm font-extrabold text-black-700">Tanggal Dipisahkan</label>
-                    <input class="w-full border border-gray-300 rounded-md p-2" type="date" name="tanggal_dipisahkan" id="tanggal_dipisahkan" style="width: 100% !important; padding: 10px !important; box-sizing: border-box !important;" required
-                    >
-                  </div>
-                </div>
-              </div>
-              <div id="form-keterangan-couple" class="form-keterangan-couple" style="padding-bottom: 15px !important; margin-top:10px !important">
-                <label for="additional_notes"><h4>Keterangan</h4></label>
-                <textarea class="form-control" id="keterangan_couple" name="keterangan_couple" rows="4" placeholder="Keterangan..." required></textarea>
-              </div>
-            </form>
-          </section>
+
         </div>
 
         <div id="popup-warning" class="popup">
@@ -541,87 +441,6 @@
               <button id="close-popup">Tutup</button>
           </div>
         </div>
-      
-      <style>
-          .popup {
-              display: none;
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              background: rgba(0, 0, 0, 0.5);
-              z-index: 9999;
-          }
-          .popup-content {
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-              background: white;
-              padding: 20px;
-              border-radius: 8px;
-              text-align: center;
-              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-          }
-          .popup-content p {
-              margin: 0 0 15px;
-          }
-          .popup-content button {
-              background: #007bff;
-              color: white;
-              border: none;
-              padding: 10px 20px;
-              border-radius: 5px;
-              cursor: pointer;
-          }
-          .popup-content button:hover {
-              background: #0056b3;
-          }
-      </style>
-      
-
-        <script>
-          document.addEventListener('DOMContentLoaded', function() {
-              const form = document.getElementById('pendataan1');
-
-              form.addEventListener('submit', function(event) {
-                  event.preventDefault();
-
-                  const formData = new FormData(form); 
-
-                  fetch('/satwas', {
-                      method: 'POST',
-                      body: formData,
-                      headers: {
-                          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content') 
-                      }
-                  })
-                  .then(response => response.json())
-                  .then(data => {
-                      if (data.success) {
-                          alert(data.message);
-                          form.reset(); 
-                      } else {
-                          const errorMessages = document.querySelectorAll('.error-message');
-                          errorMessages.forEach(msg => msg.style.display = 'none');
-                          
-                          for (const [key, value] of Object.entries(data.errors)) {
-                              const errorMessageElement = document.querySelector(`#${key}`).nextElementSibling;
-                              if (errorMessageElement) {
-                                  errorMessageElement.textContent = value[0]; 
-                                  errorMessageElement.style.display = 'block'; 
-                              }
-                          }
-                      }
-                  })
-                  .catch(error => {
-                      console.error('Error:', error);
-                      alert('An error occurred while submitting the form.');
-                  });
-              });
-          });
-        </script>
 @endsection
 
 @push('plugin-scripts') 
@@ -631,6 +450,4 @@
 @push('custom-scripts')
   <script src="{{ asset('assets/js/pendataan-satwa.js') }}"></script>  
   <script src="{{ asset('assets/js/wizard.js') }}"></script>  
-  <script src="{{ asset('assets/js/wizard-2.js') }}"></script>  
-  <script src="{{ asset('assets/js/wizard-3.js') }}"></script>  
 @endpush
