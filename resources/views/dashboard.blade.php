@@ -29,7 +29,7 @@
 
 <div class="container-fluid px-0">
     <!-- Baris pertama untuk Kartu 1-4 -->
-    <div class="row mb-3" id="data-satwas" data-satwa="{{ $satwas }}">
+    <div class="row mb-3" id="data-satwas" data-satwa="{{ $satwas }}" data-tag="{{ $tag }}">
         <!-- Kartu 1 -->
         <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="card mb-2 custom-card-size">

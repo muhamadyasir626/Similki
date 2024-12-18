@@ -210,7 +210,7 @@ $(function () {
         var options = {
             chart: {
                 type: "bar",
-                height: 600,
+                height: 450,
                 width: '100%',
                 events: {
                     dataPointSelection: function (event, chartContext, config) {

@@ -24,8 +24,9 @@ class DashboardController extends Controller
                 $classes = ListSpecies::distinct()->select('class')->get();
 
                 //filter database
-                $satwas = Satwa::with('lk')->select('id_spesies','id_lk','status_satwa','jenis_koleksi')->get();
-                $tag = Tagging::select('jenis_tagging')->get();
+                $satwas = Satwa::select('id','id_spesies','id_lk','status_satwa','jenis_koleksi', 'asal_satwa')->get();
+                // $satwas = Satwa::with('lk')->select('id','id_spesies','id_lk','status_satwa','jenis_koleksi', 'asal_satwa')->get();
+                $tag = Tagging::select('id_satwa','jenis_tagging')->get();
 
                 //statis
                 $lk_count = LembagaKonservasi::count();
@@ -172,7 +173,7 @@ class DashboardController extends Controller
                     'total_bentukLk', 'taksa', 'total_wilayahLk',
                     'total_jumlahIndvSpesies', 'total_tagging',
                     'total_jenis_koleksi', 'total_class', 'lks', 'upts', 'classes',
-                    'satwas', 'endemik_count', 'eksotik_count'
+                    'satwas', 'endemik_count', 'eksotik_count', 'tag'
                                 ));
                 
                 case'LK':
