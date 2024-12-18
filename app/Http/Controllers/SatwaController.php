@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Cache;
 class SatwaController extends Controller
 {
 
-public function getall()
+public function getAll()
 {
     try {
         // Ambil data dan cek apakah relasi berhasil di-load
@@ -339,7 +339,25 @@ public function getall()
                 'message' => 'Section tidak valid.'
             ], 400);
         }
-    }
+
+        // Simpan data ke database
+        $data = new Satwa();
+        $data->fill($request->all());
+        $data->save();
+
+        // Mengembalikan respons sukses
+        return response()->json(['success' => true]);
+        }
+
+    // Di model Satwa
+    protected $fillable = [
+    'id_lk', 'jenis_koleksi', 'status_satwa', 'no_peroleh_izin', 'asal_satwa',
+    'nomor_sats_ln', 'status_perlindungan', 'no_sk_kepala_balai', 'no_sk_dirjen_ksdae',
+    'no_sk_menteri_lhk', 'perilaku_satwa', 'jenis_kelamin', 'id_tagging', 'kode_tagging',
+    'alasan_belum_tagging', 'berita_acara_tagging', 'nama_lokal', 'nama_panggilan', 'class',
+    'genus', 'spesies', 'sub_spesies', 'jumlah_keseluruhan_gender'
+];
+
     
     
     // public function store(Request $request){
