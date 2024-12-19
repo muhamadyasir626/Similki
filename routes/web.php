@@ -57,6 +57,10 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::get('/get-spesies', [ListSpeciesController::class, 'index']);
 
     Route::resource('lembaga-konservasi', LembagaKonservasiController::class);
+    Route::get('/pendataan-lk', [LembagaKonservasiController::class, 'formLK'])->name('form-lk');
+    Route::post('/lk/pendataan-lk1',[LembagaKonservasiController::class, 'pendataan-lk1'])->name('pendataan-lk1');
+    Route::post('/lk/pendataan-lk2',[LembagaKonservasiController::class, 'pendataan-lk2'])->name('pendataan-lk2');
+
 
     Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');
     Route::get('/monitoring',[LembagaKonservasiController::class,'monitoring'])->name('monitoring-lk');
@@ -70,6 +74,7 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::post('/satwa/pendataan1',[SatwaController::class, 'pendataan1'])->name('pendataan-satwa1');
     Route::post('/satwa/pendataan2',[SatwaController::class, 'pendataan2'])->name('pendataan-satwa2');
     Route::get('/pendataan-silsilah', [SatwaController::class,'formSilsilah'])->name('form-silsilah');
+    Route::post('/satwa/pendataanSilsilah', [SatwaController::class,'pendataanSilsilah'])->name('pendataan-silsilah');
     Route::get('/search',[SatwaController::class,'search'])->name('satwa-search');
     Route::get('/filter-class/{lk}', [DashboardController::class, 'filterClass']);
     

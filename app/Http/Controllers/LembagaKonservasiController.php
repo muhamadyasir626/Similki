@@ -7,6 +7,7 @@ use App\Http\Requests\StoreLembagaKonservasiRequest;
 use App\Http\Requests\UpdateLembagaKonservasiRequest;
 use App\Imports\LembagaKonservasiImport;
 use App\Models\MonitoringInvestasi;
+use App\Models\ListUpt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
@@ -133,5 +134,11 @@ class LembagaKonservasiController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }
+    }
+
+    public function formLK() {
+        $upt_wilayah = ListUpt::distinct()->select('wilayah')->get();
+
+        return view('pages.forms.pendataan-lk', compact ('upt_wilayah'));
     }
 }

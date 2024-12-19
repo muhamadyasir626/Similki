@@ -104,7 +104,7 @@
         </a>
       </li>
       <li class="nav-item {{ active_class('pendataan-lk') }}">
-        <a href="#" class="nav-link">
+        <a href="{{ route('form-lk') }}" class="nav-link">
           <i class="link-icon" data-feather="plus-circle"></i>
           <span class="link-title">Pendataan LK</span>
         </a>
