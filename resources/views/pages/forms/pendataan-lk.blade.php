@@ -37,7 +37,7 @@
               </select>
             </div>
 
-            <!-- {{-- FORM KODE POS DAN ALAMAT --}}
+            {{-- FORM KODE POS DAN ALAMAT --}}
             <form id="stage2" action="{{ route('pendataan-lk2') }}" method="POST">
               @csrf
               <div class="stage2-content">
@@ -81,10 +81,10 @@
                 </div>
 
               </div>
-            </form> -->
+            </form>
 
             {{-- STATUS LK --}}
-            <div id="form-status-lk" style="margin-bottom: 10px">
+            <div id="form-status_lk" style="margin-bottom: 10px">
               <h5 style="margin-bottom:10px;">Status Lembaga Konservasi</h5>
               <span class="error-message" style="color: red; display: none;"></span>
               <div class="form-check">
@@ -102,7 +102,7 @@
             </div>
 
             {{-- BENTUK LK --}}
-            <div id="form-bentuk-lk">
+            <div id="form-bentuk_lk">
               <h5 style="margin-bottom:10px;">Bentuk Lembaga Konservasi</h5>
               <span class="error-message" style="color: red; display: none;"></span>
               <div class="form-check">
@@ -155,6 +155,12 @@
               </div>
             </div>
 
+            {{-- Nama Pimpinan --}}
+            <div id="form-nama_pimpinan" style="margin-bottom:10px;">
+              <h5 style="margin-bottom:8px;">Nama Pimpinan</h5>
+              <input type="text" name="nama_pimpinan" id="nama_pimpinan" placeholder="Masukkan nama pimpinan" style="width: 400px; padding:10px;" required>
+            </div>
+
             {{-- Legalitas Perizinan --}}
             <div id="form-legalitas" class="form-legalitas">
               <label for="additional_notes"><h5 style="margin: 10px;">Legalitas Perizinan LK</h5></label>
@@ -163,14 +169,14 @@
             </div>
 
             {{-- Tahun Izin --}}
-            <div id="form-tahun-izin" style="margin-bottom:10px; padding-bottom:10px;">
+            <div id="form-tahun_izin" style="margin-bottom:10px; padding-bottom:10px;">
               <h5 style="margin-bottom: 8px">Tahun Izin</h5>
               <span class="error-message" style="color: red; display: none;"></span>
               <input type="text" name="tahun_izin" id="tahun_izin" placeholder="Masukkan tahun izin" pattern="^[0-9]{4}$" style="width: 400px; padding:10px;" required>
             </div>
 
             {{-- Link SK --}}
-            <div id="form-link-sk" style="margin-bottom:10px;">
+            <div id="form-link_sk" style="margin-bottom:10px;">
               <h5 style="margin-bottom:8px;">Link SK</h5>
               <input type="url" name="link_sk" id="link_sk" placeholder="Masukkan link SK" style="width: 400px; padding:10px;" required>
             </div>
@@ -196,19 +202,19 @@
             </div>           
             
             {{-- Tahun Akreditasi --}}
-            <div id="form-tahun-akre" style="margin-bottom:10px;">
+            <div id="form-tahun_akre" style="margin-bottom:10px;">
               <h5 style="margin-bottom:8px;">Tahun Akreditasi</h5>
               <input type="text" name="tahun_akre" id="tahun_akre" placeholder="Masukkan tahun akreditasi" style="width: 400px; padding:10px;" required>
             </div>
 
             {{-- Nilai Akreditasi --}}
-            <div id="form-nilai-akre" style="margin-bottom:10px;">
+            <div id="form-nilai_akre" style="margin-bottom:10px;">
               <h5 style="margin-bottom:8px;">Nilai Akreditasi</h5>
               <input type="text" name="nilai_akre" id="nilai_akre" placeholder="Masukkan nilai akreditasi" style="width: 400px; padding:10px;" required>
             </div>
 
             {{-- Apakah ada nomor tanggal surat? --}}
-            <div id="form-no-surat" style="margin-bottom: 10px;">
+            <div id="form-no_surat" style="margin-bottom: 10px;">
                 <h5 style="margin:10px;">Apakah ada nomor tanggal surat?</h5>
                 <span class="error-message" style="color: red; display: none;"></span> 
                 
@@ -228,13 +234,13 @@
             </div>
 
             {{-- No Tanggal Surat --}}
-            <div id="form-no-tgl-surat" style="margin-bottom:10px;">
+            <div id="form-no_tgl_surat" style="margin-bottom:10px;">
               <h5 style="margin-bottom:8px;">Nomor & Tanggal Surat</h5>
               <input type="text" name="no_tgl_surat" id="no_tgl_surat" placeholder="Masukkan nomor & tanggal surat" style="width: 400px; padding:10px;" required>
             </div>
 
             {{-- Apakah ada nomor izin peroleh? --}}
-            <div id="form-izin-peroleh" style="margin-bottom: 10px;">
+            <div id="form-izin_peroleh" style="margin-bottom: 10px;">
                 <h5 style="margin:10px;">Apakah ada nomor izin peroleh?</h5>
                 <span class="error-message" style="color: red; display: none;"></span> 
                 
@@ -254,15 +260,9 @@
             </div>
 
             {{-- No Izin Peroleh --}}
-            <div id="form-no-izin" style="margin-bottom:10px;">
+            <div id="form-no_izin" style="margin-bottom:10px;">
               <h5 style="margin-bottom:8px;">Nomor Izin Peroleh</h5>
               <input type="textarea" name="no_izin" id="no_izin" placeholder="Masukkan nomor izin peroleh" style="width: 400px; padding:10px;" required>
-            </div>
-
-            {{-- Nama Pimpinan --}}
-            <div id="form-nama-pimpinan" style="margin-bottom:10px;">
-              <h5 style="margin-bottom:8px;">Nama Pimpinan</h5>
-              <input type="text" name="nama_pimpinan" id="nama_pimpinan" placeholder="Masukkan nama pimpinan" style="width: 400px; padding:10px;" required>
             </div>
 
             {{-- Apakah ada nomor izin peroleh TSL? --}}
@@ -286,7 +286,7 @@
             </div>
 
             {{-- Izin Perolehan TSL --}}
-            <div id="form-izin-tsl" class="form-izin-tsl">
+            <div id="form-izin_tsl" class="form-izin-tsl">
               <label for="additional_notes"><h5 style="margin: 10px;">Izin Perolehan TSL</h5></label>
               <span class="error-message" style="color: red; display: none;"></span>
               <textarea class="form-control" id="izin_tsl" name="izin_tsl" rows="4" placeholder="Isi disini..." required></textarea>
@@ -313,7 +313,7 @@
             </div>
 
             {{-- PKS dengan LK Lain --}}
-            <div id="form-pks-lk-lain" class="form-pks-lk-lain">
+            <div id="form-pks_lk_lain" class="form-pks-lk-lain">
               <label for="additional_notes"><h5 style="margin: 10px;">Perjanjian Kerja Sama dengan LK Lain</h5></label>
               <span class="error-message" style="color: red; display: none;"></span>
               <textarea class="form-control" id="pks" name="pks" rows="4" placeholder="Isi disini..." required></textarea>
@@ -323,35 +323,35 @@
           <h2>Data Investasi Lembaga Konservasi</h2>
           <section>  
             {{-- JUMLAH KARYAWAN LAKI2 --}}
-            <div id="form-jmlh-karyawan-laki" style="margin-bottom:10px; padding-bottom:10px;">
+            <div id="form-jmlh_karyawan_laki" style="margin-bottom:10px; padding-bottom:10px;">
               <h5 style="margin-bottom: 8px">Jumlah Karyawan Laki-laki</h5>
               <span class="error-message" style="color: red; display: none;"></span>
               <input class="" type="number" name="jmlh_laki" id="jmlh_laki" placeholder="Jumlah Karyawan Laki-laki" style="width: 400px; padding:10px;" min="0" required>
             </div>
 
             {{-- JUMLAH KARYAWAN PEREMPUAN --}}
-            <div id="form-jmlh-karyawan-perempuan" style="margin-bottom:10px; padding-bottom:10px;">
+            <div id="form-jmlh_karyawan_perempuan" style="margin-bottom:10px; padding-bottom:10px;">
               <h5 style="margin-bottom: 8px">Jumlah Karyawan Perempuan</h5>
               <span class="error-message" style="color: red; display: none;"></span>
               <input class="" type="number" name="jmlh_perempuan" id="jmlh_perempuan" placeholder="Jumlah Karyawan Perempuan" style="width: 400px; padding:10px;" min="0" required>
             </div>
 
             {{-- JUMLAH DOKTER HEWAN --}}
-            <div id="form-jmlh-dh" style="margin-bottom:10px; padding-bottom:10px;">
+            <div id="form-jmlh_dh" style="margin-bottom:10px; padding-bottom:10px;">
               <h5 style="margin-bottom: 8px">Jumlah Dokter Hewan</h5>
               <span class="error-message" style="color: red; display: none;"></span>
               <input class="" type="number" name="jmlh_dh" id="jmlh_dh" placeholder="Jumlah Dokter Hewan" style="width: 400px; padding:10px;" min="0" required>
             </div>
 
             {{-- LUAS LAHAN KONSERVASI --}}
-            <div id="form-luas-lahan" style="margin-bottom:10px; padding-bottom:10px;">
+            <div id="form-luas_lahan" style="margin-bottom:10px; padding-bottom:10px;">
               <h5 style="margin-bottom: 8px">Luas Lahan Konservasi</h5>
               <span class="error-message" style="color: red; display: none;"></span>
               <input class="" type="number" name="luas_lahan" id="luas_lahan" placeholder="Luas Lahan Konservasi" style="width: 400px; padding:10px;" min="0" required>
             </div>
 
             {{-- JUMLAH INVESTASI --}}
-            <div id="form-jmlh-invest" style="margin-bottom:10px; padding-bottom:10px;">
+            <div id="form-jmlh_invest" style="margin-bottom:10px; padding-bottom:10px;">
               <h5 style="margin-bottom: 8px">Jumlah Investasi</h5>
               <span class="error-message" style="color: red; display: none;"></span>
               <input class="" type="number" name="jmlh_invest" id="jmlh_invest" placeholder="Jumlah Investasi" style="width: 400px; padding:10px;" min="0" required>

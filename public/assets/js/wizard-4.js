@@ -94,7 +94,7 @@ $(function () {
     }
 
     // Hide all conditional forms initially
-    $("#form-no-izin,  #form-no-tgl-surat, #form-nama-pimpinan, #form-izin-tsl, #form-tahun-akre, #form-nilai-akre, #form-pks, #form-pks-lk-lain").hide();
+    $("#form-no_izin,  #form-no_tgl_surat, #form-izin_tsl, #form-tahun_akre, #form-nilai_akre, #form-pks, #form-pks_lk_lain").hide();
     
 
      // Show the field when "Ya" is selected
@@ -103,36 +103,36 @@ $(function () {
 
         // Jika "Ya" dipilih
         if (akreditasi === 'ya') {
-            $('#form-tahun-akre').show();
-            $('#form-nilai-akre').show();
+            $('#form-tahun_akre').show();
+            $('#form-nilai_akre').show();
         } else {
             // Jika "Tidak" dipilih, sembunyikan form-form terkait
-            $('#form-tahun-akre').hide();
-            $('#form-nilai-akre').hide();
+            $('#form-tahun_akre').hide();
+            $('#form-nilai_akre').hide();
         }
     });
 
-    $('#form-no-surat input[name="no_surat"]').on('change', function () {
+    $('#form-no_surat input[name="no_surat"]').on('change', function () {
         var no_surat = $("input[name='no_surat']:checked").val(); // Dapatkan nilai yang dipilih
 
         // Jika "Ya" dipilih
         if (no_surat === 'ya') {
-            $('#form-no-tgl-surat').show();
+            $('#form-no_tgl_surat').show();
         } else {
             // Jika "Tidak" dipilih, sembunyikan form-form terkait
-            $('#form-no-tgl-surat').hide();
+            $('#form-no_tgl_surat').hide();
         }
     });
 
-    $('#form-izin-peroleh input[name="izin_peroleh"]').on('change', function () {
+    $('#form-izin_peroleh input[name="izin_peroleh"]').on('change', function () {
         var izin_peroleh = $("input[name='izin_peroleh']:checked").val(); // Dapatkan nilai yang dipilih
 
         // Jika "Ya" dipilih
         if (izin_peroleh === 'ya') {
-            $('#form-no-izin').show();
+            $('#form-no_izin').show();
         } else {
             // Jika "Tidak" dipilih, sembunyikan form-form terkait
-            $('#form-no-izin').hide();
+            $('#form-no_izin').hide();
         }
     });
 
@@ -141,10 +141,10 @@ $(function () {
 
         // Jika "Ya" dipilih
         if (tsl === 'ya') {
-            $('#form-izin-tsl').show();
+            $('#form-izin_tsl').show();
         } else {
             // Jika "Tidak" dipilih, sembunyikan form-form terkait
-            $('#form-izin-tsl').hide();
+            $('#form-izin_tsl').hide();
         }
     });
 
@@ -153,10 +153,10 @@ $(function () {
 
         // Jika "Ya" dipilih
         if (pks_lk === 'ya') {
-            $('#form-pks-lk-lain').show();
+            $('#form-pks_lk_lain').show();
         } else {
             // Jika "Tidak" dipilih, sembunyikan form-form terkait
-            $('#form-pks-lk-lain').hide();
+            $('#form-pks_lk_lain').hide();
         }
     });
 
