@@ -1,0 +1,190 @@
+input, select {
+  cursor: pointer;
+  border-radius: 5px;
+}
+form{
+  width: 100%;
+}
+
+input#nama_lk_display{
+  width: 612px    ;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid black;
+}
+
+#form-ListSpecies{
+  display: flex;
+  gap: 10px;
+  flex-wrap:wrap;
+  width: 100%;
+}
+
+#input_ListSpecies {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #000; /* Menambahkan border dengan ketebalan yang konsisten */
+}
+
+.card-title {
+  font-size: 25px !important;
+}
+
+section {
+  margin-top: 40px;
+}
+
+#title-input, label {
+  width: 100%;
+  font-size: 15px !important;
+  font-weight:normal !important ;
+  margin-bottom: 10px !important;
+}
+
+.upload_file {
+  border: 1px solid #000; /* Menambahkan border dengan ketebalan yang konsisten */
+  padding: 5px;
+  height: 40px;
+  width: 612px;
+}
+
+#upload_dokumen {
+  display: flex;
+  flex-direction: column;
+}
+
+#upload_dokumen .title-input {
+  margin-bottom: 10px !important;
+}
+
+#upload_dokumen div {
+  padding-right: 10px;
+  margin-bottom: 20px;
+}
+
+.input-radio {
+  display: flex;
+  padding: 5px;
+  gap: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  align-items: center;
+  border: 1px solid #000;
+  width:612px;
+  border-radius: 5px;
+}
+
+.input-radio input[type="radio"]:checked + label {
+  background-color: beige;
+}
+
+label {
+  margin-right: 20px;
+  gap: 10px;
+  font-size: 18px;
+  color: #000;
+}
+
+label{
+  display: flex;
+  align-items: center;
+  transform: translateY(5px);
+
+
+}
+
+.section-input {
+  margin: 10px 0px;
+  padding-bottom: 10px;
+  width: 100%;
+}
+
+#tagging {
+  display: flex;
+  gap: 10px;
+}
+
+#tagging input, select {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #000; /* Menambahkan border dengan ketebalan yang konsisten */
+}
+
+#tempat-tanggal-lahir {
+  display: flex;
+  gap: 10px;
+}
+
+#tempat-tanggal-lahir input {
+  width: 300px;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #000; /* Menambahkan border dengan ketebalan yang konsisten */
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#asal-satwa div {
+  padding-bottom: 10px;
+}
+
+#asal-satwa input#sk-kepala-balai-input,#sk-dirjen-input {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 612px;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #000; /* Menambahkan border dengan ketebalan yang konsisten */
+}
+/* Media Queries untuk Responsif pada berbagai ukuran layar */
+@media (max-width: 768px) {
+  /* Membuat input lebih kecil pada layar lebih kecil */
+  input, select, .upload_file, .input-radio {
+    width: 100%;
+    max-width: none;
+  }
+
+  /* Menyesuaikan form ListSpecies untuk mobile */
+  #form-ListSpecies {
+    flex-direction: column;
+  }
+
+  /* Mengubah ukuran font untuk layar kecil */
+  .card-title {
+    font-size: 20px !important;
+  }
+
+  /* Menyesuaikan ukuran input agar lebih kecil pada layar kecil */
+  #input_ListSpecies {
+    width: 100%;
+    max-width: none;
+  }
+
+  #tagging input, select {
+    width: 100%;
+    max-width: none;
+  }
+
+  #tempat-tanggal-lahir input {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Menyesuaikan ukuran font dan form pada perangkat mobile */
+  .card-title {
+    font-size: 18px !important;
+  }
+}
+
+#scientific-name{
+  font-style: italic;
+}
+
+
+
