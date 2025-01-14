@@ -109,6 +109,12 @@
           <span class="link-title">Pendataan LK</span>
         </a>
       </li>
+      <li class="nav-item {{ active_class('persetujuan-bebas-bea') }}">
+        <a href="{{ route('form-bebas-bea') }}" class="nav-link">
+          <i class="link-icon" data-feather="plus-circle"></i>
+          <span class="link-title">Persetujuan Bebas BEA</span>
+        </a>
+      </li>
       <li class="nav-item {{ active_class('import-lk') }}">
         <a href="#" class="nav-link">
           <i class="link-icon" data-feather="upload"></i>

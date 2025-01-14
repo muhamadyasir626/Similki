@@ -60,6 +60,7 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::get('/pendataan-lk', [LembagaKonservasiController::class, 'formLK'])->name('form-lk');
     Route::post('/lk/pendataan-lk1',[LembagaKonservasiController::class, 'pendataan-lk1'])->name('pendataan-lk1');
     Route::post('/lk/pendataan-lk2',[LembagaKonservasiController::class, 'pendataan-lk2'])->name('pendataan-lk2');
+    Route::get('/persetujuan-bebas-bea', [LembagaKonservasiController::class, 'formBebasBEA'])->name('form-bebas-bea');
 
 
     Route::post('/lembaga-konservasi/import',[LembagaKonservasi::class])->name('import-lk');

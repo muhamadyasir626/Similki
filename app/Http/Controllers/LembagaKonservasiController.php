@@ -141,4 +141,10 @@ class LembagaKonservasiController extends Controller
 
         return view('pages.forms.pendataan-lk', compact ('upt_wilayah'));
     }
+
+    public function formBebasBEA() {
+        $upt_wilayah = ListUpt::distinct()->select('wilayah')->get();
+
+        return view('pages.forms.persetujuan-bebas-bea', compact('upt_wilayah'));
+    }
 }

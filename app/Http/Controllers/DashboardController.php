@@ -178,6 +178,14 @@ class DashboardController extends Controller
                 
                 case'LK':
                 $lk = Auth::user()->lk->id;
+                $lks = LembagaKonservasi::with('upt')->select('id','nama')->get();
+                $upts = ListUpt::distinct()->select('id','wilayah')->get();
+                $classes = ListSpecies::distinct()->select('class')->get();
+
+                //filter database
+                $satwas = Satwa::select('id','id_spesies','id_lk','status_satwa','jenis_koleksi', 'asal_satwa')->get();
+                // $satwas = Satwa::with('lk')->select('id','id_spesies','id_lk','status_satwa','jenis_koleksi', 'asal_satwa')->get();
+                $tag = Tagging::select('id_satwa','jenis_tagging')->get();
                     $bentuk_lk = LembagaKonservasi::where('id', $lk)->value('bentuk_lk');
                     $species_count = Satwa::where('id_lk', $lk)->count();
                     $skoleksi_count = Satwa::where('id_lk', $lk)->where('status_satwa', 'satwa koleksi')->count();
@@ -300,11 +308,12 @@ class DashboardController extends Controller
                     });
                     $total_jumlahIndvSpesies = $label_jumlahIndvSpesies->pluck('total', 'label');
                     // dd($total_jumlahIndvSpesies);
-                    return view('dashboard-lk',compact(
+                    return view('dashboard-lk',compact('lks','upts','classes',
                         'bentuk_lk', 'species_count', 'skoleksi_count', 
                         'stitipan_count', 'sbelumtag_count', 'shidup_count', 
                         'satwa', 'tagging', 'pengelola','total_jumlahIndvSpesies', 
-                        'total_class', 'total_tagging', 'total_jenis_koleksi'
+                        'total_class', 'total_tagging', 'total_jenis_koleksi',
+                        'satwas','tag'
                 ));
             case'DRH':
             case'UPT':

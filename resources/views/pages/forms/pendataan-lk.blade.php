@@ -394,6 +394,5 @@
 @endpush
 
 @push('custom-scripts')
-  <script src="{{ asset('assets/js/wizard-4.js') }}"></script>  
-  <script src="{{ asset('assets/js/wizard-5.js') }}"></script>  
+  <script src="{{ asset('assets/js/wizard-4.js') }}"></script>   
 @endpush

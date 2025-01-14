@@ -418,6 +418,33 @@ $(function () {
           console.log('UPT dipilih:', selectedUPT);
         });
       });
+
+      $(document).ready(function () {
+        // Data dummy sebagai contoh; data Anda mungkin datang dari API atau database
+        const dataSatwa = [
+            { no: 1, namaLembaga: "LK A", jenisSatwa: "Harimau", statusSatwa: "Hidup", jumlah: 5 },
+            { no: 2, namaLembaga: "LK B", jenisSatwa: "Gajah", statusSatwa: "Hidup", jumlah: 8 },
+            { no: 3, namaLembaga: "LK C", jenisSatwa: "Komodo", statusSatwa: "Belum Tagging", jumlah: 2 },
+            // Tambahkan data lainnya sesuai kebutuhan
+        ];
+    
+        // Referensi ke tabel body
+        const tableBody = $("#data-table tbody");
+    
+        // Loop melalui data dan tambahkan ke tabel
+        dataSatwa.forEach((item) => {
+            const row = `
+                <tr>
+                    <td>${item.no}</td>
+                    <td>${item.namaLembaga}</td>
+                    <td>${item.jenisSatwa}</td>
+                    <td>${item.statusSatwa}</td>
+                    <td>${item.jumlah}</td>
+                </tr>
+            `;
+            tableBody.append(row);
+        });
+    });
       
 });
 

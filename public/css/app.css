@@ -4433,6 +4433,7 @@ div.fc .btn-group-vertical > .btn-group:not(:first-child) > .fc-button-primary {
 
 .card-title {
   margin-bottom: var(--bs-card-title-spacer-y);
+  
 }
 
 .card-subtitle {
@@ -21003,8 +21004,8 @@ div.fc .btn-group-lg > .btn-icon-text.fc-button-primary .btn-icon-append {
   padding-top: 1rem;
 }
 .card .card-title {
-  text-transform: uppercase;
-  font-size: 0.850rem;
+  /* text-transform: uppercase; */
+  font-size: 25px;
   font-weight: 500;
 }
 

@@ -164,12 +164,33 @@
   </div>
 </div> 
 
+<div class="table-responsive">
+    <table id="data-table" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Lembaga</th>
+                <th>Jenis Satwa</th>
+                <th>Status Satwa</th>
+                <th>Jumlah Satwa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data akan diisi secara dinamis melalui JavaScript -->
+        </tbody>
+    </table>
+</div>
+
+
 @endsection
 
 @push('plugin-scripts')
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{{ asset('assets/plugins/flatpickr/flatpickr.min.js') }}"></script>
   <script src="{{ asset('assets/plugins/apexcharts/apexcharts.min.js') }}"></script>
+  <!-- DataTables -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 @endpush
 
 @push('custom-scripts')
