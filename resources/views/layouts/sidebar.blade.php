@@ -4,10 +4,9 @@
 
 <nav class="sidebar">
   <div class="sidebar-header">
-    <a href="#" class="sidebar-brand" id="{{ strtolower($user->role->tag) }}">
-      {{-- Noble<span>UI</span> --}}
+    {{-- <a href="#" class="sidebar-brand" id="{{ strtolower($user->role->tag) }}">
       {{ $user->role->tag }}
-    </a>
+    </a> --}}
     <div class="sidebar-toggler not-active">
       <span></span>
       <span></span>
@@ -74,9 +73,39 @@
       <li class="nav-item {{ active_class(['pendataan-satwa']) }}">
         <a href="{{ route('form-satwa') }}" class="nav-link">
           <i class="link-icon" data-feather="plus-circle"></i>
-          <span class="link-title">Pendataan Satwa </span>
+          <span class="link-title">Pendataan Satwa</span>
         </a>
       </li>
+      <li class="nav-item {{ active_class(['/pendataan-satwa-titipan']) }}">
+        <a href="{{route('pendataan-satwa-titipan')}}" class="nav-link">
+          <i class="link-icon" data-feather="plus-circle"></i>
+          <span class="link-title"> Pendataan Satwa Titipan </span>
+        </a>
+      </li>
+      <li class="nav-item {{ active_class(['/store-satwa-titipan']) }}">
+        <a href="{{route('store-satwa-titipan')}}" class="nav-link">
+          <i class="link-icon" data-feather="plus-circle"></i>
+          <span class="link-title"> Store Satwa Titipan </span>
+        </a>
+      </li>
+      <li class="nav-item {{ active_class(['/persetujuan-rkp']) }}">
+        <a href="{{ route('persetujuan-rkp') }}" class="nav-link">
+            <i class="link-icon" data-feather="plus-circle"></i>
+            <span class="link-title"> Persetujuan RKP </span>
+        </a>
+      </li>       
+      <li class="nav-item {{ active_class(['/daftar-persetujuan-rkp']) }}">
+        <a href="{{ route('daftar-persetujuan-rkp') }}" class="nav-link">
+            <i class="link-icon" data-feather="plus-circle"></i>
+            <span class="link-title"> Daftar Persetujuan RKP </span>
+        </a>
+      </li>       
+      <li class="nav-item {{ active_class(['/detail-verifikasi-rkp']) }}">
+        <a href="{{ route('detail-verifikasi-rkp') }}" class="nav-link">
+            <i class="link-icon" data-feather="plus-circle"></i>
+            <span class="link-title"> Verifikasi RKP </span>
+        </a>
+      </li>       
       <li class="nav-item {{ active_class(['/']) }}">
         <a href="" class="nav-link">
           <i class="link-icon" data-feather="activity"></i>
@@ -102,6 +131,14 @@
         </a>
       </li>
      
+      <li class="nav-item nav-category">Log Activity</li>
+      <li class="nav-item {{ active_class(['activity-log/index']) }}">
+        <a href="{{ route('activity-log') }}" class="nav-link">
+          <i class="link-icon" data-feather="lock"></i>
+          <span class="link-title">History</span>
+        </a>
+      </li>
+
       <li class="nav-item nav-category">Verifikasi Akun</li>
       <li class="nav-item {{ active_class(['/']) }}">
         <a href="{{ route('verifikasi-akun') }}" class="nav-link">

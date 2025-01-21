@@ -78,8 +78,8 @@
         <div class="dropdown-menu p-0" aria-labelledby="profileDropdown">
           <div class="d-flex flex-column align-items-center border-bottom px-5 py-3">
             <div class="text-center">
-              <p class="tx-16 fw-bolder">{{ $user->nama_lengkap }}</p>
-              <p class="tx-12 text-muted">{{ $user->email }}</p> 
+              {{-- <p class="tx-16 fw-bolder">{{ $user->nama_lengkap }}</p>
+              <p class="tx-12 text-muted">{{ $user->email }}</p>  --}}
             </div>
           </div>
           <ul class="list-unstyled p-1">
