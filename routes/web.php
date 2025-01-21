@@ -14,6 +14,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SatwaController;
 use App\Http\Controllers\LembagaKonservasiController;
 use App\Http\Controllers\ListSpeciesController;
+use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\BKSDAController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,7 +75,14 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::post('/satwa/pendataan2',[SatwaController::class, 'pendataan2'])->name('pendataan-satwa2');
     Route::post('/satwa/pendataan3',[SatwaController::class, 'pendataan3'])->name('pendataan-satwa3');
     Route::get('/search',[SatwaController::class,'search'])->name('satwa-search');
-    Route::post('/satwas', [SatwaController::class, 'store'])->name('satwa.store');
+    Route::post('/satwas', [SatwaController::class, 'store'])->name('satwa.store'); 
+    Route::get('/pendataan-satwa-titipan', [SatwaController::class, 'pendataanSatwaTitipan'])->name('pendataan-satwa-titipan');
+    Route::post('/daftar-satwa-titipan', [SatwaController::class, 'storeSatwaTitipan'])->name('store-satwa-titipan');
+    Route::get('/daftar-satwa-titipan', [SatwaController::class, 'daftarSatwaTitipan'])->name('daftar-satwa-titipan');
+    Route::get('/satwa-titipan', [SatwaController::class, 'showSatwaTitipan'])->name('satwa.index');
+    // Route::post('/pendataan-satwa-koleksi', [SatwaController::class, 'storeSatwaKoleksi'])->name('pendataan-satwa-koleksi.store');
+
+    // Route::post('/satwas/store', [SatwaController::class, 'store'])->name('satwa.store');
     
 
     Route::get('/permission', function(){
@@ -83,7 +92,8 @@ Route::middleware(['auth:sanctum','check.permission',config('jetstream.auth_sess
     Route::post('/updated-permission/id={id}',[AuthController::class,'updatePermission'])->name('updated-permission');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    
+    Route::get('/activity-log', [ActivityLogController::class, 'index'])->name('activity-log');
+
 
 });
 
@@ -107,3 +117,6 @@ Route::group(['prefix' => 'forms'], function(){
     Route::get('pendataan-satwa', function () { return view('pages.forms.pendataan-satwa'); });
 });
 
+Route::get('/persetujuan-rkp', [BksdaController::class, 'index'])->name('persetujuan-rkp');
+Route::get('/daftar-persetujuan-rkp', [BksdaController::class, 'show'])->name('daftar-persetujuan-rkp');
+Route::get('/detail-verifikasi-rkp', [BksdaController::class, 'verifikasiRKP'])->name('detail-verifikasi-rkp');
