@@ -239,5 +239,9 @@ class  AuthController extends Controller
 
         return redirect('/')->withCookie($cookie)->with('message', 'Successfully logged out.');
     }
+
+    public function logActivity (Request $request){
+        
+    }
     
 }
