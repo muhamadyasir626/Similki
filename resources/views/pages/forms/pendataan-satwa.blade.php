@@ -357,6 +357,23 @@
                 <span class="error-message" style="color: red; display: none;"></span>
                 <input class="" type="date" name="tanggal_tagging" id="tanggal_tagging" style="width: 400px; padding:10px;" required>
               </div>
+
+              <div id="form-status_satwa" style="margin-bottom: 10px">
+                <h5 style="margin-bottom:10px;">Apakah Satwa Masihh Hidup?</h5>
+                <span class="error-message" style="color: red; display: none;"></span>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="status_satwa" id="status_satwa_ya" value="ya" required>
+                  <label class="form-check-label" for="status_satwa_ya">
+                    Hidup
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="status_satwa" id="status_satwa_tidak" value="tidak" required>
+                  <label class="form-check-label" for="status_satwa_tidak">
+                    Mati
+                  </label>
+                </div>
+              </div>
             
               <div id="form-no_ba_kelahiran" style="margin-bottom:10px; padding-bottom:10px;">
                 <h5 style="margin-bottom: 8px">No. BA Kelahiran</h5>

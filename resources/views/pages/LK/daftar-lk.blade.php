@@ -152,9 +152,6 @@
         </div>
   </div>
 </div>
-
-
-
 <!-- Delete Confirmation Modal -->
 <div id="deletePopup" class="modal" style="display:none;">
     <div class="modal-container">
@@ -171,9 +168,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 @endsection
 

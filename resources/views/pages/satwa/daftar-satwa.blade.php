@@ -17,18 +17,26 @@
     <div class="card">
       <div class="card-body">
         <h6 class="card-title">Data Tabel Satwa</h6>
-        <form action="{{ route('satwa-search') }}" method="GET" class="mb-4">
-          <div class="input-group">
-            <input type="text" name="query" class="form-control" placeholder="Cari satwa..." value="{{ old('query') }}">
-            <button type="submit" class="btn btn-primary">Cari</button>
-          </div>
-        </form>
+        
         @php
           $satwa = session('satwa') ?? $satwa;
         @endphp
 
         <div class="table-responsive">
           <table id="dataTableExample" class="table">
+            <div class="searchbar" style="
+              display: flex;
+              gap: 10px;
+              margin-left: 50%;
+              flex-direction: row-reverse;
+              ">
+              <form action="{{ route('satwa-search') }}" method="GET" class="mb-4">
+                <div class="input-group">
+                  <input type="text" name="query" class="form-control" placeholder="Cari satwa..." value="{{ old('query') }}">
+                  {{-- <button type="submit" class="btn btn-primary">Cari</button> --}}
+                </div>
+              </form>
+            </div>
             <thead>
                 <tr>
                     <th>Nama Panggilan</th>
