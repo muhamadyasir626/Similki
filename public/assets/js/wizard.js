@@ -503,109 +503,96 @@ $(function () {
     $(function () {
         "use strict";
 
-        $(
-            "#form-alasan_belum_tagging, #form-jenis_tagging, #form-kode_tagging, #form-ba_tagging"
-        ).hide();
+        const formsToHide = [
+            "#form-alasan_belum_tagging",
+            "#form-jenis_tagging",
+            "#form-kode_tagging",
+            "#form-ba_tagging",
+            "#form-no_ba_kematian",
+            "#form-no_ba_kelahiran",
+        ];
+
+        // Initial hide for all forms
+        formsToHide.forEach((form) => $(form).hide());
 
         $("input[name='perilaku_satwa']").on("change", function () {
-            // Reset nilai semua form yang akan muncul selanjutnya
-            $("#form-jenis_kelamin input[type='radio']").prop("checked", false);
-            $("#form-confirm_tagging input[type='radio']").prop(
-                "checked",
-                false
-            );
-            $("#form-nama_satwa_ina input").val("");
-            $("#form-nama_panggilan input").val("");
-            $("#takson_hewan input").val("");
-
-            // Sembunyikan semua form yang akan muncul selanjutnya
-            $("#form-jenis_kelamin").hide();
-            $("#form-confirm_tagging").hide();
-            $("#form-kode_tagging").hide();
-            $("#form-nama_satwa_ina").hide();
-            $("#form-nama_panggilan").hide();
-            $("#takson_hewan").hide();
+            resetForms([
+                "#form-jenis_kelamin",
+                "#form-confirm_tagging",
+                "#form-nama_satwa_ina",
+                "#form-nama_panggilan",
+                "#takson_hewan",
+            ]);
 
             if ($(this).val() === "1") {
-                // Individu
-                $("#form-jenis_kelamin").show();
-                $("#form-confirm_tagging").show();
-                $("#form-nama_satwa_ina").show();
-                $("#form-nama_panggilan").show();
-                $("#takson_hewan").show();
-            } else {
-                // Berkelompok
-                $("#form-jenis_kelamin").show();
-                $("#form-confirm_tagging").show();
-                $("#form-nama_satwa_ina").show();
-                $("#form-nama_panggilan").show();
-                $("#takson_hewan").show();
+                showForms([
+                    "#form-jenis_kelamin",
+                    "#form-confirm_tagging",
+                    "#form-nama_satwa_ina",
+                    "#form-nama_panggilan",
+                    "#takson_hewan",
+                ]);
             }
         });
 
         $("input[name='confirm_tagging']").on("change", function () {
-            // Reset nilai semua form yang akan muncul selanjutnya
-            $("#form-jenis_tagging input[type='radio']").prop("checked", false);
-            $("#form-ba_tagging input").val("");
-            $("#form-tanggal_tagging input").val("");
-            $("#form-no_ba_kelahiran input").val("");
-            $("#form-no_ba_kematian input").val("");
-            $("#form-validasi_tanggal input").val("");
-            $("#form-tahun_titipan input").val("");
-            $("#form-keterangan input").val("");
-            $("#form-alasan_belum_tagging input").val("");
-
-            // Sembunyikan semua form yang akan muncul selanjutnya
-            $("#form-jenis_tagging").hide();
-            $("#form-ba_tagging").hide();
-            $("#form-tanggal_tagging").hide();
-            $("#form-no_ba_kelahiran").hide();
-            $("#form-no_ba_kematian").hide();
-            $("#form-validasi_tanggal").hide();
-            $("#form-keterangan").hide();
-            $("#form-alasan_belum_tagging").hide();
+            resetForms([
+                "#form-jenis_tagging",
+                "#form-ba_tagging",
+                "#form-tanggal_tagging",
+                "#form-no_ba_kelahiran",
+                "#form-no_ba_kematian",
+                "#form-validasi_tanggal",
+                "#form-keterangan",
+                "#form-alasan_belum_tagging",
+            ]);
 
             if ($(this).val().toLowerCase() === "ya") {
-                $("#form-jenis_tagging").show();
-                $("#form-kode_tagging").show();
-                $("#form-ba_tagging").show();
-                $("#form-tanggal_tagging").show();
-                $("#form-no_ba_kelahiran").show();
-                $("#form-no_ba_kematian").show();
-                $("#form-validasi_tanggal").show();
-                $("#form-keterangan").show();
-                $("#form-alasan_belum_tagging").hide();
-
-                // Clear hidden form values
-                clearFormValues("#form-ba_tagging");
-                clearFormValues("#form-no_ba_kelahiran");
-                clearFormValues("#form-no_ba_kematian");
-                clearFormValues("#form-keterangan");
-                clearFormValues("#form-jenis_tagging");
-                clearFormValues("#form-kode_tagging");
-                clearFormValues("#form-tanggal_tagging");
-                clearFormValues("#form-validasi_tanggal");
+                showForms([
+                    "#form-jenis_tagging",
+                    "#form-kode_tagging",
+                    "#form-ba_tagging",
+                    "#form-tanggal_tagging",
+                    "#form-no_ba_kelahiran",
+                    "#form-validasi_tanggal",
+                    "#form-keterangan",
+                ]);
             } else {
-                $("#form-no_ba_kelahiran").show();
-                $("#form-no_ba_kematian").show();
-                $("#form-validasi_tanggal").show();
-                $("#form-alasan_belum_tagging").show();
-                $("#form-keterangan").show();
-                $("#form-jenis_tagging").hide();
-                $("#form-kode_tagging").hide();
-                $("#form-ba_tagging").hide();
-                $("#form-tanggal_tagging").hide();
-
-                clearFormValues("#form-alasan_belum_tagging");
+                showForms([
+                    "#form-no_ba_kelahiran",
+                    "#form-no_ba_kematian",
+                    "#form-validasi_tanggal",
+                    "#form-alasan_belum_tagging",
+                    "#form-keterangan",
+                ]);
             }
         });
 
-        function clearFormValues(formId) {
-            $(formId)
-                .find("input, select, textarea")
-                .each(function () {
-                    $(this).val("");
-                });
+        $("input[name='status_satwa']").on("change", function () {
+            resetForms(["#form-no_ba_kelahiran", "#form-no_ba_kematian"]);
+
+            if ($(this).val().toLowerCase() === "ya") {
+                showForms(["#form-no_ba_kelahiran"]);
+            } else {
+                showForms(["#form-no_ba_kematian"]);
+            }
+        });
+
+        function resetForms(formIds) {
+            formIds.forEach((formId) => {
+                $(formId)
+                    .find("input, select, textarea")
+                    .each(function () {
+                        $(this).val("").prop("checked", false);
+                    });
+                $(formId).hide();
+            });
+        }
+
+        function showForms(formIds) {
+            formIds.forEach((formId) => {
+                $(formId).show();
+            });
         }
 
         $("form").on("change", function () {

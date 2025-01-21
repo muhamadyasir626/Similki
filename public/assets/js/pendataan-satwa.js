@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then((response) => response.json())
             .then((data) => {
                 if (data.success) {
-                    alert(data.message)
+                    alert(data.message);
                     form1.reset();
                     form2.reset();
                     form3.reset();
@@ -45,4 +45,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("An error occurred while submitting the form.");
             });
     });
+});
+
+$("#validasi_tanggal").on("focus", function () {
+    $(this).prop("type", "date"); // Mengubah tipe menjadi date saat difokuskan
+});
+
+$("#validasi_tanggal").on("blur", function () {
+    $(this).prop("type", "text"); // Kembalikan tipe ke text saat kehilangan fokus (optional)
 });
