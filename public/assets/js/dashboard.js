@@ -1,11 +1,5 @@
-<<<<<<< Updated upstream
-$(function() {
-  'use strict'
-
-=======
 $(function () {
     'use strict'  
->>>>>>> Stashed changes
 
 
   var colors = {
@@ -493,8 +487,6 @@ $(function () {
 
 
 
-<<<<<<< Updated upstream
-=======
     //statis
     document.addEventListener('DOMContentLoaded', () => {
         // Ambil elemen-elemen dengan atribut data-*
@@ -522,7 +514,6 @@ $(function () {
     $(document).ready(function () {
         const dataContainer = $('#jenisLKChart');
         const dataObj = JSON.parse(dataContainer.attr('data-counts'));
->>>>>>> Stashed changes
 
 
   // Cloud Storage Chart
@@ -572,15 +563,6 @@ $(function () {
       labels: ["Storage Used"]
     };
     
-<<<<<<< Updated upstream
-    var chart = new ApexCharts(document.querySelector("#storageChart"), options);
-    chart.render();    
-  }
-  // Cloud Storage Chart - END
-
-
-});
-=======
         var options = {
             chart: {
                 type: "bar",
@@ -598,7 +580,7 @@ $(function () {
                     horizontal: true,
                     columnWidth: '60%',
                     barSpacing: 50
-                }
+                }``
             },
             series: [{
                 name: "Jumlah Lembaga",
@@ -618,7 +600,8 @@ $(function () {
         };
     
         new ApexCharts(document.querySelector("#jenisLKChart"), options).render();
-    });
+      })};
+  
 
     //wilayah lk
     $(document).ready(function () {
@@ -716,6 +699,7 @@ $(function () {
             chart: {
                 type: "bar",
                 height: 450,
+                height: 450,
                 width: '100%',
                 events: {
                     dataPointSelection: function (event, chartContext, config) {
@@ -743,6 +727,7 @@ $(function () {
             tooltip: {
                 y: {
                     formatter: function (val) {
+                        return val + " satwa";
                         return val + " satwa";
                     }
                 }
@@ -927,4 +912,3 @@ $(function () {
 });
 
 
->>>>>>> Stashed changes

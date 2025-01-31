@@ -13,15 +13,6 @@
   
   {{-- <script>
     window.onload = function() {
-<<<<<<< Updated upstream
-      const token = localStorage.getItem('access_token'); // Pastikan kunci ini sesuai dengan yang Anda gunakan saat menyimpan
-
-      fetch(`/check-permission`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` // Sesuaikan format Bearer jika backend Anda memerlukannya
-=======
       // const token = localStorage.getItem('access_token'); 
       const token = localStorage.getItem('auth_token'); 
       
@@ -40,7 +31,6 @@
         },
         error: function(xhr) {
             console.error('Error:', xhr.responseText);
->>>>>>> Stashed changes
         }
     });
 

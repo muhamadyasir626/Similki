@@ -120,7 +120,7 @@
       </li>
       <li class="nav-item {{ active_class('daftar-pengajuan-lk') }}">
         <a href="{{ route('daftar-pengajuan-lk') }}" class="nav-link">
-          <i class="link-icon" data-feather="list"></i>
+          <i class="link-icon" data-feather="monitor"></i>
           <span class="link-title">Daftar Pengajuan</span>
         </a>
       </li>
