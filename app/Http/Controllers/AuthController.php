@@ -19,17 +19,11 @@ use Illuminate\Support\Facades\Validator;
 class  AuthController extends Controller
 {
     public function index(){
-<<<<<<< Updated upstream
-        $user = User::all();
-        // dd($user)
-        return view('pages.account.verifikasi-akun',compact('user'));
-=======
         $this->authorize('update',Verifikasi::class);
         $accounts = User::all();
         // dd($users);
         // return view('pages.account.verifikasi-akun');
         return view('pages.account.verifikasi-akun',compact('accounts'));
->>>>>>> Stashed changes
     }
 
     public function viewLogin(){
@@ -230,34 +224,6 @@ class  AuthController extends Controller
         $remember = $request->has('remember_me');
         
         if (Auth::attempt($credentials, $remember)) {
-<<<<<<< Updated upstream
-            try {
-                $auth = Auth::user();
-                
-                $expiryMinutes = 60 * 24 * 7; 
-                
-                $token = $auth->createToken('auth_token', [], now()->addMinutes($expiryMinutes))->plainTextToken;
-                $cookie = cookie('auth_token', $token, $expiryMinutes, null, null, true, true);
-                $auth->remember_token = Str::random(60); // Generate random token
-                $auth->save();
-                $response = [
-                    'success' => true,
-                    'message' => 'Login berhasil',
-                    'data' => [
-                        'token' => $token
-                    ],
-                    'url' => '/permission'
-                ];    
-                // return response()->json($response)->withCookie($cookie);
-                // return redirect('/permission')->header('Authorization', 'Bearer'. $token);
-                return redirect('/permission')->withCookie($cookie);                     
-            } catch (\Exception $e) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Gagal saat menggenerate token: ' . $e->getMessage()
-                ], 500);
-            }
-=======
             $auth = Auth::user();
             $status = $auth->status_permission;
             // dd($status);
@@ -281,17 +247,11 @@ class  AuthController extends Controller
                     'status'=> $status,
                 ]
             ])->withCookie($cookie);                  
->>>>>>> Stashed changes
         } else {
             return redirect('/')->with('error', 'Email/Username atau password salah, silakan coba lagi');
         }
     }
     
-<<<<<<< Updated upstream
-
-
-=======
->>>>>>> Stashed changes
     public function logout(Request $request){
         $user = Auth::user();
 

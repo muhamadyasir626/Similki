@@ -22412,9 +22412,6 @@ div.tox .tox-dialog__body {
   margin: 0 0 0 0.7em;
 }
 
-<<<<<<< Updated upstream
-/*# sourceMappingURL=app.css.map*/
-=======
 /*# sourceMappingURL=app.css.map*/
 
 .container {
@@ -22658,6 +22655,7 @@ details[open] .filter-link-arrow {
   position: absolute;
   padding: 1px;
   z-index: 10;
+  transform: translateY(-100%);
 }
 @media (max-width: 600px) {
   .searchbar {
@@ -22699,4 +22697,3 @@ details[open] .filter-link-arrow {
 th {
 
 }
->>>>>>> Stashed changes

@@ -9,13 +9,9 @@ class Tagging extends Model
 {
     use HasFactory;
 
-<<<<<<< Updated upstream
-    public function Satwa(){
-=======
     protected $guarded = ['id'];
 
     public function satwa(){
->>>>>>> Stashed changes
         return $this->belongsTo(Satwa::class,'id_satwa');
     }
 

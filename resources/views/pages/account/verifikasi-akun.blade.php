@@ -22,19 +22,6 @@
             <thead>
                 <tr>
                     <th>Nama Lengkap</th>
-<<<<<<< Updated upstream
-                    <th>Role</th>
-                    <th>Permission</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($user as $user)
-                    <tr>
-                        <td>{{ $user->nama_lengkap }}</td>
-                        <td>{{ $user->role->name }} ({{ $user->role->tag}})</td> <!-- Nama UPT melalui relasi, gunakan null check -->
-                        <td>            
-                          <input type="checkbox" data-id="{{ $user->id }}" {{ $user->status_permission ? 'checked' : '' }} class="toggle-class" data-toggle="toggle" data-style="ios">
-=======
                     <th style="text-align: center;">Email</th>
                     <th style="text-align: center;">Nomor Telepon</th>
                     <th style="text-align: center;">Role</th>
@@ -52,7 +39,6 @@
                           <input type="checkbox" data-id="{{ $account->id }}" {{ $account->status_permission ? 'checked' : '' }} 
                           class="toggle-class" data-toggle="toggle" data-on="Diizinkan" data-off="Tidak Diizinkan" 
                           data-onstyle="success" data-offstyle="danger">
->>>>>>> Stashed changes
                         </td>
                 
                     </tr>
@@ -75,15 +61,8 @@
 @push('custom-scripts')
   <script src="{{ asset('assets/js/data-table.js') }}"></script>
 <script>
-<<<<<<< Updated upstream
-$(document).ready(function() {
-    $('.toggle-class').change(function() {
-        var status = $(this).prop('checked') == true ? 1 : 0;
-        var userId = $(this).data('id');
-        console.log(userId+"->"+ status);
-=======
   $(document).ready(function() {
-      let isAjaxRunning = false; // Flag untuk mencegah AJAX berulang
+      let isAjaxRunning = false;
 
       $(document).on('change', '.toggle-class', function(event) {
           event.preventDefault();
@@ -94,15 +73,15 @@ $(document).ready(function() {
               return;
           }
 
-          const $toggle = $(this); // Ambil elemen toggle
+          const $toggle = $(this);
           const status = $toggle.prop('checked') ? 1 : 0;
           const userId = $toggle.data('id');
           const token = localStorage.getItem('auth_token');
 
           console.log(`User ID: ${userId}, Status: ${status}`);
 
-          isAjaxRunning = true; // Set flag sebelum memulai AJAX
-          $toggle.bootstrapToggle('disable'); // Disable tombol sementara
+          isAjaxRunning = true; 
+          $toggle.bootstrapToggle('disable'); 
 
           $.ajax({
               type: "POST",
@@ -141,7 +120,6 @@ $(document).ready(function() {
 
 
 
->>>>>>> Stashed changes
 
         $.ajax({
             type: "POST",

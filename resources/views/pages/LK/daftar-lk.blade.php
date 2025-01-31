@@ -16,11 +16,7 @@
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-<<<<<<< Updated upstream
-        <h6 class="card-title">Data Table</h6>
-=======
         <h6 class="card-title">Daftar Lembaga Konservasi</h6>
->>>>>>> Stashed changes
         <div class="table-responsive">
           <table id="dataTableExample" class="table">
             <div class="searchbar">
@@ -33,14 +29,6 @@
             </div>
             <thead>
                 <tr>
-<<<<<<< Updated upstream
-                    <th>Nama</th>
-                    <th>UPT</th>
-                    <th>Bentuk Lembaga Konservasi</th>
-                    <th>Akreditasi</th>
-                    <th>Tahun izin</th>
-                    <th>Action</th>
-=======
                   <th style="text-align: center;>">Nama</th>
                   <th style="text-align: center;>">Bentuk LK</th>
                   <th style="text-align: center;>">Alamat</th>
@@ -58,20 +46,11 @@
                   <th style="text-align: center;>">Email</th>
                   <th style="text-align: center;>">Nomor Telepon</th>
                   <th style="text-align: center;>">Action</th>
->>>>>>> Stashed changes
                 </tr>
             </thead>
             <tbody>
                 @foreach($ListLK as $lk)
                     <tr>
-<<<<<<< Updated upstream
-                        <td>{{ $lk->nama }}</td>
-                        <td>{{ $lk->upt->wilayah}}</td> <!-- Nama UPT melalui relasi, gunakan null check -->
-                        <td>{{ $lk->bentuk_lk }}</td>
-                        <td>{{ $lk->nilai_akred ?? '-' }}</td>
-                        <td>{{ $lk->tahun_izin }}</td>
-                        <td><button>Detail</button></td>
-=======
                         <td>{{ Str::limit($lk->nama, 30, '...') }}</td>
                         <td style="text-align: center;>">{{ $lk->bentuk_lk}}</td>
                         <td style="text-align: center;>">{{ $lk->kode_pos }} - {{$lk->alamat }}</td>
@@ -93,7 +72,6 @@
                           Detail
                         </button>
                       </td>
->>>>>>> Stashed changes
                     </tr>
                 @endforeach
             </tbody>
@@ -104,8 +82,6 @@
     </div>
   </div>
 </div>
-<<<<<<< Updated upstream
-=======
 <!-- Popup Modal -->
 <div id="detailPopup" class="modal" style="display:none;">
   <div class="modal-container">
@@ -210,7 +186,6 @@
 
 
 
->>>>>>> Stashed changes
 @endsection
 
 @push('plugin-scripts')

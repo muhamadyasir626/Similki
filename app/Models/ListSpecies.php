@@ -9,18 +9,12 @@ class ListSpecies extends Model
 {
     use HasFactory;
 
-<<<<<<< Updated upstream
-=======
     protected $guarded = ['id'];
 
->>>>>>> Stashed changes
     public function user(){
         return $this->hasOne(User::class);
     }
     public function satwa(){
-<<<<<<< Updated upstream
-        return $this->belongsTo (Satwa::class);
-=======
         return $this->hasMany(Satwa::class);
     }
     public function koleksi_individu(){
@@ -31,6 +25,5 @@ class ListSpecies extends Model
     }
     public function satwaperolehan(){
         return $this->hasOne(satwaperolehan::class);
->>>>>>> Stashed changes
     }
 }
