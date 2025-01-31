@@ -22297,7 +22297,8 @@ div.tox .tox-dialog__body {
   background: #fff;
   border: 1px solid #e9ecef;
   min-height: 23em;
-  overflow: auto;
+  height: max-content;
+  overflow: visible;
   margin: 0.5em 0;
 }
 

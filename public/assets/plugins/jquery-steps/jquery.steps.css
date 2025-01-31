@@ -1,4 +1,4 @@
-﻿/*
+﻿/* 
     Common 
 */
 
@@ -120,7 +120,7 @@
 
 .wizard > .content {
     background: #eee;
-    display: block;
+    display: flex;
     margin: 0.5em;
     min-height: 35em;
     overflow: hidden;
@@ -337,3 +337,38 @@
 .custom-dropdown:hover {
     background-color: #f2f2f2; 
 }
+
+.wizard > .content,
+.tabcontrol > .content {
+    background: #eee;
+    display: block; /* Ubah ini jika menggunakan flexbox */
+    flex-direction: column; /* Hanya jika menggunakan display: flex */
+    margin: 0.5em;
+    min-height: 35em;
+    overflow-y: auto; /* Munculkan scrollbar hanya jika perlu */
+    position: relative;
+    width: auto;
+    border-radius: 5px;
+}
+
+.wizard > .content > .body,
+.tabcontrol > .content > .body {
+    position: relative; /* Daripada absolute untuk mempengaruhi tinggi container */
+    width: 100%; /* Sesuaikan ini sesuai kebutuhan, atau gunakan calc() jika perlu */
+    height: auto; /* Biarkan tinggi sesuai dengan konten */
+    padding: 2.5%;
+}
+
+/* Pastikan .steps menyesuaikan dengan konten yang ada */
+.wizard > .steps, .tabcontrol > .steps {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: stretch; /* Stretch items to fill the vertical space if needed */
+}
+.actions a.disabled {
+    background-color: #ccc !important;  /* Mengubah warna tombol ketika disabled */
+    color: #888 !important;  /* Mengubah warna teks tombol */
+    pointer-events: none; /* Menonaktifkan interaksi dengan tombol */
+  }
+  

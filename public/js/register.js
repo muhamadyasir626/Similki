@@ -96,17 +96,21 @@ var forms = document.querySelectorAll("[id^='stage']");
 forms.forEach(function(form) {
   form.addEventListener('submit', function(event) {
     event.preventDefault(); 
+    document.getElementById('validation-errors').innerHTML = '';
     var formId = form.id;
     var url = form.action;
     var formData = new FormData(form);
     const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     
+<<<<<<< Updated upstream
     document.getElementById('validation-errors').innerHTML = '';
     
     for (let entry of formData.entries()) {
         console.log(entry[0] + ': ' + entry[1]);
     }
 
+=======
+>>>>>>> Stashed changes
 
       if (!form.checkValidity()) {
         form.reportValidity(); 
@@ -183,7 +187,7 @@ function getWilayahUpt() {
   var bentuk_upt = document.getElementById('bentuk_upt').value;
   console.log('value bentuk ' + bentuk_upt);
 
-  fetch(`/get-wilayah-upt?bentuk=${bentuk_upt}`)
+  fetch(`/api/get-wilayah-upt?bentuk=${bentuk_upt}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error('Not OK');

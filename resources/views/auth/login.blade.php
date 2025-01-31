@@ -4,16 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="icon" href="{{ asset('/assets/images/klhk.png') }}" type="image/png">
     <link rel="stylesheet" href="css/login.css" />
+<<<<<<< Updated upstream
     <link rel="icon" href="{{ asset('/assets/images/klhk.png') }}" type="image/png">
 
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+=======
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+>>>>>>> Stashed changes
 </head>
 <body>
     <div class="container">
         <div class="login-link">
             <div class="logo">
-                <img src="/assets/images/klhk.png" alt="klhk" />
+                <img src="/assets/images/klhk.png" alt="klhk" />    
             </div>
             <p class="side-big-heading">Belum punya akun?</p>
             <a href="/register" class="registerbtn">Daftar</a>
@@ -55,6 +61,12 @@
         </div>
     </div>
 
+<<<<<<< Updated upstream
     <script src="js/register.js"></script>
+=======
+    <script src="js/login.js"></script>
+
+   
+>>>>>>> Stashed changes
 </body>
 </html>

@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Registration</title>
+<<<<<<< Updated upstream
    <link rel="icon" href="{{ asset('/assets/images/klhk.png') }}" type="image/png">
+=======
+    <link rel="icon" href="{{ asset('/assets/images/klhk.png') }}" type="image/png">
+    <link rel="stylesheet" href="css/register.css" />
+>>>>>>> Stashed changes
 
     <link rel="stylesheet" href="css/register.css" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />

@@ -3,12 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Verifikasi;
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -61,6 +62,9 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    public function verifikasi(){
+        return $this->hasOne(Verifikasi::class);
+    }
     public function role(){
         return $this->belongsTo(Role::class,'id_role');
     }
@@ -72,5 +76,14 @@ class User extends Authenticatable
     }
     public function lk(){
         return $this->belongsTo(LembagaKonservasi::class,'id_lk');
+    }
+    public function riwayat_satwa(){
+        return $this->hasMany(RiwayatSatwa::class);
+    }
+    public function riwayat_lk(){
+        return $this->hasMany(RiwayatLk::class);
+    }
+    public function satwaperolehan(){
+        return $this->hasOne(SatwaPerolehan::class);
     }
 }

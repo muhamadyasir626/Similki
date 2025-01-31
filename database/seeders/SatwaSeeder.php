@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 use App\Models\LembagaKonservasi;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class SatwaSeeder extends Seeder
+class satwaeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -29,11 +29,11 @@ class RoleSeeder extends Seeder
 
         ]);
 
-        Role::create([
-            'name'=> 'Dokter Hewan',
-            'tag' => 'DRH',
+        // Role::create([
+        //     'name'=> 'Dokter Hewan',
+        //     'tag' => 'DRH',
 
-        ]);
+        // ]);
 
         Role::create([
             'name'=> 'Studbook',
@@ -41,11 +41,11 @@ class RoleSeeder extends Seeder
 
         ]);
 
-        Role::create([
-            'name'=> 'Staff Keeper',
-            'tag' => 'SK',
+        // Role::create([
+        //     'name'=> 'Staff Keeper',
+        //     'tag' => 'SK',
 
-        ]);
+        // ]);
 
     }
 }

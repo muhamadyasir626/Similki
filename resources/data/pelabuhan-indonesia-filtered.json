@@ -1,0 +1,295 @@
+[
+    {
+      "nama": "Pelabuhan Tanjung Priok",
+      "wilayah": "Jakarta"
+    },
+    {
+      "nama": "Pelabuhan Merak",
+      "wilayah": "Banten"
+    },
+    {
+      "nama": "Pelabuhan Harbour Bay",
+      "wilayah": "Batam"
+    },
+    {
+      "nama": "Pelabuhan Sunda Kelapa",
+      "wilayah": "Jakarta"
+    },
+    {
+      "nama": "Pelabuhan Batam Center",
+      "wilayah": "Kepulauan Riau"
+    },
+    {
+      "nama": "Pelabuhan Tanjung Perak",
+      "wilayah": "Jawa Timur"
+    },
+    {
+      "nama": "Pelabuhan Bakauheni",
+      "wilayah": "Lampung"
+    },
+    {
+      "nama": "Pelabuhan Soekarno-Hatta",
+      "wilayah": "Makassar"
+    },
+    {
+      "nama": "Pelabuhan Tanjung Mas",
+      "wilayah": "Semarang"
+    },
+    {
+      "nama": "Pelabuhan Tanjung Intan",
+      "wilayah": "Cilacap"
+    },
+    {
+      "nama": "Pelabuhan Guluk",
+      "wilayah": "Sumenep"
+    },
+    {
+      "nama": "Pelabuhan Kalianget",
+      "wilayah": "Surabaya"
+    },
+    {
+      "nama": "Pelabuhan Kalimas",
+      "wilayah": "Surabaya"
+    },
+    {
+      "nama": "Pelabuhan Kamal",
+      "wilayah": "Bangkalan"
+    },
+    {
+      "nama": "Pelabuhan Ketapang",
+      "wilayah": "Banyuwangi"
+    },
+    {
+      "nama": "Pelabuhan Cirebon",
+      "wilayah": "Jawa Barat"
+    },
+    {
+      "nama": "Pelabuhan Pertiwi",
+      "wilayah": "Subang"
+    },
+    {
+      "nama": "Pelabuhan Pramuka",
+      "wilayah": "Garut"
+    },
+    {
+      "nama": "Pelabuhan ASDP Jagoh",
+      "wilayah": "Kepulauan Riau"
+    },
+    {
+      "nama": "Pelabuhan ASDP Dompak",
+      "wilayah": "Tanjungpinang"
+    },
+    {
+      "nama": "Pelabuhan Batam Center",
+      "wilayah": "Pulau Batam"
+    },
+    {
+      "nama": "Pelabuhan Harbour Bay",
+      "wilayah": "Batam"
+    },
+    {
+      "nama": "Pelabuhan Telaga Punggur",
+      "wilayah": "Batam"
+    },
+    {
+      "nama": "Pelabuhan Tarempa",
+      "wilayah": "Kepulauan Riau"
+    },
+    {
+      "nama": "Pelabuhan Teluk Bayur",
+      "wilayah": "Padang"
+    },
+    {
+      "nama": "Pelabuhan Muara",
+      "wilayah": "Padang"
+    },
+    {
+      "nama": "Pelabuhan Tanjung Pandan",
+      "wilayah": "Kabupaten Belitung"
+    },
+    {
+      "nama": "Pelabuhan Tanjung Balai",
+      "wilayah": "Medan"
+    },
+    {
+      "nama": "Pelabuhan Belawan",
+      "wilayah": "Medan"
+    },
+    {
+      "nama": "Pelabuhan Yoseph Iskandar",
+      "wilayah": "Padang"
+    },
+    {
+      "nama": "Pelabuhan Krueng Geukueh",
+      "wilayah": "Aceh"
+    },
+    {
+      "nama": "Pelabuhan Soekarno-Hatta",
+      "wilayah": "Makassar"
+    },
+    {
+      "nama": "Pelabuhan Gorontalo dan Anggrek",
+      "wilayah": "Gorontalo"
+    },
+    {
+      "nama": "Pelabuhan Paotere",
+      "wilayah": "Sulawesi Selatan"
+    },
+    {
+      "nama": "Pelabuhan Pamatata",
+      "wilayah": "Sulawesi Selatan"
+    },
+    {
+      "nama": "Pelabuhan Tanjung Ringgit",
+      "wilayah": "Sulawesi Selatan"
+    },
+    {
+      "nama": "Pelabuhan Bitung",
+      "wilayah": "Sulawesi Utara"
+    },
+    {
+      "nama": "Pelabuhan Donggala",
+      "wilayah": "Sulawesi Tengah"
+    },
+    {
+      "nama": "Pelabuhan Belopa",
+      "wilayah": "Sulawesi Selatan"
+    },
+    {
+      "nama": "Pelabuhan Malili",
+      "wilayah": "Sulawesi Selatan"
+    },
+    {
+      "nama": "Pelabuhan Pare Pare",
+      "wilayah": "Sulawesi Selatan"
+    },
+    {
+      "nama": "Pelabuhan Barru",
+      "wilayah": "Sulawesi Selatan"
+    },
+    {
+      "nama": "Pelabuhan Kendari",
+      "wilayah": "Sulawesi Tenggara"
+    },
+    {
+      "nama": "Pelabuhan Buton",
+      "wilayah": "Sulawesi Tenggara"
+    },
+    {
+      "nama": "Pelabuhan Banjarmasin",
+      "wilayah": "Kalimantan Selatan"
+    },
+    {
+      "nama": "Pelabuhan Dwikora",
+      "wilayah": "Pontianak"
+    },
+    {
+      "nama": "Pelabuhan Palangkaraya",
+      "wilayah": "Kalimantan Tengah"
+    },
+    {
+      "nama": "Pelabuhan Semayang",
+      "wilayah": "Kalimantan Timur"
+    },
+    {
+      "nama": "Pelabuhan Malundung",
+      "wilayah": "Tarakan"
+    },
+    {
+      "nama": "Pelabuhan Trisakti",
+      "wilayah": "Banjarmasin"
+    },
+    {
+      "nama": "Pelabuhan Samudera",
+      "wilayah": "Kalimantan Timur"
+    },
+    {
+      "nama": "Pelabuhan Gilimanuk",
+      "wilayah": "Bali"
+    },
+    {
+      "nama": "Pelabuhan Labuan Bajo",
+      "wilayah": "Lombok"
+    },
+    {
+      "nama": "Pelabuhan Rinca",
+      "wilayah": "NTT"
+    },
+    {
+      "nama": "Pelabuhan Dermaga Pink",
+      "wilayah": "NTT"
+    },
+    {
+      "nama": "Pelabuhan Pulau Molas",
+      "wilayah": "Flores"
+    },
+    {
+      "nama": "Pelabuhan Aimere",
+      "wilayah": "NTT"
+    },
+    {
+      "nama": "Pelabuhan Pota",
+      "wilayah": "Kabupaten Manggarai"
+    },
+    {
+      "nama": "Pelabuhan Mamboro",
+      "wilayah": "NTT"
+    },
+    {
+      "nama": "Pelabuhan Waingapu",
+      "wilayah": "Sumba Timur"
+    },
+    {
+      "nama": "Pelabuhan Tobelo",
+      "wilayah": "Maluku Utara"
+    },
+    {
+      "nama": "Pelabuhan Galela",
+      "wilayah": "Maluku Utara"
+    },
+    {
+      "nama": "Pelabuhan Wonreli",
+      "wilayah": "Maluku Barat Daya"
+    },
+    {
+      "nama": "Pelabuhan Pulau Teor",
+      "wilayah": "Kabupaten Seram"
+    },
+    {
+      "nama": "Pelabuhan Tutu Kembong",
+      "wilayah": "Maluku Tenggara"
+    },
+    {
+      "nama": "Pelabuhan Merauke",
+      "wilayah": "Papua"
+    },
+    {
+      "nama": "Pelabuhan Nabire",
+      "wilayah": "Papua"
+    },
+    {
+      "nama": "Pelabuhan Biak",
+      "wilayah": "Papua"
+    },
+    {
+      "nama": "Pelabuhan Omako",
+      "wilayah": "Papua"
+    },
+    {
+      "nama": "Pelabuhan Jayapura",
+      "wilayah": "Papua Barat"
+    },
+    {
+      "nama": "Pelabuhan Fak-fak",
+      "wilayah": "Papua Barat"
+    },
+    {
+      "nama": "Pelabuhan Kaimana",
+      "wilayah": "Papua Barat"
+    },
+    {
+      "nama": "Pelabuhan Bintuni",
+      "wilayah": "Papua Barat"
+    }
+  ]
+

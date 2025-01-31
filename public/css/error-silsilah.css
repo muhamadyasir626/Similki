@@ -1,0 +1,23 @@
+#error-container {
+  background-color: #f8d7da; 
+  border: 1px solid #f5c6cb; 
+  padding: 15px;
+  margin-top: 20px; 
+  border-radius: 5px;  
+  font-family: Arial, sans-serif; 
+  color: #721c24;  
+  text-align: left; 
+}
+
+#error-messages {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;  
+}
+
+#error-messages li {
+  color: #721c24;  
+  font-size: 1em; 
+  margin-bottom: 10px;
+  line-height: 1.5; 
+}

@@ -98,6 +98,10 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+h4{
+  text-transform: capitalize!important;
+}
+
 hr {
   margin: 1rem 0;
   color: inherit;
@@ -312,6 +316,7 @@ caption {
 th {
   text-align: inherit;
   text-align: -webkit-match-parent;
+
 }
 
 thead,
@@ -1845,7 +1850,7 @@ progress {
 }
 .table > :not(caption) > * > * {
   padding: 0.85rem 0.85rem;
-  background-color: var(--bs-table-bg);
+  /* background-color: var(--bs-table-bg); */
   border-bottom-width: 1px;
   box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
 }
@@ -2612,6 +2617,7 @@ textarea.form-control-lg {
   flex-wrap: wrap;
   align-items: stretch;
   width: 100%;
+  max-width: 200px;
 }
 .input-group > .form-control, .input-group > .typeahead.tt-input,
 .input-group > .typeahead.tt-hint, .select2-container--default .select2-search--dropdown .input-group > .select2-search__field,
@@ -19533,11 +19539,13 @@ body {
   position: fixed;
   right: 0;
   left: 240px;
+  /* margin-top: -21px; */
 }
 @media (max-width: 991px) {
   .page-wrapper .navbar {
     width: 100%;
     left: 0;
+    /* top: 22px; */
   }
 }
 
@@ -21235,7 +21243,7 @@ div.fc .btn-group-lg > .btn-icon-text.fc-button-primary .btn-icon-append {
   border-left: 3px solid #6571ff;
   border-bottom-right-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
-  background: rgba(101, 113, 255, 0.2);
+  /* background: rgba(101, 113, 255, 0.2); */
   margin: 0 auto;
   position: relative;
   padding: 50px;
@@ -22333,15 +22341,18 @@ div.tox .tox-dialog__body {
   background: #fff;
   border: 1px solid #e9ecef;
   min-height: 23em;
-  overflow: auto;
+  overflow: visible;
   margin: 0.5em 0;
 }
 
 @media (max-width: 767px) {
   .wizard > .content > .body {
     width: 90%;
-    height: 90%;
+    height: auto;
     padding: 5%;
+    position: static;
+    overflow: visible;
+    
   }
 }
 
@@ -22401,4 +22412,291 @@ div.tox .tox-dialog__body {
   margin: 0 0 0 0.7em;
 }
 
+<<<<<<< Updated upstream
 /*# sourceMappingURL=app.css.map*/
+=======
+/*# sourceMappingURL=app.css.map*/
+
+.container {
+  padding: 0; /* Menghilangkan padding internal */
+}
+
+.custom-card-size {
+  height: 100%;
+  width: 100%;
+  min-width: 120px;
+  min-height: 10px;
+  display: flex;
+  margin-bottom: 20px; 
+  border: 1px solid var(--bs-card-border-color);
+  box-shadow: var(--bs-card-box-shadow);
+  border-radius: 5px;
+  /* border-radius: var(--bs-card-border-radius); */
+  background-color: var(--bs-card-bg);
+  text-align: center;
+  
+}
+
+.card-body-1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  border-radius: 10px;
+
+}
+.card-body-2 {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-body-3 {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  /* height: 100%;
+  width: 100%; */
+}
+
+#chartContainer1, #chartContainer2, #chartContainer3,#spesiesIndvChart {
+  width: 100%;  
+  height: 400px;
+  display: flex;
+  justify-content: center; 
+  align-items: center; /* Tambahkan ini jika Anda juga ingin pusat secara vertikal */
+}
+
+.row-container{
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: calc(-1* var(--bs-gutter-y));
+  margin-right: calc(-0.5* var(--bs-gutter-x));
+  margin-left: calc(-0.5* var(--bs-gutter-x));
+}
+
+
+
+.mb-2 {
+  margin-bottom: 10px;
+  padding:10px;
+}
+
+#wilayahLKChart {
+  transition: transform 0.2s ease-in-out; 
+}
+
+#wilayahLKChart:hover {
+  transform: scale(1.1);
+}
+
+
+.form-check {
+  margin-bottom: 10px;
+}
+
+.form-check-label {
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.nav-item label {
+  margin-bottom: 5px;
+  gap: 4px;
+
+  /* font-weight: bold; */
+}
+
+.filter-item{
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  font-size: 10px;
+  max-height: 400px;
+  margin-left: -25px;
+
+}
+
+.filter-item-label {
+  font-size: 14px;
+}
+
+.filter-item-label input{
+  width: 120px;
+}
+
+
+#name-label{
+  position: -webkit-sticky;
+  margin-bottom:10px;
+  margin-top:10px;
+  position: sticky;
+  background-color: white;
+  top: 0; 
+  z-index: 1000; 
+}
+
+summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary:hover{
+  color:  --bs-link-hover-color;
+}
+
+.search{
+  border: 1px solid #ccc;
+}
+
+
+
+#search-input-filter{
+  /* position: sticky; */
+  /* width: 100%; */
+  /* z-index: 1000;  */
+  top: 0; 
+  background-color: white;
+  margin-bottom:5px;
+  width: 180px;
+  border-radius: 2px;
+  /* margin-left: -39px; */
+}
+
+.custom-dropdown {
+  display: flex;
+  flex-direction: column;
+  margin-left: -6px;
+  z-index: 100000;
+}
+
+.dropdown-input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.dropdown-content {
+  display: none; /* Hidden by default */
+  position: relative;
+  background-color: #f9f9f9;
+  min-width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 100000;
+  max-height: 250px; /* Limit the height and add scroll */
+  overflow-y: auto;
+  width: 220px;
+  margin-left: -39px;
+}
+
+.dropdown-item {
+  color: black;
+  font-size: 10px;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: flex;
+  align-items: center; /* Display as block to fill the parent's width */
+}
+
+.dropdown-item:hover {
+  background-color: --bs-link-hover-color1;
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
+summary:hover{
+  color : #6571ff;
+
+}
+
+details[open] summary{
+  color : #6571ff;
+}
+
+.filter-label:hover{
+  color : #6571ff;
+}
+.filter-label{
+  cursor: pointer;
+}
+
+
+details[open] .filter-link-arrow {
+  
+  transform: rotate(-180deg); /* Rotasi ikon ketika details terbuka */
+  transition: transform 0.3s ease; /* Animasi rotasi */
+}
+
+.clear-btn{
+  height: 25px;
+  display: flex;
+  align-items: center;
+  border-radius: 2px;
+}
+
+
+.searchbar {
+  display: flex;
+  gap: 10px;
+  flex-direction: row-reverse;
+  position: absolute;
+  padding: 1px;
+  z-index: 10;
+}
+@media (max-width: 600px) {
+  .searchbar {
+    width: 100%;
+    gap: 5px;
+    flex-direction: column;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .searchbar {
+    width: 100%;
+    gap: 5px;
+    flex-direction: column;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .searchbar {
+    width: 90%;
+    gap: 8px;
+    flex-direction: row-reverse;
+  }
+}
+
+@media (min-width: 1025px) {
+  .searchbar {
+    width: 98%;
+    gap: 10px;
+    flex-direction: row-reverse;
+  }
+}
+
+
+
+
+th {
+
+}
+>>>>>>> Stashed changes

@@ -1,0 +1,234 @@
+input, select {
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+label{
+  cursor: pointer;
+}
+
+form{
+  width: 100%;
+}
+
+input#nama_lk_display{
+  width: 612px    ;
+  padding: 10px;
+  background-color: white;
+  border: 1px solid black;
+}
+
+#form-ListSpecies{
+  display: flex;
+  gap: 10px;
+  flex-wrap:wrap;
+  width: 100%;
+}
+
+.perolehan_satwa_koleksi, .nama_panggilan{
+  width:610px !important;
+}
+
+#input_ListSpecies {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #000;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+.card-title {
+  font-size: 25px !important;
+  position: absolute;
+}
+
+section {
+  margin-top: 40px;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+#title-input, label {
+  width: 100%;
+  font-size: 15px !important;
+  font-weight:normal !important ;
+  margin-bottom: 10px !important;
+}
+
+.upload_file {
+  border: 1px solid #000;
+  padding: 5px;
+  height: 40px;
+  width: 612px;
+}
+
+#upload_dokumen {
+  display: flex;
+  flex-direction: column;
+}
+
+#upload_dokumen .title-input {
+  margin-bottom: 10px !important;
+}
+
+#upload_dokumen div {
+  padding-right: 10px;
+  margin-bottom: 20px;
+}
+
+.input-radio {
+  display: flex;
+  padding: 5px;
+  gap: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  align-items: center;
+  border: 1px solid #000;
+  width:612px;
+  border-radius: 5px;
+}
+
+.input-radio input[type="radio"]:checked + label {
+  background-color: beige;
+}
+
+label {
+  margin-right: 20px;
+  gap: 10px;
+  font-size: 18px;
+  color: #000;
+}
+
+label{
+  display: flex;
+  align-items: center;
+  transform: translateY(5px);
+
+
+}
+
+.section-input {
+  margin: 10px 0px;
+  padding-bottom: 10px;
+  width: 100%;
+}
+
+#tagging {
+  display: flex;
+  gap: 10px;
+}
+
+#tagging input, select {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #000;
+}
+
+#tempat-tanggal-lahir {
+  display: flex;
+  gap: 10px;
+}
+
+#tempat-tanggal-lahir input {
+  width: 300px;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #000;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#asal-satwa div {
+  padding-bottom: 10px;
+}
+
+#asal-satwa input#sk-kepala-balai-input,#sk-dirjen-input {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 612px;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #000; 
+}
+
+@media (max-width: 768px) {
+  input, select, .upload_file, .input-radio {
+    width: 100%;
+    max-width: none;
+  }
+
+  input#jantan, input#betina, input#indonesia, input#asing, input#dilindungi, input#tidak-dilindungi {
+    width: 10%;
+  }
+
+   
+  #form-ListSpecies {
+    flex-direction: column;
+  }
+
+  .card-title {
+    font-size: 20px !important;
+  }
+
+  #input_ListSpecies {
+    width: 100%;
+    max-width: none;
+  }
+
+  input#nama_lk_display{
+    width: 100%;
+  }
+  
+  select#cara_perolehan_koleksi{
+    width: 100%;
+  }
+  
+  #tagging{
+    flex-direction: column;
+  }
+
+  #tempat-tanggal-lahir{
+    flex-direction: column;
+
+  }
+
+  #tagging input, select {
+    width: 100%;
+    max-width: none;
+  }
+
+  #tempat-tanggal-lahir input {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-title {
+    font-size: 18px !important;
+  }
+}
+
+#scientific-name{
+  font-style: italic;
+}
+
+.keterangan {
+  font-style: italic;
+  color: gray;
+  font-weight: normal;
+}
+
+
+
+

@@ -27,9 +27,10 @@ class ListSpeciesSeeder extends Seeder
                 'class' => $row[0],
                 'genus' => $row[5],
                 'spesies' => $row[6],
-                'subspesies' => $row[7],
+                // 'subspesies' => $row[7],
                 'nama_lokal' => $row[3],
                 'nama_ilmiah' => $row[4],
+                'nama_internasional' => '',
             ]);
         }
     }

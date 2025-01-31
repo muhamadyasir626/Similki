@@ -1,6 +1,11 @@
+<<<<<<< Updated upstream
 $(function() {
   'use strict'
 
+=======
+$(function () {
+    'use strict'  
+>>>>>>> Stashed changes
 
 
   var colors = {
@@ -488,6 +493,36 @@ $(function() {
 
 
 
+<<<<<<< Updated upstream
+=======
+    //statis
+    document.addEventListener('DOMContentLoaded', () => {
+        // Ambil elemen-elemen dengan atribut data-*
+        const lk_count = document.querySelector('[data-lkcount]').getAttribute('data-lkcount');
+        const species_count = document.querySelector('[data-species]').getAttribute('data-species');
+        const skoleksi_count = document.querySelector('[data-skoleksi]').getAttribute('data-skoleksi');
+        const stitipan_count = document.querySelector('[data-stitipan]').getAttribute('data-stitipan');
+        const sbelumtag_count = document.querySelector('[data-sbelumtag]').getAttribute('data-sbelumtag');
+        const shidup_count = document.querySelector('[data-shidup]').getAttribute('data-shidup');
+        const endemik_count = document.querySelector('[data-endemik]').getAttribute('data-endemik');
+        const eksotik_count = document.querySelector('[data-eksotik]').getAttribute('data-eksotik');
+    
+        console.log('Jumlah LK:', lk_count);
+        console.log('Total Jenis Satwa:', species_count);
+        console.log('Satwa Koleksi:', skoleksi_count);
+        console.log('Satwa Titipan:', stitipan_count);
+        console.log('Satwa Belum Tagging:', sbelumtag_count);
+        console.log('Satwa Hidup:', shidup_count);
+        console.log('Satwa Endemik:', endemik_count);
+        console.log('Satwa Eksotik:', eksotik_count);
+    });
+    
+
+    //bentuk lk
+    $(document).ready(function () {
+        const dataContainer = $('#jenisLKChart');
+        const dataObj = JSON.parse(dataContainer.attr('data-counts'));
+>>>>>>> Stashed changes
 
 
   // Cloud Storage Chart
@@ -537,6 +572,7 @@ $(function() {
       labels: ["Storage Used"]
     };
     
+<<<<<<< Updated upstream
     var chart = new ApexCharts(document.querySelector("#storageChart"), options);
     chart.render();    
   }
@@ -544,3 +580,351 @@ $(function() {
 
 
 });
+=======
+        var options = {
+            chart: {
+                type: "bar",
+                height: 400,
+                events: {
+                    dataPointSelection: function (event, chartContext, config) {
+                        const selectedLabel = config.w.config.xaxis.categories[config.dataPointIndex];
+                        alert(`You clicked on: ${selectedLabel}`);
+                        console.log(`Clicked on bar chart data:`, selectedLabel);
+                    }
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                    columnWidth: '60%',
+                    barSpacing: 50
+                }
+            },
+            series: [{
+                name: "Jumlah Lembaga",
+                data: totals,
+            }],
+            xaxis: {
+                categories: labels,
+            },
+            colors: [ "#008FFB", "#00E396", "#FEB019"],
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + " lembaga";
+                    }
+                }
+            }
+        };
+    
+        new ApexCharts(document.querySelector("#jenisLKChart"), options).render();
+    });
+
+    //wilayah lk
+    $(document).ready(function () {
+        const dataContainer = $('#wilayahLKChart');
+        const dataObj = JSON.parse(dataContainer.attr('data-counts'));
+
+        let labels = [];
+        let totals = [];
+
+        //label
+        // for (let key in dataObj) {
+        //     if (dataObj.hasOwnProperty(key)) {
+        //         labels.push(dataObj[key].label); 
+        //         totals.push(dataObj[key].total); 
+        //     }
+        // }
+
+        //total
+        for (let label in dataObj) {
+            if (dataObj.hasOwnProperty(label)) {
+                labels.push(label); 
+                totals.push(dataObj[label]); 
+            }
+        }
+
+        
+    
+        var options = {
+            chart: {
+                type: "bar",
+                height: 400,
+                events: {
+                    dataPointSelection: function (event, chartContext, config) {
+                        const selectedLabel = config.w.config.xaxis.categories[config.dataPointIndex];
+                        alert(`You clicked on: ${selectedLabel}`);
+                        console.log(`Clicked on bar chart data:`, selectedLabel);
+                    }
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                    columnWidth: '60%',
+                    barSpacing: 50
+                }
+            },
+            series: [{
+                name: "Jumlah Lembaga",
+                data: totals,
+            }],
+            xaxis: {
+                categories: labels,
+            },
+            colors: [ "#008FFB", "#00E396", "#FEB019"],
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + " lembaga";
+                    }
+                }
+            }
+        };
+    
+        new ApexCharts(document.querySelector("#wilayahLKChart"), options).render();
+    });
+
+    //jumlah individu spesies
+    $(document).ready(function () {
+        const dataContainer = $('#spesiesIndvChart');
+        const dataObj = JSON.parse(dataContainer.attr('data-counts'));
+        // console.log(dataObj);
+
+        let labels = [];
+        let totals = [];
+
+        //label
+        // for (let key in dataObj) {
+        //     if (dataObj.hasOwnProperty(key)) {
+        //         labels.push(dataObj[key].label); 
+        //         totals.push(dataObj[key].total); 
+        //     }
+        // }
+
+        //total
+        for (let label in dataObj) {
+            if (dataObj.hasOwnProperty(label)) {
+                labels.push(label); 
+                totals.push(dataObj[label]); 
+            }
+        }
+
+        
+    
+        var options = {
+            chart: {
+                type: "bar",
+                height: 450,
+                width: '100%',
+                events: {
+                    dataPointSelection: function (event, chartContext, config) {
+                        const selectedLabel = config.w.config.xaxis.categories[config.dataPointIndex];
+                        alert(`You clicked on: ${selectedLabel}`);
+                        console.log(`Clicked on bar chart data:`, selectedLabel);
+                    }
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                    columnWidth: '100%',
+                    barSpacing: 100
+                }
+            },
+            series: [{
+                name: "Jumlah satwa",
+                data: totals,
+            }],
+            xaxis: {
+                categories: labels,
+            },
+            colors: [ "#008FFB", "#00E396", "#FEB019"],
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + " satwa";
+                    }
+                }
+            }
+        };
+    
+        new ApexCharts(document.querySelector("#spesiesIndvChart"), options).render();
+    });
+
+     //jumlah tagging
+    $(document).ready(function () {
+        const dataContainer = $('#chartContainer2');
+        const dataObj = JSON.parse(dataContainer.attr('data-counts'));
+        // console.log(dataObj);
+    
+        let labels = [];
+        let totals = [];
+        let colors = []; 
+    
+        for (let label in dataObj) {
+            if (dataObj.hasOwnProperty(label)) {
+                labels.push(label);
+                totals.push(dataObj[label]);
+                colors.push(generateRandomColor()); 
+            }
+        }
+    
+        var options = {
+            chart: {
+                type: "pie",
+                height: 400,
+                events: {
+                    dataPointSelection: function (event, chartContext, config) {
+                        const selectedLabel = labels[config.dataPointIndex];
+                        alert(`You clicked on: ${selectedLabel}`);
+                        console.log(`Clicked on pie chart data:`, selectedLabel);
+                    }
+                }
+            },
+            series: totals,
+            labels: labels,
+            colors: colors, 
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + " satwa";
+                    }
+                }
+            }
+        };
+    
+        new ApexCharts(document.querySelector("#chartContainer2"), options).render();
+    });
+
+     //jumlah tagging
+    $(document).ready(function () {
+        const dataContainer = $('#chartContainer1');
+        const dataObj = JSON.parse(dataContainer.attr('data-counts'));
+        // console.log(dataObj);
+    
+        let labels = [];
+        let totals = [];
+        let colors = []; 
+    
+        for (let label in dataObj) {
+            if (dataObj.hasOwnProperty(label)) {
+                labels.push(label);
+                totals.push(dataObj[label]);
+                colors.push(generateRandomColor()); 
+            }
+        }
+    
+        var options = {
+            chart: {
+                type: "pie",
+                height: 400,
+                events: {
+                    dataPointSelection: function (event, chartContext, config) {
+                        const selectedLabel = labels[config.dataPointIndex];
+                        alert(`You clicked on: ${selectedLabel}`);
+                        console.log(`Clicked on pie chart data:`, selectedLabel);
+                    }
+                }
+            },
+            series: totals,
+            labels: labels,
+            colors: colors, 
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + " satwa";
+                    }
+                }
+            }
+        };
+    
+        new ApexCharts(document.querySelector("#chartContainer1"), options).render();
+    });
+
+    //jumlah satwa koleksi
+    $(document).ready(function () {
+        const dataContainer = $('#chartContainer3');
+        const dataObj = JSON.parse(dataContainer.attr('data-counts'));
+        // console.log(dataObj);
+    
+        let labels = [];
+        let totals = [];
+        let colors = []; 
+    
+        for (let label in dataObj) {
+            if (dataObj.hasOwnProperty(label)) {
+                labels.push(label);
+                totals.push(dataObj[label]);
+                colors.push(generateRandomColor()); 
+            }
+        }
+    
+        var options = {
+            chart: {
+                type: "pie",
+                height: 400,
+                events: {
+                    dataPointSelection: function (event, chartContext, config) {
+                        const selectedLabel = labels[config.dataPointIndex];
+                        alert(`You clicked on: ${selectedLabel}`);
+                        console.log(`Clicked on pie chart data:`, selectedLabel);
+                    }
+                }
+            },
+            series: totals,
+            labels: labels,
+            colors: colors, 
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val + " satwa";
+                    }
+                }
+            }
+        };
+    
+        new ApexCharts(document.querySelector("#chartContainer3"), options).render();
+    });
+    
+
+    function generateRandomColor() {
+        let maxVal = 0xFFFFFF; 
+        let randomNumber = Math.random() * maxVal; 
+        randomNumber = Math.floor(randomNumber);
+        randomNumber = randomNumber.toString(16);
+        let randColor = randomNumber.padStart(6, 0);   
+        return `#${randColor.toUpperCase()}`
+    }      
+
+    $(document).ready(function () {
+        // Inisialisasi Select2 untuk semua filter
+        $('#filterLK, #filterTaksa, #filterUPT').select2({
+          placeholder: 'Pilih opsi',
+          allowClear: true, // Tambahkan tombol clear
+          width: '100%' // Sesuaikan lebar dropdown
+        });
+      
+        // Event untuk menangkap pilihan di Lembaga Konservasi
+        $('#filterLK').on('change', function () {
+          const selectedLK = $(this).val();
+          console.log('Lembaga Konservasi dipilih:', selectedLK);
+        });
+      
+        // Event untuk menangkap pilihan di Taksa
+        $('#filterTaksa').on('change', function () {
+          const selectedTaksa = $(this).val();
+          console.log('Taksa dipilih:', selectedTaksa);
+        });
+      
+        // Event untuk menangkap pilihan di UPT
+        $('#filterUPT').on('change', function () {
+          const selectedUPT = $(this).val();
+          console.log('UPT dipilih:', selectedUPT);
+        });
+      });
+      
+});
+
+
+>>>>>>> Stashed changes

@@ -1,6 +1,10 @@
 function setLogoutTimer() {
   var time;
+<<<<<<< Updated upstream
   const idle = 15;
+=======
+  const idle = 60;
+>>>>>>> Stashed changes
   window.onload = resetTimer;
   document.onmousemove = resetTimer;
   document.onkeypress = resetTimer;

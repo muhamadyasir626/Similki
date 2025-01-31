@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Models\Satwa;
 use App\Models\ListUpt;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class LembagaKonservasi extends Model
@@ -23,7 +22,19 @@ class LembagaKonservasi extends Model
     public function satwa(){
         return $this->belongsTo(Satwa::class);
     }
-    public function monitoring(){
-        return $this->belongsTo(MonitoringInvestasi::class);
+    public function verifikasi(){
+        return $this->hasMany(Verifikasi::class);
+    }
+    public function riwayat_lk(){
+        return $this->hasMany(RiwayatLK::class);
+    }
+    public function satwa_koleksi_individu(){
+        return $this->hasOne(SatwaKoleksiIndividu::class);
+    }
+    public function titipan(){
+        return $this->hasOne(SatwaTitipan::class);
+    }
+    public function satwaperolehan(){
+        return $this->hasOne(SatwaPerolehan::class);
     }
 }

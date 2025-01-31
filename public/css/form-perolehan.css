@@ -1,0 +1,129 @@
+.card .card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+input, select{
+  cursor: pointer;
+}
+
+section {
+  /* border: 1px solid black; */
+  padding: 10px;
+  display: flex;
+  margin-bottom: 10px;
+  gap: 20px; /* Menambahkan jarak antar kolom (question) */
+  flex-wrap: wrap; /* Memungkinkan .question untuk membungkus ke baris berikutnya */
+}
+#dokumenlainnya{
+  /* border: 1px solid black; */
+  /* border-radius: 3px; */
+  
+  width: 100%!important;
+}
+#doc_lainnya{
+  width: 50%;
+}
+.question.file1{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.file{
+  border: 1px solid;
+  padding: 8px;
+  border-radius: 2px;
+}
+
+#dokumenContainer{
+display: flex;
+flex-direction: column;
+width: 100%;
+}
+
+#addDokumenBtn{
+  /* width: 50%; */
+}
+
+.inputContainer{
+  border-radius: 2px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 30%;
+}
+
+#radio{
+  margin-right: -70px; /* Lebar 50% untuk masing-masing .question */
+
+}
+
+.question h4 {
+  margin-bottom: 10px;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  gap: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-right: 80px;
+  cursor: pointer;
+  height: 100%;
+
+}
+
+.divide{
+  border: 1px solid;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+input[type="text"],input[type="number"],select,input{
+  padding: 10px;
+}
+
+select{
+  padding: 11px;
+}
+
+.radio label{
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+input[type="radio"] {
+  margin-right: 5px; 
+}
+
+.label {
+  font-size: 18px !important;
+  font-weight: bold !important;
+}
+
+#kolom4{
+  width: 23%;
+}
+
+input:focus,
+select:focus {
+    border-color: blue; /* Ubah warna border saat fokus */
+    background-color: #f0f8ff; /* Ubah warna latar belakang */
+    outline: none; /* Hapus outline default */
+    box-shadow: 0 0 8px rgba(0, 192, 255, 0.6); /* Tambahkan efek bayangan */
+    transition: all 0.3s ease-in-out; /* Animasi halus */
+}

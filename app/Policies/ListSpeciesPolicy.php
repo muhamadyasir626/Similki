@@ -19,7 +19,7 @@ class ListSpeciesPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, ListSpecies $listSpecies): bool
+    public function view(User $user, ListSpecies $ListSpecies): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class ListSpeciesPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, ListSpecies $listSpecies): bool
+    public function update(User $user, ListSpecies $ListSpecies): bool
     {
         //
     }
@@ -43,7 +43,7 @@ class ListSpeciesPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, ListSpecies $listSpecies): bool
+    public function delete(User $user, ListSpecies $ListSpecies): bool
     {
         //
     }
@@ -51,7 +51,7 @@ class ListSpeciesPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, ListSpecies $listSpecies): bool
+    public function restore(User $user, ListSpecies $ListSpecies): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class ListSpeciesPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, ListSpecies $listSpecies): bool
+    public function forceDelete(User $user, ListSpecies $ListSpecies): bool
     {
         //
     }

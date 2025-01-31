@@ -13,7 +13,9 @@ class MonitoringInvestasiController extends Controller
      */
     public function index()
     {
-        //
+        $investasi = MonitoringInvestasi::with('lk')->get(); 
+
+        return view('pages.lk.monitoring', compact('investasi'));
     }
 
     /**

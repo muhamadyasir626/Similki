@@ -9,7 +9,12 @@ class Satwa extends Model
 {
     use HasFactory;
 
+<<<<<<< Updated upstream
     protected $guard = ['id'];
+=======
+    protected $guarded = ['id'];
+    protected $table = 'satwa';
+>>>>>>> Stashed changes
 
     // public function tagging(){
     //     return $this->belongsTo(Tagging::class);
@@ -21,4 +26,19 @@ class Satwa extends Model
     public function lk(){
         return $this->belongsTo(LembagaKonservasi::class, 'id_lk');
     }
+<<<<<<< Updated upstream
+=======
+
+    public function family_member(){
+        return $this->belongsTo(Family_members::class);
+    }
+
+    public function copule(){
+        return $this->belongsTo(Couples::class);
+    }
+
+    public function history(){
+        return $this->hasMany(History::class);
+    }
+>>>>>>> Stashed changes
 }

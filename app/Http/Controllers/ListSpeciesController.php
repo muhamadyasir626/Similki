@@ -35,7 +35,7 @@ class ListSpeciesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ListSpecies $listSpecies)
+    public function show(ListSpecies $ListSpecies)
     {
         //
     }
@@ -43,7 +43,7 @@ class ListSpeciesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ListSpecies $listSpecies)
+    public function edit(ListSpecies $ListSpecies)
     {
         //
     }
@@ -51,7 +51,7 @@ class ListSpeciesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateListSpeciesRequest $request, ListSpecies $listSpecies)
+    public function update(UpdateListSpeciesRequest $request, ListSpecies $ListSpecies)
     {
         //
     }
@@ -59,7 +59,7 @@ class ListSpeciesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ListSpecies $listSpecies)
+    public function destroy(ListSpecies $ListSpecies)
     {
         //
     }

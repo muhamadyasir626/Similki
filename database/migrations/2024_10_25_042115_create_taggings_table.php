@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('taggings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_satwa')->constrained('satwas')->onDelete('cascade');
             $table->string('jenis_tagging',50)->nullable();
+<<<<<<< Updated upstream
             $table->string('kode_tagging',255)->nullable();
             $table->string('alasan_belum_tagging',255)->nullable();
             $table->string('ba_tagging',255)->nullable();
             $table->date('tanggal_tagging',255)->nullable();
+=======
+>>>>>>> Stashed changes
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('taggings');
+        Schema::dropIfExists('tagging');
     }
 };

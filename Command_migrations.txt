@@ -4,15 +4,21 @@ php artisan migrate --path=database\migrations\2024_10_25_043135_create_list_spe
 php artisan migrate --path=database\migrations\2024_10_25_040426_create_lembaga_konservasis_table.php
 php artisan migrate --path=database\migrations\2014_10_12_000000_create_users_table.php
 php artisan migrate --path=database\migrations\2024_10_25_041735_create_monitoring_investasis_table.php
-php artisan migrate --path=database\migrations\2024_10_25_070258_create_satwas_table.php
+php artisan migrate --path=database\migrations\2024_10_25_070258_create_satwa_table.php
 php artisan migrate --path=database\migrations\2024_10_25_042115_create_taggings_table.php
+<<<<<<< Updated upstream
 php artisan migrate --path=database\migrations\2024_10_27_045643_add_indexes_to_users_table.php
 php artisan migrate 
+=======
+php artisan migrate --path=database\migrations\2024_12_01_080425_create_couples_table.php
+php artisan migrate --path=database\migrations\2024_11_30_180758_create_family_members_table.php
+php artisan migrate
+>>>>>>> Stashed changes
 php artisan db:seed --class=RoleSeeder
 php artisan db:seed --class=ListSpeciesSeeder
 php artisan db:seed --class=ListUptSeeder
 php artisan db:seed --class=LembagaKonservasiSeeder
-php artisan db:seed --class=SatwaSeeder
+php artisan db:seed --class=satwaeeder
 
 php artisan db:seed --class=CSVSeeder
 
